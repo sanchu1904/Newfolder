@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - LearnHub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <a href="index.html" class="logo-small">
+                    <span class="logo-icon">📚</span>
+                    LearnHub
+                </a>
+            </div>
+            <div class="header-right">
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <div class="dashboard-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <a href="#overview" class="nav-item active" data-section="overview">
+                        <span>📊</span> Overview
+                    </a>
+                    <a href="#technical" class="nav-item" data-section="technical">
+                        <span>💻</span> Technical
+                    </a>
+                    <a href="#communication" class="nav-item" data-section="communication">
+                        <span>🗣️</span> Communication
+                    </a>
+                    <a href="#ethics" class="nav-item" data-section="ethics">
+                        <span>⭐</span> Ethical Values
+                    </a>
+                </nav>
+            </aside>
+
+            <main class="dashboard-content">
+                <!-- Overview Section -->
+                <section id="overview" class="content-section active">
+                    <div class="welcome-card">
+                        <h2>Welcome, <span id="student-name">Student</span>!</h2>
+                        <p>Continue your learning journey and track your progress.</p>
+                    </div>
+
+                    <div class="progress-grid">
+                        <div class="progress-card">
+                            <h3>Technical</h3>
+                            <div class="score-display">
+                                <span id="technical-score" class="score-number">0</span>%
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="technical-progress"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress-card">
+                            <h3>Communication</h3>
+                            <div class="score-display">
+                                <span id="communication-score" class="score-number">0</span>%
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="communication-progress"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress-card">
+                            <h3>Ethical Values</h3>
+                            <div class="score-display">
+                                <span id="ethics-score" class="score-number">0</span>%
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="ethics-progress"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress-card overall">
+                            <h3>Overall Score</h3>
+                            <div class="score-display">
+                                <span id="overall-score" class="score-number">0</span>%
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="overall-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Technical Section -->
+                <section id="technical" class="content-section">
+                    <h2>Technical Skills</h2>
+                    <div class="module-grid">
+                        <div class="module-card">
+                            <h3>Programming Basics</h3>
+                            <p>Learn fundamental programming concepts and logic</p>
+                            <p class="module-questions">12 Questions</p>
+                            <button class="btn btn-primary" onclick="startAssessment('programming')">Start Assessment</button>
+                        </div>
+
+                        <div class="module-card">
+                            <h3>Aptitude</h3>
+                            <p>Practice aptitude and problem-solving skills</p>
+                            <p class="module-questions">10 Questions</p>
+                            <button class="btn btn-primary" onclick="startAssessment('aptitude')">Start Assessment</button>
+                        </div>
+
+                        <div class="module-card">
+                            <h3>Technical Practice</h3>
+                            <p>Advanced technical questions and scenarios</p>
+                            <p class="module-questions">15 Questions</p>
+                            <button class="btn btn-primary" onclick="startAssessment('technical-practice')">Start Assessment</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Communication Section -->
+                <section id="communication" class="content-section">
+                    <h2>Communication Skills</h2>
+                    <div class="module-grid">
+                        <div class="module-card">
+                            <h3>Communication Practice</h3>
+                            <p>Improve your professional communication skills</p>
+                            <p class="module-questions">8 Questions</p>
+                            <button class="btn btn-primary" onclick="startAssessment('communication')">Start Assessment</button>
+                        </div>
+
+                        <div class="module-card">
+                            <h3>General Knowledge</h3>
+                            <p>Expand your general knowledge and awareness</p>
+                            <p class="module-questions">12 Questions</p>
+                            <button class="btn btn-primary" onclick="startAssessment('general-knowledge')">Start Assessment</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ethics Section -->
+                <section id="ethics" class="content-section">
+                    <h2>Ethical Values</h2>
+                    <div class="module-grid">
+                        <div class="module-card">
+                            <h3>Ethical Scenarios</h3>
+                            <p>Learn through situational and ethical questions</p>
+                            <p class="module-questions">10 Questions</p>
+                            <button class="btn btn-primary" onclick="startAssessment('ethics')">Start Assessment</button>
+                        </div>
+
+                        <div class="module-card">
+                            <h3>Values & Principles</h3>
+                            <p>Understand core values and professional principles</p>
+                            <p class="module-questions">8 Questions</p>
+                            <button class="btn btn-primary" onclick="startAssessment('values')">Start Assessment</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/questions-data.js"></script>
+    <script>
+        function initDashboard() {
+            const studentName = localStorage.getItem('studentName') || 'Student';
+            document.getElementById('student-name').textContent = studentName;
+            updateScores();
+            setupNavigation();
+        }
+
+        function setupNavigation() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    item.classList.add('active');
+
+                    const sectionId = item.dataset.section;
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+        }
+
+        function updateScores() {
+            const scores = getScores();
+            document.getElementById('technical-score').textContent = scores.technical;
+            document.getElementById('communication-score').textContent = scores.communication;
+            document.getElementById('ethics-score').textContent = scores.ethics;
+            document.getElementById('overall-score').textContent = scores.overall;
+
+            document.getElementById('technical-progress').style.width = scores.technical + '%';
+            document.getElementById('communication-progress').style.width = scores.communication + '%';
+            document.getElementById('ethics-progress').style.width = scores.ethics + '%';
+            document.getElementById('overall-progress').style.width = scores.overall + '%';
+        }
+
+        function getScores() {
+            const scores = JSON.parse(localStorage.getItem('scores')) || {
+                programming: 0,
+                aptitude: 0,
+                'technical-practice': 0,
+                communication: 0,
+                'general-knowledge': 0,
+                ethics: 0,
+                values: 0
+            };
+
+            const technical = Math.round((scores.programming + scores.aptitude + scores['technical-practice']) / 3);
+            const communication = Math.round((scores.communication + scores['general-knowledge']) / 2);
+            const ethics = Math.round((scores.ethics + scores.values) / 2);
+            const overall = Math.round((technical + communication + ethics) / 3);
+
+            return { technical, communication, ethics, overall };
+        }
+
+        function startAssessment(module) {
+            sessionStorage.setItem('currentModule', module);
+            window.location.href = 'assessment.html';
+        }
+
+        function logout() {
+            localStorage.removeItem('studentName');
+            window.location.href = 'index.html';
+        }
+
+        window.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>

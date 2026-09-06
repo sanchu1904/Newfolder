@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - LearnHub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="result-container">
+        <header class="result-header">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                LearnHub
+            </div>
+        </header>
+
+        <main class="result-main">
+            <div class="result-card">
+                <div id="result-status" class="result-status">
+                    <span class="status-icon">✓</span>
+                    <h2>Assessment Complete!</h2>
+                </div>
+
+                <div class="result-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Total Questions</span>
+                        <span class="detail-value" id="total-q">0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Correct Answers</span>
+                        <span class="detail-value correct" id="correct-q">0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Wrong Answers</span>
+                        <span class="detail-value wrong" id="wrong-q">0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Percentage</span>
+                        <span class="detail-value" id="percentage">0%</span>
+                    </div>
+                </div>
+
+                <div class="score-section">
+                    <h3>Your Score</h3>
+                    <div class="large-score">
+                        <span id="final-score">0</span>
+                        <span class="score-unit">%</span>
+                    </div>
+                    <p id="pass-fail" class="pass-status">Status</p>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn btn-primary" onclick="tryAgain()">Try Again</button>
+                    <button class="btn btn-secondary" onclick="backToDashboard()">Back to Dashboard</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        function initResult() {
+            const result = JSON.parse(sessionStorage.getItem('assessmentResult'));
+            
+            if (!result) {
+                document.querySelector('.result-main').innerHTML = '<p>No results found. Please take an assessment first.</p>';
+                return;
+            }
+
+            const totalQuestions = result.totalQuestions;
+            const correctAnswers = result.correctAnswers;
+            const wrongAnswers = totalQuestions - correctAnswers;
+            const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+            const isPassed = percentage >= 60;
+
+            document.getElementById('total-q').textContent = totalQuestions;
+            document.getElementById('correct-q').textContent = correctAnswers;
+            document.getElementById('wrong-q').textContent = wrongAnswers;
+            document.getElementById('percentage').textContent = percentage + '%';
+            document.getElementById('final-score').textContent = percentage;
+
+            const passFailElement = document.getElementById('pass-fail');
+            const statusElement = document.getElementById('result-status');
+
+            if (isPassed) {
+                passFailElement.textContent = '✓ Passed';
+                passFailElement.classList.add('pass');
+                statusElement.classList.add('passed');
+            } else {
+                passFailElement.textContent = '✗ Need Improvement';
+                passFailElement.classList.add('fail');
+                statusElement.classList.add('failed');
+            }
+        }
+
+        function tryAgain() {
+            const module = sessionStorage.getItem('currentModule');
+            sessionStorage.removeItem('assessmentResult');
+            sessionStorage.setItem('currentModule', module);
+            window.location.href = 'assessment.html';
+        }
+
+        function backToDashboard() {
+            sessionStorage.removeItem('assessmentResult');
+            window.location.href = 'dashboard.html';
+        }
+
+        window.addEventListener('DOMContentLoaded', initResult);
+    </script>
+</body>
+</html>

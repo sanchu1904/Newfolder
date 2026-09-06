@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Role - LearnHub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="entry-container">
+        <header class="entry-header">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <h1>LearnHub</h1>
+            </div>
+            <a href="index.html" class="btn-back">← Back</a>
+        </header>
+
+        <main class="entry-main">
+            <h2>Choose Your Role</h2>
+            
+            <div class="role-cards">
+                <div class="role-card student-card">
+                    <span class="role-icon">👤</span>
+                    <h3>Student</h3>
+                    <p>Access learning modules and take assessments</p>
+                    <a href="dashboard.html" class="btn btn-primary">Continue as Student</a>
+                </div>
+
+                <div class="role-card admin-card">
+                    <span class="role-icon">⚙️</span>
+                    <h3>Admin</h3>
+                    <p>Manage content and view analytics</p>
+                    <button class="btn btn-secondary" onclick="showAdminMessage()">Admin Access</button>
+                </div>
+            </div>
+
+            <div id="admin-message" class="admin-message hidden">
+                <p>Admin section coming soon. Please check back later.</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showAdminMessage() {
+            const message = document.getElementById('admin-message');
+            message.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment - LearnHub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="assessment-container">
+        <header class="assessment-header">
+            <div class="header-info">
+                <a href="dashboard.html" class="btn-back">← Back to Dashboard</a>
+                <h2 id="module-title">Assessment</h2>
+            </div>
+            <div class="timer-display">
+                <span id="timer">10:00</span>
+            </div>
+        </header>
+
+        <main class="assessment-main">
+            <div class="assessment-progress">
+                <div class="progress-info">
+                    <span>Question <span id="current-question">1</span> of <span id="total-questions">0</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="assessment-progress"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-card">
+                    <h3 id="question-text">Loading question...</h3>
+                    
+                    <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="answer" value="0">
+                            <span id="option-0">Option 1</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="1">
+                            <span id="option-1">Option 2</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="2">
+                            <span id="option-2">Option 3</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="3">
+                            <span id="option-3">Option 4</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-navigation">
+                    <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()">Previous</button>
+                    <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next</button>
+                    <button class="btn btn-success hidden" id="submit-btn" onclick="submitAssessment()">Submit</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/questions-data.js"></script>
+    <script src="js/assessment.js"></script>
+</body>
+</html>
