@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — SkillPrep | Platform & Student Management</title>
+    <meta name="description" content="SkillPrep Administrator Portal. Monitor college student progress, question banks, mock assessments, subscriptions, and platform analytics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js for Interactive Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* ==========================================================================
+           SKILLPREP ADMIN DESIGN SYSTEM & TOKENS
+           ========================================================================== */
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #eef2ff;
+            --primary-glow: rgba(79, 70, 229, 0.2);
+            --secondary: #0ea5e9;
+            --secondary-light: #f0f9ff;
+            
+            --admin-dark: #0f172a;
+            --admin-sidebar-bg: #0b1120;
+            --admin-sidebar-border: #1e293b;
+            --admin-nav-hover: rgba(255, 255, 255, 0.06);
+            --admin-nav-active: #4f46e5;
+            
+            --accent-green: #10b981;
+            --accent-green-light: #ecfdf5;
+            --accent-amber: #f59e0b;
+            --accent-amber-light: #fffbeb;
+            --accent-orange: #ea580c;
+            --accent-orange-light: #fff7ed;
+            --accent-purple: #8b5cf6;
+            --accent-purple-light: #f5f3ff;
+            --accent-red: #ef4444;
+            --accent-red-light: #fef2f2;
+            
+            --sidebar-width: 260px;
+            --header-height: 72px;
+            
+            --bg-body: #f8fafc;
+            --surface-card: #ffffff;
+            --surface-alt: #f1f5f9;
+            --border-subtle: #e2e8f0;
+            --border-card: #e2e8f0;
+            
+            --text-main: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-full: 9999px;
+            
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 25px -3px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
+            --shadow-xl: 0 20px 35px -8px rgba(79, 70, 229, 0.12);
+            
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            transition: var(--transition);
+        }
+
+        input, select, textarea {
+            font-family: inherit;
+        }
+
+        /* ==========================================================================
+           ADMIN LAYOUT
+           ========================================================================== */
+        .admin-layout {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* --------------------------------------------------------------------------
+           1. DARK ENTERPRISE ADMIN SIDEBAR
+           -------------------------------------------------------------------------- */
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--admin-sidebar-bg);
+            border-right: 1px solid var(--admin-sidebar-border);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 100;
+            color: #94a3b8;
+            transition: var(--transition);
+        }
+
+        .sidebar-brand {
+            height: var(--header-height);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--admin-sidebar-border);
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: #ffffff;
+            letter-spacing: -0.03em;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), #8b5cf6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            box-shadow: 0 3px 10px rgba(79, 70, 229, 0.35);
+        }
+
+        .brand-name span {
+            color: #818cf8;
+        }
+
+        .brand-tag {
+            font-size: 0.65rem;
+            font-weight: 800;
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .sidebar-nav {
+            padding: 16px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+
+        .nav-category-title {
+            font-size: 0.6875rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #64748b;
+            padding: 12px 12px 4px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 9px 12px;
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #94a3b8;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-item:hover {
+            background: var(--admin-nav-hover);
+            color: #f8fafc;
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .nav-sub-item {
+            padding-left: 36px;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .nav-sub-item:hover {
+            color: #e2e8f0;
+        }
+
+        .badge-counter {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 1px 7px;
+            border-radius: var(--radius-full);
+        }
+
+        /* Sidebar Admin Pill */
+        .sidebar-admin-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: var(--radius-md);
+            margin: 0 12px 8px;
+            border: 1px solid var(--admin-sidebar-border);
+            cursor: pointer;
+        }
+
+        .sidebar-admin-pill:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: #334155;
+        }
+
+        .admin-avatar-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-size: 0.82rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .admin-meta-info {
+            line-height: 1.25;
+            overflow: hidden;
+        }
+
+        .admin-meta-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #f8fafc;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .admin-meta-role {
+            font-size: 0.7rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            padding: 10px 12px;
+            border-top: 1px solid var(--admin-sidebar-border);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .nav-item.logout-admin:hover {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+        }
+
+        /* --------------------------------------------------------------------------
+           2. MAIN CONTENT AREA & HEADER
+           -------------------------------------------------------------------------- */
+        .admin-main-wrapper {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            width: calc(100% - var(--sidebar-width));
+        }
+
+        .admin-top-header {
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 90;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-title-group h1 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-title-group p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Search input */
+        .admin-search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .admin-search-input {
+            width: 240px;
+            padding: 8px 12px 8px 34px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-subtle);
+            background: var(--surface-alt);
+            font-size: 0.85rem;
+            color: var(--text-main);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .admin-search-input:focus {
+            width: 280px;
+            border-color: var(--primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .search-icon-svg {
+            position: absolute;
+            left: 10px;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .btn-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-subtle);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .btn-icon:hover {
+            background: var(--surface-alt);
+            color: var(--primary);
+            border-color: #cbd5e1;
+        }
+
+        .notification-badge-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .admin-dropdown-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 320px;
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            padding: 14px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 120;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .admin-dropdown-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-subtle);
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --------------------------------------------------------------------------
+           3. DASHBOARD MAIN CONTENT & GRID
+           -------------------------------------------------------------------------- */
+        .admin-content {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Generic Admin Card */
+        .card {
+            background: var(--surface-card);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-card);
+            box-shadow: var(--shadow-subtle);
+            padding: 24px;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.015em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --------------------------------------------------------------------------
+           4. WELCOME & SYSTEM ALERTS
+           -------------------------------------------------------------------------- */
+        .admin-welcome-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #ffffff;
+            border-radius: var(--radius-xl);
+            padding: 24px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-welcome-bar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 350px;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .welcome-text h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .welcome-text p {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .welcome-date-badge {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #e0e7ff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Admin Alert Strip */
+        .alert-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-left: 4px solid var(--accent-amber);
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            color: #92400e;
+        }
+
+        .alert-strip-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .alert-tag-num {
+            background: var(--accent-amber);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: var(--radius-full);
+        }
+
+        /* --------------------------------------------------------------------------
+           5. MAIN STATISTICS CARDS (4 TOP CARDS)
+           -------------------------------------------------------------------------- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: var(--surface-card);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-card);
+            box-shadow: var(--shadow-subtle);
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: #cbd5e1;
+        }
+
+        .stat-icon-wrapper {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .icon-students { background: #eff6ff; color: #2563eb; }
+        .icon-active { background: #ecfdf5; color: #059669; }
+        .icon-tests { background: #f5f3ff; color: #7c3aed; }
+        .icon-revenue { background: #fffbeb; color: #d97706; }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .stat-subtext {
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .text-trend-up { color: var(--accent-green); }
+        .text-trend-accent { color: var(--primary); }
+
+        /* --------------------------------------------------------------------------
+           6. QUICK ACTIONS TOOLBAR
+           -------------------------------------------------------------------------- */
+        .quick-actions-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            padding: 16px 20px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .quick-actions-label {
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-right: 4px;
+        }
+
+        .btn-action-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid var(--border-subtle);
+            background: var(--surface-alt);
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .btn-action-pill:hover {
+            background: #ffffff;
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .btn-action-pill.primary {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px var(--primary-glow);
+        }
+
+        .btn-action-pill.primary:hover {
+            background: var(--primary-hover);
+        }
+
+        /* --------------------------------------------------------------------------
+           7. 2-COLUMN ANALYTICS GRID (CHARTS)
+           -------------------------------------------------------------------------- */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 24px;
+        }
+
+        .grid-equal-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .grid-4col {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .filter-btn-group {
+            display: flex;
+            background: var(--surface-alt);
+            padding: 3px;
+            border-radius: var(--radius-md);
+            gap: 2px;
+        }
+
+        .btn-filter {
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            border-radius: 6px;
+        }
+
+        .btn-filter.active {
+            background: #ffffff;
+            color: var(--primary);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        /* --------------------------------------------------------------------------
+           8. SKILL PERFORMANCE CARDS (4 DOMAINS)
+           -------------------------------------------------------------------------- */
+        .skill-metric-card {
+            background: var(--surface-alt);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .skill-metric-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-domain-name {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .skill-avg-score {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .progress-bar-bg {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: var(--radius-full);
+        }
+
+        /* --------------------------------------------------------------------------
+           9. RECENT ACTIVITY & STUDENTS TABLES
+           -------------------------------------------------------------------------- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .admin-table th {
+            padding: 12px 14px;
+            background: var(--surface-alt);
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .admin-table td {
+            padding: 14px;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+        }
+
+        .admin-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .badge-completed { background: var(--accent-green-light); color: var(--accent-green); }
+        .badge-progress { background: var(--primary-light); color: var(--primary); }
+        .badge-failed { background: var(--accent-red-light); color: var(--accent-red); }
+        .badge-active { background: #dcfce7; color: #166534; }
+        .badge-expired { background: #fee2e2; color: #991b1b; }
+
+        .btn-table-action {
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
+            background: #ffffff;
+            color: var(--text-main);
+        }
+
+        .btn-table-action:hover {
+            background: var(--surface-alt);
+            color: var(--primary);
+        }
+
+        /* --------------------------------------------------------------------------
+           10. QUESTION BANK & ASSESSMENT OVERVIEWS
+           -------------------------------------------------------------------------- */
+        .qbank-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .qbank-box {
+            background: var(--surface-alt);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            border: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+
+        .qbank-num {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .qbank-cat {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* --------------------------------------------------------------------------
+           11. MODALS & TOAST NOTIFICATIONS
+           -------------------------------------------------------------------------- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            width: 100%;
+            max-width: 520px;
+            padding: 28px;
+            box-shadow: var(--shadow-xl);
+            animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalPop {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .modal-close-btn {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .toast-item {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-lg);
+            pointer-events: auto;
+            min-width: 280px;
+        }
+
+        .toast-item.success { background: #065f46; border-left: 4px solid var(--accent-green); }
+        .toast-item.info { background: #1e1b4b; border-left: 4px solid var(--primary); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --------------------------------------------------------------------------
+           RESPONSIVE BREAKPOINTS
+           -------------------------------------------------------------------------- */
+        @media (max-width: 1200px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-2col { grid-template-columns: 1fr; }
+            .grid-equal-2col { grid-template-columns: 1fr; }
+            .grid-4col { grid-template-columns: repeat(2, 1fr); }
+            .qbank-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 900px) {
+            .admin-sidebar {
+                transform: translateX(-100%);
+            }
+            .admin-sidebar.mobile-open {
+                transform: translateX(0);
+                box-shadow: 0 0 40px rgba(0,0,0,0.4);
+            }
+            .admin-main-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
+            .admin-search-wrapper {
+                display: none;
+            }
+            .stats-grid { grid-template-columns: 1fr; }
+            .grid-4col { grid-template-columns: 1fr; }
+            .admin-content { padding: 20px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-layout">
+        <!-- ==================================================================
+             1. ENTERPRISE ADMIN SIDEBAR
+             ================================================================== -->
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <div>
+                <!-- Brand Header -->
+                <div class="sidebar-brand">
+                    <a href="admin-dashboard.html" class="brand-logo">
+                        <div class="brand-icon">⚡</div>
+                        <div class="brand-name">Skill<span>Prep</span></div>
+                        <span class="brand-tag">Admin</span>
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="sidebar-nav">
+                    <div class="nav-category-title">Main</div>
+                    <a href="admin-dashboard.html" class="nav-item active">
+                        <span class="nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#students-section" class="nav-item" onclick="scrollToSection('students-section')">
+                        <span class="nav-icon">👥</span>
+                        <span>Students</span>
+                        <span class="badge-counter">1,248</span>
+                    </a>
+                    <a href="#question-bank-section" class="nav-item" onclick="scrollToSection('question-bank-section')">
+                        <span class="nav-icon">❓</span>
+                        <span>Questions</span>
+                    </a>
+                    <a href="#assessments-section" class="nav-item" onclick="scrollToSection('assessments-section')">
+                        <span class="nav-icon">📝</span>
+                        <span>Assessments</span>
+                        <span class="badge-counter">42</span>
+                    </a>
+
+                    <div class="nav-category-title">Management</div>
+                    <a href="#daily-practice-section" class="nav-item" onclick="scrollToSection('daily-practice-section')">
+                        <span class="nav-icon">📅</span>
+                        <span>Daily Practice</span>
+                    </a>
+                    <a href="#subscriptions-section" class="nav-item" onclick="scrollToSection('subscriptions-section')">
+                        <span class="nav-icon">💳</span>
+                        <span>Subscriptions</span>
+                    </a>
+                    <a href="#revenue-section" class="nav-item" onclick="scrollToSection('revenue-section')">
+                        <span class="nav-icon">📈</span>
+                        <span>Analytics</span>
+                    </a>
+
+                    <div class="nav-category-title">System</div>
+                    <a href="javascript:void(0)" class="nav-item" onclick="showToast('Notification center up to date.', 'info')">
+                        <span class="nav-icon">🔔</span>
+                        <span>Notifications</span>
+                        <span class="badge-counter" style="background:#ef4444;">3</span>
+                    </a>
+                    <a href="profile.html" class="nav-item">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div>
+                <!-- Admin User Pill -->
+                <div class="sidebar-admin-pill" onclick="showToast('Logged in as Administrator (Master privileges)', 'info')">
+                    <div class="admin-avatar-circle">AD</div>
+                    <div class="admin-meta-info">
+                        <div class="admin-meta-name">Administrator</div>
+                        <div class="admin-meta-role">Platform Admin</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <a href="dashboard.html" class="nav-item" style="color:#cbd5e1;">
+                        <span class="nav-icon">🎓</span>
+                        <span>Student View</span>
+                    </a>
+                    <a href="javascript:void(0)" class="nav-item logout-admin" onclick="adminLogout()">
+                        <span class="nav-icon">🚪</span>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ==================================================================
+             MAIN WRAPPER & HEADER
+             ================================================================== -->
+        <div class="admin-main-wrapper">
+            
+            <!-- 2. TOP HEADER -->
+            <header class="admin-top-header">
+                <div style="display:flex; align-items:center; gap:16px;">
+                    <button class="mobile-menu-btn" id="mobile-sidebar-toggle" aria-label="Toggle Sidebar">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                    <div class="header-title-group">
+                        <h1>Admin Dashboard</h1>
+                        <p>Monitor and manage the SkillPrep placement platform</p>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <!-- Search Bar -->
+                    <div class="admin-search-wrapper">
+                        <svg class="search-icon-svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        <input type="text" class="admin-search-input" placeholder="Search students, topics, test..." oninput="handleGlobalSearch(this.value)">
+                    </div>
+
+                    <!-- Notification Bell -->
+                    <div style="position: relative;">
+                        <button class="btn-icon" id="admin-notif-btn" aria-label="Notifications">
+                            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            </svg>
+                            <span class="notification-badge-dot"></span>
+                        </button>
+                        
+                        <div class="admin-dropdown-menu" id="admin-notif-dropdown">
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-subtle); padding-bottom:8px; font-weight:700; font-size:0.85rem;">
+                                <span>Platform Alerts (3)</span>
+                                <a href="javascript:void(0)" style="color:var(--primary); font-size:0.75rem;" onclick="dismissAdminNotifs()">Mark all read</a>
+                            </div>
+                            <div style="font-size:0.8rem; display:flex; flex-direction:column; gap:8px;">
+                                <div style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--accent-amber);">
+                                    <strong>💳 18 pending student payments</strong>
+                                    <div style="color:var(--text-muted); font-size:0.72rem;">Razorpay webhook verification queued</div>
+                                </div>
+                                <div style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--accent-green);">
+                                    <strong>👨‍💻 45 new coding submissions</strong>
+                                    <div style="color:var(--text-muted); font-size:0.72rem;">Top performer: TCS Mock Series</div>
+                                </div>
+                                <div style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--primary);">
+                                    <strong>🔒 System backup completed</strong>
+                                    <div style="color:var(--text-muted); font-size:0.72rem;">Database synced successfully at 04:00 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Dropdown Pill -->
+                    <div style="position:relative;">
+                        <div class="btn-icon" style="width:auto; padding:0 10px; gap:8px; cursor:pointer;" id="admin-profile-pill">
+                            <div class="admin-avatar-circle" style="width:26px; height:26px; font-size:0.75rem;">AD</div>
+                            <span style="font-size:0.85rem; font-weight:700; color:var(--text-main);">Administrator</span>
+                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </div>
+                        
+                        <div class="admin-dropdown-menu" id="admin-profile-dropdown" style="width:200px;">
+                            <a href="profile.html" style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">👤 My Profile</a>
+                            <a href="dashboard.html" style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">🎓 Student Portal</a>
+                            <hr style="border:none; border-top:1px solid var(--border-subtle); margin:4px 0;">
+                            <a href="javascript:void(0)" onclick="adminLogout()" style="padding:6px 8px; font-size:0.85rem; font-weight:700; color:#ef4444; border-radius:6px; display:block;">🚪 Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ==================================================================
+                 DASHBOARD BODY
+                 ================================================================== -->
+            <main class="admin-content">
+
+                <!-- 4. WELCOME BAR -->
+                <div class="admin-welcome-bar">
+                    <div class="welcome-text">
+                        <h2>Welcome back, Admin 👋</h2>
+                        <p>Here's what's happening across SkillPrep today. All platform systems operational.</p>
+                    </div>
+                    <div class="welcome-date-badge">
+                        <span>📅</span>
+                        <span id="current-live-date">Monday, 07 September 2026</span>
+                    </div>
+                </div>
+
+                <!-- 18. ADMIN ALERTS STRIP -->
+                <div class="alert-strip">
+                    <div class="alert-strip-left">
+                        <span>⚠️</span>
+                        <span><strong>Platform Attention Needed:</strong> 18 pending subscription verifications and 124 expiring student accounts.</span>
+                        <span class="alert-tag-num">Action Required</span>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn-action-pill" style="padding:4px 10px; font-size:0.78rem;" onclick="scrollToSection('subscriptions-section')">Review Payments →</button>
+                    </div>
+                </div>
+
+                <!-- 16. QUICK ACTIONS TOOLBAR -->
+                <section class="quick-actions-bar">
+                    <span class="quick-actions-label">⚡ Quick Actions:</span>
+                    <button class="btn-action-pill primary" onclick="openModal('modal-add-question')">
+                        <span>+ Add Question</span>
+                    </button>
+                    <button class="btn-action-pill primary" onclick="openModal('modal-add-coding')">
+                        <span>+ Add Coding Problem</span>
+                    </button>
+                    <button class="btn-action-pill" onclick="openModal('modal-create-assessment')">
+                        <span>+ Create Assessment</span>
+                    </button>
+                    <button class="btn-action-pill" onclick="openModal('modal-create-daily')">
+                        <span>+ Create Daily Drill</span>
+                    </button>
+                    <button class="btn-action-pill" onclick="scrollToSection('students-section')">
+                        <span>👥 View Students</span>
+                    </button>
+                    <button class="btn-action-pill" onclick="scrollToSection('revenue-section')">
+                        <span>📊 View Analytics</span>
+                    </button>
+                </section>
+
+                <!-- 5. MAIN STATISTICS CARDS (4 PRIMARY CARDS) -->
+                <section class="stats-grid">
+                    <!-- Total Students -->
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper icon-students">👥</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Students</span>
+                            <span class="stat-value" id="stat-total-students">1,248</span>
+                            <span class="stat-subtext text-trend-up">↑ +12% this month</span>
+                        </div>
+                    </div>
+
+                    <!-- Active Students -->
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper icon-active">⚡</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Active Students</span>
+                            <span class="stat-value" id="stat-active-students">986</span>
+                            <span class="stat-subtext text-trend-accent">79% of total students</span>
+                        </div>
+                    </div>
+
+                    <!-- Assessments Completed -->
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper icon-tests">📝</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Assessments Completed</span>
+                            <span class="stat-value" id="stat-assessments-count">3,842</span>
+                            <span class="stat-subtext text-trend-up">↑ +18% this month</span>
+                        </div>
+                    </div>
+
+                    <!-- Total Revenue -->
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper icon-revenue">₹</div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Revenue</span>
+                            <span class="stat-value" id="stat-revenue-value">₹12,480</span>
+                            <span class="stat-subtext text-trend-up">This Month (₹10/yr)</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. STUDENT OVERVIEW & GROWTH ANALYTICS -->
+                <div class="grid-2col" id="students-overview-section">
+                    <section class="card">
+                        <div class="card-header-row">
+                            <div>
+                                <h3 class="card-title">📈 Student Growth & Engagement</h3>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Track new registrations vs daily active practice</p>
+                            </div>
+                            <div class="filter-btn-group">
+                                <button class="btn-filter active" onclick="switchStudentChart('today', this)">Today</button>
+                                <button class="btn-filter" onclick="switchStudentChart('week', this)">This Week</button>
+                                <button class="btn-filter" onclick="switchStudentChart('month', this)">This Month</button>
+                                <button class="btn-filter" onclick="switchStudentChart('year', this)">This Year</button>
+                            </div>
+                        </div>
+                        <div style="height: 240px; position: relative;">
+                            <canvas id="studentGrowthChart"></canvas>
+                        </div>
+                    </section>
+
+                    <!-- 13. SUBSCRIPTION STATUS DONUT -->
+                    <section class="card" id="subscriptions-section">
+                        <div class="card-header-row">
+                            <h3 class="card-title">💳 Subscription Overview</h3>
+                            <span class="badge-status badge-active">₹10/Student Tier</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:20px;">
+                            <div style="width: 140px; height: 140px; position: relative; flex-shrink:0;">
+                                <canvas id="subscriptionDonutChart"></canvas>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:10px; flex-grow:1; font-size:0.85rem;">
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span style="display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; background:#10b981; border-radius:50%;"></span> Active Subscriptions</span>
+                                    <strong>986</strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span style="display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; background:#ef4444; border-radius:50%;"></span> Expired Subscriptions</span>
+                                    <strong>124</strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span style="display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; background:#f59e0b; border-radius:50%;"></span> Pending Payment</span>
+                                    <strong>18</strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border-subtle); padding-top:6px;">
+                                    <span style="color:var(--text-muted);">Monthly Revenue:</span>
+                                    <strong style="color:var(--primary); font-size:1rem;">₹12,480</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top:16px;">
+                            <button class="btn-action-pill" style="width:100%; justify-content:center;" onclick="showToast('Loading full subscription breakdown...', 'info')">View Detailed Subscriptions</button>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 7. SKILL PERFORMANCE OVERVIEW (4 DOMAINS) -->
+                <section class="card">
+                    <div class="card-header-row">
+                        <div>
+                            <h3 class="card-title">🎯 Skill Performance Overview</h3>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Aggregate accuracy and student participation across modules</p>
+                        </div>
+                        <button class="btn-action-pill" onclick="showToast('Exporting skill performance report...', 'info')">Export Report</button>
+                    </div>
+
+                    <div class="grid-4col">
+                        <!-- Aptitude -->
+                        <div class="skill-metric-card">
+                            <div class="skill-metric-top">
+                                <span class="skill-domain-name">🧠 Aptitude</span>
+                                <span class="skill-avg-score">78%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 78%; background: linear-gradient(90deg, #3b82f6, #6366f1);"></div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
+                                <span>Students: <strong>842</strong></span>
+                                <span style="color:var(--accent-green);">Avg Score</span>
+                            </div>
+                        </div>
+
+                        <!-- Technical -->
+                        <div class="skill-metric-card">
+                            <div class="skill-metric-top">
+                                <span class="skill-domain-name">💻 Technical</span>
+                                <span class="skill-avg-score">74%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 74%; background: linear-gradient(90deg, #10b981, #059669);"></div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
+                                <span>Students: <strong>765</strong></span>
+                                <span style="color:var(--accent-green);">Avg Score</span>
+                            </div>
+                        </div>
+
+                        <!-- Communication -->
+                        <div class="skill-metric-card">
+                            <div class="skill-metric-top">
+                                <span class="skill-domain-name">🗣 Communication</span>
+                                <span class="skill-avg-score">81%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 81%; background: linear-gradient(90deg, #f59e0b, #d97706);"></div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
+                                <span>Students: <strong>698</strong></span>
+                                <span style="color:var(--accent-green);">Avg Score</span>
+                            </div>
+                        </div>
+
+                        <!-- Coding -->
+                        <div class="skill-metric-card">
+                            <div class="skill-metric-top">
+                                <span class="skill-domain-name">👨‍💻 Coding</span>
+                                <span class="skill-avg-score">4,286</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 86%; background: linear-gradient(90deg, #8b5cf6, #ec4899);"></div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
+                                <span>Active Coders: <strong>524</strong></span>
+                                <span style="color:var(--primary);">Solved Drills</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 10, 11, 12. QUESTION BANK, ASSESSMENTS & DAILY DRILLS -->
+                <div class="grid-equal-2col">
+                    <!-- 10. Question Bank -->
+                    <section class="card" id="question-bank-section">
+                        <div class="card-header-row">
+                            <h3 class="card-title">📚 Question Bank Overview</h3>
+                            <button class="btn-action-pill primary" onclick="openModal('modal-add-question')">+ Add Question</button>
+                        </div>
+                        <div class="qbank-grid">
+                            <div class="qbank-box">
+                                <div class="qbank-num">1,250</div>
+                                <div class="qbank-cat">🧠 Aptitude</div>
+                            </div>
+                            <div class="qbank-box">
+                                <div class="qbank-num">980</div>
+                                <div class="qbank-cat">💻 Technical</div>
+                            </div>
+                            <div class="qbank-box">
+                                <div class="qbank-num">620</div>
+                                <div class="qbank-cat">🗣 Communication</div>
+                            </div>
+                            <div class="qbank-box">
+                                <div class="qbank-num">450</div>
+                                <div class="qbank-cat">👨‍💻 Coding</div>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; font-size:0.85rem; color:var(--text-secondary);">
+                            <span>Total Platform Bank: <strong>3,300+ Questions</strong></span>
+                            <button class="btn-action-pill" onclick="showToast('Opening Question Manager...', 'info')">Manage Questions →</button>
+                        </div>
+                    </section>
+
+                    <!-- 11 & 12. Assessments & Daily Drills -->
+                    <section class="card" id="assessments-section">
+                        <div class="card-header-row">
+                            <h3 class="card-title">📝 Assessments & Daily Practice</h3>
+                            <button class="btn-action-pill" onclick="openModal('modal-create-assessment')">+ Create Mock</button>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+                            <div style="background:var(--surface-alt); padding:12px; border-radius:var(--radius-md);">
+                                <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">TOTAL ASSESSMENTS</div>
+                                <div style="font-size:1.4rem; font-weight:800; color:var(--text-main);">42 <span style="font-size:0.8rem; color:var(--accent-green); font-weight:600;">(18 Active)</span></div>
+                                <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">3,842 attempts • Avg: 76%</div>
+                            </div>
+                            <div style="background:var(--surface-alt); padding:12px; border-radius:var(--radius-md);">
+                                <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">TODAY'S DAILY PRACTICE</div>
+                                <div style="font-size:1.4rem; font-weight:800; color:var(--text-main);">68% <span style="font-size:0.8rem; color:var(--primary); font-weight:600;">Completion</span></div>
+                                <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">571 completed / 842 started</div>
+                            </div>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn-action-pill" style="flex:1; justify-content:center;" onclick="showToast('Opening Assessment Manager...', 'info')">Manage Assessments</button>
+                            <button class="btn-action-pill" style="flex:1; justify-content:center;" id="daily-practice-section" onclick="showToast('Opening Daily Practice Curations...', 'info')">Curate Daily Drills</button>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 14 & 15. REVENUE ANALYTICS & PLATFORM WEAK AREAS -->
+                <div class="grid-2col" id="revenue-section">
+                    <section class="card">
+                        <div class="card-header-row">
+                            <div>
+                                <h3 class="card-title">💰 Revenue Analytics (₹10 Student Pass)</h3>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Monthly subscription collections and payment success rate</p>
+                            </div>
+                            <div class="filter-btn-group">
+                                <button class="btn-filter active" onclick="switchRevenueChart('7d', this)">7 Days</button>
+                                <button class="btn-filter" onclick="switchRevenueChart('30d', this)">30 Days</button>
+                                <button class="btn-filter" onclick="switchRevenueChart('6m', this)">6 Months</button>
+                                <button class="btn-filter" onclick="switchRevenueChart('1y', this)">1 Year</button>
+                            </div>
+                        </div>
+                        <div style="height: 220px; position: relative;">
+                            <canvas id="revenueAnalyticsChart"></canvas>
+                        </div>
+                    </section>
+
+                    <!-- 15. Platform Insights (Weak Areas) -->
+                    <section class="card">
+                        <div class="card-header-row">
+                            <h3 class="card-title">⚠️ Platform Weak Areas</h3>
+                            <span style="font-size:0.75rem; color:var(--accent-red); font-weight:700;">Needs Remediation</span>
+                        </div>
+                        <div style="display:flex; flex-direction:column; gap:10px; font-size:0.85rem;">
+                            <div style="padding:10px; background:var(--surface-alt); border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center;">
+                                <div>
+                                    <div style="font-weight:700; color:var(--text-main);">Percentage & Profit/Loss (Quant)</div>
+                                    <div style="font-size:0.75rem; color:var(--text-muted);">432 students struggling • Avg 54%</div>
+                                </div>
+                                <span class="badge-status badge-failed">Hard</span>
+                            </div>
+                            <div style="padding:10px; background:var(--surface-alt); border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center;">
+                                <div>
+                                    <div style="font-weight:700; color:var(--text-main);">Tree Traversal & Graphs (Coding)</div>
+                                    <div style="font-size:0.75rem; color:var(--text-muted);">310 students struggling • Avg 58%</div>
+                                </div>
+                                <span class="badge-status badge-progress">Medium</span>
+                            </div>
+                            <div style="padding:10px; background:var(--surface-alt); border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center;">
+                                <div>
+                                    <div style="font-weight:700; color:var(--text-main);">Sentence Correction & Idioms (Verbal)</div>
+                                    <div style="font-size:0.75rem; color:var(--text-muted);">285 students struggling • Avg 62%</div>
+                                </div>
+                                <span class="badge-status badge-progress">Medium</span>
+                            </div>
+                        </div>
+                        <button class="btn-action-pill" style="width:100%; justify-content:center; margin-top:14px;" onclick="showToast('Loading comprehensive curriculum weakness diagnosis...', 'info')">View Detailed Insights →</button>
+                    </section>
+                </div>
+
+                <!-- 8 & 9. TABLES: RECENT ACTIVITY & STUDENTS TABLE -->
+                <section class="card" id="students-section">
+                    <div class="card-header-row">
+                        <div>
+                            <h3 class="card-title">👥 Recent Student Registrations</h3>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Latest college students enrolled in SkillPrep</p>
+                        </div>
+                        <button class="btn-action-pill" onclick="showToast('Opening Student Management Directory...', 'info')">View All Students (1,248) →</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Email</th>
+                                    <th>College / Institute</th>
+                                    <th>Registered</th>
+                                    <th>Subscription</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Ananya Kumar</strong></td>
+                                    <td>student@skillprep.edu</td>
+                                    <td>ABC Engineering College</td>
+                                    <td>07 Sep 2026</td>
+                                    <td><span class="badge-status badge-completed">₹10 Plan</span></td>
+                                    <td><span class="badge-status badge-active">● Active</span></td>
+                                    <td>
+                                        <button class="btn-table-action" onclick="viewStudentDetails('Ananya Kumar')">View</button>
+                                        <button class="btn-table-action" onclick="showToast('Editing Ananya Kumar', 'info')">Edit</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Rohan Sharma</strong></td>
+                                    <td>rohan.s@college.edu</td>
+                                    <td>PSG College of Technology</td>
+                                    <td>06 Sep 2026</td>
+                                    <td><span class="badge-status badge-completed">₹10 Plan</span></td>
+                                    <td><span class="badge-status badge-active">● Active</span></td>
+                                    <td>
+                                        <button class="btn-table-action" onclick="viewStudentDetails('Rohan Sharma')">View</button>
+                                        <button class="btn-table-action" onclick="showToast('Editing Rohan Sharma', 'info')">Edit</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kavya Ramesh</strong></td>
+                                    <td>kavya.r@univ.edu</td>
+                                    <td>SSN College of Engineering</td>
+                                    <td>05 Sep 2026</td>
+                                    <td><span class="badge-status badge-failed">Expired</span></td>
+                                    <td><span class="badge-status badge-expired">● Inactive</span></td>
+                                    <td>
+                                        <button class="btn-table-action" onclick="viewStudentDetails('Kavya Ramesh')">View</button>
+                                        <button class="btn-table-action" onclick="showToast('Renew reminder sent', 'success')">Notify</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Vignesh Sundar</strong></td>
+                                    <td>vignesh.s@tech.edu</td>
+                                    <td>CIT Coimbatore</td>
+                                    <td>04 Sep 2026</td>
+                                    <td><span class="badge-status badge-completed">₹10 Plan</span></td>
+                                    <td><span class="badge-status badge-active">● Active</span></td>
+                                    <td>
+                                        <button class="btn-table-action" onclick="viewStudentDetails('Vignesh Sundar')">View</button>
+                                        <button class="btn-table-action" onclick="showToast('Editing Vignesh Sundar', 'info')">Edit</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 8. RECENT STUDENT ACTIVITY LOG -->
+                <section class="card">
+                    <div class="card-header-row">
+                        <h3 class="card-title">⚡ Real-time Student Activity Stream</h3>
+                        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Live Feed</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Activity</th>
+                                    <th>Module / Topic</th>
+                                    <th>Score / Result</th>
+                                    <th>Timestamp</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Ananya Kumar</strong></td>
+                                    <td>Completed Aptitude Assessment</td>
+                                    <td>Quantitative Drills</td>
+                                    <td><strong style="color:var(--accent-green);">88%</strong></td>
+                                    <td>5 mins ago</td>
+                                    <td><span class="badge-status badge-completed">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Rohan Sharma</strong></td>
+                                    <td>Solved Coding Problem</td>
+                                    <td>Two Sum (Arrays)</td>
+                                    <td><strong style="color:var(--primary);">100/100</strong></td>
+                                    <td>12 mins ago</td>
+                                    <td><span class="badge-status badge-completed">Accepted</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Priya S.</strong></td>
+                                    <td>Daily Practice Drill</td>
+                                    <td>Verbal & Tech</td>
+                                    <td><strong>18/21 Done</strong></td>
+                                    <td>25 mins ago</td>
+                                    <td><span class="badge-status badge-progress">In Progress</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Karthik M.</strong></td>
+                                    <td>Mock Interview Test</td>
+                                    <td>TCS NQT Full Mock</td>
+                                    <td><strong style="color:var(--accent-red);">48%</strong></td>
+                                    <td>1 hour ago</td>
+                                    <td><span class="badge-status badge-failed">Retake Suggested</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ======================================================================
+         ADMIN MODALS
+         ====================================================================== -->
+
+    <!-- ADD QUESTION MODAL -->
+    <div class="modal-overlay" id="modal-add-question">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>+ Add Question to Bank</h3>
+                <span class="modal-close-btn" onclick="closeModal('modal-add-question')">&times;</span>
+            </div>
+            <form onsubmit="handleAddQuestionSubmit(event)">
+                <div style="display:flex; flex-direction:column; gap:14px; font-size:0.85rem;">
+                    <div>
+                        <label style="font-weight:700; color:var(--text-muted);">Category / Module *</label>
+                        <select id="new-q-cat" class="admin-search-input" style="width:100%; margin-top:4px;" required>
+                            <option value="Aptitude">🧠 Quantitative Aptitude</option>
+                            <option value="Technical">💻 Technical & Core CS</option>
+                            <option value="Communication">🗣 Verbal & Communication</option>
+                            <option value="Logical">🧩 Logical Reasoning</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-weight:700; color:var(--text-muted);">Question Statement *</label>
+                        <textarea id="new-q-text" class="admin-search-input" style="width:100%; height:80px; margin-top:4px;" placeholder="Type question problem statement..." required></textarea>
+                    </div>
+                    <div>
+                        <label style="font-weight:700; color:var(--text-muted);">Correct Answer Option *</label>
+                        <input type="text" id="new-q-ans" class="admin-search-input" style="width:100%; margin-top:4px;" placeholder="e.g. Option A: 25%" required>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-action-pill" onclick="closeModal('modal-add-question')">Cancel</button>
+                    <button type="submit" class="btn-action-pill primary">Save Question</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD CODING PROBLEM MODAL -->
+    <div class="modal-overlay" id="modal-add-coding">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>+ Add Coding Challenge</h3>
+                <span class="modal-close-btn" onclick="closeModal('modal-add-coding')">&times;</span>
+            </div>
+            <form onsubmit="handleAddCodingSubmit(event)">
+                <div style="display:flex; flex-direction:column; gap:14px; font-size:0.85rem;">
+                    <div>
+                        <label style="font-weight:700; color:var(--text-muted);">Problem Title *</label>
+                        <input type="text" class="admin-search-input" style="width:100%; margin-top:4px;" placeholder="e.g. Valid Parentheses" required>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div>
+                            <label style="font-weight:700; color:var(--text-muted);">Difficulty</label>
+                            <select class="admin-search-input" style="width:100%; margin-top:4px;">
+                                <option>Easy</option>
+                                <option>Medium</option>
+                                <option>Hard</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-weight:700; color:var(--text-muted);">Topic Tag</label>
+                            <select class="admin-search-input" style="width:100%; margin-top:4px;">
+                                <option>Arrays & Hashing</option>
+                                <option>Strings</option>
+                                <option>Linked List</option>
+                                <option>Dynamic Programming</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-action-pill" onclick="closeModal('modal-add-coding')">Cancel</button>
+                    <button type="submit" class="btn-action-pill primary">Add Coding Problem</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CREATE ASSESSMENT MODAL -->
+    <div class="modal-overlay" id="modal-create-assessment">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>+ Create Mock Assessment</h3>
+                <span class="modal-close-btn" onclick="closeModal('modal-create-assessment')">&times;</span>
+            </div>
+            <form onsubmit="handleCreateAssessmentSubmit(event)">
+                <div style="display:flex; flex-direction:column; gap:14px; font-size:0.85rem;">
+                    <div>
+                        <label style="font-weight:700; color:var(--text-muted);">Assessment Title *</label>
+                        <input type="text" class="admin-search-input" style="width:100%; margin-top:4px;" placeholder="e.g. TCS NQT Company Mock Series 2" required>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div>
+                            <label style="font-weight:700; color:var(--text-muted);">Duration (Mins)</label>
+                            <input type="number" class="admin-search-input" style="width:100%; margin-top:4px;" value="60" required>
+                        </div>
+                        <div>
+                            <label style="font-weight:700; color:var(--text-muted);">Questions Count</label>
+                            <input type="number" class="admin-search-input" style="width:100%; margin-top:4px;" value="30" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-action-pill" onclick="closeModal('modal-create-assessment')">Cancel</button>
+                    <button type="submit" class="btn-action-pill primary">Publish Assessment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CREATE DAILY DRILL MODAL -->
+    <div class="modal-overlay" id="modal-create-daily">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>+ Curate Daily Drill Set</h3>
+                <span class="modal-close-btn" onclick="closeModal('modal-create-daily')">&times;</span>
+            </div>
+            <div style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; margin-bottom:16px;">
+                Generate the standard 21-question daily drill pack (10 Aptitude, 5 Technical, 5 Communication, 1 Coding problem) for tomorrow.
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-action-pill" onclick="closeModal('modal-create-daily')">Cancel</button>
+                <button type="button" class="btn-action-pill primary" onclick="showToast('Daily Practice pack for tomorrow generated & scheduled! 📅', 'success'); closeModal('modal-create-daily');">Schedule Drill Pack</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- ======================================================================
+         ADMIN JAVASCRIPT & CHART CONTROLLERS
+         ====================================================================== -->
+    <script>
+        // Role check & Authorization Guard
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            setupDropdowns();
+            setupLiveDate();
+        });
+
+        function setupLiveDate() {
+            const dateEl = document.getElementById('current-live-date');
+            if (dateEl) {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateEl.textContent = now.toLocaleDateString('en-US', options);
+            }
+        }
+
+        let growthChartInstance = null;
+        let revenueChartInstance = null;
+
+        function initCharts() {
+            // 1. Student Growth Line Chart
+            const ctxGrowth = document.getElementById('studentGrowthChart');
+            if (ctxGrowth) {
+                growthChartInstance = new Chart(ctxGrowth, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [
+                            {
+                                label: 'Active Students',
+                                data: [680, 720, 810, 890, 940, 960, 986],
+                                borderColor: '#4f46e5',
+                                backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                                tension: 0.35,
+                                fill: true,
+                                pointBackgroundColor: '#4f46e5'
+                            },
+                            {
+                                label: 'New Registrations',
+                                data: [45, 52, 68, 74, 82, 90, 112],
+                                borderColor: '#10b981',
+                                borderDash: [4, 4],
+                                tension: 0.3,
+                                fill: false,
+                                pointBackgroundColor: '#10b981'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'top', labels: { font: { family: "'Plus Jakarta Sans', sans-serif" } } } },
+                        scales: {
+                            y: { grid: { color: '#f1f5f9' }, ticks: { color: '#94a3b8' } },
+                            x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                        }
+                    }
+                });
+            }
+
+            // 2. Subscription Status Donut Chart
+            const ctxDonut = document.getElementById('subscriptionDonutChart');
+            if (ctxDonut) {
+                new Chart(ctxDonut, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Active', 'Expired', 'Pending'],
+                        datasets: [{
+                            data: [986, 124, 18],
+                            backgroundColor: ['#10b981', '#ef4444', '#f59e0b'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        cutout: '75%'
+                    }
+                });
+            }
+
+            // 3. Revenue Analytics Chart
+            const ctxRevenue = document.getElementById('revenueAnalyticsChart');
+            if (ctxRevenue) {
+                revenueChartInstance = new Chart(ctxRevenue, {
+                    type: 'bar',
+                    data: {
+                        labels: ['1 Sep', '2 Sep', '3 Sep', '4 Sep', '5 Sep', '6 Sep', '7 Sep'],
+                        datasets: [{
+                            label: 'Revenue (₹)',
+                            data: [1420, 1680, 1890, 2100, 1750, 1940, 2200],
+                            backgroundColor: '#4f46e5',
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { grid: { color: '#f1f5f9' }, ticks: { color: '#94a3b8' } },
+                            x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                        }
+                    }
+                });
+            }
+        }
+
+        function switchStudentChart(timeframe, btn) {
+            document.querySelectorAll('#students-overview-section .btn-filter').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (!growthChartInstance) return;
+            if (timeframe === 'today') {
+                growthChartInstance.data.labels = ['6 AM', '9 AM', '12 PM', '3 PM', '6 PM', '9 PM'];
+                growthChartInstance.data.datasets[0].data = [120, 340, 580, 720, 890, 986];
+                growthChartInstance.data.datasets[1].data = [10, 25, 45, 60, 88, 112];
+            } else if (timeframe === 'week') {
+                growthChartInstance.data.labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                growthChartInstance.data.datasets[0].data = [680, 720, 810, 890, 940, 960, 986];
+                growthChartInstance.data.datasets[1].data = [45, 52, 68, 74, 82, 90, 112];
+            } else if (timeframe === 'month') {
+                growthChartInstance.data.labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                growthChartInstance.data.datasets[0].data = [450, 680, 890, 986];
+                growthChartInstance.data.datasets[1].data = [180, 290, 380, 480];
+            } else {
+                growthChartInstance.data.labels = ['Jan', 'Mar', 'May', 'Jul', 'Sep'];
+                growthChartInstance.data.datasets[0].data = [200, 450, 720, 890, 986];
+                growthChartInstance.data.datasets[1].data = [200, 520, 810, 1050, 1248];
+            }
+            growthChartInstance.update();
+        }
+
+        function switchRevenueChart(timeframe, btn) {
+            document.querySelectorAll('#revenue-section .btn-filter').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (!revenueChartInstance) return;
+            if (timeframe === '7d') {
+                revenueChartInstance.data.labels = ['1 Sep', '2 Sep', '3 Sep', '4 Sep', '5 Sep', '6 Sep', '7 Sep'];
+                revenueChartInstance.data.datasets[0].data = [1420, 1680, 1890, 2100, 1750, 1940, 2200];
+            } else if (timeframe === '30d') {
+                revenueChartInstance.data.labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                revenueChartInstance.data.datasets[0].data = [2800, 3100, 3450, 3130];
+            } else {
+                revenueChartInstance.data.labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep'];
+                revenueChartInstance.data.datasets[0].data = [8400, 9800, 11200, 12100, 12480];
+            }
+            revenueChartInstance.update();
+        }
+
+        function setupDropdowns() {
+            const notifBtn = document.getElementById('admin-notif-btn');
+            const notifDropdown = document.getElementById('admin-notif-dropdown');
+            const profilePill = document.getElementById('admin-profile-pill');
+            const profileDropdown = document.getElementById('admin-profile-dropdown');
+            const mobileToggle = document.getElementById('mobile-sidebar-toggle');
+            const sidebar = document.getElementById('admin-sidebar');
+
+            if (notifBtn && notifDropdown) {
+                notifBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    notifDropdown.classList.toggle('active');
+                    profileDropdown.classList.remove('active');
+                });
+            }
+
+            if (profilePill && profileDropdown) {
+                profilePill.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('active');
+                    notifDropdown.classList.remove('active');
+                });
+            }
+
+            if (mobileToggle && sidebar) {
+                mobileToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    sidebar.classList.toggle('mobile-open');
+                });
+            }
+
+            document.addEventListener('click', () => {
+                if (notifDropdown) notifDropdown.classList.remove('active');
+                if (profileDropdown) profileDropdown.classList.remove('active');
+            });
+        }
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('active');
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast-item ${type}`;
+            const icon = type === 'success' ? '✅' : 'ℹ️';
+            toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        function handleAddQuestionSubmit(e) {
+            e.preventDefault();
+            const text = document.getElementById('new-q-text').value;
+            const cat = document.getElementById('new-q-cat').value;
+            closeModal('modal-add-question');
+            showToast(`Question added to ${cat} bank successfully! 📚`, 'success');
+            e.target.reset();
+        }
+
+        function handleAddCodingSubmit(e) {
+            e.preventDefault();
+            closeModal('modal-add-coding');
+            showToast('New coding challenge added to the active IDE sandbox! 👨‍💻', 'success');
+            e.target.reset();
+        }
+
+        function handleCreateAssessmentSubmit(e) {
+            e.preventDefault();
+            closeModal('modal-create-assessment');
+            showToast('Mock Assessment published to student dashboards! 📝', 'success');
+            e.target.reset();
+        }
+
+        function viewStudentDetails(name) {
+            showToast(`Opening profile dossier for ${name}...`, 'info');
+        }
+
+        function dismissAdminNotifs() {
+            document.querySelector('.notification-badge-dot').style.display = 'none';
+            showToast('All administrator alerts acknowledged.', 'info');
+        }
+
+        function handleGlobalSearch(query) {
+            if (query.trim().length > 2) {
+                console.log(`Filtering admin query for: ${query}`);
+            }
+        }
+
+        function adminLogout() {
+            if (confirm('Sign out from SkillPrep Administrator portal?')) {
+                localStorage.removeItem('skillprep_token');
+                sessionStorage.removeItem('skillprep_token');
+                showToast('Signed out from Admin console.', 'info');
+                setTimeout(() => { window.location.href = 'login.html'; }, 400);
+            }
+        }
+    </script>
+</body>
+</html>

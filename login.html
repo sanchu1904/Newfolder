@@ -1017,12 +1017,32 @@
                     <span>Your account information is securely protected.</span>
                 </div>
 
-                <div class="demo-helper-box">
-                    <div class="demo-helper-title">
-                        <span>💡 Quick Demo Credentials</span>
-                        <span class="demo-btn-fill" id="fill-demo-btn">Auto Fill</span>
+                <!-- Demo Credentials Box with Student & Admin Options -->
+                <div class="demo-helper-box" style="margin-top:24px; padding:16px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
+                    <div style="font-weight:800; font-size:0.85rem; color:#0f172a; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between;">
+                        <span>💡 Quick Demo Access</span>
+                        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Click to autofill credentials</span>
                     </div>
-                    <div>Student: <code>student@skillprep.edu</code> | Pass: <code>student123</code></div>
+                    
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <!-- Student Demo Option -->
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:#ffffff; border:1px solid #e2e8f0; border-radius:8px; font-size:0.8rem;">
+                            <div>
+                                <span style="font-weight:700; color:#4f46e5;">🎓 Student Demo:</span>
+                                <span style="color:#475569; margin-left:4px; font-family:monospace;">student@skillprep.edu</span>
+                            </div>
+                            <button type="button" class="demo-btn-fill" id="fill-student-demo" style="background:#eef2ff; color:#4f46e5; border:none; padding:4px 10px; border-radius:6px; font-weight:700; cursor:pointer;">Auto Fill</button>
+                        </div>
+
+                        <!-- Admin Demo Option -->
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:#ffffff; border:1px solid #e2e8f0; border-radius:8px; font-size:0.8rem;">
+                            <div>
+                                <span style="font-weight:700; color:#10b981;">🛡️ Admin Demo:</span>
+                                <span style="color:#475569; margin-left:4px; font-family:monospace;">admin@skillprep.edu</span>
+                            </div>
+                            <button type="button" class="demo-btn-fill" id="fill-admin-demo" style="background:#ecfdf5; color:#059669; border:none; padding:4px 10px; border-radius:6px; font-weight:700; cursor:pointer;">Auto Fill</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -1132,7 +1152,8 @@
             const eyeIconHide = document.getElementById('eye-icon-hide');
             const forgotPasswordLink = document.getElementById('forgot-password-link');
             const googleLoginBtn = document.getElementById('google-login-btn');
-            const fillDemoBtn = document.getElementById('fill-demo-btn');
+            const fillStudentDemoBtn = document.getElementById('fill-student-demo');
+            const fillAdminDemoBtn = document.getElementById('fill-admin-demo');
 
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('session') === 'expired') {
@@ -1157,14 +1178,29 @@
                 hideAlert();
             });
 
-            fillDemoBtn.addEventListener('click', () => {
-                emailInput.value = 'student@skillprep.edu';
-                passwordInput.value = 'student123';
-                clearFieldError(emailInput, emailError);
-                clearFieldError(passwordInput, passwordError);
-                hideAlert();
-                emailInput.focus();
-            });
+            if (fillStudentDemoBtn) {
+                fillStudentDemoBtn.addEventListener('click', () => {
+                    emailInput.value = 'student@skillprep.edu';
+                    passwordInput.value = 'student123';
+                    clearFieldError(emailInput, emailError);
+                    clearFieldError(passwordInput, passwordError);
+                    hideAlert();
+                    showAlert('Student demo credentials filled. Click Login to access Student Dashboard.', 'info');
+                    emailInput.focus();
+                });
+            }
+
+            if (fillAdminDemoBtn) {
+                fillAdminDemoBtn.addEventListener('click', () => {
+                    emailInput.value = 'admin@skillprep.edu';
+                    passwordInput.value = 'admin123';
+                    clearFieldError(emailInput, emailError);
+                    clearFieldError(passwordInput, passwordError);
+                    hideAlert();
+                    showAlert('Admin demo credentials filled. Click Login to access Admin Dashboard.', 'info');
+                    emailInput.focus();
+                });
+            }
 
             forgotPasswordLink.addEventListener('click', () => {
                 const email = emailInput.value.trim();
@@ -1225,7 +1261,7 @@
 
                         setTimeout(() => {
                             if (result.data.user.role === 'Admin') {
-                                window.location.href = 'student-entry.html';
+                                window.location.href = 'admin-dashboard.html';
                             } else {
                                 window.location.href = 'dashboard.html';
                             }
