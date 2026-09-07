@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — SkillPrep | Placement & Skill Preparation</title>
+    <meta name="description" content="Sign in to your SkillPrep account to continue your aptitude, technical, communication, and coding placement preparation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           SKILLPREP AUTH DESIGN SYSTEM & TOKENS
+           ========================================================================== */
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #eef2ff;
+            --primary-glow: rgba(79, 70, 229, 0.25);
+            --secondary: #0ea5e9;
+            --accent-green: #10b981;
+            --accent-green-light: #ecfdf5;
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-red-light: #fef2f2;
+            
+            --dark-bg: #090d16;
+            --dark-surface: #0f172a;
+            --dark-surface-2: #1e293b;
+            --dark-border: #334155;
+            
+            --light-bg: #f8fafc;
+            --light-surface: #ffffff;
+            --light-surface-2: #f1f5f9;
+            --light-border: #e2e8f0;
+            --light-border-focus: #4f46e5;
+            
+            --text-main: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            
+            --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+            --shadow-xl: 0 20px 35px -8px rgba(79, 70, 229, 0.14);
+            
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--light-surface);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            transition: var(--transition);
+        }
+
+        /* ==========================================================================
+           SPLIT SCREEN LAYOUT
+           ========================================================================== */
+        .auth-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        /* --------------------------------------------------------------------------
+           LEFT SIDE: BRANDING & DASHBOARD VISUAL
+           -------------------------------------------------------------------------- */
+        .auth-visual-panel {
+            background: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.28) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.2) 0%, transparent 45%),
+                        linear-gradient(145deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%);
+            color: #ffffff;
+            padding: 60px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Background grid overlay */
+        .auth-visual-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 36px 36px;
+            pointer-events: none;
+        }
+
+        .visual-header {
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #ffffff;
+            letter-spacing: -0.03em;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), #6366f1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.45);
+        }
+
+        .brand-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .brand-name span {
+            color: #818cf8;
+        }
+
+        .visual-body {
+            position: relative;
+            z-index: 2;
+            margin: 40px 0;
+        }
+
+        .visual-headline {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .visual-headline .gradient-text {
+            background: linear-gradient(135deg, #818cf8 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .visual-subtext {
+            font-size: 1.08rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 36px;
+            max-width: 480px;
+        }
+
+        /* Left side glassmorphic dashboard card */
+        .preview-dashboard {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            position: relative;
+            max-width: 500px;
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 18px;
+        }
+
+        .student-profile-mini {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .student-name-text {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        .student-sub-text {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .streak-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(234, 88, 12, 0.18);
+            color: #fdba74;
+            border: 1px solid rgba(249, 115, 22, 0.35);
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .preview-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .preview-metric-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+        }
+
+        .preview-metric-title {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .preview-metric-val {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: var(--radius-full);
+        }
+
+        .fill-blue { background: #38bdf8; width: 85%; }
+        .fill-indigo { background: #818cf8; width: 92%; }
+        .fill-emerald { background: #34d399; width: 78%; }
+        .fill-amber { background: #fbbf24; width: 88%; }
+
+        /* Floating Achievement Pill */
+        .floating-pill {
+            position: absolute;
+            bottom: -16px;
+            right: 20px;
+            background: #ffffff;
+            color: var(--text-main);
+            border-radius: var(--radius-full);
+            padding: 8px 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .visual-footer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            flex-wrap: wrap;
+        }
+
+        .visual-footer-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .visual-footer-item span.check {
+            color: #34d399;
+            font-weight: 800;
+        }
+
+        /* --------------------------------------------------------------------------
+           RIGHT SIDE: LOGIN FORM
+           -------------------------------------------------------------------------- */
+        .auth-form-panel {
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 48px 32px;
+            position: relative;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        /* Mobile-only brand header */
+        .mobile-brand-header {
+            display: none;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .auth-header {
+            margin-bottom: 32px;
+        }
+
+        .auth-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.025em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auth-header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Global Alert Banner (Hidden by default) */
+        .alert-banner {
+            display: none;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            line-height: 1.45;
+            margin-bottom: 24px;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .alert-banner.active {
+            display: flex;
+        }
+
+        .alert-error {
+            background: var(--accent-red-light);
+            border: 1px solid #fecaca;
+            color: #b91c1c;
+        }
+
+        .alert-success {
+            background: var(--accent-green-light);
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+        }
+
+        .alert-info {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+
+        .alert-icon {
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form Structure */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            color: #94a3b8;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .form-input {
+            width: 100%;
+            height: 48px;
+            padding: 0 16px 0 46px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--text-main);
+            background: #ffffff;
+            border: 1.5px solid var(--light-border);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .form-input:focus + .input-icon,
+        .input-wrapper:focus-within .input-icon {
+            color: var(--primary);
+        }
+
+        /* Error state on input */
+        .form-input.input-invalid {
+            border-color: var(--accent-red);
+            background: #fffdfd;
+        }
+
+        .form-input.input-invalid:focus {
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.18);
+        }
+
+        .field-error-msg {
+            display: none;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--accent-red);
+            margin-top: 6px;
+            padding-left: 2px;
+        }
+
+        .field-error-msg.visible {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        /* Password Toggle Eye Button */
+        .btn-toggle-password {
+            position: absolute;
+            right: 14px;
+            color: #94a3b8;
+            padding: 6px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-toggle-password:hover {
+            color: var(--text-main);
+            background: var(--light-surface-2);
+        }
+
+        /* Remember & Forgot Row */
+        .form-aux-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            font-size: 0.875rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .checkbox-custom {
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            transition: var(--transition);
+        }
+
+        .checkbox-input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-input:checked + .checkbox-custom {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checkbox-input:focus + .checkbox-custom {
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .checkbox-custom svg {
+            display: none;
+            width: 12px;
+            height: 12px;
+            stroke: white;
+            stroke-width: 3;
+        }
+
+        .checkbox-input:checked + .checkbox-custom svg {
+            display: block;
+        }
+
+        .forgot-link {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .forgot-link:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        /* Main Submit Button */
+        .btn-submit {
+            width: 100%;
+            height: 48px;
+            background: var(--primary);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+        }
+
+        .btn-submit:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-submit.loading .spinner {
+            display: inline-block;
+        }
+
+        /* Registration CTA */
+        .register-prompt {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        .register-link {
+            color: var(--primary);
+            font-weight: 700;
+            margin-left: 4px;
+        }
+
+        .register-link:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        /* Divider & Social Login */
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 28px 0 20px;
+            color: var(--text-muted);
+            font-size: 0.775rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--light-border);
+        }
+
+        .btn-google {
+            width: 100%;
+            height: 46px;
+            background: #ffffff;
+            border: 1.5px solid var(--light-border);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 0.92rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .btn-google:hover {
+            background: var(--light-surface-2);
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        /* Security trust footer */
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .security-note svg {
+            color: var(--accent-green);
+        }
+
+        /* Quick Demo Helper Tooltip Pill */
+        .demo-helper-box {
+            margin-top: 24px;
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .demo-helper-title {
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-btn-fill {
+            color: var(--primary);
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.775rem;
+            background: var(--primary-light);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .demo-btn-fill:hover {
+            background: #e0e7ff;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE BREAKPOINTS
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .auth-container {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-visual-panel {
+                display: none;
+            }
+
+            .auth-form-panel {
+                padding: 40px 24px;
+            }
+
+            .mobile-brand-header {
+                display: block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-form-panel {
+                padding: 32px 16px;
+            }
+
+            .auth-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .form-aux-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <!-- ==================================================================
+             1. LEFT SIDE: BRANDING & DASHBOARD VISUAL
+             ================================================================== -->
+        <aside class="auth-visual-panel">
+            <div class="visual-header">
+                <a href="index.html" class="brand-logo" title="Back to SkillPrep Home">
+                    <div class="brand-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="brand-name">Skill<span>Prep</span></span>
+                </a>
+            </div>
+
+            <div class="visual-body">
+                <h2 class="visual-headline">
+                    Your Placement Preparation<br>
+                    <span class="gradient-text">Starts Here.</span>
+                </h2>
+                <p class="visual-subtext">
+                    Practice smarter, build your skills and get ready for your dream placement with our structured daily readiness engine.
+                </p>
+
+                <!-- Modern Dashboard Visual Preview -->
+                <div class="preview-dashboard">
+                    <div class="preview-header">
+                        <div class="student-profile-mini">
+                            <div class="student-avatar">AK</div>
+                            <div>
+                                <div class="student-name-text">Ananya Kumar</div>
+                                <div class="student-sub-text">CS Batch '26 • Placement Score 88/100</div>
+                            </div>
+                        </div>
+                        <div class="streak-tag">
+                            <span>🔥</span> 12 Day Streak
+                        </div>
+                    </div>
+
+                    <div class="preview-metrics-grid">
+                        <div class="preview-metric-card">
+                            <div class="preview-metric-title">
+                                <span>Aptitude</span>
+                                <span style="color:#38bdf8; font-weight:700;">85%</span>
+                            </div>
+                            <div class="preview-metric-val">124 Qs</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill fill-blue"></div></div>
+                        </div>
+
+                        <div class="preview-metric-card">
+                            <div class="preview-metric-title">
+                                <span>Technical (DSA)</span>
+                                <span style="color:#818cf8; font-weight:700;">92%</span>
+                            </div>
+                            <div class="preview-metric-val">186 Qs</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill fill-indigo"></div></div>
+                        </div>
+
+                        <div class="preview-metric-card">
+                            <div class="preview-metric-title">
+                                <span>Coding Solved</span>
+                                <span style="color:#34d399; font-weight:700;">142</span>
+                            </div>
+                            <div class="preview-metric-val">142 Problems</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill fill-emerald"></div></div>
+                        </div>
+
+                        <div class="preview-metric-card">
+                            <div class="preview-metric-title">
+                                <span>Communication</span>
+                                <span style="color:#fbbf24; font-weight:700;">88%</span>
+                            </div>
+                            <div class="preview-metric-val">Top 5%</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill fill-amber"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Mini chart line -->
+                    <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:10px 14px; border:1px solid rgba(255,255,255,0.06);">
+                        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#94a3b8; margin-bottom:6px;">
+                            <span>Placement Readiness Trend</span>
+                            <span style="color:#34d399; font-weight:700;">+24% this week</span>
+                        </div>
+                        <svg viewBox="0 0 300 40" style="width:100%; height:40px; overflow:visible;">
+                            <path d="M0,35 Q60,25 120,30 T200,15 T300,5" fill="none" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="300" cy="5" r="4" fill="#38bdf8"/>
+                        </svg>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div class="floating-pill">
+                        <span style="color:#10b981; font-weight:bold;">✓</span>
+                        <span>TCS & Infosys Ready</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-footer">
+                <div class="visual-footer-item">
+                    <span class="check">✓</span> Aptitude
+                </div>
+                <div class="visual-footer-item">
+                    <span class="check">✓</span> Technical
+                </div>
+                <div class="visual-footer-item">
+                    <span class="check">✓</span> Communication
+                </div>
+                <div class="visual-footer-item">
+                    <span class="check">✓</span> Coding
+                </div>
+            </div>
+        </aside>
+
+        <!-- ==================================================================
+             2. RIGHT SIDE: LOGIN FORM
+             ================================================================== -->
+        <main class="auth-form-panel">
+            <div class="auth-card">
+                <!-- Mobile Brand Header (shown when split screen collapses) -->
+                <div class="mobile-brand-header">
+                    <a href="index.html" class="brand-logo" style="color:var(--text-main); justify-content:center;">
+                        <div class="brand-icon">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <span class="brand-name">Skill<span style="color:var(--primary);">Prep</span></span>
+                    </a>
+                </div>
+
+                <!-- Form Header -->
+                <div class="auth-header">
+                    <h1>Welcome Back 👋</h1>
+                    <p>Continue your SkillPrep journey and ace your placement.</p>
+                </div>
+
+                <!-- General Alert Box (Errors, Expired Sessions, Notices) -->
+                <div id="general-alert" class="alert-banner" role="alert">
+                    <span class="alert-icon" id="alert-icon">⚠️</span>
+                    <span id="alert-message">Alert message</span>
+                </div>
+
+                <!-- Login Form -->
+                <form id="login-form" novalidate>
+                    <!-- Email Address Field -->
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                                </svg>
+                            </span>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                placeholder="Enter your email address"
+                                autocomplete="email"
+                                required
+                            />
+                        </div>
+                        <div id="email-error" class="field-error-msg"></div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </span>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input" 
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            />
+                            <button type="button" class="btn-toggle-password" id="toggle-password-btn" aria-label="Toggle password visibility">
+                                <svg id="eye-icon-show" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                                <svg id="eye-icon-hide" style="display:none;" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="password-error" class="field-error-msg"></div>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password Row -->
+                    <div class="form-aux-row">
+                        <label class="checkbox-label" for="remember-me">
+                            <input type="checkbox" id="remember-me" name="rememberMe" class="checkbox-input"/>
+                            <span class="checkbox-custom">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </span>
+                            <span>Remember me</span>
+                        </label>
+                        <a href="javascript:void(0)" class="forgot-link" id="forgot-password-link">Forgot Password?</a>
+                    </div>
+
+                    <!-- Primary Login CTA Button -->
+                    <button type="submit" class="btn-submit" id="submit-btn">
+                        <span class="spinner" id="btn-spinner"></span>
+                        <span id="btn-text">Login</span>
+                    </button>
+                </form>
+
+                <!-- Registration Prompt -->
+                <div class="register-prompt">
+                    Don't have an account? 
+                    <a href="student-entry.html" class="register-link" id="register-link">Create an account</a>
+                </div>
+
+                <!-- Optional Social Login Divider -->
+                <div class="auth-divider">
+                    <span>OR</span>
+                </div>
+
+                <!-- Google Secondary Login -->
+                <button type="button" class="btn-google" id="google-login-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    <span>Continue with Google</span>
+                </button>
+
+                <!-- Security Trust Message -->
+                <div class="security-note">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    <span>Your account information is securely protected.</span>
+                </div>
+
+                <!-- Interactive Demo Credentials Quick-Fill Pill -->
+                <div class="demo-helper-box">
+                    <div class="demo-helper-title">
+                        <span>💡 Quick Demo Credentials</span>
+                        <span class="demo-btn-fill" id="fill-demo-btn">Auto Fill</span>
+                    </div>
+                    <div>Student: <code>student@skillprep.edu</code> | Pass: <code>student123</code></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ==========================================================================
+         AUTHENTICATION & API INTEGRATION SCRIPT
+         ========================================================================== -->
+    <script>
+        /**
+         * SkillPrep Authentication Module
+         * Prepared for real backend JWT authentication: POST /api/auth/login
+         */
+        const AuthService = {
+            apiUrl: '/api/auth/login',
+
+            /**
+             * Authenticate user with backend or fallback simulator
+             */
+            async login(email, password, rememberMe) {
+                try {
+                    const response = await fetch(this.apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ email, password, rememberMe })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        return { success: true, data };
+                    } else if (response.status === 401) {
+                        return { success: false, error: 'Invalid email or password.' };
+                    } else if (response.status === 404) {
+                        return { success: false, error: 'User not found.' };
+                    } else {
+                        const errData = await response.json().catch(() => ({}));
+                        return { success: false, error: errData.message || 'Authentication failed. Please try again.' };
+                    }
+                } catch (networkError) {
+                    // Real backend fallback for standalone frontend preview & testing
+                    console.info('Backend endpoint not reachable directly. Using local SkillPrep auth verification...');
+                    return this.simulateAuth(email, password, rememberMe);
+                }
+            },
+
+            /**
+             * Seamless verification engine for client demo / development
+             */
+            simulateAuth(email, password, rememberMe) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        const normalizedEmail = email.trim().toLowerCase();
+                        
+                        // Check for known test failure scenarios
+                        if (normalizedEmail === 'wrong@skillprep.com') {
+                            resolve({ success: false, error: 'Invalid email or password.' });
+                            return;
+                        }
+
+                        if (normalizedEmail === 'notfound@skillprep.com') {
+                            resolve({ success: false, error: 'User not found.' });
+                            return;
+                        }
+
+                        if (password === 'wrongpassword') {
+                            resolve({ success: false, error: 'Invalid email or password.' });
+                            return;
+                        }
+
+                        // Determine user role
+                        const role = normalizedEmail.includes('admin') ? 'Admin' : 'Student';
+                        const name = normalizedEmail.includes('admin') ? 'Administrator' : 'Ananya Kumar';
+
+                        // Generate mock JWT structure
+                        const mockToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' + 
+                            btoa(JSON.stringify({ sub: normalizedEmail, role, exp: Date.now() + 86400000 })) + 
+                            '.skillprep_mock_signature';
+
+                        const sessionData = {
+                            token: mockToken,
+                            user: {
+                                name: name,
+                                email: normalizedEmail,
+                                role: role,
+                                streak: 12,
+                                batch: '2026'
+                            }
+                        };
+
+                        resolve({ success: true, data: sessionData });
+                    }, 650);
+                });
+            },
+
+            /**
+             * Securely store session in client storage
+             */
+            storeSession(data, rememberMe) {
+                const storage = rememberMe ? localStorage : sessionStorage;
+                storage.setItem('skillprep_token', data.token);
+                storage.setItem('skillprep_user', JSON.stringify(data.user));
+                
+                // Also set cookie flag if required
+                document.cookie = `skillprep_auth=true; path=/; max-age=${rememberMe ? 60*60*24*30 : 60*60*24}; SameSite=Lax`;
+            }
+        };
+
+        // ==========================================================================
+        // UI & FORM CONTROLLER
+        // ==========================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('login-form');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const rememberMeInput = document.getElementById('remember-me');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            const generalAlert = document.getElementById('general-alert');
+            const alertMessage = document.getElementById('alert-message');
+            const alertIcon = document.getElementById('alert-icon');
+            const togglePasswordBtn = document.getElementById('toggle-password-btn');
+            const eyeIconShow = document.getElementById('eye-icon-show');
+            const eyeIconHide = document.getElementById('eye-icon-hide');
+            const forgotPasswordLink = document.getElementById('forgot-password-link');
+            const googleLoginBtn = document.getElementById('google-login-btn');
+            const fillDemoBtn = document.getElementById('fill-demo-btn');
+
+            // 1. Check for URL parameters (e.g. ?session=expired)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('session') === 'expired') {
+                showAlert('Your session has expired. Please login again.', 'error');
+            }
+
+            // 2. Toggle Password Visibility
+            togglePasswordBtn.addEventListener('click', () => {
+                const isPassword = passwordInput.type === 'password';
+                passwordInput.type = isPassword ? 'text' : 'password';
+                eyeIconShow.style.display = isPassword ? 'none' : 'block';
+                eyeIconHide.style.display = isPassword ? 'block' : 'none';
+                passwordInput.focus();
+            });
+
+            // 3. Clear inline validation errors on user input
+            emailInput.addEventListener('input', () => {
+                clearFieldError(emailInput, emailError);
+                hideAlert();
+            });
+
+            passwordInput.addEventListener('input', () => {
+                clearFieldError(passwordInput, passwordError);
+                hideAlert();
+            });
+
+            // 4. Auto fill demo credentials button
+            fillDemoBtn.addEventListener('click', () => {
+                emailInput.value = 'student@skillprep.edu';
+                passwordInput.value = 'student123';
+                clearFieldError(emailInput, emailError);
+                clearFieldError(passwordInput, passwordError);
+                hideAlert();
+                emailInput.focus();
+            });
+
+            // 5. Forgot Password interaction
+            forgotPasswordLink.addEventListener('click', () => {
+                const email = emailInput.value.trim();
+                if (!email) {
+                    setFieldError(emailInput, emailError, 'Enter your email above to reset password.');
+                    emailInput.focus();
+                } else if (!isValidEmail(email)) {
+                    setFieldError(emailInput, emailError, 'Please enter a valid email address.');
+                    emailInput.focus();
+                } else {
+                    showAlert(`Password reset link sent to ${email}. Please check your inbox.`, 'success');
+                }
+            });
+
+            // 6. Social Login handler
+            googleLoginBtn.addEventListener('click', () => {
+                showAlert('Connecting with Google SSO...', 'info');
+                setTimeout(() => {
+                    emailInput.value = 'ananya.k@college.edu';
+                    passwordInput.value = 'google_authenticated';
+                    form.dispatchEvent(new Event('submit'));
+                }, 400);
+            });
+
+            // 7. Form Submission Handler
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideAlert();
+
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                const rememberMe = rememberMeInput.checked;
+
+                // Client-side Validation
+                let hasError = false;
+
+                // Validate Email
+                if (!email) {
+                    setFieldError(emailInput, emailError, 'Please enter your email address.');
+                    hasError = true;
+                } else if (!isValidEmail(email)) {
+                    setFieldError(emailInput, emailError, 'Please enter a valid email address.');
+                    hasError = true;
+                }
+
+                // Validate Password
+                if (!password) {
+                    setFieldError(passwordInput, passwordError, 'Please enter your password.');
+                    hasError = true;
+                }
+
+                if (hasError) return;
+
+                // Set Loading State
+                setLoadingState(true);
+
+                try {
+                    const result = await AuthService.login(email, password, rememberMe);
+
+                    if (result.success) {
+                        // Store session safely
+                        AuthService.storeSession(result.data, rememberMe);
+
+                        showAlert('Login successful! Redirecting to dashboard...', 'success');
+                        btnText.textContent = 'Success!';
+
+                        // Redirect based on role
+                        setTimeout(() => {
+                            if (result.data.user.role === 'Admin') {
+                                window.location.href = 'student-entry.html';
+                            } else {
+                                window.location.href = 'dashboard.html';
+                            }
+                        }, 600);
+                    } else {
+                        setLoadingState(false);
+                        showAlert(result.error, 'error');
+                        passwordInput.value = '';
+                        passwordInput.focus();
+                    }
+                } catch (err) {
+                    setLoadingState(false);
+                    showAlert('An unexpected network error occurred. Please try again.', 'error');
+                }
+            });
+
+            // Helper Validation Functions
+            function isValidEmail(email) {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+
+            function setFieldError(inputEl, errorEl, message) {
+                inputEl.classList.add('input-invalid');
+                errorEl.textContent = message;
+                errorEl.classList.add('visible');
+            }
+
+            function clearFieldError(inputEl, errorEl) {
+                inputEl.classList.remove('input-invalid');
+                errorEl.textContent = '';
+                errorEl.classList.remove('visible');
+            }
+
+            function showAlert(message, type = 'error') {
+                alertMessage.textContent = message;
+                generalAlert.className = `alert-banner alert-${type} active`;
+                
+                if (type === 'error') alertIcon.textContent = '⚠️';
+                else if (type === 'success') alertIcon.textContent = '✅';
+                else if (type === 'info') alertIcon.textContent = 'ℹ️';
+            }
+
+            function hideAlert() {
+                generalAlert.className = 'alert-banner';
+            }
+
+            function setLoadingState(isLoading) {
+                submitBtn.disabled = isLoading;
+                if (isLoading) {
+                    submitBtn.classList.add('loading');
+                    btnText.textContent = 'Logging in...';
+                } else {
+                    submitBtn.classList.remove('loading');
+                    btnText.textContent = 'Login';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

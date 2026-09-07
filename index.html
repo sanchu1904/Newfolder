@@ -505,7 +505,6 @@
             font-weight: 700;
         }
 
-        /* Metric cards inside hero */
         .mockup-metrics {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -555,7 +554,6 @@
         .fill-emerald { background: #10b981; width: 78%; }
         .fill-amber { background: #f59e0b; width: 88%; }
 
-        /* Mockup Mini Chart */
         .mockup-chart-box {
             background: #fafafa;
             border-radius: var(--radius-md);
@@ -907,7 +905,6 @@
             color: #f1f5f9;
         }
 
-        /* Daily Challenge Card UI */
         .daily-ui-card {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(16px);
@@ -991,7 +988,7 @@
         }
 
         /* ==========================================================================
-           7. CODING PRACTICE SECTION (DARK IDE THEME)
+           7. CODING PRACTICE SECTION
            ========================================================================== */
         .coding-section {
             padding: 100px 0;
@@ -1626,7 +1623,7 @@
             </ul>
 
             <div class="nav-actions">
-                <a href="student-entry.html" class="btn btn-ghost" id="login-btn">Login</a>
+                <a href="login.html" class="btn btn-ghost" id="login-btn">Login</a>
                 <a href="student-entry.html" class="btn btn-primary" id="get-started-btn">Get Started</a>
                 <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1644,7 +1641,7 @@
             <a href="#how-it-works" class="nav-link mobile-link">How It Works</a>
             <a href="#pricing" class="nav-link mobile-link">Pricing</a>
             <a href="#testimonials" class="nav-link mobile-link">Testimonials</a>
-            <a href="student-entry.html" class="btn btn-secondary" style="width:100%; text-align:center;">Login</a>
+            <a href="login.html" class="btn btn-secondary" style="width:100%; text-align:center;">Login</a>
             <a href="student-entry.html" class="btn btn-primary" style="width:100%; text-align:center;">Get Started</a>
         </div>
     </nav>
@@ -2193,12 +2190,10 @@
                             <span class="badge badge-success">+18% Confidence</span>
                         </div>
                         <svg viewBox="0 0 500 180" style="width:100%; height:180px; overflow:visible;">
-                            <!-- Grid lines -->
                             <line x1="0" y1="40" x2="500" y2="40" stroke="#f1f5f9" stroke-width="1"/>
                             <line x1="0" y1="90" x2="500" y2="90" stroke="#f1f5f9" stroke-width="1"/>
                             <line x1="0" y1="140" x2="500" y2="140" stroke="#f1f5f9" stroke-width="1"/>
                             
-                            <!-- Shaded gradient -->
                             <defs>
                                 <linearGradient id="scoreGrad" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.3"/>
@@ -2208,12 +2203,10 @@
                             <path d="M 0,140 Q 100,120 180,95 T 340,55 T 500,20 L 500,180 L 0,180 Z" fill="url(#scoreGrad)"/>
                             <path d="M 0,140 Q 100,120 180,95 T 340,55 T 500,20" fill="none" stroke="#4f46e5" stroke-width="3.5" stroke-linecap="round"/>
                             
-                            <!-- Data points -->
                             <circle cx="180" cy="95" r="5" fill="#4f46e5" stroke="#fff" stroke-width="2"/>
                             <circle cx="340" cy="55" r="5" fill="#4f46e5" stroke="#fff" stroke-width="2"/>
                             <circle cx="500" cy="20" r="6" fill="#10b981" stroke="#fff" stroke-width="2"/>
                             
-                            <!-- X Axis Labels -->
                             <text x="10" y="175" fill="#94a3b8" font-size="11" font-family="sans-serif">Week 1</text>
                             <text x="170" y="175" fill="#94a3b8" font-size="11" font-family="sans-serif">Week 2</text>
                             <text x="330" y="175" fill="#94a3b8" font-size="11" font-family="sans-serif">Week 3</text>
