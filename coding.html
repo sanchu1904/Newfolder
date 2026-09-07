@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Practice — SkillPrep | Placement &amp; Skill Preparation</title>
+    <meta name="description" content="Solve real coding problems with a built-in editor. Practice C, C++, Java, and Python for placement interviews.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ════════════════════════════════════════════
+           DESIGN TOKENS — White & Blue Theme
+        ════════════════════════════════════════════ */
+        :root {
+            --primary:        #2563eb;
+            --primary-hover:  #1d4ed8;
+            --primary-light:  #eff6ff;
+            --primary-mid:    #bfdbfe;
+            --primary-glow:   rgba(37,99,235,0.18);
+
+            --success:        #10b981;
+            --success-light:  #ecfdf5;
+            --warning:        #f59e0b;
+            --warning-light:  #fffbeb;
+            --danger:         #ef4444;
+            --danger-light:   #fef2f2;
+            --orange:         #f97316;
+
+            --bg-body:        #f0f7ff;
+            --surface:        #ffffff;
+            --surface-alt:    #f8fafc;
+            --border:         #dbeafe;
+            --border-strong:  #93c5fd;
+
+            --editor-bg:      #0d1117;
+            --editor-surface: #161b22;
+            --editor-border:  #30363d;
+            --editor-text:    #e6edf3;
+            --editor-muted:   #8b949e;
+            --editor-line:    #1f2937;
+            --editor-kw:      #ff7b72;
+            --editor-str:     #a5d6ff;
+            --editor-num:     #79c0ff;
+            --editor-fn:      #d2a8ff;
+            --editor-comment: #8b949e;
+
+            --text-main:      #0f172a;
+            --text-secondary: #475569;
+            --text-muted:     #94a3b8;
+
+            --radius-sm:   6px;
+            --radius-md:   10px;
+            --radius-lg:   14px;
+            --radius-xl:   18px;
+            --radius-full: 9999px;
+
+            --shadow-sm:   0 1px 3px rgba(37,99,235,0.06);
+            --shadow-md:   0 4px 16px rgba(37,99,235,0.10);
+
+            --font-sans:   'Plus Jakarta Sans', system-ui, sans-serif;
+            --font-mono:   'JetBrains Mono', monospace;
+            --transition:  all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+            --header-h:    58px;
+            --panel-min:   380px;
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { height:100%; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-body);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── TOP HEADER ─────────────────────────────── */
+        .cp-header {
+            height: var(--header-h);
+            background: var(--surface);
+            border-bottom: 1.5px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 1.25rem;
+            gap: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.06);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.35rem 0.8rem;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--primary-mid);
+            background: var(--primary-light);
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+        .btn-back:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        .header-divider { width:1px; height:24px; background:var(--border); flex-shrink:0; }
+
+        .header-problem-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 0;
+        }
+        .problem-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .difficulty-badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.2rem 0.55rem;
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .difficulty-badge.easy   { background: var(--success-light); color: var(--success); border: 1px solid #6ee7b7; }
+        .difficulty-badge.medium { background: var(--warning-light);  color: #b45309;        border: 1px solid #fcd34d; }
+        .difficulty-badge.hard   { background: var(--danger-light);   color: var(--danger);  border: 1px solid #fca5a5; }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--border);
+            background: var(--surface);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: var(--font-sans);
+        }
+        .btn-nav:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+        .problem-counter {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* ── MAIN SPLIT LAYOUT ──────────────────────── */
+        .cp-body {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            gap: 0;
+        }
+
+        /* Resizer */
+        .resizer {
+            width: 5px;
+            background: var(--border);
+            cursor: col-resize;
+            flex-shrink: 0;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .resizer:hover, .resizer.dragging { background: var(--primary); }
+        .resizer::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            width: 3px; height: 40px;
+            border-radius: 3px;
+            background: var(--primary-mid);
+        }
+
+        /* ── LEFT PANEL — Problem Statement ─────────── */
+        .left-panel {
+            width: 45%;
+            min-width: var(--panel-min);
+            background: var(--surface);
+            border-right: 1.5px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .left-tabs {
+            display: flex;
+            border-bottom: 1.5px solid var(--border);
+            padding: 0 1rem;
+            flex-shrink: 0;
+        }
+        .left-tab {
+            padding: 0.65rem 1rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1.5px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .left-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .left-tab:hover:not(.active) { color: var(--text-secondary); }
+
+        .left-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem 1.5rem;
+        }
+        .left-content::-webkit-scrollbar { width: 5px; }
+        .left-content::-webkit-scrollbar-track { background: var(--surface-alt); }
+        .left-content::-webkit-scrollbar-thumb { background: var(--primary-mid); border-radius: 10px; }
+
+        /* Tab panels */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* Problem statement typography */
+        .problem-heading {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 0.8rem;
+        }
+        .problem-meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+        .meta-chip {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-full);
+            background: var(--surface-alt);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        .meta-chip.pts { background: var(--primary-light); color: var(--primary); border-color: var(--primary-mid); }
+
+        .problem-text {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+        .problem-text p { margin-bottom: 0.75rem; }
+
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 1.25rem 0 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 3px; height: 14px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .problem-ul {
+            padding-left: 1.2rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        .problem-ul li { margin-bottom: 0.25rem; }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            background: var(--surface-alt);
+            color: var(--primary);
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .sample-block {
+            background: var(--editor-bg);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 1rem;
+            border: 1px solid var(--editor-border);
+        }
+        .sample-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0.85rem;
+            background: var(--editor-surface);
+            border-bottom: 1px solid var(--editor-border);
+        }
+        .sample-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--editor-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-family: var(--font-mono);
+        }
+        .copy-btn {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--editor-muted);
+            background: transparent;
+            border: 1px solid var(--editor-border);
+            border-radius: 4px;
+            padding: 0.15rem 0.5rem;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: var(--transition);
+        }
+        .copy-btn:hover { color: #fff; border-color: var(--primary); background: var(--primary); }
+        .sample-pre {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--editor-text);
+            padding: 0.75rem 0.85rem;
+            white-space: pre;
+            overflow-x: auto;
+            line-height: 1.65;
+        }
+
+        /* Constraints table */
+        .constraints-box {
+            background: var(--surface-alt);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 0.85rem 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .constraints-box p {
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* ── RIGHT PANEL — Editor ────────────────────── */
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 320px;
+            overflow: hidden;
+            background: var(--editor-bg);
+        }
+
+        /* Editor top toolbar */
+        .editor-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.55rem 1rem;
+            background: var(--editor-surface);
+            border-bottom: 1px solid var(--editor-border);
+            flex-shrink: 0;
+        }
+
+        .lang-selector-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .lang-icon {
+            position: absolute;
+            left: 0.6rem;
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
+        #lang-select {
+            appearance: none;
+            -webkit-appearance: none;
+            background: var(--editor-bg);
+            color: var(--editor-text);
+            border: 1px solid var(--editor-border);
+            border-radius: var(--radius-sm);
+            padding: 0.35rem 2.2rem 0.35rem 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 130px;
+        }
+        #lang-select:focus { outline: none; border-color: var(--primary); }
+        #lang-select option { background: var(--editor-surface); }
+        .lang-arrow {
+            position: absolute;
+            right: 0.6rem;
+            color: var(--editor-muted);
+            pointer-events: none;
+            font-size: 0.7rem;
+        }
+
+        .toolbar-sep { width: 1px; height: 20px; background: var(--editor-border); flex-shrink: 0; }
+
+        .toolbar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--editor-muted);
+            padding: 0.3rem 0.65rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--editor-border);
+            background: transparent;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .toolbar-btn:hover { color: var(--editor-text); border-color: #6b7280; background: var(--editor-line); }
+
+        .toolbar-spacer { flex: 1; }
+
+        /* Editor area */
+        .editor-wrapper {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .line-numbers {
+            width: 44px;
+            background: var(--editor-surface);
+            border-right: 1px solid var(--editor-border);
+            padding: 1rem 0;
+            text-align: right;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            line-height: 1.6rem;
+            color: var(--editor-muted);
+            user-select: none;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .line-num {
+            padding-right: 0.65rem;
+            display: block;
+        }
+
+        #code-editor {
+            flex: 1;
+            background: var(--editor-bg);
+            color: var(--editor-text);
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: var(--font-mono);
+            font-size: 0.87rem;
+            line-height: 1.6rem;
+            padding: 1rem 1rem;
+            tab-size: 4;
+            caret-color: #58a6ff;
+            -webkit-font-smoothing: antialiased;
+        }
+        #code-editor::selection { background: rgba(56,139,253,0.3); }
+        #code-editor::-webkit-scrollbar { width: 8px; height: 8px; }
+        #code-editor::-webkit-scrollbar-track { background: var(--editor-surface); }
+        #code-editor::-webkit-scrollbar-thumb { background: #484f58; border-radius: 4px; }
+
+        /* I/O panel */
+        .io-panel {
+            flex-shrink: 0;
+            background: var(--editor-surface);
+            border-top: 1px solid var(--editor-border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .io-tabs {
+            display: flex;
+            align-items: center;
+            padding: 0 0.75rem;
+            border-bottom: 1px solid var(--editor-border);
+            gap: 0;
+        }
+        .io-tab {
+            padding: 0.5rem 0.9rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--editor-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: var(--transition);
+            font-family: var(--font-sans);
+            white-space: nowrap;
+        }
+        .io-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+        .io-tab-spacer { flex: 1; }
+
+        .io-content {
+            height: 150px;
+            overflow: hidden;
+        }
+        .io-pane {
+            display: none;
+            height: 100%;
+            flex-direction: column;
+        }
+        .io-pane.active { display: flex; }
+
+        #custom-input, #output-area {
+            flex: 1;
+            background: var(--editor-bg);
+            color: var(--editor-text);
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            line-height: 1.6;
+            padding: 0.6rem 0.85rem;
+        }
+        #output-area { color: #a8ff78; }
+        #output-area.error { color: #ff7b72; }
+        #output-area.success { color: #39d353; }
+
+        /* Bottom action bar */
+        .action-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.65rem 1rem;
+            background: var(--editor-surface);
+            border-top: 1px solid var(--editor-border);
+            flex-shrink: 0;
+        }
+
+        .action-spacer { flex: 1; }
+
+        .run-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+        .btn-run {
+            background: var(--editor-line);
+            color: var(--editor-text);
+            border: 1px solid var(--editor-border);
+        }
+        .btn-run:hover { background: #374151; border-color: #6b7280; }
+
+        .btn-submit-code {
+            background: var(--success);
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(16,185,129,0.28);
+        }
+        .btn-submit-code:hover { background: #059669; transform: translateY(-1px); box-shadow: 0 5px 15px rgba(16,185,129,0.32); }
+
+        .btn-next-problem {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 3px 10px var(--primary-glow);
+        }
+        .btn-next-problem:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 5px 15px var(--primary-glow); }
+
+        /* Result overlay */
+        .result-toast {
+            position: fixed;
+            top: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 0.85rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: var(--shadow-md);
+            z-index: 9999;
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+            min-width: 280px;
+        }
+        .result-toast.show { transform: translateX(-50%) translateY(0); }
+        .toast-icon { font-size: 1.5rem; }
+        .toast-body { flex: 1; }
+        .toast-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.1rem; }
+        .toast-sub   { font-size: 0.78rem; color: var(--text-muted); }
+        .toast-close { font-size: 1rem; color: var(--text-muted); cursor: pointer; padding: 0.2rem; }
+
+        /* Score badge (header) */
+        .score-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: var(--success-light);
+            color: var(--success);
+            border: 1.5px solid #6ee7b7;
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.7rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* Spinner */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner {
+            width: 14px; height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .cp-body { flex-direction: column; }
+            .left-panel { width: 100%; min-width: 0; height: 45%; border-right: none; border-bottom: 1.5px solid var(--border); }
+            .right-panel { height: 55%; }
+            .resizer { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══════════════════════════════════════
+         TOP HEADER
+    ══════════════════════════════════════ -->
+    <header class="cp-header">
+        <a href="dashboard.html" class="btn-back">&#8592; Dashboard</a>
+        <div class="header-divider"></div>
+
+        <div class="header-problem-info">
+            <span class="problem-title" id="header-problem-title">Loading…</span>
+            <span class="difficulty-badge" id="header-difficulty">Easy</span>
+        </div>
+
+        <div class="header-nav">
+            <span class="problem-counter" id="problem-counter">1 / 5</span>
+            <button class="btn-nav" onclick="prevProblem()">&#8592; Prev</button>
+            <button class="btn-nav" onclick="nextProblem()">Next &#8594;</button>
+        </div>
+
+        <div class="score-badge" id="score-badge">
+            &#9733; <span id="score-display">0</span> pts
+        </div>
+    </header>
+
+    <!-- ══════════════════════════════════════
+         SPLIT BODY
+    ══════════════════════════════════════ -->
+    <div class="cp-body" id="cp-body">
+
+        <!-- LEFT — Problem Statement -->
+        <div class="left-panel" id="left-panel">
+            <div class="left-tabs">
+                <div class="left-tab active" onclick="switchLeftTab('statement', this)">Statement</div>
+                <div class="left-tab" onclick="switchLeftTab('samples',   this)">Examples</div>
+                <div class="left-tab" onclick="switchLeftTab('hints',     this)">Hints</div>
+            </div>
+
+            <div class="left-content" id="left-content">
+
+                <!-- STATEMENT TAB -->
+                <div class="tab-panel active" id="tab-statement">
+                    <h2 class="problem-heading" id="prob-title">Loading…</h2>
+                    <div class="problem-meta">
+                        <span class="meta-chip pts" id="prob-pts">500 pts</span>
+                        <span class="meta-chip" id="prob-difficulty">Easy</span>
+                        <span class="meta-chip" id="prob-topic">Basics</span>
+                    </div>
+                    <div class="problem-text" id="prob-statement"></div>
+
+                    <div class="section-title">Input Format</div>
+                    <div class="problem-text" id="prob-input"></div>
+
+                    <div class="section-title">Output Format</div>
+                    <div class="problem-text" id="prob-output"></div>
+
+                    <div class="section-title">Constraints</div>
+                    <div class="constraints-box" id="prob-constraints"></div>
+
+                    <div class="section-title">Sample Input 1</div>
+                    <div class="sample-block">
+                        <div class="sample-header">
+                            <span class="sample-label">Input</span>
+                            <button class="copy-btn" onclick="copyText('sample-in-1')">Copy</button>
+                        </div>
+                        <pre class="sample-pre" id="sample-in-1"></pre>
+                    </div>
+
+                    <div class="section-title">Sample Output 1</div>
+                    <div class="sample-block">
+                        <div class="sample-header">
+                            <span class="sample-label">Output</span>
+                        </div>
+                        <pre class="sample-pre" id="sample-out-1"></pre>
+                    </div>
+
+                    <div id="extra-note" class="problem-text" style="margin-top:0.5rem;"></div>
+                </div>
+
+                <!-- SAMPLES TAB -->
+                <div class="tab-panel" id="tab-samples">
+                    <div class="section-title">Example Test Cases</div>
+                    <div id="all-samples"></div>
+                </div>
+
+                <!-- HINTS TAB -->
+                <div class="tab-panel" id="tab-hints">
+                    <div class="section-title">Hints</div>
+                    <div id="hints-content" class="problem-text"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Resizer -->
+        <div class="resizer" id="resizer"></div>
+
+        <!-- RIGHT — Code Editor -->
+        <div class="right-panel">
+
+            <!-- Editor toolbar -->
+            <div class="editor-toolbar">
+                <div class="lang-selector-wrapper">
+                    <span class="lang-icon" id="lang-icon">&#128421;</span>
+                    <select id="lang-select" onchange="changeLanguage()">
+                        <option value="cpp">C++</option>
+                        <option value="c">C</option>
+                        <option value="java">Java</option>
+                        <option value="python">Python</option>
+                    </select>
+                    <span class="lang-arrow">&#9660;</span>
+                </div>
+
+                <div class="toolbar-sep"></div>
+                <button class="toolbar-btn" onclick="resetCode()" title="Reset to template">&#8635; Reset</button>
+                <button class="toolbar-btn" onclick="clearCode()" title="Clear editor">&#10005; Clear</button>
+                <div class="toolbar-sep"></div>
+                <button class="toolbar-btn" onclick="toggleFullScreen()">&#9974; Full</button>
+                <div class="toolbar-spacer"></div>
+                <span style="font-size:0.72rem;color:var(--editor-muted);font-family:var(--font-mono);" id="editor-info">UTF-8</span>
+            </div>
+
+            <!-- Editor + line numbers -->
+            <div class="editor-wrapper">
+                <div class="line-numbers" id="line-numbers">
+                    <span class="line-num">1</span>
+                </div>
+                <textarea id="code-editor"
+                    spellcheck="false"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="off"
+                    data-gramm="false"
+                    placeholder="// Write your solution here..."></textarea>
+            </div>
+
+            <!-- I/O panel -->
+            <div class="io-panel">
+                <div class="io-tabs">
+                    <div class="io-tab active" onclick="switchIOTab('input',  this)">&#128438; Custom Input</div>
+                    <div class="io-tab"        onclick="switchIOTab('output', this)">&#9654; Output</div>
+                    <div class="io-tab-spacer"></div>
+                </div>
+                <div class="io-content">
+                    <div class="io-pane active" id="io-input">
+                        <textarea id="custom-input" placeholder="Enter custom test input here…"></textarea>
+                    </div>
+                    <div class="io-pane" id="io-output">
+                        <textarea id="output-area" readonly placeholder="Output will appear here after running…"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action bar -->
+            <div class="action-bar">
+                <button class="run-btn btn-run" id="run-btn" onclick="runCode()">
+                    &#9654; Run
+                </button>
+                <button class="run-btn btn-submit-code" id="submit-btn" onclick="submitCode()">
+                    &#10003; Submit
+                </button>
+                <div class="action-spacer"></div>
+                <button class="run-btn btn-next-problem" onclick="nextProblem()">
+                    Next Problem &#8594;
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Result Toast -->
+    <div class="result-toast" id="result-toast">
+        <span class="toast-icon" id="toast-icon">&#127881;</span>
+        <div class="toast-body">
+            <div class="toast-title" id="toast-title">Accepted!</div>
+            <div class="toast-sub"   id="toast-sub">All test cases passed.</div>
+        </div>
+        <span class="toast-close" onclick="hideToast()">&#10005;</span>
+    </div>
+
+    <script>
+    /* ══════════════════════════════════════════════════
+       CODING PROBLEMS DATABASE
+    ══════════════════════════════════════════════════ */
+    const CODING_PROBLEMS = [
+        {
+            id: 1,
+            title: "Hello World",
+            difficulty: "easy",
+            topic: "Basics",
+            points: 100,
+            statement: `<p>Write a program that prints <code>Hello, World!</code> to the standard output.</p><p>This is a classic introductory problem to verify your setup and I/O.</p>`,
+            inputFormat: `<p>No input is required.</p>`,
+            outputFormat: `<p>Print exactly: <code>Hello, World!</code></p>`,
+            constraints: `<p>No constraints.</p>`,
+            samples: [
+                { input: "(No input)", output: "Hello, World!" }
+            ],
+            note: "",
+            hints: [
+                "Use your language's standard output function.",
+                "In C++, use <code>cout &lt;&lt; \"Hello, World!\" &lt;&lt; endl;</code>",
+                "In Python, use <code>print('Hello, World!')</code>"
+            ],
+            expectedOutput: "Hello, World!",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    cout << "Hello, World!" << endl;\n    return 0;\n}`,
+                c:      `#include <stdio.h>\n\nint main() {\n    // Write your code here\n    printf("Hello, World!\\n");\n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        // Write your code here\n        System.out.println("Hello, World!");\n    }\n}`,
+                python: `# Write your code here\nprint("Hello, World!")`
+            }
+        },
+        {
+            id: 2,
+            title: "Sum of Two Numbers",
+            difficulty: "easy",
+            topic: "Math",
+            points: 150,
+            statement: `<p>Given two integers <code>A</code> and <code>B</code>, print their sum.</p>`,
+            inputFormat: `<p>The first and only line contains two space-separated integers <code>A</code> and <code>B</code>.</p>`,
+            outputFormat: `<p>Print a single integer — the sum of <code>A</code> and <code>B</code>.</p>`,
+            constraints: `<p>1 ≤ A, B ≤ 10<sup>9</sup></p>`,
+            samples: [
+                { input: "3 7", output: "10" },
+                { input: "100 200", output: "300" }
+            ],
+            note: "Use 64-bit integers to avoid overflow.",
+            hints: [
+                "Read two integers from stdin.",
+                "Simply add them and print the result.",
+                "Be careful about integer overflow for large values — use <code>long long</code> in C/C++."
+            ],
+            expectedOutput: "10",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    long long a, b;\n    cin >> a >> b;\n    // Write your solution here\n    \n    return 0;\n}`,
+                c:      `#include <stdio.h>\n\nint main() {\n    long long a, b;\n    scanf("%lld %lld", &a, &b);\n    // Write your solution here\n    \n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long a = sc.nextLong();\n        long b = sc.nextLong();\n        // Write your solution here\n        \n    }\n}`,
+                python: `a, b = map(int, input().split())\n# Write your solution here\n`
+            }
+        },
+        {
+            id: 3,
+            title: "Even or Odd",
+            difficulty: "easy",
+            topic: "Conditionals",
+            points: 150,
+            statement: `<p>Given an integer <code>N</code>, determine if it is <strong>Even</strong> or <strong>Odd</strong>.</p>`,
+            inputFormat: `<p>A single line containing integer <code>N</code>.</p>`,
+            outputFormat: `<p>Print <code>Even</code> if N is even, <code>Odd</code> otherwise.</p>`,
+            constraints: `<p>−10<sup>9</sup> ≤ N ≤ 10<sup>9</sup></p>`,
+            samples: [
+                { input: "4",  output: "Even" },
+                { input: "7",  output: "Odd"  },
+                { input: "-3", output: "Odd"  }
+            ],
+            note: "Note: 0 is even.",
+            hints: [
+                "Use the modulo operator <code>%</code>.",
+                "If <code>N % 2 == 0</code>, it is Even.",
+                "Be careful with negative numbers — <code>-3 % 2</code> may give <code>-1</code> in some languages. Use <code>abs(N) % 2</code>."
+            ],
+            expectedOutput: "Even",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    long long n;\n    cin >> n;\n    // Write your solution here\n    \n    return 0;\n}`,
+                c:      `#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    long long n;\n    scanf("%lld", &n);\n    // Write your solution here\n    \n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Write your solution here\n        \n    }\n}`,
+                python: `n = int(input())\n# Write your solution here\n`
+            }
+        },
+        {
+            id: 4,
+            title: "Factorial",
+            difficulty: "medium",
+            topic: "Loops / Recursion",
+            points: 250,
+            statement: `<p>Given a non-negative integer <code>N</code>, compute <code>N!</code> (N factorial).</p><p>Recall that <code>0! = 1</code> and <code>N! = N × (N−1)!</code>.</p>`,
+            inputFormat: `<p>A single integer <code>N</code>.</p>`,
+            outputFormat: `<p>Print the value of <code>N!</code>.</p>`,
+            constraints: `<p>0 ≤ N ≤ 20</p>`,
+            samples: [
+                { input: "5",  output: "120"  },
+                { input: "0",  output: "1"    },
+                { input: "10", output: "3628800" }
+            ],
+            note: "The answer fits in a 64-bit unsigned integer for N ≤ 20.",
+            hints: [
+                "You can use a loop or recursion.",
+                "Use <code>long long</code> (C/C++) or <code>long</code> (Java) to store the result.",
+                "Python integers are arbitrary precision — no overflow concern."
+            ],
+            expectedOutput: "120",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // Write your solution here\n    \n    return 0;\n}`,
+                c:      `#include <stdio.h>\n\nint main() {\n    int n;\n    scanf("%d", &n);\n    // Write your solution here\n    \n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n        \n    }\n}`,
+                python: `n = int(input())\n# Write your solution here\n`
+            }
+        },
+        {
+            id: 5,
+            title: "Fibonacci Number",
+            difficulty: "medium",
+            topic: "Dynamic Programming",
+            points: 300,
+            statement: `<p>Given an integer <code>N</code>, find the <code>N</code>-th Fibonacci number.</p>
+<p>The Fibonacci sequence is: <code>0, 1, 1, 2, 3, 5, 8, 13, 21, …</code></p>
+<p>Where <code>F(0) = 0</code>, <code>F(1) = 1</code>, and <code>F(N) = F(N−1) + F(N−2)</code> for N ≥ 2.</p>`,
+            inputFormat: `<p>A single integer <code>N</code>.</p>`,
+            outputFormat: `<p>Print <code>F(N)</code>.</p>`,
+            constraints: `<p>0 ≤ N ≤ 50</p>`,
+            samples: [
+                { input: "6",  output: "8"  },
+                { input: "0",  output: "0"  },
+                { input: "10", output: "55" }
+            ],
+            note: "Avoid naive recursion — it will be too slow for large N. Use iteration or memoization.",
+            hints: [
+                "A simple loop from 0 to N is sufficient.",
+                "Store only the last two values — no need for an array.",
+                "For large N consider using matrix exponentiation or the closed-form formula."
+            ],
+            expectedOutput: "8",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // Write your solution here\n    \n    return 0;\n}`,
+                c:      `#include <stdio.h>\n\nint main() {\n    int n;\n    scanf("%d", &n);\n    // Write your solution here\n    \n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n        \n    }\n}`,
+                python: `n = int(input())\n# Write your solution here\n`
+            }
+        },
+        {
+            id: 6,
+            title: "Reverse a String",
+            difficulty: "easy",
+            topic: "Strings",
+            points: 200,
+            statement: `<p>Given a string <code>S</code>, print it in reverse order.</p>`,
+            inputFormat: `<p>A single line containing the string <code>S</code> (no spaces).</p>`,
+            outputFormat: `<p>Print the reversed string.</p>`,
+            constraints: `<p>1 ≤ |S| ≤ 10<sup>5</sup>, string contains only lowercase English letters.</p>`,
+            samples: [
+                { input: "hello",  output: "olleh"  },
+                { input: "abcde",  output: "edcba"  },
+                { input: "racecar", output: "racecar" }
+            ],
+            note: "Notice the last example is a palindrome — its reverse equals itself.",
+            hints: [
+                "Use built-in reverse functions if available.",
+                "Or use two-pointer technique from both ends.",
+                "In Python: <code>s[::-1]</code>"
+            ],
+            expectedOutput: "olleh",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    // Write your solution here\n    \n    return 0;\n}`,
+                c:      `#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[100001];\n    scanf("%s", s);\n    // Write your solution here\n    \n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        // Write your solution here\n        \n    }\n}`,
+                python: `s = input()\n# Write your solution here\n`
+            }
+        },
+        {
+            id: 7,
+            title: "Prime Check",
+            difficulty: "medium",
+            topic: "Number Theory",
+            points: 300,
+            statement: `<p>Given an integer <code>N</code>, determine if it is a <strong>prime</strong> number.</p>
+<p>A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.</p>`,
+            inputFormat: `<p>A single integer <code>N</code>.</p>`,
+            outputFormat: `<p>Print <code>YES</code> if N is prime, <code>NO</code> otherwise.</p>`,
+            constraints: `<p>1 ≤ N ≤ 10<sup>6</sup></p>`,
+            samples: [
+                { input: "7",  output: "YES" },
+                { input: "10", output: "NO"  },
+                { input: "2",  output: "YES" },
+                { input: "1",  output: "NO"  }
+            ],
+            note: "1 is NOT a prime number by definition.",
+            hints: [
+                "Check divisors from 2 to √N.",
+                "Special cases: N < 2 → NO, N == 2 → YES.",
+                "Even numbers (except 2) are not prime."
+            ],
+            expectedOutput: "YES",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    long long n;\n    cin >> n;\n    // Write your solution here\n    \n    return 0;\n}`,
+                c:      `#include <stdio.h>\n#include <math.h>\n\nint main() {\n    long long n;\n    scanf("%lld", &n);\n    // Write your solution here\n    \n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long n = sc.nextLong();\n        // Write your solution here\n        \n    }\n}`,
+                python: `n = int(input())\n# Write your solution here\n`
+            }
+        },
+        {
+            id: 8,
+            title: "Max of Array",
+            difficulty: "easy",
+            topic: "Arrays",
+            points: 200,
+            statement: `<p>Given an array of <code>N</code> integers, find the maximum element.</p>`,
+            inputFormat: `<p>First line: integer <code>N</code>.<br>Second line: <code>N</code> space-separated integers.</p>`,
+            outputFormat: `<p>Print the maximum element.</p>`,
+            constraints: `<p>1 ≤ N ≤ 10<sup>5</sup>, −10<sup>9</sup> ≤ A[i] ≤ 10<sup>9</sup></p>`,
+            samples: [
+                { input: "5\n3 1 4 1 5", output: "5" },
+                { input: "3\n-10 -3 -7",  output: "-3" }
+            ],
+            note: "",
+            hints: [
+                "Initialize max with the first element.",
+                "Iterate through the rest and update max.",
+                "In Python: <code>max(arr)</code>"
+            ],
+            expectedOutput: "5",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    \n    return 0;\n}`,
+                c:      `#include <stdio.h>\n\nint main() {\n    int n;\n    scanf("%d", &n);\n    long long a[100001];\n    for (int i = 0; i < n; i++) scanf("%lld", &a[i]);\n    // Write your solution here\n    \n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n        \n    }\n}`,
+                python: `n = int(input())\na = list(map(int, input().split()))\n# Write your solution here\n`
+            }
+        },
+        {
+            id: 9,
+            title: "Linear Search",
+            difficulty: "easy",
+            topic: "Searching",
+            points: 200,
+            statement: `<p>Given an array of <code>N</code> integers and a target value <code>X</code>, find the index (0-based) of <code>X</code> in the array. If <code>X</code> is not present, print <code>-1</code>.</p>`,
+            inputFormat: `<p>Line 1: Two integers <code>N</code> and <code>X</code>.<br>Line 2: <code>N</code> space-separated integers.</p>`,
+            outputFormat: `<p>Print the 0-based index of X, or -1 if not found.</p>`,
+            constraints: `<p>1 ≤ N ≤ 10<sup>5</sup>, −10<sup>9</sup> ≤ values ≤ 10<sup>9</sup></p>`,
+            samples: [
+                { input: "5 4\n2 5 4 8 1", output: "2" },
+                { input: "4 9\n1 2 3 4",   output: "-1" }
+            ],
+            note: "If X appears multiple times, return the first (leftmost) index.",
+            hints: [
+                "Iterate through array comparing each element with X.",
+                "Return the index immediately when found.",
+                "Return -1 after the loop if not found."
+            ],
+            expectedOutput: "2",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n; long long x;\n    cin >> n >> x;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // Write your solution here\n    \n    return 0;\n}`,
+                c:      `#include <stdio.h>\n\nint main() {\n    int n; long long x;\n    scanf("%d %lld", &n, &x);\n    long long a[100001];\n    for (int i = 0; i < n; i++) scanf("%lld", &a[i]);\n    // Write your solution here\n    \n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(); long x = sc.nextLong();\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextLong();\n        // Write your solution here\n        \n    }\n}`,
+                python: `n, x = map(int, input().split())\na = list(map(int, input().split()))\n# Write your solution here\n`
+            }
+        },
+        {
+            id: 10,
+            title: "FizzBuzz",
+            difficulty: "easy",
+            topic: "Conditionals",
+            points: 150,
+            statement: `<p>Given an integer <code>N</code>, print numbers from <code>1</code> to <code>N</code> but:</p>
+<ul class="problem-ul">
+  <li>For multiples of <strong>3</strong>, print <code>Fizz</code></li>
+  <li>For multiples of <strong>5</strong>, print <code>Buzz</code></li>
+  <li>For multiples of <strong>both 3 and 5</strong>, print <code>FizzBuzz</code></li>
+  <li>Otherwise, print the number itself</li>
+</ul>`,
+            inputFormat: `<p>A single integer <code>N</code>.</p>`,
+            outputFormat: `<p>Print N lines, one output per number.</p>`,
+            constraints: `<p>1 ≤ N ≤ 100</p>`,
+            samples: [
+                { input: "15", output: "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz" }
+            ],
+            note: "Check divisibility by 15 (= 3×5) first, then by 3, then by 5.",
+            hints: [
+                "Use nested if-elif-else or check 15 first.",
+                "Loop from 1 to N inclusive.",
+                "Order of checks matters: check 15 before 3 and 5."
+            ],
+            expectedOutput: "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz",
+            templates: {
+                cpp:    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // Write your solution here\n    \n    return 0;\n}`,
+                c:      `#include <stdio.h>\n\nint main() {\n    int n;\n    scanf("%d", &n);\n    // Write your solution here\n    \n    return 0;\n}`,
+                java:   `import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        // Write your solution here\n        \n    }\n}`,
+                python: `n = int(input())\n# Write your solution here\n`
+            }
+        }
+    ];
+
+    /* ══════════════════════════════════════════════════
+       STATE
+    ══════════════════════════════════════════════════ */
+    let currentProblemIndex = 0;
+    let currentLang = 'cpp';
+    let userCodes = {};   // { "0_cpp": "...", "0_java": "..." }
+    let solvedSet = new Set();
+    let totalScore = 0;
+    let toastTimer = null;
+
+    const LANG_META = {
+        cpp:    { label: 'C++',    icon: '🔵', ext: 'cpp' },
+        c:      { label: 'C',      icon: '🟠', ext: 'c'   },
+        java:   { label: 'Java',   icon: '🟡', ext: 'java'},
+        python: { label: 'Python', icon: '🟢', ext: 'py'  }
+    };
+
+    /* ══════════════════════════════════════════════════
+       INIT
+    ══════════════════════════════════════════════════ */
+    function init() {
+        // Check if a specific problem was requested
+        const params = new URLSearchParams(window.location.search);
+        const pidx = parseInt(params.get('problem') || '0');
+        currentProblemIndex = Math.max(0, Math.min(pidx, CODING_PROBLEMS.length - 1));
+
+        loadProblem();
+        setupEditor();
+        setupResizer();
+    }
+
+    /* ══════════════════════════════════════════════════
+       LOAD PROBLEM
+    ══════════════════════════════════════════════════ */
+    function loadProblem() {
+        const p = CODING_PROBLEMS[currentProblemIndex];
+
+        // Header
+        document.getElementById('header-problem-title').textContent = p.title;
+        const diffBadge = document.getElementById('header-difficulty');
+        diffBadge.textContent = p.difficulty.charAt(0).toUpperCase() + p.difficulty.slice(1);
+        diffBadge.className   = 'difficulty-badge ' + p.difficulty;
+        document.getElementById('problem-counter').textContent = (currentProblemIndex+1) + ' / ' + CODING_PROBLEMS.length;
+
+        // Statement tab
+        document.getElementById('prob-title').textContent = p.title;
+        document.getElementById('prob-pts').textContent   = p.points + ' pts';
+        const probDiff = document.getElementById('prob-difficulty');
+        probDiff.textContent = p.difficulty.charAt(0).toUpperCase() + p.difficulty.slice(1);
+        document.getElementById('prob-topic').textContent = p.topic;
+        document.getElementById('prob-statement').innerHTML   = p.statement;
+        document.getElementById('prob-input').innerHTML       = p.inputFormat;
+        document.getElementById('prob-output').innerHTML      = p.outputFormat;
+        document.getElementById('prob-constraints').innerHTML = p.constraints;
+        document.getElementById('sample-in-1').textContent    = p.samples[0]?.input  || '';
+        document.getElementById('sample-out-1').textContent   = p.samples[0]?.output || '';
+        document.getElementById('extra-note').innerHTML       = p.note ? '<strong>Note:</strong> ' + p.note : '';
+
+        // Samples tab
+        const allSamples = document.getElementById('all-samples');
+        allSamples.innerHTML = '';
+        p.samples.forEach((s, i) => {
+            allSamples.innerHTML += `
+                <div style="margin-bottom:1rem;">
+                    <div class="section-title" style="margin-top:0;">Example ${i+1}</div>
+                    <div class="sample-block">
+                        <div class="sample-header"><span class="sample-label">Input</span></div>
+                        <pre class="sample-pre">${escHtml(s.input)}</pre>
+                    </div>
+                    <div class="sample-block">
+                        <div class="sample-header"><span class="sample-label">Output</span></div>
+                        <pre class="sample-pre">${escHtml(s.output)}</pre>
+                    </div>
+                </div>`;
+        });
+
+        // Hints tab
+        document.getElementById('hints-content').innerHTML = p.hints.map(h => `<p>💡 ${h}</p>`).join('');
+
+        // Load code for this problem+lang
+        loadEditorCode();
+
+        // Prefill custom input with sample
+        document.getElementById('custom-input').value = p.samples[0]?.input === '(No input)' ? '' : (p.samples[0]?.input || '');
+        clearOutput();
+
+        // Reset to statement tab
+        switchLeftTab('statement', document.querySelector('.left-tab'));
+    }
+
+    function escHtml(str) {
+        return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    /* ══════════════════════════════════════════════════
+       EDITOR
+    ══════════════════════════════════════════════════ */
+    function setupEditor() {
+        const ed = document.getElementById('code-editor');
+
+        // Tab key inserts spaces
+        ed.addEventListener('keydown', e => {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const s = ed.selectionStart, end = ed.selectionEnd;
+                ed.value = ed.value.substring(0,s) + '    ' + ed.value.substring(end);
+                ed.selectionStart = ed.selectionEnd = s + 4;
+                updateLineNumbers();
+            }
+        });
+
+        ed.addEventListener('input',  updateLineNumbers);
+        ed.addEventListener('scroll', syncScroll);
+
+        loadEditorCode();
+        updateLineNumbers();
+    }
+
+    function loadEditorCode() {
+        const key = currentProblemIndex + '_' + currentLang;
+        const p   = CODING_PROBLEMS[currentProblemIndex];
+        const ed  = document.getElementById('code-editor');
+        ed.value  = userCodes[key] !== undefined ? userCodes[key] : (p.templates[currentLang] || '');
+        updateLineNumbers();
+        updateEditorInfo();
+    }
+
+    function saveEditorCode() {
+        const key = currentProblemIndex + '_' + currentLang;
+        userCodes[key] = document.getElementById('code-editor').value;
+    }
+
+    function changeLanguage() {
+        saveEditorCode();
+        currentLang = document.getElementById('lang-select').value;
+        document.getElementById('lang-icon').textContent = LANG_META[currentLang].icon;
+        loadEditorCode();
+    }
+
+    function resetCode() {
+        if (!confirm('Reset code to template? Your changes will be lost.')) return;
+        const key = currentProblemIndex + '_' + currentLang;
+        delete userCodes[key];
+        loadEditorCode();
+    }
+    function clearCode() { document.getElementById('code-editor').value = ''; updateLineNumbers(); }
+
+    function updateLineNumbers() {
+        const ed    = document.getElementById('code-editor');
+        const lines = ed.value.split('\n').length;
+        const ln    = document.getElementById('line-numbers');
+        let html = '';
+        for (let i = 1; i <= lines; i++) html += `<span class="line-num">${i}</span>`;
+        ln.innerHTML = html;
+        updateEditorInfo();
+    }
+
+    function syncScroll() {
+        document.getElementById('line-numbers').scrollTop = document.getElementById('code-editor').scrollTop;
+    }
+
+    function updateEditorInfo() {
+        const ed   = document.getElementById('code-editor');
+        const lines = ed.value.split('\n').length;
+        const chars = ed.value.length;
+        document.getElementById('editor-info').textContent = `Ln ${lines}  ·  ${chars} chars`;
+    }
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.getElementById('cp-body').requestFullscreen?.();
+        } else {
+            document.exitFullscreen?.();
+        }
+    }
+
+    /* ══════════════════════════════════════════════════
+       RUN & SUBMIT (simulated)
+    ══════════════════════════════════════════════════ */
+    function runCode() {
+        saveEditorCode();
+        const btn = document.getElementById('run-btn');
+        btn.innerHTML = '<span class="spinner"></span> Running…';
+        btn.disabled = true;
+
+        switchIOTab('output', document.querySelectorAll('.io-tab')[1]);
+        const out = document.getElementById('output-area');
+        out.className = '';
+        out.value = '';
+
+        const customIn = document.getElementById('custom-input').value.trim();
+        const p = CODING_PROBLEMS[currentProblemIndex];
+
+        setTimeout(() => {
+            // Simulate output based on problem & language
+            const simulatedOut = simulateRun(p, currentLang, customIn);
+            out.value = simulatedOut;
+            out.className = 'success';
+            btn.innerHTML = '&#9654; Run';
+            btn.disabled = false;
+        }, 900);
+    }
+
+    function submitCode() {
+        saveEditorCode();
+        const code = document.getElementById('code-editor').value.trim();
+        if (!code || code.length < 10) {
+            showToast('error', '✏️ No Code', 'Please write your solution before submitting.');
+            return;
+        }
+
+        const btn = document.getElementById('submit-btn');
+        btn.innerHTML = '<span class="spinner"></span> Judging…';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            btn.innerHTML = '&#10003; Submit';
+            btn.disabled = false;
+
+            const p = CODING_PROBLEMS[currentProblemIndex];
+            // Simulate: if code contains keywords related to solution, accept
+            const accepted = checkCodeHeuristic(code, p, currentLang);
+
+            if (accepted) {
+                if (!solvedSet.has(currentProblemIndex)) {
+                    solvedSet.add(currentProblemIndex);
+                    totalScore += p.points;
+                    document.getElementById('score-display').textContent = totalScore;
+                    showToast('success', '🎉 Accepted!', `All test cases passed. +${p.points} pts`);
+                } else {
+                    showToast('success', '✅ Already Solved', 'This problem is already in your solved list.');
+                }
+            } else {
+                showToast('error', '❌ Wrong Answer', 'Your output did not match expected. Check your logic.');
+            }
+        }, 1800);
+    }
+
+    function checkCodeHeuristic(code, p, lang) {
+        // Simple heuristic: check if the code has substantial content
+        if (code.split('\n').length < 3) return false;
+        const lc = code.toLowerCase();
+        // Check for template-only (no actual solution)
+        if (lc.includes('your code here') && !lc.includes('cout') && !lc.includes('print') && !lc.includes('return') && code.split('\n').length < 8) return false;
+        return true;
+    }
+
+    function simulateRun(p, lang, customIn) {
+        const input = customIn || (p.samples[0]?.input === '(No input)' ? '' : p.samples[0]?.input);
+        // Return sample output for matching input
+        for (const s of p.samples) {
+            if (s.input.trim() === input.trim()) return s.output;
+        }
+        return `[Simulated output for input: "${input.substring(0,40)}"]\n${p.samples[0]?.output || ''}`;
+    }
+
+    function clearOutput() {
+        const out = document.getElementById('output-area');
+        out.value = '';
+        out.className = '';
+    }
+
+    /* ══════════════════════════════════════════════════
+       NAVIGATION
+    ══════════════════════════════════════════════════ */
+    function nextProblem() {
+        saveEditorCode();
+        if (currentProblemIndex < CODING_PROBLEMS.length - 1) {
+            currentProblemIndex++;
+            loadProblem();
+        } else {
+            showToast('info', '🏁 All Done!', 'You\'ve reached the last problem. Great work!');
+        }
+    }
+    function prevProblem() {
+        saveEditorCode();
+        if (currentProblemIndex > 0) {
+            currentProblemIndex--;
+            loadProblem();
+        }
+    }
+
+    /* ══════════════════════════════════════════════════
+       TABS
+    ══════════════════════════════════════════════════ */
+    function switchLeftTab(id, el) {
+        document.querySelectorAll('.left-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        if (el) el.classList.add('active');
+        else document.querySelectorAll('.left-tab')[0].classList.add('active');
+        document.getElementById('tab-' + id)?.classList.add('active');
+    }
+
+    function switchIOTab(id, el) {
+        document.querySelectorAll('.io-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.io-pane').forEach(p => p.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById('io-' + id)?.classList.add('active');
+    }
+
+    /* ══════════════════════════════════════════════════
+       TOAST
+    ══════════════════════════════════════════════════ */
+    function showToast(type, title, sub) {
+        const icons = { success:'🎉', error:'❌', info:'ℹ️' };
+        document.getElementById('toast-icon').textContent  = icons[type] || 'ℹ️';
+        document.getElementById('toast-title').textContent = title;
+        document.getElementById('toast-sub').textContent   = sub;
+        const toast = document.getElementById('result-toast');
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(hideToast, 4000);
+    }
+    function hideToast() {
+        document.getElementById('result-toast').classList.remove('show');
+    }
+
+    /* ══════════════════════════════════════════════════
+       COPY
+    ══════════════════════════════════════════════════ */
+    function copyText(id) {
+        const text = document.getElementById(id)?.textContent || '';
+        navigator.clipboard.writeText(text).then(() => showToast('info', '📋 Copied', 'Text copied to clipboard.'));
+    }
+
+    /* ══════════════════════════════════════════════════
+       RESIZER (drag to resize panels)
+    ══════════════════════════════════════════════════ */
+    function setupResizer() {
+        const resizer   = document.getElementById('resizer');
+        const leftPanel = document.getElementById('left-panel');
+        const body      = document.getElementById('cp-body');
+        let startX, startW;
+
+        resizer.addEventListener('mousedown', e => {
+            startX = e.clientX;
+            startW = leftPanel.offsetWidth;
+            resizer.classList.add('dragging');
+            document.body.style.cursor = 'col-resize';
+            document.body.style.userSelect = 'none';
+        });
+
+        document.addEventListener('mousemove', e => {
+            if (!resizer.classList.contains('dragging')) return;
+            const dx  = e.clientX - startX;
+            const min = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--panel-min'));
+            const max = body.offsetWidth * 0.7;
+            const nw  = Math.max(min, Math.min(startW + dx, max));
+            leftPanel.style.width = nw + 'px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            resizer.classList.remove('dragging');
+            document.body.style.cursor = '';
+            document.body.style.userSelect = '';
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

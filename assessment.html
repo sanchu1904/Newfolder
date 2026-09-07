@@ -3,66 +3,682 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assessment — SkillPrep | Placement & Skill Preparation</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Assessment — SkillPrep | Placement &amp; Skill Preparation</title>
+    <meta name="description" content="Take your SkillPrep assessment. Answer aptitude, technical, and communication questions to sharpen your placement skills.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* =====================================================
+           DESIGN TOKENS — White & Blue Theme
+        ===================================================== */
+        :root {
+            --primary:        #2563eb;
+            --primary-hover:  #1d4ed8;
+            --primary-light:  #eff6ff;
+            --primary-mid:    #bfdbfe;
+            --primary-glow:   rgba(37, 99, 235, 0.18);
+
+            --success:        #10b981;
+            --success-light:  #ecfdf5;
+            --warning:        #f59e0b;
+            --warning-light:  #fffbeb;
+            --danger:         #ef4444;
+            --danger-light:   #fef2f2;
+
+            --bg-body:        #f0f7ff;
+            --surface:        #ffffff;
+            --surface-alt:    #f8fafc;
+            --border:         #dbeafe;
+            --border-strong:  #93c5fd;
+
+            --text-main:      #0f172a;
+            --text-secondary: #475569;
+            --text-muted:     #94a3b8;
+
+            --radius-sm:   8px;
+            --radius-md:   12px;
+            --radius-lg:   16px;
+            --radius-xl:   20px;
+            --radius-full: 9999px;
+
+            --shadow-sm:   0 1px 3px rgba(37,99,235,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md:   0 4px 16px rgba(37,99,235,0.10), 0 2px 6px rgba(0,0,0,0.04);
+            --shadow-lg:   0 12px 32px rgba(37,99,235,0.14), 0 4px 10px rgba(0,0,0,0.04);
+
+            --font-sans:   'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono:   'JetBrains Mono', monospace;
+            --transition:  all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+
+            --header-h:    68px;
+            --sidebar-w:   280px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── HEADER ────────────────────────────────────────── */
+        .assessment-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: var(--header-h);
+            background: var(--surface);
+            border-bottom: 1.5px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            box-shadow: 0 2px 12px rgba(37,99,235,0.07);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.4rem 0.85rem;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--primary-mid);
+            background: var(--primary-light);
+            transition: var(--transition);
+        }
+        .btn-back:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            transform: translateX(-2px);
+        }
+
+        .header-divider {
+            width: 1.5px;
+            height: 28px;
+            background: var(--border);
+            border-radius: 2px;
+        }
+
+        .header-module { display: flex; flex-direction: column; }
+        .header-module-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+        .header-module-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Timer */
+        .timer-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--primary-light);
+            border: 1.5px solid var(--primary-mid);
+            border-radius: var(--radius-lg);
+            padding: 0.45rem 1.1rem;
+            transition: var(--transition);
+        }
+        .timer-icon { font-size: 1.1rem; }
+        .timer-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        #timer {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 56px;
+            text-align: center;
+        }
+        .timer-wrapper.warning { background: var(--warning-light); border-color: #fcd34d; }
+        .timer-wrapper.warning #timer,
+        .timer-wrapper.warning .timer-label { color: #b45309; }
+        .timer-wrapper.danger  { background: var(--danger-light); border-color: #fca5a5; animation: pulse-danger 1s ease-in-out infinite; }
+        .timer-wrapper.danger  #timer,
+        .timer-wrapper.danger  .timer-label { color: var(--danger); }
+        @keyframes pulse-danger {
+            0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+            50%      { box-shadow: 0 0 0 6px rgba(239,68,68,0.18); }
+        }
+
+        /* ── BODY LAYOUT ───────────────────────────────────── */
+        .assessment-body {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* ── SIDEBAR ───────────────────────────────────────── */
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--surface);
+            border-right: 1.5px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 1.2rem;
+            gap: 1.5rem;
+            overflow-y: auto;
+        }
+        .sidebar-section-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        /* Progress ring */
+        .progress-ring-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .ring-svg  { display: block; }
+        .ring-bg   { fill: none; stroke: var(--border); stroke-width: 7; }
+        .ring-fill {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 7;
+            stroke-linecap: round;
+            stroke-dasharray: 226;
+            stroke-dashoffset: 226;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        .ring-text { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; fill: var(--primary); }
+        .ring-sub  { font-size: 0.68rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+
+        /* Status pills */
+        .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+        .status-pill {
+            display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+            padding: 0.6rem 0.4rem;
+            border-radius: var(--radius-md);
+            border: 1.5px solid transparent;
+        }
+        .status-pill.answered  { background: #eff6ff; border-color: #bfdbfe; }
+        .status-pill.skipped   { background: #f8fafc; border-color: var(--border); }
+        .status-pill-count     { font-size: 1.25rem; font-weight: 800; line-height: 1; }
+        .status-pill.answered  .status-pill-count { color: var(--primary); }
+        .status-pill.skipped   .status-pill-count { color: var(--text-muted); }
+        .status-pill-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+        .status-pill.answered  .status-pill-label { color: var(--primary); }
+        .status-pill.skipped   .status-pill-label { color: var(--text-muted); }
+
+        /* Question grid */
+        .q-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.4rem; }
+        .q-dot {
+            width: 100%; aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--border);
+            background: var(--surface-alt);
+            font-size: 0.72rem; font-weight: 700; color: var(--text-muted);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: var(--transition);
+            font-family: var(--font-sans);
+        }
+        .q-dot:hover    { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+        .q-dot.current  { border-color: var(--primary); background: var(--primary); color: #fff; box-shadow: 0 2px 8px var(--primary-glow); }
+        .q-dot.answered { border-color: #86efac; background: var(--success-light); color: var(--success); }
+
+        /* Sidebar submit */
+        .sidebar-submit-btn {
+            width: 100%; padding: 0.75rem;
+            background: var(--primary); color: #fff;
+            border: none; border-radius: var(--radius-md);
+            font-family: var(--font-sans); font-size: 0.92rem; font-weight: 700;
+            cursor: pointer; transition: var(--transition);
+            box-shadow: 0 4px 12px var(--primary-glow);
+            letter-spacing: 0.02em;
+        }
+        .sidebar-submit-btn:hover    { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 6px 18px var(--primary-glow); }
+        .sidebar-submit-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+        /* ── QUESTION AREA ─────────────────────────────────── */
+        .question-area {
+            flex: 1; overflow-y: auto;
+            padding: 2rem 2.5rem;
+            display: flex; flex-direction: column; gap: 1.5rem;
+        }
+
+        /* Progress strip */
+        .progress-strip { display: flex; flex-direction: column; gap: 0.4rem; }
+        .progress-strip-info { display: flex; justify-content: space-between; align-items: center; }
+        .progress-strip-label { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); }
+        .progress-strip-pct   { font-size: 0.82rem; font-weight: 700; color: var(--primary); }
+        .progress-bar-track   { width: 100%; height: 6px; background: var(--primary-light); border-radius: var(--radius-full); overflow: hidden; }
+        .progress-bar-fill    {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #60a5fa);
+            border-radius: var(--radius-full);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 0%;
+        }
+
+        /* Question card */
+        .question-card {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 2rem 2.2rem;
+            box-shadow: var(--shadow-md);
+            position: relative; overflow: hidden;
+        }
+        .question-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--primary), #60a5fa);
+        }
+        .question-badge {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            background: var(--primary-light); color: var(--primary);
+            font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            padding: 0.3rem 0.75rem;
+            border-radius: var(--radius-full);
+            border: 1.5px solid var(--primary-mid);
+            margin-bottom: 1.2rem;
+        }
+        .question-text {
+            font-size: 1.15rem; font-weight: 600;
+            color: var(--text-main); line-height: 1.7;
+            margin-bottom: 1.8rem;
+        }
+
+        /* Options */
+        .options-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .option-label {
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1rem 1.2rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer; transition: var(--transition);
+            background: var(--surface-alt);
+            position: relative; overflow: hidden;
+        }
+        .option-label::before {
+            content: ''; position: absolute; inset: 0;
+            background: var(--primary-light); opacity: 0; transition: var(--transition);
+        }
+        .option-label:hover { border-color: var(--primary); background: var(--surface); transform: translateX(4px); }
+        .option-label:hover::before { opacity: 1; }
+
+        .option-label input[type="radio"] {
+            width: 20px; height: 20px;
+            accent-color: var(--primary);
+            cursor: pointer; flex-shrink: 0; position: relative; z-index: 1;
+        }
+        .option-letter {
+            width: 30px; height: 30px;
+            border-radius: var(--radius-sm);
+            background: var(--border); color: var(--text-secondary);
+            font-size: 0.8rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: var(--transition); position: relative; z-index: 1;
+        }
+        .option-text {
+            flex: 1; font-size: 0.96rem; font-weight: 500;
+            color: var(--text-main); position: relative; z-index: 1; transition: var(--transition);
+        }
+        .option-label:has(input:checked)             { border-color: var(--primary); background: var(--surface); }
+        .option-label:has(input:checked)::before      { opacity: 1; }
+        .option-label:has(input:checked) .option-letter { background: var(--primary); color: #fff; }
+        .option-label:has(input:checked) .option-text   { font-weight: 700; color: var(--primary); }
+
+        /* Nav buttons */
+        .nav-actions {
+            display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+            padding: 1rem 0; border-top: 1.5px solid var(--border);
+        }
+        .nav-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.65rem 1.4rem; border-radius: var(--radius-md);
+            font-family: var(--font-sans); font-size: 0.92rem; font-weight: 700;
+            cursor: pointer; transition: var(--transition);
+            border: 1.5px solid transparent; text-decoration: none; letter-spacing: 0.01em;
+        }
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+        .btn-prev { background: var(--surface); color: var(--text-secondary); border-color: var(--border); }
+        .btn-prev:hover:not(:disabled) { background: var(--surface-alt); border-color: var(--border-strong); color: var(--text-main); }
+        .btn-next { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 3px 10px var(--primary-glow); }
+        .btn-next:hover:not(:disabled) { background: var(--primary-hover); border-color: var(--primary-hover); transform: translateX(3px); box-shadow: 0 5px 16px var(--primary-glow); }
+        .btn-submit { background: var(--success); color: #fff; border-color: var(--success); box-shadow: 0 3px 10px rgba(16,185,129,0.25); }
+        .btn-submit:hover:not(:disabled) { background: #059669; border-color: #059669; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(16,185,129,0.28); }
+
+        .skip-note {
+            display: flex; align-items: center; gap: 0.6rem;
+            font-size: 0.8rem; color: var(--text-muted); font-weight: 500;
+        }
+        .skip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .question-area { padding: 1.5rem 1.2rem; }
+        }
+        @media (max-width: 600px) {
+            .assessment-header { padding: 0 1rem; }
+            .header-module-title { font-size: 0.95rem; }
+            .question-text { font-size: 1rem; }
+            .question-card { padding: 1.4rem 1.2rem; }
+        }
+    </style>
 </head>
 <body>
-    <div class="assessment-container">
-        <header class="assessment-header">
-            <div class="header-info">
-                <a href="dashboard.html" class="btn-back">← Back to Dashboard</a>
-                <h2 id="module-title">Assessment</h2>
-            </div>
-            <div class="timer-display">
-                <span id="timer">10:00</span>
-            </div>
-        </header>
 
-        <main class="assessment-main">
-            <div class="assessment-progress">
-                <div class="progress-info">
-                    <span>Question <span id="current-question">1</span> of <span id="total-questions">0</span></span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="assessment-progress"></div>
+    <!-- HEADER -->
+    <header class="assessment-header">
+        <div class="header-left">
+            <a href="dashboard.html" class="btn-back">&#8592; Dashboard</a>
+            <div class="header-divider"></div>
+            <div class="header-module">
+                <span class="header-module-label">Now taking</span>
+                <span class="header-module-title" id="module-title">Assessment</span>
+            </div>
+        </div>
+        <div class="timer-wrapper" id="timer-wrapper">
+            <span class="timer-icon">&#9203;</span>
+            <div>
+                <div class="timer-label">Time Left</div>
+                <div id="timer">10:00</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BODY -->
+    <div class="assessment-body">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-section-label">Your Progress</div>
+                <div class="progress-ring-wrapper">
+                    <svg class="ring-svg" width="90" height="90" viewBox="0 0 90 90">
+                        <circle class="ring-bg"   cx="45" cy="45" r="36"/>
+                        <circle class="ring-fill" cx="45" cy="45" r="36" id="ring-fill"/>
+                        <text x="45" y="44" text-anchor="middle" dominant-baseline="middle" class="ring-text" id="ring-pct-text">0%</text>
+                        <text x="45" y="58" text-anchor="middle" dominant-baseline="middle" font-size="7" fill="#94a3b8" font-family="Plus Jakarta Sans, sans-serif" font-weight="600">done</text>
+                    </svg>
+                    <span class="ring-sub" id="ring-sub-label">0 of 0 answered</span>
                 </div>
             </div>
 
-            <div class="question-container">
-                <div class="question-card">
-                    <h3 id="question-text">Loading question...</h3>
-                    
-                    <div class="options-container">
-                        <label class="option">
-                            <input type="radio" name="answer" value="0">
-                            <span id="option-0">Option 1</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="answer" value="1">
-                            <span id="option-1">Option 2</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="answer" value="2">
-                            <span id="option-2">Option 3</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="answer" value="3">
-                            <span id="option-3">Option 4</span>
-                        </label>
+            <div>
+                <div class="sidebar-section-label">Status</div>
+                <div class="status-grid">
+                    <div class="status-pill answered">
+                        <span class="status-pill-count" id="answered-count">0</span>
+                        <span class="status-pill-label">Answered</span>
+                    </div>
+                    <div class="status-pill skipped">
+                        <span class="status-pill-count" id="skipped-count">0</span>
+                        <span class="status-pill-label">Skipped</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="question-navigation">
-                    <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()">Previous</button>
-                    <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next</button>
-                    <button class="btn btn-success hidden" id="submit-btn" onclick="submitAssessment()">Submit</button>
+            <div>
+                <div class="sidebar-section-label">Questions</div>
+                <div class="q-grid" id="q-grid"></div>
+            </div>
+
+            <button class="sidebar-submit-btn" id="sidebar-submit-btn" onclick="submitAssessment()">
+                Submit Assessment &#10003;
+            </button>
+        </aside>
+
+        <!-- QUESTION AREA -->
+        <main class="question-area">
+
+            <div class="progress-strip">
+                <div class="progress-strip-info">
+                    <span class="progress-strip-label">
+                        Question <span id="current-question">1</span> of <span id="total-questions">0</span>
+                    </span>
+                    <span class="progress-strip-pct" id="progress-pct">0%</span>
+                </div>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="assessment-progress"></div>
                 </div>
             </div>
+
+            <div class="question-card">
+                <div class="question-badge">
+                    &#128221; Question <span id="q-badge-num">1</span>
+                </div>
+                <p class="question-text" id="question-text">Loading question&#8230;</p>
+
+                <div class="options-list">
+                    <label class="option-label">
+                        <input type="radio" name="answer" value="0">
+                        <span class="option-letter">A</span>
+                        <span class="option-text" id="option-0">Option A</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="answer" value="1">
+                        <span class="option-letter">B</span>
+                        <span class="option-text" id="option-1">Option B</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="answer" value="2">
+                        <span class="option-letter">C</span>
+                        <span class="option-text" id="option-2">Option C</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="answer" value="3">
+                        <span class="option-letter">D</span>
+                        <span class="option-text" id="option-3">Option D</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <button class="nav-btn btn-prev" id="prev-btn" onclick="previousQuestion()">&#8592; Previous</button>
+                <div class="skip-note" id="skip-note">
+                    <span class="skip-dot"></span> Select an option to proceed
+                </div>
+                <button class="nav-btn btn-next" id="next-btn" onclick="nextQuestion()">Next &#8594;</button>
+                <button class="nav-btn btn-submit hidden" id="submit-btn" onclick="submitAssessment()">Submit &#10003;</button>
+            </div>
+
         </main>
     </div>
 
     <script src="js/main.js"></script>
     <script src="js/questions-data.js"></script>
-    <script src="js/assessment.js"></script>
+    <script>
+        let currentQuestionIndex = 0;
+        let questions            = [];
+        let userAnswers          = [];
+        let timerInterval        = null;
+        let timeRemaining        = 600;
+        const PASSING_SCORE      = 60;
+
+        function initAssessment() {
+            const module = sessionStorage.getItem('currentModule');
+            if (!module) { window.location.href = 'dashboard.html'; return; }
+            questions = getQuestionsByModule(module);
+            if (questions.length === 0) { alert('No questions found for this module'); window.location.href = 'dashboard.html'; return; }
+            userAnswers          = new Array(questions.length).fill(null);
+            currentQuestionIndex = 0;
+            timeRemaining        = 600;
+            updateModuleTitle(module);
+            buildQuestionGrid();
+            loadQuestion();
+            startTimer();
+        }
+
+        function updateModuleTitle(module) {
+            const titles = {
+                'programming':'Programming Basics','aptitude':'Aptitude Assessment',
+                'technical-practice':'Technical Practice','communication':'Communication Skills',
+                'general-knowledge':'General Knowledge','ethics':'Ethical Scenarios','values':'Values & Principles'
+            };
+            document.getElementById('module-title').textContent = titles[module] || 'Assessment';
+        }
+
+        function buildQuestionGrid() {
+            const grid = document.getElementById('q-grid');
+            grid.innerHTML = '';
+            questions.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'q-dot';
+                dot.textContent = i + 1;
+                dot.id = 'q-dot-' + i;
+                dot.onclick = () => jumpTo(i);
+                grid.appendChild(dot);
+            });
+            document.getElementById('total-questions').textContent = questions.length;
+        }
+
+        function jumpTo(index) {
+            saveCurrentAnswer();
+            currentQuestionIndex = index;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById('question-text').textContent   = q.question;
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('q-badge-num').textContent      = currentQuestionIndex + 1;
+            for (let i = 0; i < 4; i++) document.getElementById('option-' + i).textContent = q.options[i];
+
+            const pct = Math.round(((currentQuestionIndex + 1) / questions.length) * 100);
+            document.getElementById('assessment-progress').style.width = pct + '%';
+            document.getElementById('progress-pct').textContent = pct + '%';
+
+            document.querySelectorAll('input[name="answer"]').forEach(r => r.checked = false);
+            if (userAnswers[currentQuestionIndex] !== null) {
+                const r = document.querySelector('input[name="answer"][value="' + userAnswers[currentQuestionIndex] + '"]');
+                if (r) r.checked = true;
+            }
+            updateNavButtons();
+            updateSidebar();
+            setupOptionListeners();
+        }
+
+        function updateNavButtons() {
+            const prevBtn    = document.getElementById('prev-btn');
+            const nextBtn    = document.getElementById('next-btn');
+            const submitBtn  = document.getElementById('submit-btn');
+            const sidebarBtn = document.getElementById('sidebar-submit-btn');
+            const skipNote   = document.getElementById('skip-note');
+            const isAnswered = !!document.querySelector('input[name="answer"]:checked');
+            prevBtn.disabled = (currentQuestionIndex === 0);
+            if (currentQuestionIndex === questions.length - 1) {
+                nextBtn.classList.add('hidden'); submitBtn.classList.remove('hidden'); submitBtn.disabled = !isAnswered;
+            } else {
+                nextBtn.classList.remove('hidden'); submitBtn.classList.add('hidden'); nextBtn.disabled = !isAnswered;
+            }
+            skipNote.style.display = isAnswered ? 'none' : 'flex';
+            sidebarBtn.disabled = !userAnswers.every(a => a !== null);
+        }
+
+        function setupOptionListeners() {
+            document.querySelectorAll('input[name="answer"]').forEach(r => {
+                r.addEventListener('change', () => { updateNavButtons(); updateSidebar(); });
+            });
+        }
+
+        function saveCurrentAnswer() {
+            const sel = document.querySelector('input[name="answer"]:checked');
+            if (sel) userAnswers[currentQuestionIndex] = parseInt(sel.value);
+        }
+
+        function nextQuestion() {
+            const sel = document.querySelector('input[name="answer"]:checked');
+            if (!sel) return;
+            userAnswers[currentQuestionIndex] = parseInt(sel.value);
+            if (currentQuestionIndex < questions.length - 1) { currentQuestionIndex++; loadQuestion(); }
+        }
+
+        function previousQuestion() {
+            saveCurrentAnswer();
+            if (currentQuestionIndex > 0) { currentQuestionIndex--; loadQuestion(); }
+        }
+
+        function updateSidebar() {
+            const answered = userAnswers.filter(a => a !== null).length;
+            document.getElementById('answered-count').textContent  = answered;
+            document.getElementById('skipped-count').textContent   = questions.length - answered;
+            document.getElementById('ring-sub-label').textContent  = answered + ' of ' + questions.length + ' answered';
+            const pct = questions.length > 0 ? (answered / questions.length) * 100 : 0;
+            document.getElementById('ring-pct-text').textContent   = Math.round(pct) + '%';
+            document.getElementById('ring-fill').style.strokeDashoffset = 226 - (pct / 100) * 226;
+            questions.forEach((_, i) => {
+                const dot = document.getElementById('q-dot-' + i);
+                if (!dot) return;
+                dot.className = 'q-dot' + (userAnswers[i] !== null ? ' answered' : '') + (i === currentQuestionIndex ? ' current' : '');
+            });
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const m = Math.floor(timeRemaining / 60), s = timeRemaining % 60;
+                document.getElementById('timer').textContent = m + ':' + s.toString().padStart(2, '0');
+                const w = document.getElementById('timer-wrapper');
+                if (timeRemaining <= 60) w.classList.add('warning');
+                if (timeRemaining <= 30) w.classList.add('danger');
+                if (timeRemaining <= 0)  { clearInterval(timerInterval); submitAssessment(); }
+            }, 1000);
+        }
+
+        function submitAssessment() {
+            saveCurrentAnswer();
+            clearInterval(timerInterval);
+            let correct = 0;
+            userAnswers.forEach((ans, i) => { if (ans === questions[i].correct) correct++; });
+            const result = {
+                module: sessionStorage.getItem('currentModule'),
+                totalQuestions: questions.length,
+                correctAnswers: correct,
+                percentage: Math.round((correct / questions.length) * 100),
+                timestamp: new Date().toLocaleString()
+            };
+            const moduleMap = {
+                'programming':'programming','aptitude':'aptitude','technical-practice':'technical-practice',
+                'communication':'communication','general-knowledge':'general-knowledge','ethics':'ethics','values':'values'
+            };
+            updateStudentScore(moduleMap[result.module], result.percentage);
+            sessionStorage.setItem('assessmentResult', JSON.stringify(result));
+            window.location.href = 'result.html';
+        }
+
+        window.addEventListener('DOMContentLoaded', initAssessment);
+    </script>
 </body>
 </html>
