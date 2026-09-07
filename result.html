@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assessment Results — SkillPrep | Placement & Skill Preparation</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="result-container">
         <header class="result-header">
@@ -62,7 +64,7 @@
     <script>
         function initResult() {
             const result = JSON.parse(sessionStorage.getItem('assessmentResult'));
-            
+
             if (!result) {
                 document.querySelector('.result-main').innerHTML = '<p>No results found. Please take an assessment first.</p>';
                 return;
@@ -109,4 +111,5 @@
         window.addEventListener('DOMContentLoaded', initResult);
     </script>
 </body>
+
 </html>

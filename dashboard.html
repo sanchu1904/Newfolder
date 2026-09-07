@@ -1713,6 +1713,10 @@
                         <span class="nav-icon">🏠</span>
                         <span>Dashboard</span>
                     </a>
+                    <a href="learning.html" class="nav-item">
+                        <span class="nav-icon">📖</span>
+                        <span>Learning & Notes</span>
+                    </a>
                     <a href="#daily-practice" class="nav-item" onclick="scrollToSection('daily-practice-focus')">
                         <span class="nav-icon">📅</span>
                         <span>Daily Practice</span>
@@ -1752,10 +1756,14 @@
 
             <div>
                 <!-- Left-Side User Card (Click to View Profile) -->
-                <div class="sidebar-user-card" onclick="window.location.href='profile.html'" style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:var(--surface-alt); border-radius:var(--radius-md); margin:0 14px 10px; cursor:pointer; border:1px solid var(--border-subtle);" title="View Student Profile">
-                    <div class="user-avatar-circle" style="width:34px; height:34px; font-size:0.82rem;" id="sidebar-user-avatar">AK</div>
+                <div class="sidebar-user-card" onclick="window.location.href='profile.html'"
+                    style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:var(--surface-alt); border-radius:var(--radius-md); margin:0 14px 10px; cursor:pointer; border:1px solid var(--border-subtle);"
+                    title="View Student Profile">
+                    <div class="user-avatar-circle" style="width:34px; height:34px; font-size:0.82rem;"
+                        id="sidebar-user-avatar">AK</div>
                     <div style="flex-grow:1; overflow:hidden; line-height:1.25;">
-                        <div style="font-weight:700; font-size:0.85rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="sidebar-student-name">Ananya Kumar</div>
+                        <div style="font-weight:700; font-size:0.85rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"
+                            id="sidebar-student-name">Ananya Kumar</div>
                         <div style="font-size:0.72rem; color:var(--primary); font-weight:600;">Student • Active</div>
                     </div>
                 </div>
@@ -1892,6 +1900,38 @@
                             <span class="stat-value">48 Problems</span>
                             <span class="stat-subtext" style="color:var(--text-muted);">25 Easy • 18 Med • 5 Hard</span>
                         </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================================
+                     LEARNING PROGRESS — SUBJECT-WISE NOTES & TRACKER
+                     ========================================================== -->
+                <section class="learning-progress-section" id="learning-progress-section">
+                    <div class="learning-section-header">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+                                <span style="font-size:1.4rem;">📖</span>
+                                <h3 style="font-size:1.2rem; font-weight:800; color:var(--text-main); margin:0;">Learning Progress & Notes</h3>
+                                <span class="badge-w3-tag">W3Schools Progress Tracker</span>
+                            </div>
+                            <p style="font-size:0.88rem; color:var(--text-secondary); margin:0;">
+                                Study subject-wise notes and track your topic completion status across all domains.
+                            </p>
+                        </div>
+                        <div class="learning-overall-hero-badge">
+                            <div class="overall-progress-circle-wrap">
+                                <span class="overall-pct-val" id="dash-overall-pct">0%</span>
+                                <span class="overall-pct-sub">Overall Completed</span>
+                            </div>
+                            <a href="learning.html" class="btn-continue-learning" id="dash-btn-continue-learn">
+                                <span>Continue Learning →</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 4 Subject Progress Cards (Python, Aptitude, Technical, Communication) -->
+                    <div class="learning-subjects-grid" id="dash-learning-subjects-grid">
+                        <!-- Populated dynamically via js/learning-data.js -->
                     </div>
                 </section>
 
@@ -2533,6 +2573,63 @@
             localStorage.removeItem('skillprep_user');
             sessionStorage.clear();
             window.location.href = 'login.html';
+        }
+
+        function renderDashboardLearningWidget() {
+            if (typeof LEARNING_SUBJECTS === 'undefined' || typeof getOverallLearningProgress === 'undefined') return;
+
+            // 1. Overall Progress
+            const overall = getOverallLearningProgress();
+            const overallEl = document.getElementById('dash-overall-pct');
+            if (overallEl) {
+                overallEl.textContent = `${overall.percentage}%`;
+            }
+
+            // 2. Last Studied button update
+            const last = typeof getLastStudied === 'function' ? getLastStudied() : null;
+            const continueBtn = document.getElementById('dash-btn-continue-learn');
+            if (continueBtn && last) {
+                continueBtn.href = `learning.html?subject=${last.subjectId}&topic=${last.topicId}`;
+            }
+
+            // 3. Render 4 Subject Cards (Python, Aptitude, Technical, Communication)
+            const grid = document.getElementById('dash-learning-subjects-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            LEARNING_SUBJECTS.forEach(subject => {
+                const prog = getSubjectProgress(subject.id);
+                const card = document.createElement('div');
+                card.className = 'learning-subject-card';
+                card.innerHTML = `
+                    <div class="learning-subject-head">
+                        <div class="subject-head-title">
+                            <span>${subject.icon}</span>
+                            <span>${subject.title}</span>
+                        </div>
+                        <span class="subject-pct-pill">${prog.percentage}%</span>
+                    </div>
+                    <div class="subject-w3-track">
+                        <div class="subject-w3-fill" style="width: ${prog.percentage}%;"></div>
+                    </div>
+                    <div class="subject-footer-row">
+                        <span>${prog.completed} of ${prog.total} Topics</span>
+                        <a href="learning.html?subject=${subject.id}" class="subject-study-link">Study Notes →</a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDashboardLearningWidget();
+        });
+    </script>
+    <script src="js/learning-data.js"></script>
+    <script>
+        // Ensure widget updates if script loaded after DOM
+        if (typeof renderDashboardLearningWidget === 'function') {
+            renderDashboardLearningWidget();
         }
     </script>
 </body>
