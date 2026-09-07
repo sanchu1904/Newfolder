@@ -34,7 +34,6 @@
             --light-surface: #ffffff;
             --light-surface-2: #f1f5f9;
             --light-border: #e2e8f0;
-            --light-border-focus: #4f46e5;
             
             --text-main: #0f172a;
             --text-secondary: #475569;
@@ -97,9 +96,7 @@
             width: 100%;
         }
 
-        /* --------------------------------------------------------------------------
-           LEFT SIDE: BRANDING & DASHBOARD VISUAL
-           -------------------------------------------------------------------------- */
+        /* LEFT SIDE: BRANDING & DASHBOARD VISUAL */
         .auth-visual-panel {
             background: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.28) 0%, transparent 40%),
                         radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.2) 0%, transparent 45%),
@@ -114,7 +111,6 @@
             border-right: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Background grid overlay */
         .auth-visual-panel::before {
             content: '';
             position: absolute;
@@ -191,7 +187,6 @@
             max-width: 480px;
         }
 
-        /* Left side glassmorphic dashboard card */
         .preview-dashboard {
             background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(16px);
@@ -304,7 +299,6 @@
         .fill-emerald { background: #34d399; width: 78%; }
         .fill-amber { background: #fbbf24; width: 88%; }
 
-        /* Floating Achievement Pill */
         .floating-pill {
             position: absolute;
             bottom: -16px;
@@ -352,9 +346,7 @@
             font-weight: 800;
         }
 
-        /* --------------------------------------------------------------------------
-           RIGHT SIDE: LOGIN FORM
-           -------------------------------------------------------------------------- */
+        /* RIGHT SIDE: LOGIN FORM */
         .auth-form-panel {
             background: #ffffff;
             display: flex;
@@ -370,7 +362,6 @@
             max-width: 440px;
         }
 
-        /* Mobile-only brand header */
         .mobile-brand-header {
             display: none;
             margin-bottom: 32px;
@@ -398,7 +389,6 @@
             line-height: 1.5;
         }
 
-        /* Global Alert Banner (Hidden by default) */
         .alert-banner {
             display: none;
             align-items: flex-start;
@@ -443,7 +433,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Form Structure */
         .form-group {
             margin-bottom: 20px;
         }
@@ -502,7 +491,6 @@
             color: var(--primary);
         }
 
-        /* Error state on input */
         .form-input.input-invalid {
             border-color: var(--accent-red);
             background: #fffdfd;
@@ -526,7 +514,6 @@
             animation: fadeIn 0.2s ease;
         }
 
-        /* Password Toggle Eye Button */
         .btn-toggle-password {
             position: absolute;
             right: 14px;
@@ -543,7 +530,6 @@
             background: var(--light-surface-2);
         }
 
-        /* Remember & Forgot Row */
         .form-aux-row {
             display: flex;
             align-items: center;
@@ -611,7 +597,6 @@
             text-decoration: underline;
         }
 
-        /* Main Submit Button */
         .btn-submit {
             width: 100%;
             height: 48px;
@@ -644,7 +629,6 @@
             transform: none;
         }
 
-        /* Loading spinner */
         .spinner {
             display: none;
             width: 18px;
@@ -663,7 +647,6 @@
             display: inline-block;
         }
 
-        /* Registration CTA */
         .register-prompt {
             text-align: center;
             margin-top: 24px;
@@ -682,7 +665,6 @@
             text-decoration: underline;
         }
 
-        /* Divider & Social Login */
         .auth-divider {
             display: flex;
             align-items: center;
@@ -725,7 +707,6 @@
             transform: translateY(-1px);
         }
 
-        /* Security trust footer */
         .security-note {
             display: flex;
             align-items: center;
@@ -741,7 +722,6 @@
             color: var(--accent-green);
         }
 
-        /* Quick Demo Helper Tooltip Pill */
         .demo-helper-box {
             margin-top: 24px;
             background: #f8fafc;
@@ -775,9 +755,6 @@
             background: #e0e7ff;
         }
 
-        /* ==========================================================================
-           RESPONSIVE BREAKPOINTS
-           ========================================================================== */
         @media (max-width: 992px) {
             .auth-container {
                 grid-template-columns: 1fr;
@@ -816,9 +793,7 @@
 <body>
 
     <div class="auth-container">
-        <!-- ==================================================================
-             1. LEFT SIDE: BRANDING & DASHBOARD VISUAL
-             ================================================================== -->
+        <!-- 1. LEFT SIDE: BRANDING & DASHBOARD VISUAL -->
         <aside class="auth-visual-panel">
             <div class="visual-header">
                 <a href="index.html" class="brand-logo" title="Back to SkillPrep Home">
@@ -893,19 +868,6 @@
                         </div>
                     </div>
 
-                    <!-- Mini chart line -->
-                    <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:10px 14px; border:1px solid rgba(255,255,255,0.06);">
-                        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#94a3b8; margin-bottom:6px;">
-                            <span>Placement Readiness Trend</span>
-                            <span style="color:#34d399; font-weight:700;">+24% this week</span>
-                        </div>
-                        <svg viewBox="0 0 300 40" style="width:100%; height:40px; overflow:visible;">
-                            <path d="M0,35 Q60,25 120,30 T200,15 T300,5" fill="none" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round"/>
-                            <circle cx="300" cy="5" r="4" fill="#38bdf8"/>
-                        </svg>
-                    </div>
-
-                    <!-- Floating Badge -->
                     <div class="floating-pill">
                         <span style="color:#10b981; font-weight:bold;">✓</span>
                         <span>TCS & Infosys Ready</span>
@@ -929,12 +891,9 @@
             </div>
         </aside>
 
-        <!-- ==================================================================
-             2. RIGHT SIDE: LOGIN FORM
-             ================================================================== -->
+        <!-- 2. RIGHT SIDE: LOGIN FORM -->
         <main class="auth-form-panel">
             <div class="auth-card">
-                <!-- Mobile Brand Header (shown when split screen collapses) -->
                 <div class="mobile-brand-header">
                     <a href="index.html" class="brand-logo" style="color:var(--text-main); justify-content:center;">
                         <div class="brand-icon">
@@ -946,19 +905,16 @@
                     </a>
                 </div>
 
-                <!-- Form Header -->
                 <div class="auth-header">
                     <h1>Welcome Back 👋</h1>
                     <p>Continue your SkillPrep journey and ace your placement.</p>
                 </div>
 
-                <!-- General Alert Box (Errors, Expired Sessions, Notices) -->
                 <div id="general-alert" class="alert-banner" role="alert">
                     <span class="alert-icon" id="alert-icon">⚠️</span>
                     <span id="alert-message">Alert message</span>
                 </div>
 
-                <!-- Login Form -->
                 <form id="login-form" novalidate>
                     <!-- Email Address Field -->
                     <div class="form-group">
@@ -1034,18 +990,16 @@
                     </button>
                 </form>
 
-                <!-- Registration Prompt -->
+                <!-- Registration Prompt linked to register.html -->
                 <div class="register-prompt">
                     Don't have an account? 
-                    <a href="student-entry.html" class="register-link" id="register-link">Create an account</a>
+                    <a href="register.html" class="register-link" id="register-link">Create an account</a>
                 </div>
 
-                <!-- Optional Social Login Divider -->
                 <div class="auth-divider">
                     <span>OR</span>
                 </div>
 
-                <!-- Google Secondary Login -->
                 <button type="button" class="btn-google" id="google-login-btn">
                     <svg width="18" height="18" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -1056,7 +1010,6 @@
                     <span>Continue with Google</span>
                 </button>
 
-                <!-- Security Trust Message -->
                 <div class="security-note">
                     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
@@ -1064,7 +1017,6 @@
                     <span>Your account information is securely protected.</span>
                 </div>
 
-                <!-- Interactive Demo Credentials Quick-Fill Pill -->
                 <div class="demo-helper-box">
                     <div class="demo-helper-title">
                         <span>💡 Quick Demo Credentials</span>
@@ -1076,20 +1028,10 @@
         </main>
     </div>
 
-    <!-- ==========================================================================
-         AUTHENTICATION & API INTEGRATION SCRIPT
-         ========================================================================== -->
     <script>
-        /**
-         * SkillPrep Authentication Module
-         * Prepared for real backend JWT authentication: POST /api/auth/login
-         */
         const AuthService = {
             apiUrl: '/api/auth/login',
 
-            /**
-             * Authenticate user with backend or fallback simulator
-             */
             async login(email, password, rememberMe) {
                 try {
                     const response = await fetch(this.apiUrl, {
@@ -1113,21 +1055,16 @@
                         return { success: false, error: errData.message || 'Authentication failed. Please try again.' };
                     }
                 } catch (networkError) {
-                    // Real backend fallback for standalone frontend preview & testing
                     console.info('Backend endpoint not reachable directly. Using local SkillPrep auth verification...');
                     return this.simulateAuth(email, password, rememberMe);
                 }
             },
 
-            /**
-             * Seamless verification engine for client demo / development
-             */
             simulateAuth(email, password, rememberMe) {
                 return new Promise((resolve) => {
                     setTimeout(() => {
                         const normalizedEmail = email.trim().toLowerCase();
                         
-                        // Check for known test failure scenarios
                         if (normalizedEmail === 'wrong@skillprep.com') {
                             resolve({ success: false, error: 'Invalid email or password.' });
                             return;
@@ -1143,11 +1080,9 @@
                             return;
                         }
 
-                        // Determine user role
                         const role = normalizedEmail.includes('admin') ? 'Admin' : 'Student';
                         const name = normalizedEmail.includes('admin') ? 'Administrator' : 'Ananya Kumar';
 
-                        // Generate mock JWT structure
                         const mockToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' + 
                             btoa(JSON.stringify({ sub: normalizedEmail, role, exp: Date.now() + 86400000 })) + 
                             '.skillprep_mock_signature';
@@ -1168,22 +1103,14 @@
                 });
             },
 
-            /**
-             * Securely store session in client storage
-             */
             storeSession(data, rememberMe) {
                 const storage = rememberMe ? localStorage : sessionStorage;
                 storage.setItem('skillprep_token', data.token);
                 storage.setItem('skillprep_user', JSON.stringify(data.user));
-                
-                // Also set cookie flag if required
                 document.cookie = `skillprep_auth=true; path=/; max-age=${rememberMe ? 60*60*24*30 : 60*60*24}; SameSite=Lax`;
             }
         };
 
-        // ==========================================================================
-        // UI & FORM CONTROLLER
-        // ==========================================================================
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('login-form');
             const emailInput = document.getElementById('email');
@@ -1203,13 +1130,11 @@
             const googleLoginBtn = document.getElementById('google-login-btn');
             const fillDemoBtn = document.getElementById('fill-demo-btn');
 
-            // 1. Check for URL parameters (e.g. ?session=expired)
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('session') === 'expired') {
                 showAlert('Your session has expired. Please login again.', 'error');
             }
 
-            // 2. Toggle Password Visibility
             togglePasswordBtn.addEventListener('click', () => {
                 const isPassword = passwordInput.type === 'password';
                 passwordInput.type = isPassword ? 'text' : 'password';
@@ -1218,7 +1143,6 @@
                 passwordInput.focus();
             });
 
-            // 3. Clear inline validation errors on user input
             emailInput.addEventListener('input', () => {
                 clearFieldError(emailInput, emailError);
                 hideAlert();
@@ -1229,7 +1153,6 @@
                 hideAlert();
             });
 
-            // 4. Auto fill demo credentials button
             fillDemoBtn.addEventListener('click', () => {
                 emailInput.value = 'student@skillprep.edu';
                 passwordInput.value = 'student123';
@@ -1239,7 +1162,6 @@
                 emailInput.focus();
             });
 
-            // 5. Forgot Password interaction
             forgotPasswordLink.addEventListener('click', () => {
                 const email = emailInput.value.trim();
                 if (!email) {
@@ -1253,7 +1175,6 @@
                 }
             });
 
-            // 6. Social Login handler
             googleLoginBtn.addEventListener('click', () => {
                 showAlert('Connecting with Google SSO...', 'info');
                 setTimeout(() => {
@@ -1263,7 +1184,6 @@
                 }, 400);
             });
 
-            // 7. Form Submission Handler
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 hideAlert();
@@ -1272,10 +1192,8 @@
                 const password = passwordInput.value;
                 const rememberMe = rememberMeInput.checked;
 
-                // Client-side Validation
                 let hasError = false;
 
-                // Validate Email
                 if (!email) {
                     setFieldError(emailInput, emailError, 'Please enter your email address.');
                     hasError = true;
@@ -1284,7 +1202,6 @@
                     hasError = true;
                 }
 
-                // Validate Password
                 if (!password) {
                     setFieldError(passwordInput, passwordError, 'Please enter your password.');
                     hasError = true;
@@ -1292,20 +1209,16 @@
 
                 if (hasError) return;
 
-                // Set Loading State
                 setLoadingState(true);
 
                 try {
                     const result = await AuthService.login(email, password, rememberMe);
 
                     if (result.success) {
-                        // Store session safely
                         AuthService.storeSession(result.data, rememberMe);
-
                         showAlert('Login successful! Redirecting to dashboard...', 'success');
                         btnText.textContent = 'Success!';
 
-                        // Redirect based on role
                         setTimeout(() => {
                             if (result.data.user.role === 'Admin') {
                                 window.location.href = 'student-entry.html';
@@ -1325,7 +1238,6 @@
                 }
             });
 
-            // Helper Validation Functions
             function isValidEmail(email) {
                 const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return regex.test(email);
