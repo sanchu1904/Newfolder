@@ -9,14 +9,14 @@ const PASSING_SCORE = 60;
 
 function initAssessment() {
     const module = sessionStorage.getItem('currentModule');
-    
+
     if (!module) {
         window.location.href = 'dashboard.html';
         return;
     }
 
     questions = getQuestionsByModule(module);
-    
+
     if (questions.length === 0) {
         alert('No questions found for this module');
         window.location.href = 'dashboard.html';
@@ -53,7 +53,7 @@ function loadQuestion() {
     }
 
     const question = questions[currentQuestionIndex];
-    
+
     document.getElementById('question-text').textContent = question.question;
     document.getElementById('current-question').textContent = currentQuestionIndex + 1;
     document.getElementById('total-questions').textContent = questions.length;
@@ -85,9 +85,9 @@ function updateNavigationButtons() {
     const submitBtn = document.getElementById('submit-btn');
 
     prevBtn.disabled = currentQuestionIndex === 0;
-    
+
     const isAnswered = document.querySelector('input[name="answer"]:checked') !== null;
-    
+
     if (currentQuestionIndex === questions.length - 1) {
         nextBtn.classList.add('hidden');
         submitBtn.classList.remove('hidden');
@@ -101,14 +101,14 @@ function updateNavigationButtons() {
 
 function nextQuestion() {
     const selectedAnswer = document.querySelector('input[name="answer"]:checked');
-    
+
     if (!selectedAnswer) {
         alert('Please select an answer before proceeding');
         return;
     }
 
     userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
-    
+
     if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
         loadQuestion();
@@ -117,7 +117,7 @@ function nextQuestion() {
 
 function previousQuestion() {
     const selectedAnswer = document.querySelector('input[name="answer"]:checked');
-    
+
     if (selectedAnswer) {
         userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
     }
@@ -135,7 +135,7 @@ function startTimer() {
         const minutes = Math.floor(timeRemaining / 60);
         const seconds = timeRemaining % 60;
         const timeDisplay = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        
+
         const timerElement = document.getElementById('timer');
         timerElement.textContent = timeDisplay;
 
@@ -155,7 +155,7 @@ function startTimer() {
 
 function submitAssessment() {
     const selectedAnswer = document.querySelector('input[name="answer"]:checked');
-    
+
     if (selectedAnswer) {
         userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
     }
@@ -191,7 +191,7 @@ function submitAssessment() {
     updateStudentScore(scoreKey, result.percentage);
 
     sessionStorage.setItem('assessmentResult', JSON.stringify(result));
-    
+
     window.location.href = 'result.html';
 }
 

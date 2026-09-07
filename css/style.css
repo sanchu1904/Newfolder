@@ -85,7 +85,7 @@ body {
     color: var(--text-primary);
 }
 
-.hero > p {
+.hero>p {
     font-size: 1.1rem;
     color: var(--text-secondary);
     margin-bottom: var(--spacing-2xl);
@@ -380,6 +380,7 @@ body {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -612,7 +613,7 @@ body {
     flex: 1;
 }
 
-.option input[type="radio"]:checked + span {
+.option input[type="radio"]:checked+span {
     font-weight: 600;
     color: var(--primary-color);
 }
@@ -857,7 +858,7 @@ body {
         font-size: 1.5rem;
     }
 
-    .hero > p {
+    .hero>p {
         font-size: 1rem;
     }
 
@@ -905,4 +906,165 @@ body {
     .result-actions .btn {
         width: 100%;
     }
+}
+
+/* ==========================================================================
+   DASHBOARD LEARNING PROGRESS SECTION STYLES
+   ========================================================================== */
+.learning-progress-section {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle, #e2e8f0);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.learning-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.badge-w3-tag {
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #a7f3d0;
+    text-transform: uppercase;
+}
+
+.learning-overall-hero-badge {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.overall-progress-circle-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.2;
+}
+
+.overall-pct-val {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #4f46e5;
+}
+
+.overall-pct-sub {
+    font-size: 0.72rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.btn-continue-learning {
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 9px 18px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    transition: all 0.2s;
+}
+
+.btn-continue-learning:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+}
+
+.learning-subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.learning-subject-card {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.learning-subject-card:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.learning-subject-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.subject-head-title {
+    font-weight: 750;
+    font-size: 0.95rem;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.subject-pct-pill {
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.subject-w3-track {
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.subject-w3-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #059669);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+}
+
+.subject-footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: #64748b;
+}
+
+.subject-study-link {
+    font-weight: 700;
+    color: #4f46e5;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s;
+}
+
+.subject-study-link:hover {
+    color: #3730a3;
+    text-decoration: underline;
 }

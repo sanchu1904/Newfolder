@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning & Notes Portal — SkillPrep | Placement & Skill Preparation</title>
+    <meta name="description" content="Study subject-wise placement preparation notes, track your topic completion progress, and master Python, Aptitude, Technical CS, and Communication.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ==========================================================================
+           LEARNING PORTAL LAYOUT & STYLES (W3Schools-Style Progress System)
+           ========================================================================== */
+        :root {
+            --learning-sidebar-width: 320px;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .learning-navbar {
+            height: 64px;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            flex-shrink: 0;
+            z-index: 50;
+        }
+
+        .navbar-brand-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #4f46e5;
+        }
+
+        .nav-portal-badge {
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-actions-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .overall-progress-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f1f5f9;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid #e2e8f0;
+        }
+
+        .overall-mini-bar {
+            width: 80px;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .overall-mini-fill {
+            height: 100%;
+            background: #4f46e5;
+            border-radius: 999px;
+            transition: width 0.3s ease;
+        }
+
+        .btn-nav-dash {
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #475569;
+            padding: 7px 14px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            transition: all 0.2s;
+        }
+
+        .btn-nav-dash:hover {
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* Workspace Grid */
+        .learning-workspace {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 64px);
+            overflow: hidden;
+        }
+
+        /* Left Sidebar: Subjects & Topics */
+        .learning-sidebar {
+            width: var(--learning-sidebar-width);
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .subject-selector-box {
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            background: #fafafa;
+        }
+
+        .subject-dropdown-title {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .subject-tabs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .subject-tab-btn {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 8px 10px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .subject-tab-btn:hover {
+            border-color: #cbd5e1;
+            background: #f8fafc;
+        }
+
+        .subject-tab-btn.active {
+            border-color: #4f46e5;
+            background: #eef2ff;
+        }
+
+        .tab-btn-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .subject-tab-btn.active .tab-btn-name {
+            color: #4f46e5;
+        }
+
+        .tab-btn-pct {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .subject-tab-btn.active .tab-btn-pct {
+            color: #4338ca;
+        }
+
+        .topics-list-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+        }
+
+        .topics-section-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            padding: 8px 8px 6px;
+        }
+
+        .topic-nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .topic-nav-item:hover {
+            background: #f1f5f9;
+        }
+
+        .topic-nav-item.active {
+            background: #f5f7ff;
+            border-color: #c7d2fe;
+        }
+
+        .topic-left-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .topic-check-icon {
+            font-size: 1.1rem;
+            line-height: 1;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+
+        .topic-check-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .topic-nav-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #334155;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .topic-nav-item.active .topic-nav-title {
+            font-weight: 700;
+            color: #4f46e5;
+        }
+
+        .topic-nav-time {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        /* Main Content Canvas */
+        .learning-content-canvas {
+            flex: 1;
+            height: 100%;
+            overflow-y: auto;
+            padding: 24px 36px 60px;
+            background: #f8fafc;
+        }
+
+        .study-container-max {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        /* W3Schools-Style Subject Header Progress Bar */
+        .w3-progress-hero {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .w3-hero-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .w3-subject-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        .w3-completion-badge {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #059669;
+            background: #ecfdf5;
+            padding: 4px 12px;
+            border-radius: 999px;
+            border: 1px solid #a7f3d0;
+        }
+
+        .w3-progress-track {
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .w3-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            border-radius: 999px;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .w3-hero-sub {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        /* Topic Study Card */
+        .topic-study-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 24px;
+        }
+
+        .topic-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .topic-title-area h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            margin: 0 0 6px 0;
+        }
+
+        .topic-meta-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .btn-mark-completed {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1.5px solid #cbd5e1;
+            background: #ffffff;
+            color: #475569;
+            flex-shrink: 0;
+        }
+
+        .btn-mark-completed:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+            color: #15803d;
+        }
+
+        .btn-mark-completed.completed {
+            background: #10b981;
+            color: #ffffff;
+            border-color: #10b981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-mark-completed.completed:hover {
+            background: #059669;
+        }
+
+        /* Note Content Formatting */
+        .topic-body-content {
+            font-size: 0.98rem;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        .topic-body-content h4 {
+            font-size: 1.15rem;
+            font-weight: 750;
+            color: #0f172a;
+            margin: 24px 0 10px 0;
+        }
+
+        .topic-body-content p {
+            margin-bottom: 14px;
+        }
+
+        .topic-body-content ul,
+        .topic-body-content ol {
+            margin: 0 0 16px 20px;
+            padding: 0;
+        }
+
+        .topic-body-content li {
+            margin-bottom: 8px;
+        }
+
+        .topic-body-content code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88em;
+            background: #f1f5f9;
+            color: #4338ca;
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Code Snippet Box */
+        .code-block-wrapper {
+            background: #0f172a;
+            border-radius: 12px;
+            margin: 18px 0;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.2);
+        }
+
+        .code-block-header {
+            background: #1e293b;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-copy-code {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-copy-code:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .code-block-wrapper pre {
+            margin: 0;
+            padding: 16px 20px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            color: #f8fafc;
+        }
+
+        /* Tip & Callout Box */
+        .tip-callout {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid #3b82f6;
+            border-radius: 0 10px 10px 0;
+            padding: 14px 18px;
+            margin: 20px 0;
+            font-size: 0.92rem;
+            color: #1e40af;
+        }
+
+        /* Bottom Study Navigation */
+        .study-bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .btn-study-nav {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-study-prev {
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            color: #475569;
+        }
+
+        .btn-study-prev:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .btn-study-next {
+            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-study-next:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Mobile Drawer Button */
+        .mobile-topics-toggle {
+            display: none;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        @media (max-width: 860px) {
+            .mobile-topics-toggle {
+                display: inline-flex;
+            }
+
+            .learning-sidebar {
+                position: fixed;
+                left: 0;
+                top: 64px;
+                bottom: 0;
+                z-index: 100;
+                transform: translateX(-100%);
+                transition: transform 0.25s ease-in-out;
+                box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
+            }
+
+            .learning-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .learning-content-canvas {
+                padding: 16px 16px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="learning-navbar">
+        <div class="navbar-brand-group">
+            <button type="button" class="mobile-topics-toggle" onclick="toggleSidebarDrawer()">☰ Topics</button>
+            <a href="dashboard.html" class="brand-logo-wrap">
+                <span>⚡ SkillPrep</span>
+            </a>
+            <span class="nav-portal-badge">📖 Notes & Learning</span>
+        </div>
+
+        <div class="nav-actions-group">
+            <!-- Overall Progress Widget -->
+            <div class="overall-progress-pill" title="Overall Learning Progress across all subjects">
+                <span style="font-size:0.78rem; color:#64748b; text-transform:uppercase;">Overall:</span>
+                <div class="overall-mini-bar">
+                    <div class="overall-mini-fill" id="overall-bar-fill" style="width: 0%;"></div>
+                </div>
+                <span id="overall-pct-text" style="color:#4f46e5;">0%</span>
+            </div>
+
+            <a href="dashboard.html" class="btn-nav-dash">← Back to Dashboard</a>
+        </div>
+    </header>
+
+    <!-- Main Learning Workspace -->
+    <div class="learning-workspace">
+        <!-- Left Sidebar -->
+        <aside class="learning-sidebar" id="learning-sidebar">
+            <div class="subject-selector-box">
+                <div class="subject-dropdown-title">Select Subject</div>
+                <div class="subject-tabs-grid" id="subject-tabs-grid">
+                    <!-- Populated dynamically: Python, Aptitude, Technical, Communication -->
+                </div>
+            </div>
+
+            <div class="topics-list-container">
+                <div class="topics-section-title" id="topics-list-heading">Python Topics (0/0)</div>
+                <div id="topics-items-list">
+                    <!-- Populated dynamically with ✅ / ⬜ -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Reading Canvas -->
+        <main class="learning-content-canvas" id="learning-content-canvas">
+            <div class="study-container-max">
+                
+                <!-- W3Schools-Style Subject Hero Progress Bar -->
+                <section class="w3-progress-hero">
+                    <div class="w3-hero-top">
+                        <div class="w3-subject-badge" id="hero-subject-name">
+                            <span>🐍</span> <span>Python Programming</span>
+                        </div>
+                        <div class="w3-completion-badge" id="hero-progress-badge">
+                            65% Completed
+                        </div>
+                    </div>
+                    <div class="w3-progress-track">
+                        <div class="w3-progress-fill" id="hero-progress-fill" style="width: 65%;"></div>
+                    </div>
+                    <div class="w3-hero-sub">
+                        <span id="hero-counts-text">4 of 10 Topics Completed</span>
+                        <span style="font-weight:600; color:#4f46e5;">W3Schools-Style Learning Tracker</span>
+                    </div>
+                </section>
+
+                <!-- Topic Reading Card -->
+                <article class="topic-study-card">
+                    <div class="topic-header-row">
+                        <div class="topic-title-area">
+                            <h1 id="topic-title">Variables & Identifiers</h1>
+                            <div class="topic-meta-line">
+                                <span id="topic-subject-breadcrumb">Python Programming</span>
+                                <span>•</span>
+                                <span id="topic-read-time">⏱ 8 min read</span>
+                                <span>•</span>
+                                <span id="topic-status-label" style="font-weight:700; color:#ea580c;">⬜ Incomplete</span>
+                            </div>
+                        </div>
+
+                        <!-- Mark as Completed Checkbox Button -->
+                        <button type="button" class="btn-mark-completed" id="btn-toggle-completion" onclick="handleToggleCurrentTopic()">
+                            <span id="completion-btn-icon">⬜</span>
+                            <span id="completion-btn-text">Mark as Completed</span>
+                        </button>
+                    </div>
+
+                    <!-- Topic Content -->
+                    <div class="topic-body-content" id="topic-content-body">
+                        <!-- Dynamic content injected here -->
+                    </div>
+                </article>
+
+                <!-- Previous / Next Topic Navigation -->
+                <div class="study-bottom-nav">
+                    <button type="button" class="btn-study-nav btn-study-prev" id="btn-prev-topic" onclick="navigateTopic(-1)">
+                        ← Previous Topic
+                    </button>
+                    <button type="button" class="btn-study-nav btn-study-next" id="btn-next-topic" onclick="navigateTopic(1)">
+                        <span>Next Topic →</span>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Learning Logic Scripts -->
+    <script src="js/learning-data.js"></script>
+    <script>
+        let currentSubjectId = 'python';
+        let currentTopicId = 'python_variables';
+
+        function initLearningPortal() {
+            // Check URL parameters if specified (e.g. ?subject=aptitude&topic=apt_percentages)
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramSubject = urlParams.get('subject');
+            const paramTopic = urlParams.get('topic');
+
+            if (paramSubject && LEARNING_SUBJECTS.some(s => s.id === paramSubject)) {
+                currentSubjectId = paramSubject;
+                if (paramTopic) {
+                    currentTopicId = paramTopic;
+                } else {
+                    const subj = LEARNING_SUBJECTS.find(s => s.id === paramSubject);
+                    currentTopicId = subj.topics[0].id;
+                }
+            } else {
+                // Restore last studied
+                const last = getLastStudied();
+                if (last && LEARNING_SUBJECTS.some(s => s.id === last.subjectId)) {
+                    currentSubjectId = last.subjectId;
+                    currentTopicId = last.topicId;
+                } else {
+                    currentSubjectId = 'python';
+                    currentTopicId = 'python_variables';
+                }
+            }
+
+            renderSubjectTabs();
+            renderTopicsList();
+            renderActiveTopic();
+            updateOverallProgressHeader();
+        }
+
+        // Render Subject Selector Tabs
+        function renderSubjectTabs() {
+            const container = document.getElementById('subject-tabs-grid');
+            container.innerHTML = '';
+
+            LEARNING_SUBJECTS.forEach(subject => {
+                const prog = getSubjectProgress(subject.id);
+                const isSelected = subject.id === currentSubjectId;
+
+                const btn = document.createElement('button');
+                btn.className = `subject-tab-btn ${isSelected ? 'active' : ''}`;
+                btn.onclick = () => selectSubject(subject.id);
+                btn.innerHTML = `
+                    <div class="tab-btn-name">${subject.icon} ${subject.title.split(' ')[0]}</div>
+                    <div class="tab-btn-pct">${prog.percentage}% (${prog.completed}/${prog.total})</div>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        function selectSubject(subjectId) {
+            currentSubjectId = subjectId;
+            const subject = LEARNING_SUBJECTS.find(s => s.id === subjectId);
+            currentTopicId = subject.topics[0].id;
+            setLastStudied(currentSubjectId, currentTopicId);
+
+            renderSubjectTabs();
+            renderTopicsList();
+            renderActiveTopic();
+            updateOverallProgressHeader();
+
+            // Scroll to top of content canvas
+            document.getElementById('learning-content-canvas').scrollTop = 0;
+            closeSidebarDrawer();
+        }
+
+        // Render Topic Checklist in Sidebar
+        function renderTopicsList() {
+            const subject = LEARNING_SUBJECTS.find(s => s.id === currentSubjectId);
+            if (!subject) return;
+
+            const prog = getSubjectProgress(subject.id);
+            document.getElementById('topics-list-heading').textContent = 
+                `${subject.title} Topics (${prog.completed}/${prog.total})`;
+
+            const listContainer = document.getElementById('topics-items-list');
+            listContainer.innerHTML = '';
+
+            subject.topics.forEach(topic => {
+                const completed = isTopicCompleted(topic.id);
+                const isCurrent = topic.id === currentTopicId;
+
+                const item = document.createElement('div');
+                item.className = `topic-nav-item ${isCurrent ? 'active' : ''}`;
+                item.onclick = (e) => {
+                    if (e.target.classList.contains('topic-check-icon')) return;
+                    selectTopic(topic.id);
+                };
+
+                item.innerHTML = `
+                    <div class="topic-left-info">
+                        <span class="topic-check-icon" title="${completed ? 'Completed (click to toggle)' : 'Incomplete (click to toggle)'}" onclick="toggleTopicDirect('${topic.id}', event)">
+                            ${completed ? '✅' : '⬜'}
+                        </span>
+                        <span class="topic-nav-title">${topic.title}</span>
+                    </div>
+                    <span class="topic-nav-time">${topic.estimatedTime}</span>
+                `;
+                listContainer.appendChild(item);
+            });
+        }
+
+        function selectTopic(topicId) {
+            currentTopicId = topicId;
+            setLastStudied(currentSubjectId, currentTopicId);
+            renderTopicsList();
+            renderActiveTopic();
+            document.getElementById('learning-content-canvas').scrollTop = 0;
+            closeSidebarDrawer();
+        }
+
+        function toggleTopicDirect(topicId, event) {
+            if (event) event.stopPropagation();
+            toggleTopicCompletion(topicId);
+            renderSubjectTabs();
+            renderTopicsList();
+            renderActiveTopic();
+            updateOverallProgressHeader();
+        }
+
+        // Render Active Topic Content and W3 Progress Bar
+        function renderActiveTopic() {
+            const subject = LEARNING_SUBJECTS.find(s => s.id === currentSubjectId);
+            if (!subject) return;
+
+            const topic = subject.topics.find(t => t.id === currentTopicId) || subject.topics[0];
+            const prog = getSubjectProgress(subject.id);
+            const isDone = isTopicCompleted(topic.id);
+
+            // 1. Update W3Schools-Style Hero Progress Bar
+            document.getElementById('hero-subject-name').innerHTML = `<span>${subject.icon}</span> <span>${subject.title}</span>`;
+            document.getElementById('hero-progress-badge').textContent = `${prog.percentage}% Completed`;
+            document.getElementById('hero-progress-fill').style.width = `${prog.percentage}%`;
+            document.getElementById('hero-counts-text').textContent = `${prog.completed} of ${prog.total} Topics Completed`;
+
+            // 2. Update Topic Header
+            document.getElementById('topic-title').textContent = topic.title;
+            document.getElementById('topic-subject-breadcrumb').textContent = subject.title;
+            document.getElementById('topic-read-time').textContent = `⏱ ${topic.estimatedTime} read`;
+            
+            const statusLabel = document.getElementById('topic-status-label');
+            if (isDone) {
+                statusLabel.textContent = '✅ Completed';
+                statusLabel.style.color = '#15803d';
+            } else {
+                statusLabel.textContent = '⬜ Incomplete';
+                statusLabel.style.color = '#ea580c';
+            }
+
+            // 3. Update Toggle Completion Button
+            const toggleBtn = document.getElementById('btn-toggle-completion');
+            const toggleIcon = document.getElementById('completion-btn-icon');
+            const toggleText = document.getElementById('completion-btn-text');
+
+            if (isDone) {
+                toggleBtn.className = 'btn-mark-completed completed';
+                toggleIcon.textContent = '✓';
+                toggleText.textContent = 'Completed';
+            } else {
+                toggleBtn.className = 'btn-mark-completed';
+                toggleIcon.textContent = '⬜';
+                toggleText.textContent = 'Mark as Completed';
+            }
+
+            // 4. Update Topic Body
+            document.getElementById('topic-content-body').innerHTML = topic.content;
+
+            // 5. Update Previous / Next Buttons
+            const currentIdx = subject.topics.findIndex(t => t.id === topic.id);
+            const prevBtn = document.getElementById('btn-prev-topic');
+            const nextBtn = document.getElementById('btn-next-topic');
+
+            prevBtn.disabled = (currentIdx === 0);
+            prevBtn.style.opacity = (currentIdx === 0) ? '0.4' : '1';
+            prevBtn.style.pointerEvents = (currentIdx === 0) ? 'none' : 'auto';
+
+            if (currentIdx === subject.topics.length - 1) {
+                nextBtn.innerHTML = `<span>Subject Finished ✓</span>`;
+            } else {
+                const nextTopic = subject.topics[currentIdx + 1];
+                nextBtn.innerHTML = `<span>Next: ${nextTopic.title} →</span>`;
+            }
+        }
+
+        function handleToggleCurrentTopic() {
+            toggleTopicCompletion(currentTopicId);
+            renderSubjectTabs();
+            renderTopicsList();
+            renderActiveTopic();
+            updateOverallProgressHeader();
+        }
+
+        function navigateTopic(direction) {
+            const subject = LEARNING_SUBJECTS.find(s => s.id === currentSubjectId);
+            if (!subject) return;
+
+            const currentIdx = subject.topics.findIndex(t => t.id === currentTopicId);
+            const newIdx = currentIdx + direction;
+
+            if (newIdx >= 0 && newIdx < subject.topics.length) {
+                // If moving next and current topic is uncompleted, prompt or mark completed seamlessly
+                if (direction === 1 && !isTopicCompleted(currentTopicId)) {
+                    setTopicCompleted(currentTopicId, true);
+                }
+                selectTopic(subject.topics[newIdx].id);
+            } else if (newIdx >= subject.topics.length) {
+                // Move to next subject if available
+                const currentSubjIdx = LEARNING_SUBJECTS.findIndex(s => s.id === currentSubjectId);
+                if (currentSubjIdx < LEARNING_SUBJECTS.length - 1) {
+                    selectSubject(LEARNING_SUBJECTS[currentSubjIdx + 1].id);
+                } else {
+                    alert('🎉 Congratulations! You have reviewed all subjects in SkillPrep Learning.');
+                }
+            }
+        }
+
+        function updateOverallProgressHeader() {
+            const overall = getOverallLearningProgress();
+            document.getElementById('overall-bar-fill').style.width = `${overall.percentage}%`;
+            document.getElementById('overall-pct-text').textContent = `${overall.percentage}%`;
+        }
+
+        function copyCode(button) {
+            const pre = button.parentElement.nextElementSibling;
+            if (pre) {
+                navigator.clipboard.writeText(pre.innerText).then(() => {
+                    const originalText = button.textContent;
+                    button.textContent = 'Copied!';
+                    button.style.background = '#10b981';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '';
+                    }, 1500);
+                });
+            }
+        }
+
+        function toggleSidebarDrawer() {
+            const sidebar = document.getElementById('learning-sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        function closeSidebarDrawer() {
+            const sidebar = document.getElementById('learning-sidebar');
+            sidebar.classList.remove('open');
+        }
+
+        window.addEventListener('DOMContentLoaded', initLearningPortal);
+    </script>
+</body>
+</html>
