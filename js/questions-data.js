@@ -773,6 +773,67 @@ const QUESTIONS = {
     ]
 };
 
+// Helper to retrieve custom questions added by admin
+function getCustomQuestions() {
+    try {
+        return JSON.parse(localStorage.getItem('skillprep_custom_questions') || '[]');
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveCustomQuestionToDB(qData) {
+    try {
+        const list = getCustomQuestions();
+        const newQuestion = {
+            id: 'q_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+            category: qData.category,
+            topic: qData.topic || 'General',
+            question: qData.question,
+            options: qData.options,
+            correct: parseInt(qData.correct),
+            createdAt: new Date().toISOString()
+        };
+        list.push(newQuestion);
+        localStorage.setItem('skillprep_custom_questions', JSON.stringify(list));
+        return newQuestion;
+    } catch (e) {
+        console.error('Failed to save question:', e);
+        return null;
+    }
+}
+
+function deleteCustomQuestion(questionId) {
+    try {
+        const list = getCustomQuestions().filter(q => q.id !== questionId);
+        localStorage.setItem('skillprep_custom_questions', JSON.stringify(list));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
 function getQuestionsByModule(module) {
-    return QUESTIONS[module] || [];
+    const base = QUESTIONS[module] || [];
+    const customList = getCustomQuestions();
+    
+    const modNorm = (module || '').toLowerCase().trim();
+    const filteredCustom = customList.filter(q => {
+        const catNorm = (q.category || '').toLowerCase().trim();
+        if (catNorm === modNorm) return true;
+        if (catNorm === 'aptitude' && modNorm === 'aptitude') return true;
+        if (catNorm === 'technical' && (modNorm === 'technical' || modNorm === 'technical-practice')) return true;
+        if (catNorm === 'coding' && (modNorm === 'coding' || modNorm === 'programming')) return true;
+        if (catNorm === 'communication' && modNorm === 'communication') return true;
+        return false;
+    });
+
+    return [...base, ...filteredCustom];
+}
+
+function getQuestionsByTopic(category, topic) {
+    const allForCat = getQuestionsByModule(category);
+    if (!topic || topic === 'all') return allForCat;
+    const topNorm = topic.toLowerCase().trim();
+    return allForCat.filter(q => (q.topic || '').toLowerCase().trim() === topNorm);
 }

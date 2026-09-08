@@ -943,14 +943,197 @@
             padding: 28px;
             box-shadow: var(--shadow-xl);
             animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        @keyframes modalPop {
-            0% { opacity: 0; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
+        .modal-box.modal-lg {
+            max-width: 680px;
         }
 
-        .modal-header {
+        /* Question Creator Steps */
+        .step-heading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            margin-top: 4px;
+        }
+
+        .step-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 0.72rem;
+            font-weight: 800;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .category-select-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .category-select-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .cat-card-btn {
+            background: var(--surface-alt);
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cat-card-btn:hover {
+            border-color: var(--primary);
+            background: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .cat-card-btn.active {
+            border-color: var(--primary);
+            background: #eff6ff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .cat-card-btn .cat-icon {
+            font-size: 1.5rem;
+        }
+
+        .cat-card-btn .cat-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .cat-card-btn.active .cat-name {
+            color: var(--primary);
+        }
+
+        .option-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface-alt);
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--border-subtle);
+            transition: var(--transition);
+        }
+
+        .option-item-row.is-correct {
+            border-color: var(--accent-green);
+            background: #ecfdf5;
+        }
+
+        .option-letter-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .option-item-row.is-correct .option-letter-badge {
+            background: var(--accent-green);
+            color: #ffffff;
+            border-color: var(--accent-green);
+        }
+
+        .option-input-field {
+            flex-grow: 1;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 7px 12px;
+            font-size: 0.85rem;
+            background: #ffffff;
+            outline: none;
+            color: var(--text-main);
+        }
+
+        .option-input-field:focus {
+            border-color: var(--primary);
+        }
+
+        .correct-radio-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .option-item-row.is-correct .correct-radio-label {
+            color: var(--accent-green);
+        }
+
+        /* Question list pills */
+        .badge-cat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .badge-cat-aptitude { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+        .badge-cat-technical { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+        .badge-cat-coding { background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; }
+        .badge-cat-communication { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+
+        .badge-source-admin {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            padding: 2px 6px;
+            border-radius: var(--radius-full);
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .badge-topic-tag {
+            background: var(--surface-alt);
+            color: var(--text-secondary);
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 0.72rem;
+            font-weight: 600;
+            border: 1px solid var(--border-subtle);
+        }
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1069,33 +1252,13 @@
                         <span class="nav-icon">📊</span>
                         <span>Dashboard</span>
                     </a>
-                    <a href="#students-section" class="nav-item" onclick="scrollToSection('students-section')">
-                        <span class="nav-icon">👥</span>
-                        <span>Students</span>
-                        <span class="badge-counter">1,248</span>
+                    <a href="#question-management-section" class="nav-item" onclick="scrollToSection('question-management-section')">
+                        <span class="nav-icon">📚</span>
+                        <span>Question Bank</span>
                     </a>
-                    <a href="#question-bank-section" class="nav-item" onclick="scrollToSection('question-bank-section')">
-                        <span class="nav-icon">❓</span>
-                        <span>Questions</span>
-                    </a>
-                    <a href="#assessments-section" class="nav-item" onclick="scrollToSection('assessments-section')">
-                        <span class="nav-icon">📝</span>
-                        <span>Assessments</span>
-                        <span class="badge-counter">42</span>
-                    </a>
-
-                    <div class="nav-category-title">Management</div>
-                    <a href="#daily-practice-section" class="nav-item" onclick="scrollToSection('daily-practice-section')">
-                        <span class="nav-icon">📅</span>
-                        <span>Daily Practice</span>
-                    </a>
-                    <a href="#subscriptions-section" class="nav-item" onclick="scrollToSection('subscriptions-section')">
-                        <span class="nav-icon">💳</span>
-                        <span>Subscriptions</span>
-                    </a>
-                    <a href="#revenue-section" class="nav-item" onclick="scrollToSection('revenue-section')">
-                        <span class="nav-icon">📈</span>
-                        <span>Analytics</span>
+                    <a href="#activity-section" class="nav-item" onclick="scrollToSection('activity-section')">
+                        <span class="nav-icon">⚡</span>
+                        <span>Live Activity</span>
                     </a>
 
                     <div class="nav-category-title">System</div>
@@ -1154,12 +1317,17 @@
                 </div>
 
                 <div class="header-actions">
+                    <!-- + Add Question Header Button -->
+                    <button class="btn-action-pill primary" onclick="openModal('modal-add-question')" style="box-shadow: 0 4px 12px var(--primary-glow); padding: 8px 16px;">
+                        <span>➕ Add Question</span>
+                    </button>
+
                     <!-- Search Bar -->
                     <div class="admin-search-wrapper">
                         <svg class="search-icon-svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
-                        <input type="text" class="admin-search-input" placeholder="Search students, topics, test..." oninput="handleGlobalSearch(this.value)">
+                        <input type="text" class="admin-search-input" placeholder="Search questions, topics..." oninput="handleGlobalSearch(this.value)">
                     </div>
 
                     <!-- Notification Bell -->
@@ -1236,32 +1404,9 @@
                         <span class="alert-tag-num">Action Required</span>
                     </div>
                     <div style="display:flex; gap:8px;">
-                        <button class="btn-action-pill" style="padding:4px 10px; font-size:0.78rem;" onclick="scrollToSection('subscriptions-section')">Review Payments →</button>
+                        <button class="btn-action-pill" style="padding:4px 10px; font-size:0.78rem;" onclick="showToast('Loading platform verification queue...', 'info')">Review Alerts →</button>
                     </div>
                 </div>
-
-                <!-- 16. QUICK ACTIONS TOOLBAR -->
-                <section class="quick-actions-bar">
-                    <span class="quick-actions-label">⚡ Quick Actions:</span>
-                    <button class="btn-action-pill primary" onclick="openModal('modal-add-question')">
-                        <span>+ Add Question</span>
-                    </button>
-                    <button class="btn-action-pill primary" onclick="openModal('modal-add-coding')">
-                        <span>+ Add Coding Problem</span>
-                    </button>
-                    <button class="btn-action-pill" onclick="openModal('modal-create-assessment')">
-                        <span>+ Create Assessment</span>
-                    </button>
-                    <button class="btn-action-pill" onclick="openModal('modal-create-daily')">
-                        <span>+ Create Daily Drill</span>
-                    </button>
-                    <button class="btn-action-pill" onclick="scrollToSection('students-section')">
-                        <span>👥 View Students</span>
-                    </button>
-                    <button class="btn-action-pill" onclick="scrollToSection('revenue-section')">
-                        <span>📊 View Analytics</span>
-                    </button>
-                </section>
 
                 <!-- 5. MAIN STATISTICS CARDS (4 PRIMARY CARDS) -->
                 <section class="stats-grid">
@@ -1306,314 +1451,80 @@
                     </div>
                 </section>
 
-                <!-- 6. STUDENT OVERVIEW & GROWTH ANALYTICS -->
-                <div class="grid-2col" id="students-overview-section">
-                    <section class="card">
-                        <div class="card-header-row">
-                            <div>
-                                <h3 class="card-title">📈 Student Growth & Engagement</h3>
-                                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Track new registrations vs daily active practice</p>
-                            </div>
-                            <div class="filter-btn-group">
-                                <button class="btn-filter active" onclick="switchStudentChart('today', this)">Today</button>
-                                <button class="btn-filter" onclick="switchStudentChart('week', this)">This Week</button>
-                                <button class="btn-filter" onclick="switchStudentChart('month', this)">This Month</button>
-                                <button class="btn-filter" onclick="switchStudentChart('year', this)">This Year</button>
-                            </div>
-                        </div>
-                        <div style="height: 240px; position: relative;">
-                            <canvas id="studentGrowthChart"></canvas>
-                        </div>
-                    </section>
-
-                    <!-- 13. SUBSCRIPTION STATUS DONUT -->
-                    <section class="card" id="subscriptions-section">
-                        <div class="card-header-row">
-                            <h3 class="card-title">💳 Subscription Overview</h3>
-                            <span class="badge-status badge-active">₹10/Student Tier</span>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:20px;">
-                            <div style="width: 140px; height: 140px; position: relative; flex-shrink:0;">
-                                <canvas id="subscriptionDonutChart"></canvas>
-                            </div>
-                            <div style="display:flex; flex-direction:column; gap:10px; flex-grow:1; font-size:0.85rem;">
-                                <div style="display:flex; justify-content:space-between;">
-                                    <span style="display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; background:#10b981; border-radius:50%;"></span> Active Subscriptions</span>
-                                    <strong>986</strong>
-                                </div>
-                                <div style="display:flex; justify-content:space-between;">
-                                    <span style="display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; background:#ef4444; border-radius:50%;"></span> Expired Subscriptions</span>
-                                    <strong>124</strong>
-                                </div>
-                                <div style="display:flex; justify-content:space-between;">
-                                    <span style="display:flex; align-items:center; gap:6px;"><span style="width:10px; height:10px; background:#f59e0b; border-radius:50%;"></span> Pending Payment</span>
-                                    <strong>18</strong>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border-subtle); padding-top:6px;">
-                                    <span style="color:var(--text-muted);">Monthly Revenue:</span>
-                                    <strong style="color:var(--primary); font-size:1rem;">₹12,480</strong>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top:16px;">
-                            <button class="btn-action-pill" style="width:100%; justify-content:center;" onclick="showToast('Loading full subscription breakdown...', 'info')">View Detailed Subscriptions</button>
-                        </div>
-                    </section>
-                </div>
-
-                <!-- 7. SKILL PERFORMANCE OVERVIEW (4 DOMAINS) -->
-                <section class="card">
+                <!-- 6. STUDENT GROWTH ANALYTICS -->
+                <section class="card" id="students-overview-section">
                     <div class="card-header-row">
                         <div>
-                            <h3 class="card-title">🎯 Skill Performance Overview</h3>
-                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Aggregate accuracy and student participation across modules</p>
+                            <h3 class="card-title">📈 Student Growth & Engagement</h3>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Track new registrations vs daily active practice</p>
                         </div>
-                        <button class="btn-action-pill" onclick="showToast('Exporting skill performance report...', 'info')">Export Report</button>
+                        <div class="filter-btn-group">
+                            <button class="btn-filter active" onclick="switchStudentChart('today', this)">Today</button>
+                            <button class="btn-filter" onclick="switchStudentChart('week', this)">This Week</button>
+                            <button class="btn-filter" onclick="switchStudentChart('month', this)">This Month</button>
+                            <button class="btn-filter" onclick="switchStudentChart('year', this)">This Year</button>
+                        </div>
                     </div>
-
-                    <div class="grid-4col">
-                        <!-- Aptitude -->
-                        <div class="skill-metric-card">
-                            <div class="skill-metric-top">
-                                <span class="skill-domain-name">🧠 Aptitude</span>
-                                <span class="skill-avg-score">78%</span>
-                            </div>
-                            <div class="progress-bar-bg">
-                                <div class="progress-bar-fill" style="width: 78%; background: linear-gradient(90deg, #3b82f6, #6366f1);"></div>
-                            </div>
-                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
-                                <span>Students: <strong>842</strong></span>
-                                <span style="color:var(--accent-green);">Avg Score</span>
-                            </div>
-                        </div>
-
-                        <!-- Technical -->
-                        <div class="skill-metric-card">
-                            <div class="skill-metric-top">
-                                <span class="skill-domain-name">💻 Technical</span>
-                                <span class="skill-avg-score">74%</span>
-                            </div>
-                            <div class="progress-bar-bg">
-                                <div class="progress-bar-fill" style="width: 74%; background: linear-gradient(90deg, #10b981, #059669);"></div>
-                            </div>
-                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
-                                <span>Students: <strong>765</strong></span>
-                                <span style="color:var(--accent-green);">Avg Score</span>
-                            </div>
-                        </div>
-
-                        <!-- Communication -->
-                        <div class="skill-metric-card">
-                            <div class="skill-metric-top">
-                                <span class="skill-domain-name">🗣 Communication</span>
-                                <span class="skill-avg-score">81%</span>
-                            </div>
-                            <div class="progress-bar-bg">
-                                <div class="progress-bar-fill" style="width: 81%; background: linear-gradient(90deg, #f59e0b, #d97706);"></div>
-                            </div>
-                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
-                                <span>Students: <strong>698</strong></span>
-                                <span style="color:var(--accent-green);">Avg Score</span>
-                            </div>
-                        </div>
-
-                        <!-- Coding -->
-                        <div class="skill-metric-card">
-                            <div class="skill-metric-top">
-                                <span class="skill-domain-name">👨‍💻 Coding</span>
-                                <span class="skill-avg-score">4,286</span>
-                            </div>
-                            <div class="progress-bar-bg">
-                                <div class="progress-bar-fill" style="width: 86%; background: linear-gradient(90deg, #8b5cf6, #ec4899);"></div>
-                            </div>
-                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
-                                <span>Active Coders: <strong>524</strong></span>
-                                <span style="color:var(--primary);">Solved Drills</span>
-                            </div>
-                        </div>
+                    <div style="height: 260px; position: relative;">
+                        <canvas id="studentGrowthChart"></canvas>
                     </div>
                 </section>
 
-                <!-- 10, 11, 12. QUESTION BANK, ASSESSMENTS & DAILY DRILLS -->
-                <div class="grid-equal-2col">
-                    <!-- 10. Question Bank -->
-                    <section class="card" id="question-bank-section">
-                        <div class="card-header-row">
-                            <h3 class="card-title">📚 Question Bank Overview</h3>
-                            <button class="btn-action-pill primary" onclick="openModal('modal-add-question')">+ Add Question</button>
-                        </div>
-                        <div class="qbank-grid">
-                            <div class="qbank-box">
-                                <div class="qbank-num">1,250</div>
-                                <div class="qbank-cat">🧠 Aptitude</div>
-                            </div>
-                            <div class="qbank-box">
-                                <div class="qbank-num">980</div>
-                                <div class="qbank-cat">💻 Technical</div>
-                            </div>
-                            <div class="qbank-box">
-                                <div class="qbank-num">620</div>
-                                <div class="qbank-cat">🗣 Communication</div>
-                            </div>
-                            <div class="qbank-box">
-                                <div class="qbank-num">450</div>
-                                <div class="qbank-cat">👨‍💻 Coding</div>
-                            </div>
-                        </div>
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; font-size:0.85rem; color:var(--text-secondary);">
-                            <span>Total Platform Bank: <strong>3,300+ Questions</strong></span>
-                            <button class="btn-action-pill" onclick="showToast('Opening Question Manager...', 'info')">Manage Questions →</button>
-                        </div>
-                    </section>
-
-                    <!-- 11 & 12. Assessments & Daily Drills -->
-                    <section class="card" id="assessments-section">
-                        <div class="card-header-row">
-                            <h3 class="card-title">📝 Assessments & Daily Practice</h3>
-                            <button class="btn-action-pill" onclick="openModal('modal-create-assessment')">+ Create Mock</button>
-                        </div>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
-                            <div style="background:var(--surface-alt); padding:12px; border-radius:var(--radius-md);">
-                                <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">TOTAL ASSESSMENTS</div>
-                                <div style="font-size:1.4rem; font-weight:800; color:var(--text-main);">42 <span style="font-size:0.8rem; color:var(--accent-green); font-weight:600;">(18 Active)</span></div>
-                                <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">3,842 attempts • Avg: 76%</div>
-                            </div>
-                            <div style="background:var(--surface-alt); padding:12px; border-radius:var(--radius-md);">
-                                <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">TODAY'S DAILY PRACTICE</div>
-                                <div style="font-size:1.4rem; font-weight:800; color:var(--text-main);">68% <span style="font-size:0.8rem; color:var(--primary); font-weight:600;">Completion</span></div>
-                                <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">571 completed / 842 started</div>
-                            </div>
+                <!-- 7. QUESTION BANK MANAGEMENT & LIVE REPOSITORY -->
+                <section class="card" id="question-management-section">
+                    <div class="card-header-row" style="flex-wrap:wrap; gap:12px;">
+                        <div>
+                            <h3 class="card-title">📚 Question Bank & Question Creator</h3>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Manage questions across Aptitude, Technical, Coding, and Communication</p>
                         </div>
                         <div style="display:flex; gap:10px;">
-                            <button class="btn-action-pill" style="flex:1; justify-content:center;" onclick="showToast('Opening Assessment Manager...', 'info')">Manage Assessments</button>
-                            <button class="btn-action-pill" style="flex:1; justify-content:center;" id="daily-practice-section" onclick="showToast('Opening Daily Practice Curations...', 'info')">Curate Daily Drills</button>
+                            <button class="btn-action-pill primary" onclick="openModal('modal-add-question')" style="box-shadow:0 4px 12px var(--primary-glow);">
+                                <span>➕ Add Question</span>
+                            </button>
                         </div>
-                    </section>
-                </div>
-
-                <!-- 14 & 15. REVENUE ANALYTICS & PLATFORM WEAK AREAS -->
-                <div class="grid-2col" id="revenue-section">
-                    <section class="card">
-                        <div class="card-header-row">
-                            <div>
-                                <h3 class="card-title">💰 Revenue Analytics (₹10 Student Pass)</h3>
-                                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Monthly subscription collections and payment success rate</p>
-                            </div>
-                            <div class="filter-btn-group">
-                                <button class="btn-filter active" onclick="switchRevenueChart('7d', this)">7 Days</button>
-                                <button class="btn-filter" onclick="switchRevenueChart('30d', this)">30 Days</button>
-                                <button class="btn-filter" onclick="switchRevenueChart('6m', this)">6 Months</button>
-                                <button class="btn-filter" onclick="switchRevenueChart('1y', this)">1 Year</button>
-                            </div>
-                        </div>
-                        <div style="height: 220px; position: relative;">
-                            <canvas id="revenueAnalyticsChart"></canvas>
-                        </div>
-                    </section>
-
-                    <!-- 15. Platform Insights (Weak Areas) -->
-                    <section class="card">
-                        <div class="card-header-row">
-                            <h3 class="card-title">⚠️ Platform Weak Areas</h3>
-                            <span style="font-size:0.75rem; color:var(--accent-red); font-weight:700;">Needs Remediation</span>
-                        </div>
-                        <div style="display:flex; flex-direction:column; gap:10px; font-size:0.85rem;">
-                            <div style="padding:10px; background:var(--surface-alt); border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center;">
-                                <div>
-                                    <div style="font-weight:700; color:var(--text-main);">Percentage & Profit/Loss (Quant)</div>
-                                    <div style="font-size:0.75rem; color:var(--text-muted);">432 students struggling • Avg 54%</div>
-                                </div>
-                                <span class="badge-status badge-failed">Hard</span>
-                            </div>
-                            <div style="padding:10px; background:var(--surface-alt); border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center;">
-                                <div>
-                                    <div style="font-weight:700; color:var(--text-main);">Tree Traversal & Graphs (Coding)</div>
-                                    <div style="font-size:0.75rem; color:var(--text-muted);">310 students struggling • Avg 58%</div>
-                                </div>
-                                <span class="badge-status badge-progress">Medium</span>
-                            </div>
-                            <div style="padding:10px; background:var(--surface-alt); border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center;">
-                                <div>
-                                    <div style="font-weight:700; color:var(--text-main);">Sentence Correction & Idioms (Verbal)</div>
-                                    <div style="font-size:0.75rem; color:var(--text-muted);">285 students struggling • Avg 62%</div>
-                                </div>
-                                <span class="badge-status badge-progress">Medium</span>
-                            </div>
-                        </div>
-                        <button class="btn-action-pill" style="width:100%; justify-content:center; margin-top:14px;" onclick="showToast('Loading comprehensive curriculum weakness diagnosis...', 'info')">View Detailed Insights →</button>
-                    </section>
-                </div>
-
-                <!-- 8 & 9. TABLES: RECENT ACTIVITY & STUDENTS TABLE -->
-                <section class="card" id="students-section">
-                    <div class="card-header-row">
-                        <div>
-                            <h3 class="card-title">👥 Recent Student Registrations</h3>
-                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Latest college students enrolled in SkillPrep</p>
-                        </div>
-                        <button class="btn-action-pill" onclick="showToast('Opening Student Management Directory...', 'info')">View All Students (1,248) →</button>
                     </div>
 
-                    <div class="table-responsive">
+                    <!-- Category Filter Chips -->
+                    <div style="display:flex; flex-wrap:wrap; gap:8px; margin: 16px 0 12px 0;">
+                        <button class="btn-filter active" id="filter-btn-all" onclick="filterQuestionBank('all', this)">
+                            <span>All Categories</span>
+                            <span class="badge-counter" id="count-all-questions" style="margin-left:6px; background:var(--surface-alt); color:var(--text-main);">0</span>
+                        </button>
+                        <button class="btn-filter" id="filter-btn-aptitude" onclick="filterQuestionBank('Aptitude', this)">
+                            <span>🧠 Aptitude</span>
+                            <span class="badge-counter" id="count-aptitude-questions" style="margin-left:6px; background:#eff6ff; color:#2563eb;">0</span>
+                        </button>
+                        <button class="btn-filter" id="filter-btn-technical" onclick="filterQuestionBank('Technical', this)">
+                            <span>💻 Technical</span>
+                            <span class="badge-counter" id="count-technical-questions" style="margin-left:6px; background:#ecfdf5; color:#059669;">0</span>
+                        </button>
+                        <button class="btn-filter" id="filter-btn-coding" onclick="filterQuestionBank('Coding', this)">
+                            <span>👨‍💻 Coding</span>
+                            <span class="badge-counter" id="count-coding-questions" style="margin-left:6px; background:#f5f3ff; color:#7c3aed;">0</span>
+                        </button>
+                        <button class="btn-filter" id="filter-btn-communication" onclick="filterQuestionBank('Communication', this)">
+                            <span>🗣 Communication</span>
+                            <span class="badge-counter" id="count-communication-questions" style="margin-left:6px; background:#fffbeb; color:#d97706;">0</span>
+                        </button>
+                    </div>
+
+                    <!-- Questions Table -->
+                    <div class="table-responsive" style="margin-top:12px;">
                         <table class="admin-table">
                             <thead>
                                 <tr>
-                                    <th>Student Name</th>
-                                    <th>Email</th>
-                                    <th>College / Institute</th>
-                                    <th>Registered</th>
-                                    <th>Subscription</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                    <th style="width:130px;">Category</th>
+                                    <th style="width:180px;">Topic</th>
+                                    <th>Question Problem Statement</th>
+                                    <th style="width:180px;">Correct Answer</th>
+                                    <th style="width:100px;">Source</th>
+                                    <th style="width:110px;">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="questions-bank-table-body">
                                 <tr>
-                                    <td><strong>Ananya Kumar</strong></td>
-                                    <td>student@skillprep.edu</td>
-                                    <td>ABC Engineering College</td>
-                                    <td>07 Sep 2026</td>
-                                    <td><span class="badge-status badge-completed">₹10 Plan</span></td>
-                                    <td><span class="badge-status badge-active">● Active</span></td>
-                                    <td>
-                                        <button class="btn-table-action" onclick="viewStudentDetails('Ananya Kumar')">View</button>
-                                        <button class="btn-table-action" onclick="showToast('Editing Ananya Kumar', 'info')">Edit</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Rohan Sharma</strong></td>
-                                    <td>rohan.s@college.edu</td>
-                                    <td>PSG College of Technology</td>
-                                    <td>06 Sep 2026</td>
-                                    <td><span class="badge-status badge-completed">₹10 Plan</span></td>
-                                    <td><span class="badge-status badge-active">● Active</span></td>
-                                    <td>
-                                        <button class="btn-table-action" onclick="viewStudentDetails('Rohan Sharma')">View</button>
-                                        <button class="btn-table-action" onclick="showToast('Editing Rohan Sharma', 'info')">Edit</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Kavya Ramesh</strong></td>
-                                    <td>kavya.r@univ.edu</td>
-                                    <td>SSN College of Engineering</td>
-                                    <td>05 Sep 2026</td>
-                                    <td><span class="badge-status badge-failed">Expired</span></td>
-                                    <td><span class="badge-status badge-expired">● Inactive</span></td>
-                                    <td>
-                                        <button class="btn-table-action" onclick="viewStudentDetails('Kavya Ramesh')">View</button>
-                                        <button class="btn-table-action" onclick="showToast('Renew reminder sent', 'success')">Notify</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Vignesh Sundar</strong></td>
-                                    <td>vignesh.s@tech.edu</td>
-                                    <td>CIT Coimbatore</td>
-                                    <td>04 Sep 2026</td>
-                                    <td><span class="badge-status badge-completed">₹10 Plan</span></td>
-                                    <td><span class="badge-status badge-active">● Active</span></td>
-                                    <td>
-                                        <button class="btn-table-action" onclick="viewStudentDetails('Vignesh Sundar')">View</button>
-                                        <button class="btn-table-action" onclick="showToast('Editing Vignesh Sundar', 'info')">Edit</button>
+                                    <td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">
+                                        Loading platform question database...
                                     </td>
                                 </tr>
                             </tbody>
@@ -1622,7 +1533,7 @@
                 </section>
 
                 <!-- 8. RECENT STUDENT ACTIVITY LOG -->
-                <section class="card">
+                <section class="card" id="activity-section">
                     <div class="card-header-row">
                         <h3 class="card-title">⚡ Real-time Student Activity Stream</h3>
                         <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Live Feed</span>
@@ -1685,36 +1596,121 @@
          ADMIN MODALS
          ====================================================================== -->
 
-    <!-- ADD QUESTION MODAL -->
+    <!-- 4-STEP QUESTION CREATION MODAL -->
     <div class="modal-overlay" id="modal-add-question">
-        <div class="modal-box">
+        <div class="modal-box modal-lg">
             <div class="modal-header">
-                <h3>+ Add Question to Bank</h3>
+                <div>
+                    <h3>➕ Create New Question</h3>
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Add questions directly into the platform database for student practice & tests</p>
+                </div>
                 <span class="modal-close-btn" onclick="closeModal('modal-add-question')">&times;</span>
             </div>
-            <form onsubmit="handleAddQuestionSubmit(event)">
-                <div style="display:flex; flex-direction:column; gap:14px; font-size:0.85rem;">
-                    <div>
-                        <label style="font-weight:700; color:var(--text-muted);">Category / Module *</label>
-                        <select id="new-q-cat" class="admin-search-input" style="width:100%; margin-top:4px;" required>
-                            <option value="Aptitude">🧠 Quantitative Aptitude</option>
-                            <option value="Technical">💻 Technical & Core CS</option>
-                            <option value="Communication">🗣 Verbal & Communication</option>
-                            <option value="Logical">🧩 Logical Reasoning</option>
+            
+            <form id="form-create-question" onsubmit="handleSaveQuestionSubmit(event)">
+                
+                <!-- STEP 1: SELECT CATEGORY -->
+                <div style="margin-bottom:16px;">
+                    <div class="step-heading">
+                        <span class="step-badge">Step 1</span>
+                        <span>Select Category *</span>
+                    </div>
+                    <div class="category-select-grid">
+                        <div class="cat-card-btn active" data-category="Aptitude" onclick="selectQuestionCategory('Aptitude', this)">
+                            <span class="cat-icon">🧠</span>
+                            <span class="cat-name">Aptitude</span>
+                        </div>
+                        <div class="cat-card-btn" data-category="Technical" onclick="selectQuestionCategory('Technical', this)">
+                            <span class="cat-icon">💻</span>
+                            <span class="cat-name">Technical</span>
+                        </div>
+                        <div class="cat-card-btn" data-category="Coding" onclick="selectQuestionCategory('Coding', this)">
+                            <span class="cat-icon">👨‍💻</span>
+                            <span class="cat-name">Coding</span>
+                        </div>
+                        <div class="cat-card-btn" data-category="Communication" onclick="selectQuestionCategory('Communication', this)">
+                            <span class="cat-icon">🗣</span>
+                            <span class="cat-name">Communication</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="new-q-category" value="Aptitude" required>
+                </div>
+
+                <!-- STEP 2: SELECT OR ENTER TOPIC -->
+                <div style="margin-bottom:16px;">
+                    <div class="step-heading">
+                        <span class="step-badge">Step 2</span>
+                        <span>Select or Enter Topic *</span>
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <select id="new-q-topic-select" class="admin-search-input" style="width:100%;" onchange="handleTopicSelectChange(this.value)">
+                            <!-- Populated dynamically based on category -->
                         </select>
-                    </div>
-                    <div>
-                        <label style="font-weight:700; color:var(--text-muted);">Question Statement *</label>
-                        <textarea id="new-q-text" class="admin-search-input" style="width:100%; height:80px; margin-top:4px;" placeholder="Type question problem statement..." required></textarea>
-                    </div>
-                    <div>
-                        <label style="font-weight:700; color:var(--text-muted);">Correct Answer Option *</label>
-                        <input type="text" id="new-q-ans" class="admin-search-input" style="width:100%; margin-top:4px;" placeholder="e.g. Option A: 25%" required>
+                        <div id="new-q-custom-topic-wrapper" style="display:none;">
+                            <input type="text" id="new-q-topic-custom" class="admin-search-input" style="width:100%;" placeholder="Type new custom topic name (e.g. Dynamic Programming, Time & Work)...">
+                        </div>
                     </div>
                 </div>
-                <div class="modal-actions">
+
+                <!-- STEP 3: ADD THE QUESTION & 4 OPTIONS -->
+                <div style="margin-bottom:16px;">
+                    <div class="step-heading">
+                        <span class="step-badge">Step 3</span>
+                        <span>Add Question Statement & 4 Answer Options *</span>
+                    </div>
+                    
+                    <!-- Question statement -->
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Question Problem Statement</label>
+                        <textarea id="new-q-statement" class="admin-search-input" style="width:100%; height:75px; resize:vertical;" placeholder="Enter question statement (e.g. If a train travels 120 km in 2 hours, what is its speed?)..." required></textarea>
+                    </div>
+
+                    <!-- 4 Options -->
+                    <div class="option-input-group">
+                        <div class="option-item-row is-correct" id="opt-row-0">
+                            <span class="option-letter-badge">A</span>
+                            <input type="text" id="new-q-opt-0" class="option-input-field" placeholder="Enter text for Option A" required oninput="validateOptionInputs()">
+                            <label class="correct-radio-label">
+                                <input type="radio" name="correct_option" value="0" checked onchange="updateCorrectOptionUI(0)">
+                                <span>Correct Answer</span>
+                            </label>
+                        </div>
+
+                        <div class="option-item-row" id="opt-row-1">
+                            <span class="option-letter-badge">B</span>
+                            <input type="text" id="new-q-opt-1" class="option-input-field" placeholder="Enter text for Option B" required oninput="validateOptionInputs()">
+                            <label class="correct-radio-label">
+                                <input type="radio" name="correct_option" value="1" onchange="updateCorrectOptionUI(1)">
+                                <span>Correct Answer</span>
+                            </label>
+                        </div>
+
+                        <div class="option-item-row" id="opt-row-2">
+                            <span class="option-letter-badge">C</span>
+                            <input type="text" id="new-q-opt-2" class="option-input-field" placeholder="Enter text for Option C" required oninput="validateOptionInputs()">
+                            <label class="correct-radio-label">
+                                <input type="radio" name="correct_option" value="2" onchange="updateCorrectOptionUI(2)">
+                                <span>Correct Answer</span>
+                            </label>
+                        </div>
+
+                        <div class="option-item-row" id="opt-row-3">
+                            <span class="option-letter-badge">D</span>
+                            <input type="text" id="new-q-opt-3" class="option-input-field" placeholder="Enter text for Option D" required oninput="validateOptionInputs()">
+                            <label class="correct-radio-label">
+                                <input type="radio" name="correct_option" value="3" onchange="updateCorrectOptionUI(3)">
+                                <span>Correct Answer</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: SAVE BUTTON -->
+                <div class="modal-actions" style="margin-top:20px; padding-top:14px; border-top:1px solid var(--border-subtle);">
                     <button type="button" class="btn-action-pill" onclick="closeModal('modal-add-question')">Cancel</button>
-                    <button type="submit" class="btn-action-pill primary">Save Question</button>
+                    <button type="submit" class="btn-action-pill primary" style="padding:10px 22px; font-size:0.9rem;">
+                        <span>💾 Save Question (OK)</span>
+                    </button>
                 </div>
             </form>
         </div>
@@ -1813,15 +1809,66 @@
     <!-- TOAST NOTIFICATIONS -->
     <div class="toast-container" id="toast-container"></div>
 
+    <!-- External Data Sources -->
+    <script src="js/questions-data.js"></script>
+
     <!-- ======================================================================
          ADMIN JAVASCRIPT & CHART CONTROLLERS
          ====================================================================== -->
     <script>
+        // Predefined Topics by Category
+        const PREDEFINED_TOPICS = {
+            'Aptitude': [
+                'Quantitative Aptitude',
+                'Time & Work',
+                'Speed, Distance & Time',
+                'Profit, Loss & Discount',
+                'Percentages & Ratios',
+                'Logical Reasoning',
+                'Number Series & Puzzles',
+                'Data Interpretation',
+                'Permutations & Combinations',
+                'Probability'
+            ],
+            'Technical': [
+                'Data Structures (Arrays, Stacks, Queues)',
+                'Algorithms & Complexity (Sorting, Searching)',
+                'Database Management Systems (DBMS / SQL)',
+                'Object-Oriented Programming (OOP Concepts)',
+                'Operating Systems (Processes, Memory)',
+                'Computer Networks (OSI, TCP/IP, Protocols)',
+                'Web Technologies & APIs'
+            ],
+            'Coding': [
+                'Python Basics & Syntax',
+                'Java Core & Collections',
+                'C / C++ Fundamentals',
+                'Arrays, Strings & Pointers',
+                'Recursion & Backtracking',
+                'Dynamic Programming',
+                'Trees & Binary Search Trees',
+                'Graph Algorithms'
+            ],
+            'Communication': [
+                'Verbal Ability & Grammar',
+                'Sentence Correction & Idioms',
+                'Vocabulary, Synonyms & Antonyms',
+                'Reading Comprehension',
+                'Business Communication & Email Etiquette',
+                'HR & Behavioral Interview Scenarios'
+            ]
+        };
+
+        let currentSelectedCategory = 'Aptitude';
+        let currentQuestionBankFilter = 'all';
+
         // Role check & Authorization Guard
         document.addEventListener('DOMContentLoaded', () => {
             initCharts();
             setupDropdowns();
             setupLiveDate();
+            initQuestionCreator();
+            renderQuestionBankTable('all');
         });
 
         function setupLiveDate() {
@@ -1831,6 +1878,335 @@
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 dateEl.textContent = now.toLocaleDateString('en-US', options);
             }
+        }
+
+        // =====================================================================
+        // QUESTION CREATOR & TOPIC SELECTION ENGINE (STEPS 1 - 4)
+        // =====================================================================
+        function initQuestionCreator() {
+            populateTopics('Aptitude');
+        }
+
+        // STEP 1: Select Category
+        function selectQuestionCategory(category, btnElement) {
+            currentSelectedCategory = category;
+            document.getElementById('new-q-category').value = category;
+            
+            // Highlight active button
+            document.querySelectorAll('.cat-card-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                const target = document.querySelector(`.cat-card-btn[data-category="${category}"]`);
+                if (target) target.classList.add('active');
+            }
+
+            // STEP 2: Update Topics list automatically
+            populateTopics(category);
+        }
+
+        // STEP 2: Populate topics based on chosen category
+        function populateTopics(category) {
+            const selectEl = document.getElementById('new-q-topic-select');
+            const customWrapper = document.getElementById('new-q-custom-topic-wrapper');
+            const customInput = document.getElementById('new-q-topic-custom');
+            if (!selectEl) return;
+
+            selectEl.innerHTML = '';
+            const topics = PREDEFINED_TOPICS[category] || ['General'];
+            
+            topics.forEach((topic, idx) => {
+                const opt = document.createElement('option');
+                opt.value = topic;
+                opt.textContent = topic;
+                selectEl.appendChild(opt);
+            });
+
+            // Add custom topic option
+            const customOpt = document.createElement('option');
+            customOpt.value = '__custom__';
+            customOpt.textContent = '➕ + Enter New Custom Topic...';
+            selectEl.appendChild(customOpt);
+
+            selectEl.selectedIndex = 0;
+            if (customWrapper) customWrapper.style.display = 'none';
+            if (customInput) {
+                customInput.value = '';
+                customInput.required = false;
+            }
+        }
+
+        function handleTopicSelectChange(value) {
+            const customWrapper = document.getElementById('new-q-custom-topic-wrapper');
+            const customInput = document.getElementById('new-q-topic-custom');
+            if (value === '__custom__') {
+                if (customWrapper) customWrapper.style.display = 'block';
+                if (customInput) {
+                    customInput.required = true;
+                    customInput.focus();
+                }
+            } else {
+                if (customWrapper) customWrapper.style.display = 'none';
+                if (customInput) {
+                    customInput.required = false;
+                }
+            }
+        }
+
+        // STEP 3: Correct Answer Option Selection UI
+        function updateCorrectOptionUI(selectedIndex) {
+            for (let i = 0; i < 4; i++) {
+                const row = document.getElementById(`opt-row-${i}`);
+                if (row) {
+                    if (i === parseInt(selectedIndex)) {
+                        row.classList.add('is-correct');
+                    } else {
+                        row.classList.remove('is-correct');
+                    }
+                }
+            }
+        }
+
+        function validateOptionInputs() {
+            // Live validation if needed
+        }
+
+        // STEP 4: Save the Question into Database
+        function handleSaveQuestionSubmit(e) {
+            e.preventDefault();
+
+            const category = document.getElementById('new-q-category').value.trim();
+            const topicSelect = document.getElementById('new-q-topic-select').value;
+            const topicCustom = document.getElementById('new-q-topic-custom').value.trim();
+            const topic = (topicSelect === '__custom__') ? (topicCustom || 'General') : topicSelect;
+
+            const statement = document.getElementById('new-q-statement').value.trim();
+            const opt0 = document.getElementById('new-q-opt-0').value.trim();
+            const opt1 = document.getElementById('new-q-opt-1').value.trim();
+            const opt2 = document.getElementById('new-q-opt-2').value.trim();
+            const opt3 = document.getElementById('new-q-opt-3').value.trim();
+
+            const correctRadio = document.querySelector('input[name="correct_option"]:checked');
+            const correctIndex = correctRadio ? parseInt(correctRadio.value) : 0;
+
+            if (!statement || !opt0 || !opt1 || !opt2 || !opt3) {
+                showToast('Please fill in question problem statement and all 4 options.', 'error');
+                return;
+            }
+
+            // Save question object into persistence store
+            const newQData = {
+                category: category,
+                topic: topic,
+                question: statement,
+                options: [opt0, opt1, opt2, opt3],
+                correct: correctIndex
+            };
+
+            const savedItem = saveCustomQuestionToDB(newQData);
+
+            if (savedItem) {
+                showToast(`✅ Question saved successfully to ${category} > ${topic}! 📚`, 'success');
+                
+                // Reset form
+                document.getElementById('form-create-question').reset();
+                selectQuestionCategory('Aptitude');
+                updateCorrectOptionUI(0);
+                closeModal('modal-add-question');
+
+                // Refresh Questions table
+                renderQuestionBankTable(currentQuestionBankFilter);
+            } else {
+                showToast('Failed to save question. Please try again.', 'error');
+            }
+        }
+
+        // =====================================================================
+        // QUESTION BANK TABLE & FILTER RENDERING
+        // =====================================================================
+        function renderQuestionBankTable(filterCat = 'all') {
+            currentQuestionBankFilter = filterCat;
+            const tbody = document.getElementById('questions-bank-table-body');
+            if (!tbody) return;
+
+            const customQuestions = getCustomQuestions();
+            
+            // Collect base and custom questions
+            const aptQuestions = (typeof getQuestionsByModule === 'function') ? getQuestionsByModule('aptitude') : [];
+            const techQuestions = (typeof getQuestionsByModule === 'function') ? getQuestionsByModule('technical-practice') : [];
+            const codeQuestions = (typeof getQuestionsByModule === 'function') ? getQuestionsByModule('programming') : [];
+            const commQuestions = (typeof getQuestionsByModule === 'function') ? getQuestionsByModule('communication') : [];
+
+            // Update Counts
+            const totalCount = aptQuestions.length + techQuestions.length + codeQuestions.length + commQuestions.length;
+            const countAll = document.getElementById('count-all-questions');
+            const countApt = document.getElementById('count-aptitude-questions');
+            const countTech = document.getElementById('count-technical-questions');
+            const countCode = document.getElementById('count-coding-questions');
+            const countComm = document.getElementById('count-communication-questions');
+
+            if (countAll) countAll.textContent = totalCount;
+            if (countApt) countApt.textContent = aptQuestions.length;
+            if (countTech) countTech.textContent = techQuestions.length;
+            if (countCode) countCode.textContent = codeQuestions.length;
+            if (countComm) countComm.textContent = commQuestions.length;
+
+            // Merge questions with normalized category labels
+            let displayList = [];
+
+            // 1. First show Custom Questions added by Admin
+            customQuestions.forEach(q => {
+                displayList.push({
+                    id: q.id,
+                    category: q.category,
+                    topic: q.topic || 'General Topic',
+                    question: q.question,
+                    options: q.options || [],
+                    correct: q.correct,
+                    isCustom: true,
+                    createdAt: q.createdAt
+                });
+            });
+
+            // 2. Then show sample/standard questions from base sets
+            const appendBase = (arr, catName, defaultTopic) => {
+                arr.forEach((q, idx) => {
+                    // Avoid duplicating custom questions that getQuestionsByModule merged
+                    if (q.id && q.id.startsWith('q_')) return;
+                    displayList.push({
+                        id: `std_${catName}_${idx}`,
+                        category: catName,
+                        topic: q.topic || defaultTopic,
+                        question: q.question,
+                        options: q.options || [],
+                        correct: q.correct,
+                        isCustom: false
+                    });
+                });
+            };
+
+            appendBase(QUESTIONS.aptitude || [], 'Aptitude', 'Quantitative & Logic');
+            appendBase(QUESTIONS['technical-practice'] || [], 'Technical', 'Core CS & Data Structures');
+            appendBase(QUESTIONS.programming || [], 'Coding', 'Python & Code Basics');
+            appendBase(QUESTIONS.communication || [], 'Communication', 'Verbal & Professional English');
+
+            // Apply category filter
+            if (filterCat !== 'all') {
+                displayList = displayList.filter(q => q.category.toLowerCase() === filterCat.toLowerCase());
+            }
+
+            if (displayList.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding:32px; color:var(--text-muted);">
+                            <div style="font-size:1.8rem; margin-bottom:8px;">🔍</div>
+                            <div>No questions found in this category.</div>
+                            <button class="btn-action-pill primary" style="margin-top:12px;" onclick="openModal('modal-add-question'); selectQuestionCategory('${filterCat === 'all' ? 'Aptitude' : filterCat}');">
+                                + Add First Question
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = '';
+            displayList.slice(0, 50).forEach((q, index) => {
+                const tr = document.createElement('tr');
+                
+                // Category badge
+                const catLower = (q.category || '').toLowerCase();
+                let catClass = 'badge-cat-aptitude';
+                let catIcon = '🧠';
+                if (catLower.includes('tech')) { catClass = 'badge-cat-technical'; catIcon = '💻'; }
+                else if (catLower.includes('cod') || catLower.includes('prog')) { catClass = 'badge-cat-coding'; catIcon = '👨‍💻'; }
+                else if (catLower.includes('comm')) { catClass = 'badge-cat-communication'; catIcon = '🗣'; }
+
+                const correctOptText = (q.options && q.options[q.correct] !== undefined) ? q.options[q.correct] : `Option ${String.fromCharCode(65 + q.correct)}`;
+
+                tr.innerHTML = `
+                    <td>
+                        <span class="badge-cat-pill ${catClass}">
+                            <span>${catIcon}</span>
+                            <span>${q.category}</span>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge-topic-tag">${escapeHtml(q.topic)}</span>
+                    </td>
+                    <td>
+                        <div style="font-weight:600; color:var(--text-main); font-size:0.88rem; line-height:1.4;">
+                            ${escapeHtml(q.question)}
+                        </div>
+                        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px; display:flex; gap:8px; flex-wrap:wrap;">
+                            <span>A: ${escapeHtml(q.options[0] || '')}</span> •
+                            <span>B: ${escapeHtml(q.options[1] || '')}</span> •
+                            <span>C: ${escapeHtml(q.options[2] || '')}</span> •
+                            <span>D: ${escapeHtml(q.options[3] || '')}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span style="display:inline-flex; align-items:center; gap:4px; background:#ecfdf5; color:#059669; font-weight:700; font-size:0.8rem; padding:3px 8px; border-radius:6px; border:1px solid #a7f3d0;">
+                            ✓ (${String.fromCharCode(65 + q.correct)}) ${escapeHtml(correctOptText.length > 20 ? correctOptText.substring(0, 18) + '...' : correctOptText)}
+                        </span>
+                    </td>
+                    <td>
+                        ${q.isCustom ? '<span class="badge-source-admin">Admin Created</span>' : '<span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Platform Default</span>'}
+                    </td>
+                    <td>
+                        <div style="display:flex; gap:6px;">
+                            ${q.isCustom ? `
+                                <button class="btn-table-action" style="color:#ef4444; border-color:#fecaca;" onclick="deleteQuestionFromAdmin('${q.id}', '${q.category}')">Delete</button>
+                            ` : `
+                                <button class="btn-table-action" onclick="showToast('Platform core question (Read-only)', 'info')">View</button>
+                            `}
+                            <button class="btn-table-action" onclick="previewQuestionTest('${q.category}', '${q.topic}')">Test →</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterQuestionBank(category, btnElement) {
+            document.querySelectorAll('#question-management-section .btn-filter').forEach(b => b.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+            renderQuestionBankTable(category);
+        }
+
+        function deleteQuestionFromAdmin(questionId, category) {
+            if (confirm('Are you sure you want to remove this question from the database?')) {
+                const ok = deleteCustomQuestion(questionId);
+                if (ok) {
+                    showToast('Question removed from the database.', 'info');
+                    renderQuestionBankTable(currentQuestionBankFilter);
+                }
+            }
+        }
+
+        function previewQuestionTest(category, topic) {
+            const catMap = {
+                'Aptitude': 'aptitude',
+                'Technical': 'technical-practice',
+                'Coding': 'programming',
+                'Communication': 'communication'
+            };
+            const mod = catMap[category] || 'aptitude';
+            sessionStorage.setItem('currentModule', mod);
+            if (topic) sessionStorage.setItem('currentTopic', topic);
+            showToast(`Opening assessment module for ${category}...`, 'info');
+            setTimeout(() => {
+                window.location.href = (category === 'Coding') ? 'coding.html' : 'assessment.html';
+            }, 500);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return String(text)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
         }
 
         let growthChartInstance = null;
@@ -1876,54 +2252,6 @@
                     }
                 });
             }
-
-            // 2. Subscription Status Donut Chart
-            const ctxDonut = document.getElementById('subscriptionDonutChart');
-            if (ctxDonut) {
-                new Chart(ctxDonut, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Active', 'Expired', 'Pending'],
-                        datasets: [{
-                            data: [986, 124, 18],
-                            backgroundColor: ['#10b981', '#ef4444', '#f59e0b'],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        cutout: '75%'
-                    }
-                });
-            }
-
-            // 3. Revenue Analytics Chart
-            const ctxRevenue = document.getElementById('revenueAnalyticsChart');
-            if (ctxRevenue) {
-                revenueChartInstance = new Chart(ctxRevenue, {
-                    type: 'bar',
-                    data: {
-                        labels: ['1 Sep', '2 Sep', '3 Sep', '4 Sep', '5 Sep', '6 Sep', '7 Sep'],
-                        datasets: [{
-                            label: 'Revenue (₹)',
-                            data: [1420, 1680, 1890, 2100, 1750, 1940, 2200],
-                            backgroundColor: '#4f46e5',
-                            borderRadius: 6
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { grid: { color: '#f1f5f9' }, ticks: { color: '#94a3b8' } },
-                            x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
-                        }
-                    }
-                });
-            }
         }
 
         function switchStudentChart(timeframe, btn) {
@@ -1949,24 +2277,6 @@
                 growthChartInstance.data.datasets[1].data = [200, 520, 810, 1050, 1248];
             }
             growthChartInstance.update();
-        }
-
-        function switchRevenueChart(timeframe, btn) {
-            document.querySelectorAll('#revenue-section .btn-filter').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            if (!revenueChartInstance) return;
-            if (timeframe === '7d') {
-                revenueChartInstance.data.labels = ['1 Sep', '2 Sep', '3 Sep', '4 Sep', '5 Sep', '6 Sep', '7 Sep'];
-                revenueChartInstance.data.datasets[0].data = [1420, 1680, 1890, 2100, 1750, 1940, 2200];
-            } else if (timeframe === '30d') {
-                revenueChartInstance.data.labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-                revenueChartInstance.data.datasets[0].data = [2800, 3100, 3450, 3130];
-            } else {
-                revenueChartInstance.data.labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep'];
-                revenueChartInstance.data.datasets[0].data = [8400, 9800, 11200, 12100, 12480];
-            }
-            revenueChartInstance.update();
         }
 
         function setupDropdowns() {
@@ -2023,6 +2333,7 @@
 
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
+            if (!container) return;
             const toast = document.createElement('div');
             toast.className = `toast-item ${type}`;
             const icon = type === 'success' ? '✅' : 'ℹ️';
@@ -2034,15 +2345,6 @@
                 toast.style.transition = 'all 0.3s ease';
                 setTimeout(() => toast.remove(), 300);
             }, 3500);
-        }
-
-        function handleAddQuestionSubmit(e) {
-            e.preventDefault();
-            const text = document.getElementById('new-q-text').value;
-            const cat = document.getElementById('new-q-cat').value;
-            closeModal('modal-add-question');
-            showToast(`Question added to ${cat} bank successfully! 📚`, 'success');
-            e.target.reset();
         }
 
         function handleAddCodingSubmit(e) {
@@ -2069,8 +2371,19 @@
         }
 
         function handleGlobalSearch(query) {
-            if (query.trim().length > 2) {
-                console.log(`Filtering admin query for: ${query}`);
+            if (query.trim().length > 1) {
+                renderQuestionBankTable(currentQuestionBankFilter);
+                const qLower = query.toLowerCase().trim();
+                const tbody = document.getElementById('questions-bank-table-body');
+                if (tbody) {
+                    const rows = tbody.querySelectorAll('tr');
+                    rows.forEach(r => {
+                        const txt = r.textContent.toLowerCase();
+                        r.style.display = txt.includes(qLower) ? '' : 'none';
+                    });
+                }
+            } else {
+                renderQuestionBankTable(currentQuestionBankFilter);
             }
         }
 

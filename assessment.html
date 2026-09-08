@@ -863,25 +863,36 @@
 
         function initAssessment() {
             const module = sessionStorage.getItem('currentModule');
+            const topic = sessionStorage.getItem('currentTopic');
             if (!module) { window.location.href = 'dashboard.html'; return; }
-            questions = getQuestionsByModule(module);
+            
+            let allQ = getQuestionsByModule(module);
+            if (topic && topic !== 'all') {
+                const topicQ = getQuestionsByTopic(module, topic);
+                if (topicQ.length > 0) {
+                    allQ = topicQ;
+                }
+            }
+            questions = allQ;
             if (questions.length === 0) { alert('No questions found for this module'); window.location.href = 'dashboard.html'; return; }
             userAnswers = new Array(questions.length).fill(null);
             currentQuestionIndex = 0;
             timeRemaining = 600;
-            updateModuleTitle(module);
+            updateModuleTitle(module, topic);
             buildQuestionGrid();
             loadQuestion();
             startTimer();
         }
 
-        function updateModuleTitle(module) {
+        function updateModuleTitle(module, topic) {
             const titles = {
-                'programming': 'Programming Basics', 'aptitude': 'Aptitude Assessment',
+                'programming': 'Programming & Coding Practice', 'coding': 'Programming & Coding Practice',
+                'aptitude': 'Aptitude Assessment', 'technical': 'Technical Practice',
                 'technical-practice': 'Technical Practice', 'communication': 'Communication Skills',
                 'general-knowledge': 'General Knowledge', 'ethics': 'Ethical Scenarios', 'values': 'Values & Principles'
             };
-            document.getElementById('module-title').textContent = titles[module] || 'Assessment';
+            const baseTitle = titles[module] || 'Assessment';
+            document.getElementById('module-title').textContent = topic ? `${baseTitle} — ${topic}` : baseTitle;
         }
 
         function buildQuestionGrid() {
