@@ -1486,14 +1486,17 @@
             margin-bottom: 8px;
             transition: var(--transition);
         }
+
         .testcase-input-card.is-visible-case {
             border-left: 4px solid var(--accent-green);
             background: #f0fdf4;
         }
+
         .testcase-input-card.is-hidden-case {
             border-left: 4px solid var(--accent-amber);
             background: #fffdf5;
         }
+
         .testcase-header-pill {
             display: flex;
             align-items: center;
@@ -1502,11 +1505,13 @@
             font-weight: 700;
             margin-bottom: 6px;
         }
+
         .testcase-grid-inputs {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
         }
+
         .tc-field-input {
             width: 100%;
             font-family: var(--font-mono);
@@ -1519,6 +1524,7 @@
             color: var(--text-main);
             box-sizing: border-box;
         }
+
         .tc-field-input:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 2px var(--primary-glow);
@@ -1767,388 +1773,336 @@
                         </svg>
                         <input type="text" class="admin-search-input" placeholder="Search questions, topics..."
                             oninput="handleGlobalSearch(this.value)">
+                        style="font-size:0.85rem; font-weight:700; color:var(--text-main);">Administrator</span>
+                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </div>
 
-                    <!-- Notification Bell -->
-                    <div style="position: relative;">
-                        <button class="btn-icon" id="admin-notif-btn" aria-label="Notifications">
-                            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                            </svg>
-                            <span class="notification-badge-dot"></span>
-                        </button>
-
-                        <div class="admin-dropdown-menu" id="admin-notif-dropdown">
-                            <div
-                                style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-subtle); padding-bottom:8px; font-weight:700; font-size:0.85rem;">
-                                <span>Platform Alerts (3)</span>
-                                <a href="javascript:void(0)" style="color:var(--primary); font-size:0.75rem;"
-                                    onclick="dismissAdminNotifs()">Mark all read</a>
-                            </div>
-                            <div style="font-size:0.8rem; display:flex; flex-direction:column; gap:8px;">
-                                <div
-                                    style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--accent-amber);">
-                                    <strong>💳 18 pending student payments</strong>
-                                    <div style="color:var(--text-muted); font-size:0.72rem;">Razorpay webhook
-                                        verification queued</div>
-                                </div>
-                                <div
-                                    style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--accent-green);">
-                                    <strong>👨‍💻 45 new coding submissions</strong>
-                                    <div style="color:var(--text-muted); font-size:0.72rem;">Top performer: TCS Mock
-                                        Series</div>
-                                </div>
-                                <div
-                                    style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--primary);">
-                                    <strong>🔒 System backup completed</strong>
-                                    <div style="color:var(--text-muted); font-size:0.72rem;">Database synced
-                                        successfully at 04:00 AM</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Profile Dropdown Pill -->
-                    <div style="position:relative;">
-                        <div class="btn-icon" style="width:auto; padding:0 10px; gap:8px; cursor:pointer;"
-                            id="admin-profile-pill">
-                            <div class="admin-avatar-circle" style="width:26px; height:26px; font-size:0.75rem;">AD
-                            </div>
-                            <span
-                                style="font-size:0.85rem; font-weight:700; color:var(--text-main);">Administrator</span>
-                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </div>
-
-                        <div class="admin-dropdown-menu" id="admin-profile-dropdown" style="width:200px;">
-                            <a href="profile.html"
-                                style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">👤
-                                My Profile</a>
-                            <a href="dashboard.html"
-                                style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">🎓
-                                Student Portal</a>
-                            <hr style="border:none; border-top:1px solid var(--border-subtle); margin:4px 0;">
-                            <a href="javascript:void(0)" onclick="adminLogout()"
-                                style="padding:6px 8px; font-size:0.85rem; font-weight:700; color:#ef4444; border-radius:6px; display:block;">🚪
-                                Logout</a>
-                        </div>
+                    <div class="admin-dropdown-menu" id="admin-profile-dropdown" style="width:200px;">
+                        <a href="profile.html"
+                            style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">👤
+                            My Profile</a>
+                        <a href="dashboard.html"
+                            style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">🎓
+                            Student Portal</a>
+                        <hr style="border:none; border-top:1px solid var(--border-subtle); margin:4px 0;">
+                        <a href="javascript:void(0)" onclick="adminLogout()"
+                            style="padding:6px 8px; font-size:0.85rem; font-weight:700; color:#ef4444; border-radius:6px; display:block;">🚪
+                            Logout</a>
                     </div>
                 </div>
-            </header>
+        </div>
+        </header>
 
-            <!-- ==================================================================
+        <!-- ==================================================================
                  DASHBOARD BODY
                  ================================================================== -->
-            <main class="admin-content">
+        <main class="admin-content">
 
-                <!-- 4. WELCOME BAR -->
-                <div class="admin-welcome-bar">
-                    <div class="welcome-text">
-                        <h2>Welcome back, Admin 👋</h2>
-                        <p>Here's what's happening across SkillPrep today. All platform systems operational.</p>
-                    </div>
-                    <div class="welcome-date-badge">
-                        <span>📅</span>
-                        <span id="current-live-date">Monday, 07 September 2026</span>
+            <!-- 4. WELCOME BAR -->
+            <div class="admin-welcome-bar">
+                <div class="welcome-text">
+                    <h2>Welcome back, Admin 👋</h2>
+                    <p>Here's what's happening across SkillPrep today. All platform systems operational.</p>
+                </div>
+                <div class="welcome-date-badge">
+                    <span>📅</span>
+                    <span id="current-live-date">Monday, 07 September 2026</span>
+                </div>
+            </div>
+
+            <!-- 18. ADMIN ALERTS STRIP -->
+            <div class="alert-strip">
+                <div class="alert-strip-left">
+                    <span>⚠️</span>
+                    <span><strong>Platform Attention Needed:</strong> 18 pending subscription verifications and 124
+                        expiring student accounts.</span>
+                    <span class="alert-tag-num">Action Required</span>
+                </div>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn-action-pill" style="padding:4px 10px; font-size:0.78rem;"
+                        onclick="showToast('Loading platform verification queue...', 'info')">Review Alerts
+                        →</button>
+                </div>
+            </div>
+
+            <!-- 5. MAIN STATISTICS CARDS (4 PRIMARY CARDS) -->
+            <section class="stats-grid">
+                <!-- Total Students -->
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper icon-students">👥</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Students</span>
+                        <span class="stat-value" id="stat-total-students">1,248</span>
+                        <span class="stat-subtext text-trend-up">↑ +12% this month</span>
                     </div>
                 </div>
 
-                <!-- 18. ADMIN ALERTS STRIP -->
-                <div class="alert-strip">
-                    <div class="alert-strip-left">
-                        <span>⚠️</span>
-                        <span><strong>Platform Attention Needed:</strong> 18 pending subscription verifications and 124
-                            expiring student accounts.</span>
-                        <span class="alert-tag-num">Action Required</span>
-                    </div>
-                    <div style="display:flex; gap:8px;">
-                        <button class="btn-action-pill" style="padding:4px 10px; font-size:0.78rem;"
-                            onclick="showToast('Loading platform verification queue...', 'info')">Review Alerts
-                            →</button>
+                <!-- Active Students -->
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper icon-active">⚡</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Active Students</span>
+                        <span class="stat-value" id="stat-active-students">986</span>
+                        <span class="stat-subtext text-trend-accent">79% of total students</span>
                     </div>
                 </div>
 
-                <!-- 5. MAIN STATISTICS CARDS (4 PRIMARY CARDS) -->
-                <section class="stats-grid">
-                    <!-- Total Students -->
-                    <div class="stat-card">
-                        <div class="stat-icon-wrapper icon-students">👥</div>
-                        <div class="stat-info">
-                            <span class="stat-label">Total Students</span>
-                            <span class="stat-value" id="stat-total-students">1,248</span>
-                            <span class="stat-subtext text-trend-up">↑ +12% this month</span>
+                <!-- Assessments Completed -->
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper icon-tests">📝</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Assessments Completed</span>
+                        <span class="stat-value" id="stat-assessments-count">3,842</span>
+                        <span class="stat-subtext text-trend-up">↑ +18% this month</span>
+                    </div>
+                </div>
+
+                <!-- Total Revenue -->
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper icon-revenue">₹</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Revenue</span>
+                        <span class="stat-value" id="stat-revenue-value">₹12,480</span>
+                        <span class="stat-subtext text-trend-up">This Month (₹10/yr)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. STUDENT GROWTH ANALYTICS -->
+            <section class="card" id="students-overview-section">
+                <div class="card-header-row">
+                    <div>
+                        <h3 class="card-title">📈 Student Growth & Engagement</h3>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Track new
+                            registrations vs daily active practice</p>
+                    </div>
+                    <div class="filter-btn-group">
+                        <button class="btn-filter active" onclick="switchStudentChart('today', this)">Today</button>
+                        <button class="btn-filter" onclick="switchStudentChart('week', this)">This Week</button>
+                        <button class="btn-filter" onclick="switchStudentChart('month', this)">This Month</button>
+                        <button class="btn-filter" onclick="switchStudentChart('year', this)">This Year</button>
+                    </div>
+                </div>
+                <div style="height: 260px; position: relative;">
+                    <canvas id="studentGrowthChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 7. QUESTION BANK MANAGEMENT & LIVE REPOSITORY -->
+            <section class="card" id="question-management-section">
+                <div class="card-header-row" style="flex-wrap:wrap; gap:12px;">
+                    <div>
+                        <h3 class="card-title">📚 Question Bank & Question Creator</h3>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Click on any category
+                            below to view all questions and options as a list, or add new questions</p>
+                    </div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button class="btn-action-pill" onclick="openCreateQuestionModal('Aptitude')"
+                            style="background:#eff6ff; color:#2563eb; border:1.5px solid #bfdbfe; font-weight:700;">
+                            <span>➕ Add MCQ Question</span>
+                        </button>
+                        <button class="btn-action-pill primary" onclick="openCreateCodingQuestionModal()"
+                            style="box-shadow:0 4px 12px rgba(79, 70, 229, 0.3); background:#4f46e5; font-weight:700;">
+                            <span>👨‍💻 Add Coding Question</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Category Selector Cards Grid -->
+                <div class="qbank-categories-grid">
+                    <div class="qbank-cat-card active" id="cat-card-all" onclick="selectQuestionCategoryTab('all')">
+                        <div class="qbank-cat-top">
+                            <div class="qbank-cat-icon">🌐</div>
+                            <span class="qbank-cat-count" id="count-all-questions">0</span>
+                        </div>
+                        <div class="qbank-cat-info">
+                            <span class="qbank-cat-title">All Categories</span>
+                            <span class="qbank-cat-desc">Complete Master Bank</span>
                         </div>
                     </div>
 
-                    <!-- Active Students -->
-                    <div class="stat-card">
-                        <div class="stat-icon-wrapper icon-active">⚡</div>
-                        <div class="stat-info">
-                            <span class="stat-label">Active Students</span>
-                            <span class="stat-value" id="stat-active-students">986</span>
-                            <span class="stat-subtext text-trend-accent">79% of total students</span>
+                    <div class="qbank-cat-card" id="cat-card-aptitude" onclick="selectQuestionCategoryTab('Aptitude')">
+                        <div class="qbank-cat-top">
+                            <div class="qbank-cat-icon" style="color:#2563eb; background:#eff6ff;">🧠</div>
+                            <span class="qbank-cat-count" id="count-aptitude-questions">0</span>
+                        </div>
+                        <div class="qbank-cat-info">
+                            <span class="qbank-cat-title">Aptitude</span>
+                            <span class="qbank-cat-desc">Quant, Logic & Reasoning</span>
                         </div>
                     </div>
 
-                    <!-- Assessments Completed -->
-                    <div class="stat-card">
-                        <div class="stat-icon-wrapper icon-tests">📝</div>
-                        <div class="stat-info">
-                            <span class="stat-label">Assessments Completed</span>
-                            <span class="stat-value" id="stat-assessments-count">3,842</span>
-                            <span class="stat-subtext text-trend-up">↑ +18% this month</span>
+                    <div class="qbank-cat-card" id="cat-card-technical"
+                        onclick="selectQuestionCategoryTab('Technical')">
+                        <div class="qbank-cat-top">
+                            <div class="qbank-cat-icon" style="color:#059669; background:#ecfdf5;">💻</div>
+                            <span class="qbank-cat-count" id="count-technical-questions">0</span>
+                        </div>
+                        <div class="qbank-cat-info">
+                            <span class="qbank-cat-title">Technical</span>
+                            <span class="qbank-cat-desc">Core CS, DBMS, OS & Web</span>
                         </div>
                     </div>
 
-                    <!-- Total Revenue -->
-                    <div class="stat-card">
-                        <div class="stat-icon-wrapper icon-revenue">₹</div>
-                        <div class="stat-info">
-                            <span class="stat-label">Total Revenue</span>
-                            <span class="stat-value" id="stat-revenue-value">₹12,480</span>
-                            <span class="stat-subtext text-trend-up">This Month (₹10/yr)</span>
+                    <div class="qbank-cat-card" id="cat-card-coding" onclick="selectQuestionCategoryTab('Coding')">
+                        <div class="qbank-cat-top">
+                            <div class="qbank-cat-icon" style="color:#7c3aed; background:#f5f3ff;">👨‍💻</div>
+                            <span class="qbank-cat-count" id="count-coding-questions">0</span>
+                        </div>
+                        <div class="qbank-cat-info">
+                            <span class="qbank-cat-title">Coding</span>
+                            <span class="qbank-cat-desc">DSA, Python & Algorithms</span>
                         </div>
                     </div>
-                </section>
 
-                <!-- 6. STUDENT GROWTH ANALYTICS -->
-                <section class="card" id="students-overview-section">
-                    <div class="card-header-row">
-                        <div>
-                            <h3 class="card-title">📈 Student Growth & Engagement</h3>
-                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Track new
-                                registrations vs daily active practice</p>
+                    <div class="qbank-cat-card" id="cat-card-communication"
+                        onclick="selectQuestionCategoryTab('Communication')">
+                        <div class="qbank-cat-top">
+                            <div class="qbank-cat-icon" style="color:#d97706; background:#fffbeb;">🗣</div>
+                            <span class="qbank-cat-count" id="count-communication-questions">0</span>
                         </div>
-                        <div class="filter-btn-group">
-                            <button class="btn-filter active" onclick="switchStudentChart('today', this)">Today</button>
-                            <button class="btn-filter" onclick="switchStudentChart('week', this)">This Week</button>
-                            <button class="btn-filter" onclick="switchStudentChart('month', this)">This Month</button>
-                            <button class="btn-filter" onclick="switchStudentChart('year', this)">This Year</button>
+                        <div class="qbank-cat-info">
+                            <span class="qbank-cat-title">Communication</span>
+                            <span class="qbank-cat-desc">Verbal & Professional English</span>
                         </div>
                     </div>
-                    <div style="height: 260px; position: relative;">
-                        <canvas id="studentGrowthChart"></canvas>
-                    </div>
-                </section>
+                </div>
 
-                <!-- 7. QUESTION BANK MANAGEMENT & LIVE REPOSITORY -->
-                <section class="card" id="question-management-section">
-                    <div class="card-header-row" style="flex-wrap:wrap; gap:12px;">
-                        <div>
-                            <h3 class="card-title">📚 Question Bank & Question Creator</h3>
-                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Click on any category
-                                below to view all questions and options as a list, or add new questions</p>
+                <!-- Toolbar with Search, Topic Filter, View Toggle, and Add Button -->
+                <div class="qbank-toolbar">
+                    <div class="qbank-toolbar-left">
+                        <div class="admin-search-wrapper" style="width:240px; margin-bottom:0;">
+                            <svg class="search-icon-svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <input type="text" id="qbank-search-input" class="admin-search-input"
+                                placeholder="Search questions or options..." oninput="handleQBankSearch(this.value)">
                         </div>
-                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                            <button class="btn-action-pill" onclick="openCreateQuestionModal('Aptitude')"
-                                style="background:#eff6ff; color:#2563eb; border:1.5px solid #bfdbfe; font-weight:700;">
-                                <span>➕ Add MCQ Question</span>
+
+                        <select id="qbank-topic-filter" class="admin-search-input" style="width:210px; margin-bottom:0;"
+                            onchange="handleQBankTopicFilter(this.value)">
+                            <option value="all">🎯 All Topics</option>
+                        </select>
+
+                        <select id="qbank-source-filter" class="admin-search-input"
+                            style="width:160px; margin-bottom:0;" onchange="handleQBankSourceFilter(this.value)">
+                            <option value="all">⚡ All Sources</option>
+                            <option value="custom">👤 Admin Created</option>
+                            <option value="standard">🏛️ Platform Core</option>
+                        </select>
+                    </div>
+
+                    <div class="qbank-toolbar-right">
+                        <span id="qbank-status-counter"
+                            style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">
+                            Loading questions...
+                        </span>
+
+                        <div class="qbank-view-toggle">
+                            <button type="button" class="qbank-view-btn active" id="btn-view-cards"
+                                onclick="setQBankViewMode('cards')" title="Card View (with options)">
+                                <span>📄 Cards</span>
                             </button>
-                            <button class="btn-action-pill primary" onclick="openCreateCodingQuestionModal()"
-                                style="box-shadow:0 4px 12px rgba(79, 70, 229, 0.3); background:#4f46e5; font-weight:700;">
-                                <span>👨‍💻 Add Coding Question</span>
+                            <button type="button" class="qbank-view-btn" id="btn-view-table"
+                                onclick="setQBankViewMode('table')" title="Compact Table">
+                                <span>🗂 Table</span>
                             </button>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Category Selector Cards Grid -->
-                    <div class="qbank-categories-grid">
-                        <div class="qbank-cat-card active" id="cat-card-all" onclick="selectQuestionCategoryTab('all')">
-                            <div class="qbank-cat-top">
-                                <div class="qbank-cat-icon">🌐</div>
-                                <span class="qbank-cat-count" id="count-all-questions">0</span>
-                            </div>
-                            <div class="qbank-cat-info">
-                                <span class="qbank-cat-title">All Categories</span>
-                                <span class="qbank-cat-desc">Complete Master Bank</span>
-                            </div>
-                        </div>
+                <!-- 1. Question Cards List Container (Default view displaying all options clearly) -->
+                <div id="qbank-cards-container" class="qbank-questions-list">
+                    <!-- Rendered by JS -->
+                </div>
 
-                        <div class="qbank-cat-card" id="cat-card-aptitude"
-                            onclick="selectQuestionCategoryTab('Aptitude')">
-                            <div class="qbank-cat-top">
-                                <div class="qbank-cat-icon" style="color:#2563eb; background:#eff6ff;">🧠</div>
-                                <span class="qbank-cat-count" id="count-aptitude-questions">0</span>
-                            </div>
-                            <div class="qbank-cat-info">
-                                <span class="qbank-cat-title">Aptitude</span>
-                                <span class="qbank-cat-desc">Quant, Logic & Reasoning</span>
-                            </div>
-                        </div>
+                <!-- 2. Question Table Container (Alternative Compact View) -->
+                <div id="qbank-table-container" class="table-responsive" style="display:none; margin-top:12px;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th style="width:120px;">Category</th>
+                                <th style="width:170px;">Topic</th>
+                                <th>Question & Options</th>
+                                <th style="width:180px;">Correct Answer</th>
+                                <th style="width:110px;">Source</th>
+                                <th style="width:120px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="questions-bank-table-body">
+                            <tr>
+                                <td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">
+                                    Loading platform question database...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
-                        <div class="qbank-cat-card" id="cat-card-technical"
-                            onclick="selectQuestionCategoryTab('Technical')">
-                            <div class="qbank-cat-top">
-                                <div class="qbank-cat-icon" style="color:#059669; background:#ecfdf5;">💻</div>
-                                <span class="qbank-cat-count" id="count-technical-questions">0</span>
-                            </div>
-                            <div class="qbank-cat-info">
-                                <span class="qbank-cat-title">Technical</span>
-                                <span class="qbank-cat-desc">Core CS, DBMS, OS & Web</span>
-                            </div>
-                        </div>
+            <!-- 8. RECENT STUDENT ACTIVITY LOG -->
+            <section class="card" id="activity-section">
+                <div class="card-header-row">
+                    <h3 class="card-title">⚡ Real-time Student Activity Stream</h3>
+                    <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Live Feed</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Activity</th>
+                                <th>Module / Topic</th>
+                                <th>Score / Result</th>
+                                <th>Timestamp</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Ananya Kumar</strong></td>
+                                <td>Completed Aptitude Assessment</td>
+                                <td>Quantitative Drills</td>
+                                <td><strong style="color:var(--accent-green);">88%</strong></td>
+                                <td>5 mins ago</td>
+                                <td><span class="badge-status badge-completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rohan Sharma</strong></td>
+                                <td>Solved Coding Problem</td>
+                                <td>Two Sum (Arrays)</td>
+                                <td><strong style="color:var(--primary);">100/100</strong></td>
+                                <td>12 mins ago</td>
+                                <td><span class="badge-status badge-completed">Accepted</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Priya S.</strong></td>
+                                <td>Daily Practice Drill</td>
+                                <td>Verbal & Tech</td>
+                                <td><strong>18/21 Done</strong></td>
+                                <td>25 mins ago</td>
+                                <td><span class="badge-status badge-progress">In Progress</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Karthik M.</strong></td>
+                                <td>Mock Interview Test</td>
+                                <td>TCS NQT Full Mock</td>
+                                <td><strong style="color:var(--accent-red);">48%</strong></td>
+                                <td>1 hour ago</td>
+                                <td><span class="badge-status badge-failed">Retake Suggested</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
-                        <div class="qbank-cat-card" id="cat-card-coding" onclick="selectQuestionCategoryTab('Coding')">
-                            <div class="qbank-cat-top">
-                                <div class="qbank-cat-icon" style="color:#7c3aed; background:#f5f3ff;">👨‍💻</div>
-                                <span class="qbank-cat-count" id="count-coding-questions">0</span>
-                            </div>
-                            <div class="qbank-cat-info">
-                                <span class="qbank-cat-title">Coding</span>
-                                <span class="qbank-cat-desc">DSA, Python & Algorithms</span>
-                            </div>
-                        </div>
-
-                        <div class="qbank-cat-card" id="cat-card-communication"
-                            onclick="selectQuestionCategoryTab('Communication')">
-                            <div class="qbank-cat-top">
-                                <div class="qbank-cat-icon" style="color:#d97706; background:#fffbeb;">🗣</div>
-                                <span class="qbank-cat-count" id="count-communication-questions">0</span>
-                            </div>
-                            <div class="qbank-cat-info">
-                                <span class="qbank-cat-title">Communication</span>
-                                <span class="qbank-cat-desc">Verbal & Professional English</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Toolbar with Search, Topic Filter, View Toggle, and Add Button -->
-                    <div class="qbank-toolbar">
-                        <div class="qbank-toolbar-left">
-                            <div class="admin-search-wrapper" style="width:240px; margin-bottom:0;">
-                                <svg class="search-icon-svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                                <input type="text" id="qbank-search-input" class="admin-search-input"
-                                    placeholder="Search questions or options..."
-                                    oninput="handleQBankSearch(this.value)">
-                            </div>
-
-                            <select id="qbank-topic-filter" class="admin-search-input"
-                                style="width:210px; margin-bottom:0;" onchange="handleQBankTopicFilter(this.value)">
-                                <option value="all">🎯 All Topics</option>
-                            </select>
-
-                            <select id="qbank-source-filter" class="admin-search-input"
-                                style="width:160px; margin-bottom:0;" onchange="handleQBankSourceFilter(this.value)">
-                                <option value="all">⚡ All Sources</option>
-                                <option value="custom">👤 Admin Created</option>
-                                <option value="standard">🏛️ Platform Core</option>
-                            </select>
-                        </div>
-
-                        <div class="qbank-toolbar-right">
-                            <span id="qbank-status-counter"
-                                style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">
-                                Loading questions...
-                            </span>
-
-                            <div class="qbank-view-toggle">
-                                <button type="button" class="qbank-view-btn active" id="btn-view-cards"
-                                    onclick="setQBankViewMode('cards')" title="Card View (with options)">
-                                    <span>📄 Cards</span>
-                                </button>
-                                <button type="button" class="qbank-view-btn" id="btn-view-table"
-                                    onclick="setQBankViewMode('table')" title="Compact Table">
-                                    <span>🗂 Table</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 1. Question Cards List Container (Default view displaying all options clearly) -->
-                    <div id="qbank-cards-container" class="qbank-questions-list">
-                        <!-- Rendered by JS -->
-                    </div>
-
-                    <!-- 2. Question Table Container (Alternative Compact View) -->
-                    <div id="qbank-table-container" class="table-responsive" style="display:none; margin-top:12px;">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th style="width:120px;">Category</th>
-                                    <th style="width:170px;">Topic</th>
-                                    <th>Question & Options</th>
-                                    <th style="width:180px;">Correct Answer</th>
-                                    <th style="width:110px;">Source</th>
-                                    <th style="width:120px;">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="questions-bank-table-body">
-                                <tr>
-                                    <td colspan="6" style="text-align:center; padding:24px; color:var(--text-muted);">
-                                        Loading platform question database...
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <!-- 8. RECENT STUDENT ACTIVITY LOG -->
-                <section class="card" id="activity-section">
-                    <div class="card-header-row">
-                        <h3 class="card-title">⚡ Real-time Student Activity Stream</h3>
-                        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Live Feed</span>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Student</th>
-                                    <th>Activity</th>
-                                    <th>Module / Topic</th>
-                                    <th>Score / Result</th>
-                                    <th>Timestamp</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Ananya Kumar</strong></td>
-                                    <td>Completed Aptitude Assessment</td>
-                                    <td>Quantitative Drills</td>
-                                    <td><strong style="color:var(--accent-green);">88%</strong></td>
-                                    <td>5 mins ago</td>
-                                    <td><span class="badge-status badge-completed">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Rohan Sharma</strong></td>
-                                    <td>Solved Coding Problem</td>
-                                    <td>Two Sum (Arrays)</td>
-                                    <td><strong style="color:var(--primary);">100/100</strong></td>
-                                    <td>12 mins ago</td>
-                                    <td><span class="badge-status badge-completed">Accepted</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Priya S.</strong></td>
-                                    <td>Daily Practice Drill</td>
-                                    <td>Verbal & Tech</td>
-                                    <td><strong>18/21 Done</strong></td>
-                                    <td>25 mins ago</td>
-                                    <td><span class="badge-status badge-progress">In Progress</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Karthik M.</strong></td>
-                                    <td>Mock Interview Test</td>
-                                    <td>TCS NQT Full Mock</td>
-                                    <td><strong style="color:var(--accent-red);">48%</strong></td>
-                                    <td>1 hour ago</td>
-                                    <td><span class="badge-status badge-failed">Retake Suggested</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-            </main>
-        </div>
+        </main>
+    </div>
     </div>
 
     <!-- ======================================================================
@@ -2292,11 +2246,15 @@
                     <!-- Problem Title & Difficulty -->
                     <div style="display:grid; grid-template-columns: 2fr 1fr; gap:10px; margin-bottom:12px;">
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Problem Title *</label>
-                            <input type="text" id="new-q-coding-title" class="admin-search-input" style="width:100%;" placeholder="e.g. Two Sum, Factorial Calculator, Reverse String">
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Problem
+                                Title *</label>
+                            <input type="text" id="new-q-coding-title" class="admin-search-input" style="width:100%;"
+                                placeholder="e.g. Two Sum, Factorial Calculator, Reverse String">
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Difficulty</label>
+                            <label
+                                style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Difficulty</label>
                             <select id="new-q-coding-difficulty" class="admin-search-input" style="width:100%;">
                                 <option value="Easy">Easy (500 pts)</option>
                                 <option value="Medium">Medium (750 pts)</option>
@@ -2307,49 +2265,69 @@
 
                     <!-- Problem Statement & Constraints -->
                     <div style="margin-bottom:12px;">
-                        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Problem Statement &amp; Constraints *</label>
-                        <textarea id="new-q-coding-statement" class="admin-search-input" style="width:100%; height:75px; resize:vertical;" placeholder="Describe the problem, input format, output format, and constraints (e.g. 1 <= N <= 10^5)..."></textarea>
+                        <label
+                            style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Problem
+                            Statement &amp; Constraints *</label>
+                        <textarea id="new-q-coding-statement" class="admin-search-input"
+                            style="width:100%; height:75px; resize:vertical;"
+                            placeholder="Describe the problem, input format, output format, and constraints (e.g. 1 <= N <= 10^5)..."></textarea>
                     </div>
 
                     <!-- Reference Solution Code -->
                     <div style="margin-bottom:12px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                            <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">Authoritative Solution Code *</label>
-                            <select id="new-q-solution-lang" class="admin-search-input" style="width:130px; padding:3px 8px; font-size:0.75rem;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">Authoritative
+                                Solution Code *</label>
+                            <select id="new-q-solution-lang" class="admin-search-input"
+                                style="width:130px; padding:3px 8px; font-size:0.75rem;">
                                 <option value="python">Python 3</option>
                                 <option value="cpp">C++</option>
                                 <option value="java">Java</option>
                                 <option value="c">C</option>
                             </select>
                         </div>
-                        <textarea id="new-q-solution-code" class="admin-search-input" style="width:100%; height:90px; font-family:var(--font-mono); font-size:0.82rem; resize:vertical; background:#0f172a; color:#f8fafc; border-color:#334155;" placeholder="def solution(nums, target):&#10;    # Write correct Python reference solution..."></textarea>
+                        <textarea id="new-q-solution-code" class="admin-search-input"
+                            style="width:100%; height:90px; font-family:var(--font-mono); font-size:0.82rem; resize:vertical; background:#0f172a; color:#f8fafc; border-color:#334155;"
+                            placeholder="def solution(nums, target):&#10;    # Write correct Python reference solution..."></textarea>
                     </div>
 
                     <!-- Starter Code Template -->
                     <div style="margin-bottom:14px;">
-                        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Starter Code Template (Given to Students)</label>
-                        <textarea id="new-q-starter-code" class="admin-search-input" style="width:100%; height:60px; font-family:var(--font-mono); font-size:0.82rem; resize:vertical; background:#0f172a; color:#94a3b8; border-color:#334155;" placeholder="# Write your solution here&#10;def solution():&#10;    pass"></textarea>
+                        <label
+                            style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Starter
+                            Code Template (Given to Students)</label>
+                        <textarea id="new-q-starter-code" class="admin-search-input"
+                            style="width:100%; height:60px; font-family:var(--font-mono); font-size:0.82rem; resize:vertical; background:#0f172a; color:#94a3b8; border-color:#334155;"
+                            placeholder="# Write your solution here&#10;def solution():&#10;    pass"></textarea>
                     </div>
 
                     <!-- 10 Test Cases Configuration (3 Visible + 7 Hidden) -->
-                    <div style="border:1.5px solid var(--border-subtle); border-radius:var(--radius-lg); padding:14px; background:var(--surface-alt);">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <div
+                        style="border:1.5px solid var(--border-subtle); border-radius:var(--radius-lg); padding:14px; background:var(--surface-alt);">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                             <div>
-                                <h4 style="font-size:0.9rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:6px;">
+                                <h4
+                                    style="font-size:0.9rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:6px;">
                                     <span>🧪 10 Test Cases &amp; Expected Outputs</span>
                                 </h4>
                                 <p style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">
-                                    <strong>3 Visible Test Cases</strong> are displayed to the candidate. The remaining <strong>7 Hidden Test Cases</strong> are confidential and evaluated automatically when submitted.
+                                    <strong>3 Visible Test Cases</strong> are displayed to the candidate. The remaining
+                                    <strong>7 Hidden Test Cases</strong> are confidential and evaluated automatically
+                                    when submitted.
                                 </p>
                             </div>
-                            <button type="button" class="btn-action-pill" onclick="autoFillSampleTestCases()" style="background:#ffffff; font-size:0.75rem; padding:4px 10px;">
+                            <button type="button" class="btn-action-pill" onclick="autoFillSampleTestCases()"
+                                style="background:#ffffff; font-size:0.75rem; padding:4px 10px;">
                                 <span>⚡ Auto-Fill 10 Test Cases</span>
                             </button>
                         </div>
 
                         <!-- 3 Visible Test Cases -->
                         <div style="margin-bottom:12px;">
-                            <div style="font-size:0.75rem; font-weight:800; color:#15803d; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+                            <div
+                                style="font-size:0.75rem; font-weight:800; color:#15803d; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
                                 🟢 3 Visible Test Cases (Sample Examples for Student)
                             </div>
                             <div id="visible-testcases-inputs">
@@ -2359,7 +2337,8 @@
 
                         <!-- 7 Hidden Test Cases -->
                         <div>
-                            <div style="font-size:0.75rem; font-weight:800; color:#b45309; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+                            <div
+                                style="font-size:0.75rem; font-weight:800; color:#b45309; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
                                 🔒 7 Hidden Test Cases (Confidential Evaluation &amp; Edge Cases)
                             </div>
                             <div id="hidden-testcases-inputs">
