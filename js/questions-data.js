@@ -813,6 +813,28 @@ function deleteCustomQuestion(questionId) {
     }
 }
 
+function updateCustomQuestion(questionId, qData) {
+    try {
+        let list = getCustomQuestions();
+        const index = list.findIndex(q => q.id === questionId);
+        if (index === -1) return null;
+        list[index] = {
+            ...list[index],
+            category: qData.category,
+            topic: qData.topic || 'General',
+            question: qData.question,
+            options: qData.options,
+            correct: parseInt(qData.correct),
+            updatedAt: new Date().toISOString()
+        };
+        localStorage.setItem('skillprep_custom_questions', JSON.stringify(list));
+        return list[index];
+    } catch (e) {
+        console.error('Failed to update question:', e);
+        return null;
+    }
+}
+
 function getQuestionsByModule(module) {
     const base = QUESTIONS[module] || [];
     const customList = getCustomQuestions();
