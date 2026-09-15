@@ -838,7 +838,7 @@ function updateCustomQuestion(questionId, qData) {
 function getQuestionsByModule(module) {
     const base = QUESTIONS[module] || [];
     const customList = getCustomQuestions();
-    
+
     const modNorm = (module || '').toLowerCase().trim();
     const filteredCustom = customList.filter(q => {
         const catNorm = (q.category || '').toLowerCase().trim();
