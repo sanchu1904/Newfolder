@@ -1903,37 +1903,6 @@
                     </div>
                 </section>
 
-                <!-- ==========================================================
-                     LEARNING PROGRESS — SUBJECT-WISE NOTES & TRACKER
-                     ========================================================== -->
-                <section class="learning-progress-section" id="learning-progress-section">
-                    <div class="learning-section-header">
-                        <div>
-                            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-                                <span style="font-size:1.4rem;">📖</span>
-                                <h3 style="font-size:1.2rem; font-weight:800; color:var(--text-main); margin:0;">Learning Progress & Notes</h3>
-                                <span class="badge-w3-tag">W3Schools Progress Tracker</span>
-                            </div>
-                            <p style="font-size:0.88rem; color:var(--text-secondary); margin:0;">
-                                Study subject-wise notes and track your topic completion status across all domains.
-                            </p>
-                        </div>
-                        <div class="learning-overall-hero-badge">
-                            <div class="overall-progress-circle-wrap">
-                                <span class="overall-pct-val" id="dash-overall-pct">0%</span>
-                                <span class="overall-pct-sub">Overall Completed</span>
-                            </div>
-                            <a href="learning.html" class="btn-continue-learning" id="dash-btn-continue-learn">
-                                <span>Continue Learning →</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- 4 Subject Progress Cards (Python, Aptitude, Technical, Communication) -->
-                    <div class="learning-subjects-grid" id="dash-learning-subjects-grid">
-                        <!-- Populated dynamically via js/learning-data.js -->
-                    </div>
-                </section>
 
                 <!-- ==========================================================
                      4. DAILY PRACTICE — MAIN FOCUS
@@ -2359,96 +2328,6 @@
                     </div>
                 </section>
 
-                <!-- ==========================================================
-                     10, 11, 12. ACHIEVEMENTS, SUBSCRIPTION & QUICK ACTIONS
-                     ========================================================== -->
-                <div class="dashboard-grid-3col">
-                    <!-- 10. ACHIEVEMENTS -->
-                    <section class="card">
-                        <div class="card-header-row">
-                            <h3 class="card-title">🏆 Achievements</h3>
-                            <span style="font-size:0.775rem; color:var(--text-muted); font-weight:700;">4 / 5
-                                Unlocked</span>
-                        </div>
-
-                        <div class="achievements-badges-grid">
-                            <div class="achievement-badge-item">
-                                <span>🏆</span> 7 Day Streak
-                            </div>
-                            <div class="achievement-badge-item">
-                                <span>🔥</span> 30 Questions
-                            </div>
-                            <div class="achievement-badge-item">
-                                <span>💻</span> 25 Coding
-                            </div>
-                            <div class="achievement-badge-item">
-                                <span>🎯</span> 80% Accuracy
-                            </div>
-                        </div>
-
-                        <div class="next-achievement-box">
-                            <div class="next-achieve-title">Next Achievement</div>
-                            <div class="next-achieve-progress-row">
-                                <span>Complete 50 coding problems</span>
-                                <strong>48 / 50</strong>
-                            </div>
-                            <div
-                                style="height:5px; background:rgba(79,70,229,0.15); border-radius:10px; overflow:hidden;">
-                                <div style="height:100%; width:96%; background:var(--primary);"></div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- 11. SUBSCRIPTION CARD -->
-                    <section class="card">
-                        <div class="card-header-row">
-                            <h3 class="card-title">💳 Subscription</h3>
-                            <span class="sub-badge-active">Active</span>
-                        </div>
-
-                        <div class="subscription-box">
-                            <div class="sub-header-row">
-                                <div>
-                                    <div class="sub-price">₹10 <span
-                                            style="font-size:0.875rem; color:var(--text-muted); font-weight:600;">/
-                                            year</span></div>
-                                    <div class="sub-validity">Valid until: 31/12/2026</div>
-                                </div>
-                                <span style="font-size:1.4rem;">🎓</span>
-                            </div>
-                            <button class="btn-sub-manage"
-                                onclick="alert('Subscription is active and valid for the 2026 placement season.')">
-                                Manage Subscription
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- 12. QUICK ACTIONS -->
-                    <section class="card">
-                        <div class="card-header-row">
-                            <h3 class="card-title">⚡ Quick Actions</h3>
-                        </div>
-
-                        <div class="quick-actions-grid">
-                            <button class="quick-action-btn" onclick="startModule('aptitude')">
-                                <span class="emoji">⚡</span>
-                                <span>Daily Practice</span>
-                            </button>
-                            <button class="quick-action-btn" onclick="startModule('technical-practice')">
-                                <span class="emoji">📝</span>
-                                <span>Take Mock Test</span>
-                            </button>
-                            <button class="quick-action-btn" onclick="startModule('programming')">
-                                <span class="emoji">💻</span>
-                                <span>Practice Coding</span>
-                            </button>
-                            <button class="quick-action-btn" onclick="scrollToSection('performance-chart-section')">
-                                <span class="emoji">📊</span>
-                                <span>View Analytics</span>
-                            </button>
-                        </div>
-                    </section>
-                </div>
 
             </main>
         </div>
@@ -2575,62 +2454,6 @@
             window.location.href = 'login.html';
         }
 
-        function renderDashboardLearningWidget() {
-            if (typeof LEARNING_SUBJECTS === 'undefined' || typeof getOverallLearningProgress === 'undefined') return;
-
-            // 1. Overall Progress
-            const overall = getOverallLearningProgress();
-            const overallEl = document.getElementById('dash-overall-pct');
-            if (overallEl) {
-                overallEl.textContent = `${overall.percentage}%`;
-            }
-
-            // 2. Last Studied button update
-            const last = typeof getLastStudied === 'function' ? getLastStudied() : null;
-            const continueBtn = document.getElementById('dash-btn-continue-learn');
-            if (continueBtn && last) {
-                continueBtn.href = `learning.html?subject=${last.subjectId}&topic=${last.topicId}`;
-            }
-
-            // 3. Render 4 Subject Cards (Python, Aptitude, Technical, Communication)
-            const grid = document.getElementById('dash-learning-subjects-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-
-            LEARNING_SUBJECTS.forEach(subject => {
-                const prog = getSubjectProgress(subject.id);
-                const card = document.createElement('div');
-                card.className = 'learning-subject-card';
-                card.innerHTML = `
-                    <div class="learning-subject-head">
-                        <div class="subject-head-title">
-                            <span>${subject.icon}</span>
-                            <span>${subject.title}</span>
-                        </div>
-                        <span class="subject-pct-pill">${prog.percentage}%</span>
-                    </div>
-                    <div class="subject-w3-track">
-                        <div class="subject-w3-fill" style="width: ${prog.percentage}%;"></div>
-                    </div>
-                    <div class="subject-footer-row">
-                        <span>${prog.completed} of ${prog.total} Topics</span>
-                        <a href="learning.html?subject=${subject.id}" class="subject-study-link">Study Notes →</a>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderDashboardLearningWidget();
-        });
-    </script>
-    <script src="js/learning-data.js"></script>
-    <script>
-        // Ensure widget updates if script loaded after DOM
-        if (typeof renderDashboardLearningWidget === 'function') {
-            renderDashboardLearningWidget();
-        }
     </script>
 </body>
 
