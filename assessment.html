@@ -866,6 +866,13 @@
             const topic = sessionStorage.getItem('currentTopic');
             if (!module) { window.location.href = 'dashboard.html'; return; }
             
+            // Coding questions must be taken in the dedicated Coding Platform (IDE with 10 test cases), NOT multiple-choice
+            if (module === 'programming' || module === 'coding') {
+                const redirectUrl = 'coding.html' + (topic ? `?topic=${encodeURIComponent(topic)}` : '');
+                window.location.href = redirectUrl;
+                return;
+            }
+
             let allQ = getQuestionsByModule(module);
             if (topic && topic !== 'all') {
                 const topicQ = getQuestionsByTopic(module, topic);

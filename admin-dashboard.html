@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard — SkillPrep | Platform & Student Management</title>
-    <meta name="description" content="SkillPrep Administrator Portal. Monitor college student progress, question banks, mock assessments, subscriptions, and platform analytics.">
+    <meta name="description"
+        content="SkillPrep Administrator Portal. Monitor college student progress, question banks, mock assessments, subscriptions, and platform analytics.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Chart.js for Interactive Analytics -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -22,13 +26,13 @@
             --primary-glow: rgba(79, 70, 229, 0.2);
             --secondary: #0ea5e9;
             --secondary-light: #f0f9ff;
-            
+
             --admin-dark: #0f172a;
             --admin-sidebar-bg: #0b1120;
             --admin-sidebar-border: #1e293b;
             --admin-nav-hover: rgba(255, 255, 255, 0.06);
             --admin-nav-active: #4f46e5;
-            
+
             --accent-green: #10b981;
             --accent-green-light: #ecfdf5;
             --accent-amber: #f59e0b;
@@ -39,38 +43,40 @@
             --accent-purple-light: #f5f3ff;
             --accent-red: #ef4444;
             --accent-red-light: #fef2f2;
-            
+
             --sidebar-width: 260px;
             --header-height: 72px;
-            
+
             --bg-body: #f8fafc;
             --surface-card: #ffffff;
             --surface-alt: #f1f5f9;
             --border-subtle: #e2e8f0;
             --border-card: #e2e8f0;
-            
+
             --text-main: #0f172a;
             --text-secondary: #475569;
             --text-muted: #64748b;
-            
+
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
             --radius-xl: 20px;
             --radius-full: 9999px;
-            
+
             --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
             --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
             --shadow-lg: 0 10px 25px -3px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
             --shadow-xl: 0 20px 35px -8px rgba(79, 70, 229, 0.12);
-            
+
             --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
             --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -100,7 +106,9 @@
             transition: var(--transition);
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             font-family: inherit;
         }
 
@@ -192,6 +200,7 @@
         .sidebar-nav::-webkit-scrollbar {
             width: 4px;
         }
+
         .sidebar-nav::-webkit-scrollbar-thumb {
             background: #1e293b;
             border-radius: 4px;
@@ -634,10 +643,25 @@
             flex-shrink: 0;
         }
 
-        .icon-students { background: #eff6ff; color: #2563eb; }
-        .icon-active { background: #ecfdf5; color: #059669; }
-        .icon-tests { background: #f5f3ff; color: #7c3aed; }
-        .icon-revenue { background: #fffbeb; color: #d97706; }
+        .icon-students {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .icon-active {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .icon-tests {
+            background: #f5f3ff;
+            color: #7c3aed;
+        }
+
+        .icon-revenue {
+            background: #fffbeb;
+            color: #d97706;
+        }
 
         .stat-info {
             display: flex;
@@ -667,8 +691,13 @@
             margin-top: 2px;
         }
 
-        .text-trend-up { color: var(--accent-green); }
-        .text-trend-accent { color: var(--primary); }
+        .text-trend-up {
+            color: var(--accent-green);
+        }
+
+        .text-trend-accent {
+            color: var(--primary);
+        }
 
         /* --------------------------------------------------------------------------
            6. QUICK ACTIONS TOOLBAR
@@ -862,11 +891,30 @@
             font-weight: 700;
         }
 
-        .badge-completed { background: var(--accent-green-light); color: var(--accent-green); }
-        .badge-progress { background: var(--primary-light); color: var(--primary); }
-        .badge-failed { background: var(--accent-red-light); color: var(--accent-red); }
-        .badge-active { background: #dcfce7; color: #166534; }
-        .badge-expired { background: #fee2e2; color: #991b1b; }
+        .badge-completed {
+            background: var(--accent-green-light);
+            color: var(--accent-green);
+        }
+
+        .badge-progress {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .badge-failed {
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+        }
+
+        .badge-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-expired {
+            background: #fee2e2;
+            color: #991b1b;
+        }
 
         .btn-table-action {
             padding: 4px 8px;
@@ -1383,10 +1431,30 @@
             font-size: 0.72rem;
             font-weight: 700;
         }
-        .badge-cat-aptitude { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
-        .badge-cat-technical { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
-        .badge-cat-coding { background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; }
-        .badge-cat-communication { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+
+        .badge-cat-aptitude {
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+        }
+
+        .badge-cat-technical {
+            background: #ecfdf5;
+            color: #059669;
+            border: 1px solid #a7f3d0;
+        }
+
+        .badge-cat-coding {
+            background: #f5f3ff;
+            color: #7c3aed;
+            border: 1px solid #ddd6fe;
+        }
+
+        .badge-cat-communication {
+            background: #fffbeb;
+            color: #d97706;
+            border: 1px solid #fde68a;
+        }
 
         .badge-source-admin {
             background: #fef2f2;
@@ -1407,6 +1475,53 @@
             font-size: 0.72rem;
             font-weight: 600;
             border: 1px solid var(--border-subtle);
+        }
+
+        /* Testcase input cards & styling */
+        .testcase-input-card {
+            background: #ffffff;
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+        .testcase-input-card.is-visible-case {
+            border-left: 4px solid var(--accent-green);
+            background: #f0fdf4;
+        }
+        .testcase-input-card.is-hidden-case {
+            border-left: 4px solid var(--accent-amber);
+            background: #fffdf5;
+        }
+        .testcase-header-pill {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .testcase-grid-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .tc-field-input {
+            width: 100%;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            padding: 7px 10px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid #d1d5db;
+            background: #ffffff;
+            outline: none;
+            color: var(--text-main);
+            box-sizing: border-box;
+        }
+        .tc-field-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-glow);
         }
 
         .modal-header {
@@ -1461,49 +1576,89 @@
             min-width: 280px;
         }
 
-        .toast-item.success { background: #065f46; border-left: 4px solid var(--accent-green); }
-        .toast-item.info { background: #1e1b4b; border-left: 4px solid var(--primary); }
+        .toast-item.success {
+            background: #065f46;
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .toast-item.info {
+            background: #1e1b4b;
+            border-left: 4px solid var(--primary);
+        }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         /* --------------------------------------------------------------------------
            RESPONSIVE BREAKPOINTS
            -------------------------------------------------------------------------- */
         @media (max-width: 1200px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .grid-2col { grid-template-columns: 1fr; }
-            .grid-equal-2col { grid-template-columns: 1fr; }
-            .grid-4col { grid-template-columns: repeat(2, 1fr); }
-            .qbank-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-equal-2col {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-4col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .qbank-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 900px) {
             .admin-sidebar {
                 transform: translateX(-100%);
             }
+
             .admin-sidebar.mobile-open {
                 transform: translateX(0);
-                box-shadow: 0 0 40px rgba(0,0,0,0.4);
+                box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
             }
+
             .admin-main-wrapper {
                 margin-left: 0;
                 width: 100%;
             }
+
             .mobile-menu-btn {
                 display: flex;
             }
+
             .admin-search-wrapper {
                 display: none;
             }
-            .stats-grid { grid-template-columns: 1fr; }
-            .grid-4col { grid-template-columns: 1fr; }
-            .admin-content { padding: 20px 16px; }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-4col {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-content {
+                padding: 20px 16px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="admin-layout">
@@ -1528,7 +1683,8 @@
                         <span class="nav-icon">📊</span>
                         <span>Dashboard</span>
                     </a>
-                    <a href="#question-management-section" class="nav-item" onclick="scrollToSection('question-management-section')">
+                    <a href="#question-management-section" class="nav-item"
+                        onclick="scrollToSection('question-management-section')">
                         <span class="nav-icon">📚</span>
                         <span>Question Bank</span>
                     </a>
@@ -1538,7 +1694,8 @@
                     </a>
 
                     <div class="nav-category-title">System</div>
-                    <a href="javascript:void(0)" class="nav-item" onclick="showToast('Notification center up to date.', 'info')">
+                    <a href="javascript:void(0)" class="nav-item"
+                        onclick="showToast('Notification center up to date.', 'info')">
                         <span class="nav-icon">🔔</span>
                         <span>Notifications</span>
                         <span class="badge-counter" style="background:#ef4444;">3</span>
@@ -1552,7 +1709,8 @@
 
             <div>
                 <!-- Admin User Pill -->
-                <div class="sidebar-admin-pill" onclick="showToast('Logged in as Administrator (Master privileges)', 'info')">
+                <div class="sidebar-admin-pill"
+                    onclick="showToast('Logged in as Administrator (Master privileges)', 'info')">
                     <div class="admin-avatar-circle">AD</div>
                     <div class="admin-meta-info">
                         <div class="admin-meta-name">Administrator</div>
@@ -1577,13 +1735,14 @@
              MAIN WRAPPER & HEADER
              ================================================================== -->
         <div class="admin-main-wrapper">
-            
+
             <!-- 2. TOP HEADER -->
             <header class="admin-top-header">
                 <div style="display:flex; align-items:center; gap:16px;">
                     <button class="mobile-menu-btn" id="mobile-sidebar-toggle" aria-label="Toggle Sidebar">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                     <div class="header-title-group">
@@ -1594,44 +1753,58 @@
 
                 <div class="header-actions">
                     <!-- + Add Question Header Button -->
-                    <button class="btn-action-pill primary" onclick="openModal('modal-add-question')" style="box-shadow: 0 4px 12px var(--primary-glow); padding: 8px 16px;">
+                    <button class="btn-action-pill primary" onclick="openModal('modal-add-question')"
+                        style="box-shadow: 0 4px 12px var(--primary-glow); padding: 8px 16px;">
                         <span>➕ Add Question</span>
                     </button>
 
                     <!-- Search Bar -->
                     <div class="admin-search-wrapper">
-                        <svg class="search-icon-svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        <svg class="search-icon-svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                        <input type="text" class="admin-search-input" placeholder="Search questions, topics..." oninput="handleGlobalSearch(this.value)">
+                        <input type="text" class="admin-search-input" placeholder="Search questions, topics..."
+                            oninput="handleGlobalSearch(this.value)">
                     </div>
 
                     <!-- Notification Bell -->
                     <div style="position: relative;">
                         <button class="btn-icon" id="admin-notif-btn" aria-label="Notifications">
-                            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
                             <span class="notification-badge-dot"></span>
                         </button>
-                        
+
                         <div class="admin-dropdown-menu" id="admin-notif-dropdown">
-                            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-subtle); padding-bottom:8px; font-weight:700; font-size:0.85rem;">
+                            <div
+                                style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-subtle); padding-bottom:8px; font-weight:700; font-size:0.85rem;">
                                 <span>Platform Alerts (3)</span>
-                                <a href="javascript:void(0)" style="color:var(--primary); font-size:0.75rem;" onclick="dismissAdminNotifs()">Mark all read</a>
+                                <a href="javascript:void(0)" style="color:var(--primary); font-size:0.75rem;"
+                                    onclick="dismissAdminNotifs()">Mark all read</a>
                             </div>
                             <div style="font-size:0.8rem; display:flex; flex-direction:column; gap:8px;">
-                                <div style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--accent-amber);">
+                                <div
+                                    style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--accent-amber);">
                                     <strong>💳 18 pending student payments</strong>
-                                    <div style="color:var(--text-muted); font-size:0.72rem;">Razorpay webhook verification queued</div>
+                                    <div style="color:var(--text-muted); font-size:0.72rem;">Razorpay webhook
+                                        verification queued</div>
                                 </div>
-                                <div style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--accent-green);">
+                                <div
+                                    style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--accent-green);">
                                     <strong>👨‍💻 45 new coding submissions</strong>
-                                    <div style="color:var(--text-muted); font-size:0.72rem;">Top performer: TCS Mock Series</div>
+                                    <div style="color:var(--text-muted); font-size:0.72rem;">Top performer: TCS Mock
+                                        Series</div>
                                 </div>
-                                <div style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--primary);">
+                                <div
+                                    style="padding:8px; background:var(--surface-alt); border-radius:6px; border-left:3px solid var(--primary);">
                                     <strong>🔒 System backup completed</strong>
-                                    <div style="color:var(--text-muted); font-size:0.72rem;">Database synced successfully at 04:00 AM</div>
+                                    <div style="color:var(--text-muted); font-size:0.72rem;">Database synced
+                                        successfully at 04:00 AM</div>
                                 </div>
                             </div>
                         </div>
@@ -1639,17 +1812,29 @@
 
                     <!-- Profile Dropdown Pill -->
                     <div style="position:relative;">
-                        <div class="btn-icon" style="width:auto; padding:0 10px; gap:8px; cursor:pointer;" id="admin-profile-pill">
-                            <div class="admin-avatar-circle" style="width:26px; height:26px; font-size:0.75rem;">AD</div>
-                            <span style="font-size:0.85rem; font-weight:700; color:var(--text-main);">Administrator</span>
-                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        <div class="btn-icon" style="width:auto; padding:0 10px; gap:8px; cursor:pointer;"
+                            id="admin-profile-pill">
+                            <div class="admin-avatar-circle" style="width:26px; height:26px; font-size:0.75rem;">AD
+                            </div>
+                            <span
+                                style="font-size:0.85rem; font-weight:700; color:var(--text-main);">Administrator</span>
+                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
                         </div>
-                        
+
                         <div class="admin-dropdown-menu" id="admin-profile-dropdown" style="width:200px;">
-                            <a href="profile.html" style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">👤 My Profile</a>
-                            <a href="dashboard.html" style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">🎓 Student Portal</a>
+                            <a href="profile.html"
+                                style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">👤
+                                My Profile</a>
+                            <a href="dashboard.html"
+                                style="padding:6px 8px; font-size:0.85rem; font-weight:600; border-radius:6px; display:block;">🎓
+                                Student Portal</a>
                             <hr style="border:none; border-top:1px solid var(--border-subtle); margin:4px 0;">
-                            <a href="javascript:void(0)" onclick="adminLogout()" style="padding:6px 8px; font-size:0.85rem; font-weight:700; color:#ef4444; border-radius:6px; display:block;">🚪 Logout</a>
+                            <a href="javascript:void(0)" onclick="adminLogout()"
+                                style="padding:6px 8px; font-size:0.85rem; font-weight:700; color:#ef4444; border-radius:6px; display:block;">🚪
+                                Logout</a>
                         </div>
                     </div>
                 </div>
@@ -1676,11 +1861,14 @@
                 <div class="alert-strip">
                     <div class="alert-strip-left">
                         <span>⚠️</span>
-                        <span><strong>Platform Attention Needed:</strong> 18 pending subscription verifications and 124 expiring student accounts.</span>
+                        <span><strong>Platform Attention Needed:</strong> 18 pending subscription verifications and 124
+                            expiring student accounts.</span>
                         <span class="alert-tag-num">Action Required</span>
                     </div>
                     <div style="display:flex; gap:8px;">
-                        <button class="btn-action-pill" style="padding:4px 10px; font-size:0.78rem;" onclick="showToast('Loading platform verification queue...', 'info')">Review Alerts →</button>
+                        <button class="btn-action-pill" style="padding:4px 10px; font-size:0.78rem;"
+                            onclick="showToast('Loading platform verification queue...', 'info')">Review Alerts
+                            →</button>
                     </div>
                 </div>
 
@@ -1732,7 +1920,8 @@
                     <div class="card-header-row">
                         <div>
                             <h3 class="card-title">📈 Student Growth & Engagement</h3>
-                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Track new registrations vs daily active practice</p>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Track new
+                                registrations vs daily active practice</p>
                         </div>
                         <div class="filter-btn-group">
                             <button class="btn-filter active" onclick="switchStudentChart('today', this)">Today</button>
@@ -1751,11 +1940,17 @@
                     <div class="card-header-row" style="flex-wrap:wrap; gap:12px;">
                         <div>
                             <h3 class="card-title">📚 Question Bank & Question Creator</h3>
-                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Click on any category below to view all questions and options as a list, or add new questions</p>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Click on any category
+                                below to view all questions and options as a list, or add new questions</p>
                         </div>
-                        <div style="display:flex; gap:10px;">
-                            <button class="btn-action-pill primary" onclick="openCreateQuestionModal()" style="box-shadow:0 4px 12px var(--primary-glow);">
-                                <span>➕ Add Question</span>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <button class="btn-action-pill" onclick="openCreateQuestionModal('Aptitude')"
+                                style="background:#eff6ff; color:#2563eb; border:1.5px solid #bfdbfe; font-weight:700;">
+                                <span>➕ Add MCQ Question</span>
+                            </button>
+                            <button class="btn-action-pill primary" onclick="openCreateCodingQuestionModal()"
+                                style="box-shadow:0 4px 12px rgba(79, 70, 229, 0.3); background:#4f46e5; font-weight:700;">
+                                <span>👨‍💻 Add Coding Question</span>
                             </button>
                         </div>
                     </div>
@@ -1773,7 +1968,8 @@
                             </div>
                         </div>
 
-                        <div class="qbank-cat-card" id="cat-card-aptitude" onclick="selectQuestionCategoryTab('Aptitude')">
+                        <div class="qbank-cat-card" id="cat-card-aptitude"
+                            onclick="selectQuestionCategoryTab('Aptitude')">
                             <div class="qbank-cat-top">
                                 <div class="qbank-cat-icon" style="color:#2563eb; background:#eff6ff;">🧠</div>
                                 <span class="qbank-cat-count" id="count-aptitude-questions">0</span>
@@ -1784,7 +1980,8 @@
                             </div>
                         </div>
 
-                        <div class="qbank-cat-card" id="cat-card-technical" onclick="selectQuestionCategoryTab('Technical')">
+                        <div class="qbank-cat-card" id="cat-card-technical"
+                            onclick="selectQuestionCategoryTab('Technical')">
                             <div class="qbank-cat-top">
                                 <div class="qbank-cat-icon" style="color:#059669; background:#ecfdf5;">💻</div>
                                 <span class="qbank-cat-count" id="count-technical-questions">0</span>
@@ -1806,7 +2003,8 @@
                             </div>
                         </div>
 
-                        <div class="qbank-cat-card" id="cat-card-communication" onclick="selectQuestionCategoryTab('Communication')">
+                        <div class="qbank-cat-card" id="cat-card-communication"
+                            onclick="selectQuestionCategoryTab('Communication')">
                             <div class="qbank-cat-top">
                                 <div class="qbank-cat-icon" style="color:#d97706; background:#fffbeb;">🗣</div>
                                 <span class="qbank-cat-count" id="count-communication-questions">0</span>
@@ -1822,17 +2020,23 @@
                     <div class="qbank-toolbar">
                         <div class="qbank-toolbar-left">
                             <div class="admin-search-wrapper" style="width:240px; margin-bottom:0;">
-                                <svg class="search-icon-svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                <svg class="search-icon-svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
-                                <input type="text" id="qbank-search-input" class="admin-search-input" placeholder="Search questions or options..." oninput="handleQBankSearch(this.value)">
+                                <input type="text" id="qbank-search-input" class="admin-search-input"
+                                    placeholder="Search questions or options..."
+                                    oninput="handleQBankSearch(this.value)">
                             </div>
 
-                            <select id="qbank-topic-filter" class="admin-search-input" style="width:210px; margin-bottom:0;" onchange="handleQBankTopicFilter(this.value)">
+                            <select id="qbank-topic-filter" class="admin-search-input"
+                                style="width:210px; margin-bottom:0;" onchange="handleQBankTopicFilter(this.value)">
                                 <option value="all">🎯 All Topics</option>
                             </select>
 
-                            <select id="qbank-source-filter" class="admin-search-input" style="width:160px; margin-bottom:0;" onchange="handleQBankSourceFilter(this.value)">
+                            <select id="qbank-source-filter" class="admin-search-input"
+                                style="width:160px; margin-bottom:0;" onchange="handleQBankSourceFilter(this.value)">
                                 <option value="all">⚡ All Sources</option>
                                 <option value="custom">👤 Admin Created</option>
                                 <option value="standard">🏛️ Platform Core</option>
@@ -1840,15 +2044,18 @@
                         </div>
 
                         <div class="qbank-toolbar-right">
-                            <span id="qbank-status-counter" style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">
+                            <span id="qbank-status-counter"
+                                style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">
                                 Loading questions...
                             </span>
 
                             <div class="qbank-view-toggle">
-                                <button type="button" class="qbank-view-btn active" id="btn-view-cards" onclick="setQBankViewMode('cards')" title="Card View (with options)">
+                                <button type="button" class="qbank-view-btn active" id="btn-view-cards"
+                                    onclick="setQBankViewMode('cards')" title="Card View (with options)">
                                     <span>📄 Cards</span>
                                 </button>
-                                <button type="button" class="qbank-view-btn" id="btn-view-table" onclick="setQBankViewMode('table')" title="Compact Table">
+                                <button type="button" class="qbank-view-btn" id="btn-view-table"
+                                    onclick="setQBankViewMode('table')" title="Compact Table">
                                     <span>🗂 Table</span>
                                 </button>
                             </div>
@@ -1954,14 +2161,16 @@
             <div class="modal-header">
                 <div>
                     <h3 id="modal-question-header-title">➕ Create New Question</h3>
-                    <p id="modal-question-header-desc" style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Add questions directly into the platform database for student practice & tests</p>
+                    <p id="modal-question-header-desc"
+                        style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Add questions directly into
+                        the platform database for student practice & tests</p>
                 </div>
                 <span class="modal-close-btn" onclick="closeModal('modal-add-question')">&times;</span>
             </div>
-            
+
             <form id="form-create-question" onsubmit="handleSaveQuestionSubmit(event)">
                 <input type="hidden" id="edit-question-id" value="">
-                
+
                 <!-- STEP 1: SELECT CATEGORY -->
                 <div style="margin-bottom:16px;">
                     <div class="step-heading">
@@ -1969,19 +2178,23 @@
                         <span>Select Category *</span>
                     </div>
                     <div class="category-select-grid">
-                        <div class="cat-card-btn active" data-category="Aptitude" onclick="selectQuestionCategory('Aptitude', this)">
+                        <div class="cat-card-btn active" data-category="Aptitude"
+                            onclick="selectQuestionCategory('Aptitude', this)">
                             <span class="cat-icon">🧠</span>
                             <span class="cat-name">Aptitude</span>
                         </div>
-                        <div class="cat-card-btn" data-category="Technical" onclick="selectQuestionCategory('Technical', this)">
+                        <div class="cat-card-btn" data-category="Technical"
+                            onclick="selectQuestionCategory('Technical', this)">
                             <span class="cat-icon">💻</span>
                             <span class="cat-name">Technical</span>
                         </div>
-                        <div class="cat-card-btn" data-category="Coding" onclick="selectQuestionCategory('Coding', this)">
+                        <div class="cat-card-btn" data-category="Coding"
+                            onclick="selectQuestionCategory('Coding', this)">
                             <span class="cat-icon">👨‍💻</span>
                             <span class="cat-name">Coding</span>
                         </div>
-                        <div class="cat-card-btn" data-category="Communication" onclick="selectQuestionCategory('Communication', this)">
+                        <div class="cat-card-btn" data-category="Communication"
+                            onclick="selectQuestionCategory('Communication', this)">
                             <span class="cat-icon">🗣</span>
                             <span class="cat-name">Communication</span>
                         </div>
@@ -1996,42 +2209,51 @@
                         <span>Select or Enter Topic *</span>
                     </div>
                     <div style="display:flex; flex-direction:column; gap:8px;">
-                        <select id="new-q-topic-select" class="admin-search-input" style="width:100%;" onchange="handleTopicSelectChange(this.value)">
+                        <select id="new-q-topic-select" class="admin-search-input" style="width:100%;"
+                            onchange="handleTopicSelectChange(this.value)">
                             <!-- Populated dynamically based on category -->
                         </select>
                         <div id="new-q-custom-topic-wrapper" style="display:none;">
-                            <input type="text" id="new-q-topic-custom" class="admin-search-input" style="width:100%;" placeholder="Type new custom topic name (e.g. Dynamic Programming, Time & Work)...">
+                            <input type="text" id="new-q-topic-custom" class="admin-search-input" style="width:100%;"
+                                placeholder="Type new custom topic name (e.g. Dynamic Programming, Time & Work)...">
                         </div>
                     </div>
                 </div>
 
-                <!-- STEP 3: ADD THE QUESTION & 4 OPTIONS -->
-                <div style="margin-bottom:16px;">
+                <!-- STEP 3A: MCQ FIELDS (Aptitude, Technical, Communication) -->
+                <div id="section-mcq-fields" style="margin-bottom:16px;">
                     <div class="step-heading">
                         <span class="step-badge">Step 3</span>
                         <span>Add Question Statement & 4 Answer Options *</span>
                     </div>
-                    
+
                     <!-- Question statement -->
                     <div style="margin-bottom:12px;">
-                        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Question Problem Statement</label>
-                        <textarea id="new-q-statement" class="admin-search-input" style="width:100%; height:75px; resize:vertical;" placeholder="Enter question statement (e.g. If a train travels 120 km in 2 hours, what is its speed?)..." required></textarea>
+                        <label
+                            style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Question
+                            Problem Statement</label>
+                        <textarea id="new-q-statement" class="admin-search-input"
+                            style="width:100%; height:75px; resize:vertical;"
+                            placeholder="Enter question statement (e.g. If a train travels 120 km in 2 hours, what is its speed?)..."></textarea>
                     </div>
 
                     <!-- 4 Options -->
                     <div class="option-input-group">
                         <div class="option-item-row is-correct" id="opt-row-0">
                             <span class="option-letter-badge">A</span>
-                            <input type="text" id="new-q-opt-0" class="option-input-field" placeholder="Enter text for Option A" required oninput="validateOptionInputs()">
+                            <input type="text" id="new-q-opt-0" class="option-input-field"
+                                placeholder="Enter text for Option A" oninput="validateOptionInputs()">
                             <label class="correct-radio-label">
-                                <input type="radio" name="correct_option" value="0" checked onchange="updateCorrectOptionUI(0)">
+                                <input type="radio" name="correct_option" value="0" checked
+                                    onchange="updateCorrectOptionUI(0)">
                                 <span>Correct Answer</span>
                             </label>
                         </div>
 
                         <div class="option-item-row" id="opt-row-1">
                             <span class="option-letter-badge">B</span>
-                            <input type="text" id="new-q-opt-1" class="option-input-field" placeholder="Enter text for Option B" required oninput="validateOptionInputs()">
+                            <input type="text" id="new-q-opt-1" class="option-input-field"
+                                placeholder="Enter text for Option B" oninput="validateOptionInputs()">
                             <label class="correct-radio-label">
                                 <input type="radio" name="correct_option" value="1" onchange="updateCorrectOptionUI(1)">
                                 <span>Correct Answer</span>
@@ -2040,7 +2262,8 @@
 
                         <div class="option-item-row" id="opt-row-2">
                             <span class="option-letter-badge">C</span>
-                            <input type="text" id="new-q-opt-2" class="option-input-field" placeholder="Enter text for Option C" required oninput="validateOptionInputs()">
+                            <input type="text" id="new-q-opt-2" class="option-input-field"
+                                placeholder="Enter text for Option C" oninput="validateOptionInputs()">
                             <label class="correct-radio-label">
                                 <input type="radio" name="correct_option" value="2" onchange="updateCorrectOptionUI(2)">
                                 <span>Correct Answer</span>
@@ -2049,7 +2272,8 @@
 
                         <div class="option-item-row" id="opt-row-3">
                             <span class="option-letter-badge">D</span>
-                            <input type="text" id="new-q-opt-3" class="option-input-field" placeholder="Enter text for Option D" required oninput="validateOptionInputs()">
+                            <input type="text" id="new-q-opt-3" class="option-input-field"
+                                placeholder="Enter text for Option D" oninput="validateOptionInputs()">
                             <label class="correct-radio-label">
                                 <input type="radio" name="correct_option" value="3" onchange="updateCorrectOptionUI(3)">
                                 <span>Correct Answer</span>
@@ -2058,9 +2282,98 @@
                     </div>
                 </div>
 
+                <!-- STEP 3B: CODING FIELDS (Removed MCQ Options A/B/C/D completely; provides Code Editor and 10 Test Cases) -->
+                <div id="section-coding-fields" style="display:none; margin-bottom:16px;">
+                    <div class="step-heading">
+                        <span class="step-badge">Step 3</span>
+                        <span>Coding Problem Details, Solution Code &amp; 10 Test Cases *</span>
+                    </div>
+
+                    <!-- Problem Title & Difficulty -->
+                    <div style="display:grid; grid-template-columns: 2fr 1fr; gap:10px; margin-bottom:12px;">
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Problem Title *</label>
+                            <input type="text" id="new-q-coding-title" class="admin-search-input" style="width:100%;" placeholder="e.g. Two Sum, Factorial Calculator, Reverse String">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Difficulty</label>
+                            <select id="new-q-coding-difficulty" class="admin-search-input" style="width:100%;">
+                                <option value="Easy">Easy (500 pts)</option>
+                                <option value="Medium">Medium (750 pts)</option>
+                                <option value="Hard">Hard (1000 pts)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Problem Statement & Constraints -->
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Problem Statement &amp; Constraints *</label>
+                        <textarea id="new-q-coding-statement" class="admin-search-input" style="width:100%; height:75px; resize:vertical;" placeholder="Describe the problem, input format, output format, and constraints (e.g. 1 <= N <= 10^5)..."></textarea>
+                    </div>
+
+                    <!-- Reference Solution Code -->
+                    <div style="margin-bottom:12px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">Authoritative Solution Code *</label>
+                            <select id="new-q-solution-lang" class="admin-search-input" style="width:130px; padding:3px 8px; font-size:0.75rem;">
+                                <option value="python">Python 3</option>
+                                <option value="cpp">C++</option>
+                                <option value="java">Java</option>
+                                <option value="c">C</option>
+                            </select>
+                        </div>
+                        <textarea id="new-q-solution-code" class="admin-search-input" style="width:100%; height:90px; font-family:var(--font-mono); font-size:0.82rem; resize:vertical; background:#0f172a; color:#f8fafc; border-color:#334155;" placeholder="def solution(nums, target):&#10;    # Write correct Python reference solution..."></textarea>
+                    </div>
+
+                    <!-- Starter Code Template -->
+                    <div style="margin-bottom:14px;">
+                        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Starter Code Template (Given to Students)</label>
+                        <textarea id="new-q-starter-code" class="admin-search-input" style="width:100%; height:60px; font-family:var(--font-mono); font-size:0.82rem; resize:vertical; background:#0f172a; color:#94a3b8; border-color:#334155;" placeholder="# Write your solution here&#10;def solution():&#10;    pass"></textarea>
+                    </div>
+
+                    <!-- 10 Test Cases Configuration (3 Visible + 7 Hidden) -->
+                    <div style="border:1.5px solid var(--border-subtle); border-radius:var(--radius-lg); padding:14px; background:var(--surface-alt);">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                            <div>
+                                <h4 style="font-size:0.9rem; font-weight:800; color:var(--text-main); display:flex; align-items:center; gap:6px;">
+                                    <span>🧪 10 Test Cases &amp; Expected Outputs</span>
+                                </h4>
+                                <p style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">
+                                    <strong>3 Visible Test Cases</strong> are displayed to the candidate. The remaining <strong>7 Hidden Test Cases</strong> are confidential and evaluated automatically when submitted.
+                                </p>
+                            </div>
+                            <button type="button" class="btn-action-pill" onclick="autoFillSampleTestCases()" style="background:#ffffff; font-size:0.75rem; padding:4px 10px;">
+                                <span>⚡ Auto-Fill 10 Test Cases</span>
+                            </button>
+                        </div>
+
+                        <!-- 3 Visible Test Cases -->
+                        <div style="margin-bottom:12px;">
+                            <div style="font-size:0.75rem; font-weight:800; color:#15803d; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+                                🟢 3 Visible Test Cases (Sample Examples for Student)
+                            </div>
+                            <div id="visible-testcases-inputs">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+                        </div>
+
+                        <!-- 7 Hidden Test Cases -->
+                        <div>
+                            <div style="font-size:0.75rem; font-weight:800; color:#b45309; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
+                                🔒 7 Hidden Test Cases (Confidential Evaluation &amp; Edge Cases)
+                            </div>
+                            <div id="hidden-testcases-inputs">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- STEP 4: SAVE BUTTON -->
-                <div class="modal-actions" style="margin-top:20px; padding-top:14px; border-top:1px solid var(--border-subtle);">
-                    <button type="button" class="btn-action-pill" onclick="closeModal('modal-add-question')">Cancel</button>
+                <div class="modal-actions"
+                    style="margin-top:20px; padding-top:14px; border-top:1px solid var(--border-subtle);">
+                    <button type="button" class="btn-action-pill"
+                        onclick="closeModal('modal-add-question')">Cancel</button>
                     <button type="submit" class="btn-action-pill primary" style="padding:10px 22px; font-size:0.9rem;">
                         <span>💾 Save Question (OK)</span>
                     </button>
@@ -2080,7 +2393,8 @@
                 <div style="display:flex; flex-direction:column; gap:14px; font-size:0.85rem;">
                     <div>
                         <label style="font-weight:700; color:var(--text-muted);">Problem Title *</label>
-                        <input type="text" class="admin-search-input" style="width:100%; margin-top:4px;" placeholder="e.g. Valid Parentheses" required>
+                        <input type="text" class="admin-search-input" style="width:100%; margin-top:4px;"
+                            placeholder="e.g. Valid Parentheses" required>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                         <div>
@@ -2103,7 +2417,8 @@
                     </div>
                 </div>
                 <div class="modal-actions">
-                    <button type="button" class="btn-action-pill" onclick="closeModal('modal-add-coding')">Cancel</button>
+                    <button type="button" class="btn-action-pill"
+                        onclick="closeModal('modal-add-coding')">Cancel</button>
                     <button type="submit" class="btn-action-pill primary">Add Coding Problem</button>
                 </div>
             </form>
@@ -2121,21 +2436,25 @@
                 <div style="display:flex; flex-direction:column; gap:14px; font-size:0.85rem;">
                     <div>
                         <label style="font-weight:700; color:var(--text-muted);">Assessment Title *</label>
-                        <input type="text" class="admin-search-input" style="width:100%; margin-top:4px;" placeholder="e.g. TCS NQT Company Mock Series 2" required>
+                        <input type="text" class="admin-search-input" style="width:100%; margin-top:4px;"
+                            placeholder="e.g. TCS NQT Company Mock Series 2" required>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                         <div>
                             <label style="font-weight:700; color:var(--text-muted);">Duration (Mins)</label>
-                            <input type="number" class="admin-search-input" style="width:100%; margin-top:4px;" value="60" required>
+                            <input type="number" class="admin-search-input" style="width:100%; margin-top:4px;"
+                                value="60" required>
                         </div>
                         <div>
                             <label style="font-weight:700; color:var(--text-muted);">Questions Count</label>
-                            <input type="number" class="admin-search-input" style="width:100%; margin-top:4px;" value="30" required>
+                            <input type="number" class="admin-search-input" style="width:100%; margin-top:4px;"
+                                value="30" required>
                         </div>
                     </div>
                 </div>
                 <div class="modal-actions">
-                    <button type="button" class="btn-action-pill" onclick="closeModal('modal-create-assessment')">Cancel</button>
+                    <button type="button" class="btn-action-pill"
+                        onclick="closeModal('modal-create-assessment')">Cancel</button>
                     <button type="submit" class="btn-action-pill primary">Publish Assessment</button>
                 </div>
             </form>
@@ -2150,11 +2469,14 @@
                 <span class="modal-close-btn" onclick="closeModal('modal-create-daily')">&times;</span>
             </div>
             <div style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; margin-bottom:16px;">
-                Generate the standard 21-question daily drill pack (10 Aptitude, 5 Technical, 5 Communication, 1 Coding problem) for tomorrow.
+                Generate the standard 21-question daily drill pack (10 Aptitude, 5 Technical, 5 Communication, 1 Coding
+                problem) for tomorrow.
             </div>
             <div class="modal-actions">
                 <button type="button" class="btn-action-pill" onclick="closeModal('modal-create-daily')">Cancel</button>
-                <button type="button" class="btn-action-pill primary" onclick="showToast('Daily Practice pack for tomorrow generated & scheduled! 📅', 'success'); closeModal('modal-create-daily');">Schedule Drill Pack</button>
+                <button type="button" class="btn-action-pill primary"
+                    onclick="showToast('Daily Practice pack for tomorrow generated & scheduled! 📅', 'success'); closeModal('modal-create-daily');">Schedule
+                    Drill Pack</button>
             </div>
         </div>
     </div>
@@ -2225,6 +2547,7 @@
             setupDropdowns();
             setupLiveDate();
             initQuestionCreator();
+            renderTestCaseInputRows();
             populateQBankTopicFilter('all');
             renderQuestionBankView();
         });
@@ -2245,22 +2568,107 @@
             populateTopics('Aptitude');
         }
 
+        function renderTestCaseInputRows() {
+            const visibleContainer = document.getElementById('visible-testcases-inputs');
+            const hiddenContainer = document.getElementById('hidden-testcases-inputs');
+            if (!visibleContainer || !hiddenContainer) return;
+
+            visibleContainer.innerHTML = '';
+            hiddenContainer.innerHTML = '';
+
+            // 3 Visible Test Cases (indices 0, 1, 2)
+            for (let i = 0; i < 3; i++) {
+                const card = document.createElement('div');
+                card.className = 'testcase-input-card is-visible-case';
+                card.innerHTML = `
+                    <div class="testcase-header-pill">
+                        <span style="color:#166534;">🟢 Test Case ${i + 1} (Visible Example)</span>
+                        <span style="font-size:0.68rem; color:#15803d; font-weight:700;">Visible to Candidate</span>
+                    </div>
+                    <div class="testcase-grid-inputs">
+                        <div>
+                            <input type="text" id="new-q-tc-in-${i}" class="tc-field-input" placeholder="Input (e.g. 3 7)">
+                        </div>
+                        <div>
+                            <input type="text" id="new-q-tc-out-${i}" class="tc-field-input" placeholder="Expected Output (e.g. 10)">
+                        </div>
+                    </div>
+                `;
+                visibleContainer.appendChild(card);
+            }
+
+            // 7 Hidden Test Cases (indices 3 to 9)
+            for (let i = 3; i < 10; i++) {
+                const card = document.createElement('div');
+                card.className = 'testcase-input-card is-hidden-case';
+                card.innerHTML = `
+                    <div class="testcase-header-pill">
+                        <span style="color:#92400e;">🔒 Test Case ${i + 1} (Hidden Evaluation)</span>
+                        <span style="font-size:0.68rem; color:#b45309; font-weight:700;">Secret Case</span>
+                    </div>
+                    <div class="testcase-grid-inputs">
+                        <div>
+                            <input type="text" id="new-q-tc-in-${i}" class="tc-field-input" placeholder="Input (e.g. 100 200)">
+                        </div>
+                        <div>
+                            <input type="text" id="new-q-tc-out-${i}" class="tc-field-input" placeholder="Expected Output (e.g. 300)">
+                        </div>
+                    </div>
+                `;
+                hiddenContainer.appendChild(card);
+            }
+        }
+
+        function autoFillSampleTestCases() {
+            const samples = [
+                { in: "3 7", out: "10" },
+                { in: "100 200", out: "300" },
+                { in: "-5 15", out: "10" },
+                { in: "0 0", out: "0" },
+                { in: "-100 -50", out: "-150" },
+                { in: "1000000 2000000", out: "3000000" },
+                { in: "999 -999", out: "0" },
+                { in: "12345 67890", out: "80235" },
+                { in: "-50000 50000", out: "0" },
+                { in: "987654321 123456789", out: "1111111110" }
+            ];
+
+            for (let i = 0; i < 10; i++) {
+                const inEl = document.getElementById(`new-q-tc-in-${i}`);
+                const outEl = document.getElementById(`new-q-tc-out-${i}`);
+                if (inEl && outEl && samples[i]) {
+                    inEl.value = samples[i].in;
+                    outEl.value = samples[i].out;
+                }
+            }
+            showToast('10 test cases auto-filled (3 Visible + 7 Hidden)! 🧪', 'info');
+        }
+
         function openCreateQuestionModal(cat) {
             const editIdInput = document.getElementById('edit-question-id');
             if (editIdInput) editIdInput.value = '';
-            
+
             const titleEl = document.getElementById('modal-question-header-title');
             if (titleEl) titleEl.textContent = '➕ Create New Question';
-            
+
             const descEl = document.getElementById('modal-question-header-desc');
             if (descEl) descEl.textContent = 'Add questions directly into the platform database for student practice & tests';
 
             document.getElementById('form-create-question').reset();
-            
+
             const targetCat = (cat && cat !== 'all') ? cat : ((currentQuestionBankFilter !== 'all') ? currentQuestionBankFilter : 'Aptitude');
             selectQuestionCategory(targetCat);
             updateCorrectOptionUI(0);
             openModal('modal-add-question');
+        }
+
+        function openCreateCodingQuestionModal() {
+            openCreateQuestionModal('Coding');
+            const titleEl = document.getElementById('modal-question-header-title');
+            if (titleEl) titleEl.textContent = '👨‍💻 Add Coding Challenge & 10 Test Cases';
+
+            const descEl = document.getElementById('modal-question-header-desc');
+            if (descEl) descEl.textContent = 'Create a coding challenge with solution code and configure 10 test cases (3 visible + 7 hidden)';
         }
 
         // STEP 1: Select Category
@@ -2268,7 +2676,7 @@
             currentSelectedCategory = category;
             const catInput = document.getElementById('new-q-category');
             if (catInput) catInput.value = category;
-            
+
             // Highlight active button
             document.querySelectorAll('#modal-add-question .cat-card-btn').forEach(btn => btn.classList.remove('active'));
             if (btnElement) {
@@ -2276,6 +2684,49 @@
             } else {
                 const target = document.querySelector(`#modal-add-question .cat-card-btn[data-category="${category}"]`);
                 if (target) target.classList.add('active');
+            }
+
+            // Toggle between MCQ Fields and Coding Fields
+            const mcqSection = document.getElementById('section-mcq-fields');
+            const codingSection = document.getElementById('section-coding-fields');
+
+            if (category === 'Coding') {
+                if (mcqSection) mcqSection.style.display = 'none';
+                if (codingSection) codingSection.style.display = 'block';
+
+                // Remove required from MCQ inputs
+                const stmt = document.getElementById('new-q-statement');
+                if (stmt) stmt.required = false;
+                for (let i = 0; i < 4; i++) {
+                    const opt = document.getElementById(`new-q-opt-${i}`);
+                    if (opt) opt.required = false;
+                }
+
+                // Ensure coding fields required
+                const codingTitle = document.getElementById('new-q-coding-title');
+                const codingStmt = document.getElementById('new-q-coding-statement');
+                if (codingTitle) codingTitle.required = true;
+                if (codingStmt) codingStmt.required = true;
+
+                // Ensure test case rows rendered
+                renderTestCaseInputRows();
+            } else {
+                if (mcqSection) mcqSection.style.display = 'block';
+                if (codingSection) codingSection.style.display = 'none';
+
+                // Add required to MCQ inputs
+                const stmt = document.getElementById('new-q-statement');
+                if (stmt) stmt.required = true;
+                for (let i = 0; i < 4; i++) {
+                    const opt = document.getElementById(`new-q-opt-${i}`);
+                    if (opt) opt.required = true;
+                }
+
+                // Remove required from coding fields
+                const codingTitle = document.getElementById('new-q-coding-title');
+                const codingStmt = document.getElementById('new-q-coding-statement');
+                if (codingTitle) codingTitle.required = false;
+                if (codingStmt) codingStmt.required = false;
             }
 
             // STEP 2: Update Topics list automatically
@@ -2291,7 +2742,7 @@
 
             selectEl.innerHTML = '';
             const topics = PREDEFINED_TOPICS[category] || ['General'];
-            
+
             let hasPredefinedMatch = false;
             topics.forEach((topic) => {
                 const opt = document.createElement('option');
@@ -2373,27 +2824,71 @@
             const topicCustom = document.getElementById('new-q-topic-custom').value.trim();
             const topic = (topicSelect === '__custom__') ? (topicCustom || 'General') : topicSelect;
 
-            const statement = document.getElementById('new-q-statement').value.trim();
-            const opt0 = document.getElementById('new-q-opt-0').value.trim();
-            const opt1 = document.getElementById('new-q-opt-1').value.trim();
-            const opt2 = document.getElementById('new-q-opt-2').value.trim();
-            const opt3 = document.getElementById('new-q-opt-3').value.trim();
+            let qData = {};
 
-            const correctRadio = document.querySelector('input[name="correct_option"]:checked');
-            const correctIndex = correctRadio ? parseInt(correctRadio.value) : 0;
+            if (category === 'Coding') {
+                const title = document.getElementById('new-q-coding-title').value.trim() || topic;
+                const difficulty = document.getElementById('new-q-coding-difficulty').value;
+                const statement = document.getElementById('new-q-coding-statement').value.trim();
+                const solutionLang = document.getElementById('new-q-solution-lang').value;
+                const solutionCode = document.getElementById('new-q-solution-code').value.trim();
+                const starterCode = document.getElementById('new-q-starter-code').value.trim();
 
-            if (!statement || !opt0 || !opt1 || !opt2 || !opt3) {
-                showToast('Please fill in question problem statement and all 4 options.', 'error');
-                return;
+                if (!statement && !title) {
+                    showToast('Please provide a problem statement or title for the coding question.', 'error');
+                    return;
+                }
+
+                // Gather 10 test cases
+                const testCases = [];
+                for (let i = 0; i < 10; i++) {
+                    const inputVal = document.getElementById(`new-q-tc-in-${i}`)?.value || '';
+                    const outputVal = document.getElementById(`new-q-tc-out-${i}`)?.value || '';
+                    testCases.push({
+                        id: i + 1,
+                        input: inputVal,
+                        output: outputVal,
+                        isVisible: (i < 3) // 3 visible, 7 hidden
+                    });
+                }
+
+                qData = {
+                    category: 'Coding',
+                    topic: topic,
+                    title: title,
+                    difficulty: difficulty,
+                    question: statement || title,
+                    isCoding: true,
+                    language: solutionLang,
+                    solutionCode: solutionCode,
+                    starterCode: starterCode,
+                    testCases: testCases
+                };
+            } else {
+                // MCQ validation
+                const statement = document.getElementById('new-q-statement').value.trim();
+                const opt0 = document.getElementById('new-q-opt-0').value.trim();
+                const opt1 = document.getElementById('new-q-opt-1').value.trim();
+                const opt2 = document.getElementById('new-q-opt-2').value.trim();
+                const opt3 = document.getElementById('new-q-opt-3').value.trim();
+
+                const correctRadio = document.querySelector('input[name="correct_option"]:checked');
+                const correctIndex = correctRadio ? parseInt(correctRadio.value) : 0;
+
+                if (!statement || !opt0 || !opt1 || !opt2 || !opt3) {
+                    showToast('Please fill in question problem statement and all 4 options.', 'error');
+                    return;
+                }
+
+                qData = {
+                    category: category,
+                    topic: topic,
+                    question: statement,
+                    isCoding: false,
+                    options: [opt0, opt1, opt2, opt3],
+                    correct: correctIndex
+                };
             }
-
-            const qData = {
-                category: category,
-                topic: topic,
-                question: statement,
-                options: [opt0, opt1, opt2, opt3],
-                correct: correctIndex
-            };
 
             if (editId) {
                 // Update existing question
@@ -2460,7 +2955,7 @@
             if (!selectEl) return;
 
             selectEl.innerHTML = '<option value="all">🎯 All Topics</option>';
-            
+
             let topicList = [];
             if (category === 'all') {
                 Object.keys(PREDEFINED_TOPICS).forEach(cat => {
@@ -2527,13 +3022,30 @@
             }
         }
 
+        function toggleHiddenTestCasesReveal(tcBoxId) {
+            const el = document.getElementById(tcBoxId);
+            if (el) {
+                if (el.style.display === 'none' || el.style.display === '') {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            }
+        }
+
+        function copyCodeSnippet(snippetText) {
+            navigator.clipboard.writeText(snippetText).then(() => {
+                showToast('Solution code copied to clipboard! 📋', 'info');
+            });
+        }
+
         function renderQuestionBankView() {
             const cardsContainer = document.getElementById('qbank-cards-container');
             const tbody = document.getElementById('questions-bank-table-body');
             const counterEl = document.getElementById('qbank-status-counter');
 
             const customQuestions = getCustomQuestions();
-            
+
             // Base Standard questions
             const aptBase = QUESTIONS.aptitude || [];
             const techBase = QUESTIONS['technical-practice'] || [];
@@ -2565,11 +3077,19 @@
 
             // 1. First add Custom Questions
             customQuestions.forEach(q => {
+                const isCod = (q.category === 'Coding' || q.isCoding === true);
                 masterList.push({
                     id: q.id,
                     category: q.category || 'Aptitude',
                     topic: q.topic || 'General Topic',
+                    title: q.title || q.topic || 'Question',
+                    difficulty: q.difficulty || 'Medium',
                     question: q.question,
+                    isCoding: isCod,
+                    language: q.language || 'python',
+                    solutionCode: q.solutionCode || '',
+                    starterCode: q.starterCode || '',
+                    testCases: q.testCases || [],
                     options: q.options || [],
                     correct: parseInt(q.correct) || 0,
                     isCustom: true,
@@ -2578,13 +3098,36 @@
             });
 
             // 2. Then add Standard Base Questions
-            const appendBaseQuestions = (arr, catName, defaultTopic) => {
+            // Standard Coding Questions
+            codeBase.forEach((q, idx) => {
+                masterList.push({
+                    id: q.id || `std_coding_${idx}`,
+                    category: 'Coding',
+                    topic: q.topic || 'Python Basics',
+                    title: q.title || 'Coding Problem',
+                    difficulty: q.difficulty || 'Easy',
+                    question: q.question,
+                    isCoding: true,
+                    language: q.language || 'python',
+                    solutionCode: q.solutionCode || '',
+                    starterCode: q.starterCode || '',
+                    testCases: q.testCases || [],
+                    options: [],
+                    correct: 0,
+                    isCustom: false
+                });
+            });
+
+            // Standard MCQ Questions
+            const appendBaseMCQs = (arr, catName, defaultTopic) => {
                 arr.forEach((q, idx) => {
                     masterList.push({
                         id: `std_${catName.toLowerCase()}_${idx}`,
                         category: catName,
                         topic: q.topic || defaultTopic,
+                        title: defaultTopic,
                         question: q.question,
+                        isCoding: false,
                         options: q.options || [],
                         correct: parseInt(q.correct) || 0,
                         isCustom: false
@@ -2592,10 +3135,9 @@
                 });
             };
 
-            appendBaseQuestions(aptBase, 'Aptitude', 'Quantitative & Logic');
-            appendBaseQuestions(techBase, 'Technical', 'Core CS & Data Structures');
-            appendBaseQuestions(codeBase, 'Coding', 'Python & Code Basics');
-            appendBaseQuestions(commBase, 'Communication', 'Verbal & Professional English');
+            appendBaseMCQs(aptBase, 'Aptitude', 'Quantitative & Logic');
+            appendBaseMCQs(techBase, 'Technical', 'Core CS & Data Structures');
+            appendBaseMCQs(commBase, 'Communication', 'Verbal & Professional English');
 
             // Apply Category Filter
             let displayList = masterList;
@@ -2620,8 +3162,9 @@
                 displayList = displayList.filter(q => {
                     const qTxt = (q.question || '').toLowerCase();
                     const topicTxt = (q.topic || '').toLowerCase();
+                    const titleTxt = (q.title || '').toLowerCase();
                     const optTxt = (q.options || []).join(' ').toLowerCase();
-                    return qTxt.includes(currentQBankSearch) || topicTxt.includes(currentQBankSearch) || optTxt.includes(currentQBankSearch);
+                    return qTxt.includes(currentQBankSearch) || topicTxt.includes(currentQBankSearch) || titleTxt.includes(currentQBankSearch) || optTxt.includes(currentQBankSearch);
                 });
             }
 
@@ -2632,7 +3175,7 @@
             }
 
             // -------------------------------------------------------------
-            // 1. RENDER QUESTION CARDS (WITH OPTIONS EXPLICITLY DISPLAYED)
+            // 1. RENDER QUESTION CARDS
             // -------------------------------------------------------------
             if (cardsContainer) {
                 if (displayList.length === 0) {
@@ -2653,7 +3196,7 @@
                     displayList.forEach((q, index) => {
                         const card = document.createElement('div');
                         card.className = 'qbank-qcard';
-                        
+
                         // Category styling
                         const catLower = (q.category || '').toLowerCase();
                         let catClass = 'badge-cat-aptitude';
@@ -2662,18 +3205,115 @@
                         else if (catLower.includes('cod') || catLower.includes('prog')) { catClass = 'badge-cat-coding'; catIcon = '👨‍💻'; }
                         else if (catLower.includes('comm')) { catClass = 'badge-cat-communication'; catIcon = '🗣'; }
 
-                        // Generate Options HTML (All 4 options cleanly laid out with correct answer highlighted)
-                        const optionsHtml = (q.options || []).map((optText, optIdx) => {
-                            const isCorrect = (optIdx === q.correct);
-                            const letter = String.fromCharCode(65 + optIdx);
-                            return `
-                                <div class="qbank-opt-item ${isCorrect ? 'is-correct' : ''}">
-                                    <span class="qbank-opt-letter">${letter}</span>
-                                    <span class="qbank-opt-text">${escapeHtml(optText)}</span>
-                                    ${isCorrect ? `<span class="qbank-correct-badge">✓ Correct Answer</span>` : ''}
+                        let mainContentHtml = '';
+
+                        if (q.isCoding || q.category === 'Coding') {
+                            // Render Coding problem details (NO multiple choice options!)
+                            const visibleTCs = (q.testCases || []).filter(tc => tc.isVisible !== false).slice(0, 3);
+                            const hiddenTCs = (q.testCases || []).filter(tc => tc.isVisible === false);
+                            const totalTCs = (q.testCases && q.testCases.length) ? q.testCases.length : 10;
+                            const hiddenBoxId = `hidden-tcs-box-${index}`;
+
+                            const visibleRows = visibleTCs.map(tc => `
+                                <tr>
+                                    <td><code>${escapeHtml(tc.input || '(empty)')}</code></td>
+                                    <td><code>${escapeHtml(tc.output || '(empty)')}</code></td>
+                                    <td><span style="color:#166534; font-weight:700; font-size:0.7rem;">🟢 Visible Sample</span></td>
+                                </tr>
+                            `).join('');
+
+                            const hiddenRows = hiddenTCs.map(tc => `
+                                <tr>
+                                    <td><code>${escapeHtml(tc.input || '(empty)')}</code></td>
+                                    <td><code>${escapeHtml(tc.output || '(empty)')}</code></td>
+                                    <td><span style="color:#b45309; font-weight:700; font-size:0.7rem;">🔒 Hidden Case</span></td>
+                                </tr>
+                            `).join('');
+
+                            const safeSolutionCode = escapeHtml(q.solutionCode || '# No solution code provided yet');
+
+                            mainContentHtml = `
+                                <!-- Reference Solution Code Box -->
+                                ${q.solutionCode ? `
+                                    <div class="qbank-code-preview-box">
+                                        <div class="qbank-code-header">
+                                            <span>💻 Reference Solution (${escapeHtml(q.language || 'Python')})</span>
+                                            <button class="copy-btn" onclick="copyCodeSnippet(\`${safeSolutionCode}\`)">📋 Copy Code</button>
+                                        </div>
+                                        <pre class="qbank-code-pre"><code>${safeSolutionCode}</code></pre>
+                                    </div>
+                                ` : ''}
+
+                                <!-- 10 Test Cases Container -->
+                                <div class="qbank-testcases-container">
+                                    <!-- 3 Visible Test Cases -->
+                                    <div class="testcases-visible-box">
+                                        <div class="testcases-header-label">
+                                            <span class="tc-visible-badge">👁️ 3 Visible Test Cases (Sample inputs for students)</span>
+                                            <span style="font-size:0.72rem; color:#166534; font-weight:700;">${visibleTCs.length}/3 Configured</span>
+                                        </div>
+                                        <table class="testcase-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Input</th>
+                                                    <th>Expected Output</th>
+                                                    <th>Visibility</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${visibleRows || '<tr><td colspan="3" style="color:var(--text-muted);">No visible samples configured</td></tr>'}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- 7 Hidden Test Cases Banner & Toggle -->
+                                    <div class="testcases-hidden-box">
+                                        <div class="testcases-header-label">
+                                            <span class="tc-hidden-badge">🔒 7 Hidden Evaluation Test Cases (Grading only)</span>
+                                            <button class="btn-table-action" style="font-size:0.7rem; padding:2px 6px;" onclick="toggleHiddenTestCasesReveal('${hiddenBoxId}')">
+                                                👁️ View/Hide 7 Hidden Cases
+                                            </button>
+                                        </div>
+                                        <div style="font-size:0.74rem; color:#78350f;">
+                                            🛡️ These 7 test cases evaluate edge cases & performance, and are <strong>strictly hidden from student view</strong>.
+                                        </div>
+                                        <div id="${hiddenBoxId}" style="display:none; margin-top:8px; border-top:1px solid #fde68a; padding-top:6px;">
+                                            <table class="testcase-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Input</th>
+                                                        <th>Expected Output</th>
+                                                        <th>Visibility</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    ${hiddenRows || '<tr><td colspan="3" style="color:var(--text-muted);">No hidden test cases configured</td></tr>'}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             `;
-                        }).join('');
+                        } else {
+                            // Generate MCQ Options HTML (All 4 options cleanly laid out with correct answer highlighted)
+                            const optionsHtml = (q.options || []).map((optText, optIdx) => {
+                                const isCorrect = (optIdx === q.correct);
+                                const letter = String.fromCharCode(65 + optIdx);
+                                return `
+                                    <div class="qbank-opt-item ${isCorrect ? 'is-correct' : ''}">
+                                        <span class="qbank-opt-letter">${letter}</span>
+                                        <span class="qbank-opt-text">${escapeHtml(optText)}</span>
+                                        ${isCorrect ? `<span class="qbank-correct-badge">✓ Correct Answer</span>` : ''}
+                                    </div>
+                                `;
+                            }).join('');
+
+                            mainContentHtml = `
+                                <div class="qbank-options-grid">
+                                    ${optionsHtml}
+                                </div>
+                            `;
+                        }
 
                         card.innerHTML = `
                             <div class="qbank-qcard-header">
@@ -2684,6 +3324,7 @@
                                         <span>${escapeHtml(q.category)}</span>
                                     </span>
                                     <span class="badge-topic-tag">${escapeHtml(q.topic)}</span>
+                                    ${q.isCoding ? `<span class="badge-topic-tag" style="background:#f3e8ff; color:#7e22ce; border-color:#d8b4fe;">⚡ 10 Test Cases</span>` : ''}
                                     ${q.isCustom ? '<span class="badge-source-admin" style="font-size:0.7rem;">👤 Admin Created</span>' : '<span style="font-size:0.7rem; color:var(--text-muted); font-weight:600;">🏛️ Core Platform</span>'}
                                 </div>
                                 <div style="display:flex; gap:6px; align-items:center;">
@@ -2693,17 +3334,16 @@
                                     ` : `
                                         <span style="font-size:0.75rem; color:var(--text-muted); padding:3px 6px;">Verified Core</span>
                                     `}
-                                    <button class="btn-table-action" style="background:#eff6ff; color:#2563eb; font-weight:700;" onclick="previewQuestionTest('${q.category}', '${q.topic}')">🎯 Test Assessment →</button>
+                                    <button class="btn-table-action" style="background:#eff6ff; color:#2563eb; font-weight:700;" onclick="previewQuestionTest('${q.category}', '${q.topic}')">🎯 ${q.isCoding ? 'Open in IDE →' : 'Test Assessment →'}</button>
                                 </div>
                             </div>
 
                             <div class="qbank-qstatement">
+                                ${q.title && q.title !== q.topic ? `<div style="font-weight:800; font-size:0.95rem; margin-bottom:4px; color:var(--text-main);">${escapeHtml(q.title)}</div>` : ''}
                                 ${escapeHtml(q.question)}
                             </div>
 
-                            <div class="qbank-options-grid">
-                                ${optionsHtml}
-                            </div>
+                            ${mainContentHtml}
 
                             <div class="qbank-qcard-footer">
                                 <span>📚 Module: <strong>${escapeHtml(q.category)}</strong> &bull; Topic: <strong>${escapeHtml(q.topic)}</strong></span>
@@ -2733,7 +3373,7 @@
                     tbody.innerHTML = '';
                     displayList.forEach((q, index) => {
                         const tr = document.createElement('tr');
-                        
+
                         const catLower = (q.category || '').toLowerCase();
                         let catClass = 'badge-cat-aptitude';
                         let catIcon = '🧠';
@@ -2741,7 +3381,42 @@
                         else if (catLower.includes('cod') || catLower.includes('prog')) { catClass = 'badge-cat-coding'; catIcon = '👨‍💻'; }
                         else if (catLower.includes('comm')) { catClass = 'badge-cat-communication'; catIcon = '🗣'; }
 
-                        const correctOptText = (q.options && q.options[q.correct] !== undefined) ? q.options[q.correct] : `Option ${String.fromCharCode(65 + q.correct)}`;
+                        let detailsColumnHtml = '';
+                        let correctColumnHtml = '';
+
+                        if (q.isCoding || q.category === 'Coding') {
+                            detailsColumnHtml = `
+                                <div style="font-weight:700; color:var(--text-main); font-size:0.88rem; line-height:1.4;">
+                                    ${escapeHtml(q.title || q.question)}
+                                </div>
+                                <div style="font-size:0.75rem; color:#7e22ce; margin-top:4px;">
+                                    👨‍💻 Coding Problem &bull; 10 Test Cases (3 Visible Samples + 7 Hidden Evaluation Cases)
+                                </div>
+                            `;
+                            correctColumnHtml = `
+                                <span style="display:inline-flex; align-items:center; gap:4px; background:#f5f3ff; color:#7c3aed; font-weight:700; font-size:0.78rem; padding:3px 8px; border-radius:6px; border:1px solid #ddd6fe;">
+                                    💻 Solution Code (${escapeHtml(q.language || 'Python')})
+                                </span>
+                            `;
+                        } else {
+                            const correctOptText = (q.options && q.options[q.correct] !== undefined) ? q.options[q.correct] : `Option ${String.fromCharCode(65 + q.correct)}`;
+                            detailsColumnHtml = `
+                                <div style="font-weight:700; color:var(--text-main); font-size:0.88rem; line-height:1.4;">
+                                    ${escapeHtml(q.question)}
+                                </div>
+                                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
+                                    <span style="${q.correct === 0 ? 'color:#059669; font-weight:700;' : ''}">A: ${escapeHtml(q.options[0] || '')}</span> &bull;
+                                    <span style="${q.correct === 1 ? 'color:#059669; font-weight:700;' : ''}">B: ${escapeHtml(q.options[1] || '')}</span> &bull;
+                                    <span style="${q.correct === 2 ? 'color:#059669; font-weight:700;' : ''}">C: ${escapeHtml(q.options[2] || '')}</span> &bull;
+                                    <span style="${q.correct === 3 ? 'color:#059669; font-weight:700;' : ''}">D: ${escapeHtml(q.options[3] || '')}</span>
+                                </div>
+                            `;
+                            correctColumnHtml = `
+                                <span style="display:inline-flex; align-items:center; gap:4px; background:#ecfdf5; color:#059669; font-weight:700; font-size:0.8rem; padding:3px 8px; border-radius:6px; border:1px solid #a7f3d0;">
+                                    ✓ (${String.fromCharCode(65 + q.correct)}) ${escapeHtml(correctOptText.length > 20 ? correctOptText.substring(0, 18) + '...' : correctOptText)}
+                                </span>
+                            `;
+                        }
 
                         tr.innerHTML = `
                             <td>
@@ -2754,20 +3429,10 @@
                                 <span class="badge-topic-tag">${escapeHtml(q.topic)}</span>
                             </td>
                             <td>
-                                <div style="font-weight:700; color:var(--text-main); font-size:0.88rem; line-height:1.4;">
-                                    ${escapeHtml(q.question)}
-                                </div>
-                                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
-                                    <span style="${q.correct === 0 ? 'color:#059669; font-weight:700;' : ''}">A: ${escapeHtml(q.options[0] || '')}</span> &bull;
-                                    <span style="${q.correct === 1 ? 'color:#059669; font-weight:700;' : ''}">B: ${escapeHtml(q.options[1] || '')}</span> &bull;
-                                    <span style="${q.correct === 2 ? 'color:#059669; font-weight:700;' : ''}">C: ${escapeHtml(q.options[2] || '')}</span> &bull;
-                                    <span style="${q.correct === 3 ? 'color:#059669; font-weight:700;' : ''}">D: ${escapeHtml(q.options[3] || '')}</span>
-                                </div>
+                                ${detailsColumnHtml}
                             </td>
                             <td>
-                                <span style="display:inline-flex; align-items:center; gap:4px; background:#ecfdf5; color:#059669; font-weight:700; font-size:0.8rem; padding:3px 8px; border-radius:6px; border:1px solid #a7f3d0;">
-                                    ✓ (${String.fromCharCode(65 + q.correct)}) ${escapeHtml(correctOptText.length > 20 ? correctOptText.substring(0, 18) + '...' : correctOptText)}
-                                </span>
+                                ${correctColumnHtml}
                             </td>
                             <td>
                                 ${q.isCustom ? '<span class="badge-source-admin">Admin Created</span>' : '<span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Platform Core</span>'}
@@ -2780,7 +3445,7 @@
                                     ` : `
                                         <button class="btn-table-action" onclick="showToast('Platform core question (Read-only)', 'info')">View</button>
                                     `}
-                                    <button class="btn-table-action" onclick="previewQuestionTest('${q.category}', '${q.topic}')">Test →</button>
+                                    <button class="btn-table-action" onclick="previewQuestionTest('${q.category}', '${q.topic}')">${q.isCoding ? 'IDE →' : 'Test →'}</button>
                                 </div>
                             </td>
                         `;
@@ -2819,18 +3484,42 @@
             // Pre-fill fields
             selectQuestionCategory(q.category);
             populateTopics(q.category, q.topic);
-            
-            document.getElementById('new-q-statement').value = q.question || '';
-            document.getElementById('new-q-opt-0').value = (q.options && q.options[0]) || '';
-            document.getElementById('new-q-opt-1').value = (q.options && q.options[1]) || '';
-            document.getElementById('new-q-opt-2').value = (q.options && q.options[2]) || '';
-            document.getElementById('new-q-opt-3').value = (q.options && q.options[3]) || '';
 
-            const radios = document.querySelectorAll('input[name="correct_option"]');
-            radios.forEach(r => {
-                r.checked = (parseInt(r.value) === parseInt(q.correct));
-            });
-            updateCorrectOptionUI(q.correct);
+            if (q.isCoding || q.category === 'Coding') {
+                const titleField = document.getElementById('new-q-coding-title');
+                const diffField = document.getElementById('new-q-coding-difficulty');
+                const stmtField = document.getElementById('new-q-coding-statement');
+                const langField = document.getElementById('new-q-solution-lang');
+                const solField = document.getElementById('new-q-solution-code');
+                const startField = document.getElementById('new-q-starter-code');
+
+                if (titleField) titleField.value = q.title || q.topic || '';
+                if (diffField) diffField.value = q.difficulty || 'Medium';
+                if (stmtField) stmtField.value = q.question || '';
+                if (langField) langField.value = q.language || 'python';
+                if (solField) solField.value = q.solutionCode || '';
+                if (startField) startField.value = q.starterCode || '';
+
+                // Populate test cases
+                (q.testCases || []).forEach((tc, idx) => {
+                    const inEl = document.getElementById(`new-q-tc-in-${idx}`);
+                    const outEl = document.getElementById(`new-q-tc-out-${idx}`);
+                    if (inEl) inEl.value = tc.input || '';
+                    if (outEl) outEl.value = tc.output || '';
+                });
+            } else {
+                document.getElementById('new-q-statement').value = q.question || '';
+                document.getElementById('new-q-opt-0').value = (q.options && q.options[0]) || '';
+                document.getElementById('new-q-opt-1').value = (q.options && q.options[1]) || '';
+                document.getElementById('new-q-opt-2').value = (q.options && q.options[2]) || '';
+                document.getElementById('new-q-opt-3').value = (q.options && q.options[3]) || '';
+
+                const radios = document.querySelectorAll('input[name="correct_option"]');
+                radios.forEach(r => {
+                    r.checked = (parseInt(r.value) === parseInt(q.correct));
+                });
+                updateCorrectOptionUI(q.correct);
+            }
 
             openModal('modal-add-question');
         }
@@ -3047,4 +3736,5 @@
         }
     </script>
 </body>
+
 </html>

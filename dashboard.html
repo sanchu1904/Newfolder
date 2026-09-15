@@ -2538,7 +2538,7 @@
 
         function startModule(module) {
             sessionStorage.setItem('currentModule', module);
-            if (module === 'programming') {
+            if (module === 'programming' || module === 'coding') {
                 window.location.href = 'coding.html';
             } else {
                 window.location.href = 'assessment.html';
