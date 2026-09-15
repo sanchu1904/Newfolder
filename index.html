@@ -1,14 +1,19 @@
+~
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillPrep — Build the Skills. Ace the Placement.</title>
-    <meta name="description" content="SkillPrep is an affordable, comprehensive placement and interview preparation platform for college students. Practice Aptitude, Technical, Communication, and Coding daily.">
+    <meta name="description"
+        content="SkillPrep is an affordable, comprehensive placement and interview preparation platform for college students. Practice Aptitude, Technical, Communication, and Coding daily.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <style>
         /* ==========================================================================
            SKILLPREP MODERN DESIGN SYSTEM & TOKENS
@@ -25,14 +30,14 @@
             --accent-amber: #f59e0b;
             --accent-amber-light: #fffbeb;
             --accent-purple: #8b5cf6;
-            
+
             --dark-bg: #090d16;
             --dark-surface: #0f172a;
             --dark-surface-2: #1e293b;
             --dark-border: #334155;
             --dark-text: #f8fafc;
             --dark-muted: #94a3b8;
-            
+
             --light-bg: #f8fafc;
             --light-surface: #ffffff;
             --light-surface-2: #f1f5f9;
@@ -40,25 +45,27 @@
             --text-main: #0f172a;
             --text-secondary: #475569;
             --text-muted: #64748b;
-            
+
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 18px;
             --radius-xl: 24px;
             --radius-full: 9999px;
-            
+
             --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
             --shadow-xl: 0 20px 35px -8px rgba(79, 70, 229, 0.12), 0 8px 16px -4px rgba(15, 23, 42, 0.04);
             --shadow-glow: 0 0 25px rgba(79, 70, 229, 0.28);
-            
+
             --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
             --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -364,7 +371,7 @@
             position: relative;
             padding: 70px 0 90px;
             background: radial-gradient(circle at 50% -20%, rgba(79, 70, 229, 0.08) 0%, transparent 60%),
-                        linear-gradient(180deg, #ffffff 0%, var(--light-bg) 100%);
+                linear-gradient(180deg, #ffffff 0%, var(--light-bg) 100%);
             overflow: hidden;
         }
 
@@ -550,10 +557,25 @@
             border-radius: var(--radius-full);
         }
 
-        .fill-blue { background: #3b82f6; width: 85%; }
-        .fill-indigo { background: #6366f1; width: 92%; }
-        .fill-emerald { background: #10b981; width: 78%; }
-        .fill-amber { background: #f59e0b; width: 88%; }
+        .fill-blue {
+            background: #3b82f6;
+            width: 85%;
+        }
+
+        .fill-indigo {
+            background: #6366f1;
+            width: 92%;
+        }
+
+        .fill-emerald {
+            background: #10b981;
+            width: 78%;
+        }
+
+        .fill-amber {
+            background: #f59e0b;
+            width: 88%;
+        }
 
         .mockup-chart-box {
             background: #fafafa;
@@ -602,8 +624,15 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         /* ==========================================================================
@@ -720,12 +749,35 @@
             transform: scale(1.08);
         }
 
-        .icon-blue { background: #eff6ff; color: #2563eb; }
-        .icon-indigo { background: #eef2ff; color: #4f46e5; }
-        .icon-teal { background: #f0fdfa; color: #0d9488; }
-        .icon-emerald { background: #ecfdf5; color: #059669; }
-        .icon-amber { background: #fffbeb; color: #d97706; }
-        .icon-purple { background: #f5f3ff; color: #7c3aed; }
+        .icon-blue {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .icon-indigo {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .icon-teal {
+            background: #f0fdfa;
+            color: #0d9488;
+        }
+
+        .icon-emerald {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .icon-amber {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        .icon-purple {
+            background: #f5f3ff;
+            color: #7c3aed;
+        }
 
         .feature-card h3 {
             font-size: 1.28rem;
@@ -933,8 +985,15 @@
         }
 
         @keyframes pulse-fire {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
         }
 
         .streak-count-title {
@@ -1034,9 +1093,17 @@
             border-radius: 50%;
         }
 
-        .dot-red { background: #ef4444; }
-        .dot-yellow { background: #f59e0b; }
-        .dot-green { background: #10b981; }
+        .dot-red {
+            background: #ef4444;
+        }
+
+        .dot-yellow {
+            background: #f59e0b;
+        }
+
+        .dot-green {
+            background: #10b981;
+        }
 
         .ide-tabs {
             display: flex;
@@ -1074,11 +1141,27 @@
             text-align: right;
         }
 
-        .syntax-kw { color: #f43f5e; font-weight: 600; }
-        .syntax-fn { color: #38bdf8; }
-        .syntax-str { color: #34d399; }
-        .syntax-num { color: #fbbf24; }
-        .syntax-comment { color: #64748b; font-style: italic; }
+        .syntax-kw {
+            color: #f43f5e;
+            font-weight: 600;
+        }
+
+        .syntax-fn {
+            color: #38bdf8;
+        }
+
+        .syntax-str {
+            color: #34d399;
+        }
+
+        .syntax-num {
+            color: #fbbf24;
+        }
+
+        .syntax-comment {
+            color: #64748b;
+            font-style: italic;
+        }
 
         .ide-console {
             background: #0a0f1d;
@@ -1296,7 +1379,7 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
             transform: rotate(45deg);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .pricing-title {
@@ -1441,9 +1524,17 @@
             font-size: 1rem;
         }
 
-        .avatar-1 { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-        .avatar-2 { background: linear-gradient(135deg, #10b981, #047857); }
-        .avatar-3 { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+        .avatar-1 {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .avatar-2 {
+            background: linear-gradient(135deg, #10b981, #047857);
+        }
+
+        .avatar-3 {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+        }
 
         .author-info h4 {
             font-size: 0.95rem;
@@ -1571,34 +1662,104 @@
            RESPONSIVE DESIGN BREAKPOINTS
            ========================================================================== */
         @media (max-width: 1024px) {
-            .hero-title { font-size: 2.8rem; }
-            .hero-grid { grid-template-columns: 1fr; gap: 50px; }
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
-            .steps-grid { grid-template-columns: repeat(2, 1fr); }
-            .daily-grid { grid-template-columns: 1fr; }
-            .coding-grid { grid-template-columns: 1fr; }
-            .analytics-top-stats { grid-template-columns: repeat(2, 1fr); }
-            .analytics-visual-grid { grid-template-columns: 1fr; }
-            .testimonials-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .daily-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .coding-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-top-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .analytics-visual-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .nav-links, .nav-actions .btn-ghost { display: none; }
-            .mobile-menu-toggle { display: flex; }
-            .hero-title { font-size: 2.3rem; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .stat-item:nth-child(2)::after { display: none; }
-            .features-grid { grid-template-columns: 1fr; }
-            .steps-grid { grid-template-columns: 1fr; }
-            .pricing-features-grid { grid-template-columns: 1fr; }
-            .daily-box { padding: 32px 20px; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-            .final-cta-box h2 { font-size: 2.1rem; }
+
+            .nav-links,
+            .nav-actions .btn-ghost {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-item:nth-child(2)::after {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .daily-box {
+                padding: 32px 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .final-cta-box h2 {
+                font-size: 2.1rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- ==========================================
@@ -1609,7 +1770,7 @@
             <a href="index.html" class="brand-logo" id="nav-brand">
                 <div class="brand-icon">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 </div>
                 <span class="brand-name">Skill<span>Prep</span></span>
@@ -1629,7 +1790,7 @@
                 <a href="student-entry.html" class="btn btn-primary" id="get-started-btn">Get Started</a>
                 <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
@@ -1665,16 +1826,19 @@
                         <span class="gradient-text">Ace the Placement.</span>
                     </h1>
                     <p class="hero-description">
-                        Practice Aptitude, Technical Skills, Communication and Coding — all in one platform designed for your placement journey.
+                        Practice Aptitude, Technical Skills, Communication and Coding — all in one platform designed for
+                        your placement journey.
                     </p>
                     <div class="hero-cta-group">
                         <a href="student-entry.html" class="btn btn-primary btn-lg" id="hero-primary-cta">
                             <span>Start Practicing</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </a>
-                        <a href="#features" class="btn btn-secondary btn-lg" id="hero-secondary-cta">Explore Features</a>
+                        <a href="#features" class="btn btn-secondary btn-lg" id="hero-secondary-cta">Explore
+                            Features</a>
                     </div>
                     <div class="hero-trust-bar">
                         <span class="dot"></span>
@@ -1755,20 +1919,23 @@
                             <svg class="chart-svg" viewBox="0 0 360 65" preserveAspectRatio="none">
                                 <defs>
                                     <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.35"/>
-                                        <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.0"/>
+                                        <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.35" />
+                                        <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.0" />
                                     </linearGradient>
                                 </defs>
-                                <path d="M0,55 Q60,40 120,45 T240,25 T360,8 L360,65 L0,65 Z" fill="url(#chartGrad)"/>
-                                <path d="M0,55 Q60,40 120,45 T240,25 T360,8" fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round"/>
-                                <circle cx="360" cy="8" r="4" fill="#4f46e5"/>
+                                <path d="M0,55 Q60,40 120,45 T240,25 T360,8 L360,65 L0,65 Z" fill="url(#chartGrad)" />
+                                <path d="M0,55 Q60,40 120,45 T240,25 T360,8" fill="none" stroke="#4f46e5"
+                                    stroke-width="3" stroke-linecap="round" />
+                                <circle cx="360" cy="8" r="4" fill="#4f46e5" />
                             </svg>
                         </div>
                     </div>
 
                     <!-- Floating Badges -->
                     <div class="floating-badge floating-badge-1">
-                        <div style="background:#ecfdf5; color:#10b981; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">✓</div>
+                        <div
+                            style="background:#ecfdf5; color:#10b981; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">
+                            ✓</div>
                         <div>
                             <div style="font-size:0.8rem; font-weight:700;">Mock Test Passed</div>
                             <div style="font-size:0.7rem; color:var(--text-muted);">96% in Aptitude Round</div>
@@ -1776,7 +1943,9 @@
                     </div>
 
                     <div class="floating-badge floating-badge-2">
-                        <div style="background:#fffbeb; color:#f59e0b; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">★</div>
+                        <div
+                            style="background:#fffbeb; color:#f59e0b; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">
+                            ★</div>
                         <div>
                             <div style="font-size:0.8rem; font-weight:700;">TCS / Infosys Ready</div>
                             <div style="font-size:0.7rem; color:var(--text-muted);">Assessed 2026 Batch</div>
@@ -1821,19 +1990,23 @@
             <div class="section-header">
                 <span class="badge badge-primary">Comprehensive Curriculum</span>
                 <h2>Everything You Need to Become Placement Ready</h2>
-                <p>Designed strictly around actual company hiring patterns, online assessment rounds, and technical interview requirements.</p>
+                <p>Designed strictly around actual company hiring patterns, online assessment rounds, and technical
+                    interview requirements.</p>
             </div>
 
             <div class="features-grid">
                 <!-- Feature 1 -->
                 <div class="feature-card">
                     <div class="feature-icon-wrapper icon-blue">
-                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                         </svg>
                     </div>
                     <h3>Aptitude Practice</h3>
-                    <p>Practice Number System, Percentage, Profit & Loss, Time & Work, Probability, Logical Reasoning and more with step-by-step shortcuts.</p>
+                    <p>Practice Number System, Percentage, Profit & Loss, Time & Work, Probability, Logical Reasoning
+                        and more with step-by-step shortcuts.</p>
                     <div class="feature-tags">
                         <span class="mini-tag">Quantitative</span>
                         <span class="mini-tag">Logical</span>
@@ -1844,12 +2017,15 @@
                 <!-- Feature 2 -->
                 <div class="feature-card">
                     <div class="feature-icon-wrapper icon-indigo">
-                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                         </svg>
                     </div>
                     <h3>Technical Skills</h3>
-                    <p>Master Python, Java, C, C++, JavaScript, SQL, DBMS, OS, OOP, DSA and Algorithms asked frequently in tier-1 interview rounds.</p>
+                    <p>Master Python, Java, C, C++, JavaScript, SQL, DBMS, OS, OOP, DSA and Algorithms asked frequently
+                        in tier-1 interview rounds.</p>
                     <div class="feature-tags">
                         <span class="mini-tag">DSA</span>
                         <span class="mini-tag">DBMS / SQL</span>
@@ -1860,12 +2036,15 @@
                 <!-- Feature 3 -->
                 <div class="feature-card">
                     <div class="feature-icon-wrapper icon-teal">
-                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                         </svg>
                     </div>
                     <h3>Communication</h3>
-                    <p>Improve Grammar, Vocabulary, Sentence Correction, Reading Comprehension, and articulate answers for HR & Managerial interviews.</p>
+                    <p>Improve Grammar, Vocabulary, Sentence Correction, Reading Comprehension, and articulate answers
+                        for HR & Managerial interviews.</p>
                     <div class="feature-tags">
                         <span class="mini-tag">Verbal Ability</span>
                         <span class="mini-tag">HR Questions</span>
@@ -1875,12 +2054,15 @@
                 <!-- Feature 4 -->
                 <div class="feature-card">
                     <div class="feature-icon-wrapper icon-emerald">
-                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/>
+                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                         </svg>
                     </div>
                     <h3>Coding Practice</h3>
-                    <p>Solve coding problems using an online editor with real-time test cases, hidden edge cases, and instant automatic evaluation.</p>
+                    <p>Solve coding problems using an online editor with real-time test cases, hidden edge cases, and
+                        instant automatic evaluation.</p>
                     <div class="feature-tags">
                         <span class="mini-tag">Online Compiler</span>
                         <span class="mini-tag">Test Suites</span>
@@ -1890,12 +2072,15 @@
                 <!-- Feature 5 -->
                 <div class="feature-card">
                     <div class="feature-icon-wrapper icon-amber">
-                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/>
+                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
                         </svg>
                     </div>
                     <h3>Daily Practice</h3>
-                    <p>Get a curated daily mix of questions and maintain your practice streak to build steady discipline without overwhelming yourself.</p>
+                    <p>Get a curated daily mix of questions and maintain your practice streak to build steady discipline
+                        without overwhelming yourself.</p>
                     <div class="feature-tags">
                         <span class="mini-tag">🔥 Streaks</span>
                         <span class="mini-tag">Daily Challenge</span>
@@ -1905,12 +2090,15 @@
                 <!-- Feature 6 -->
                 <div class="feature-card">
                     <div class="feature-icon-wrapper icon-purple">
-                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
                     </div>
                     <h3>Performance Analytics</h3>
-                    <p>Track scores, accuracy percentages, weak topics, time spent per problem, and actionable improvement recommendations.</p>
+                    <p>Track scores, accuracy percentages, weak topics, time spent per problem, and actionable
+                        improvement recommendations.</p>
                     <div class="feature-tags">
                         <span class="mini-tag">Accuracy Radar</span>
                         <span class="mini-tag">Weak Areas</span>
@@ -1928,7 +2116,8 @@
             <div class="section-header">
                 <span class="badge badge-primary">Structured Roadmap</span>
                 <h2>Your Placement Preparation, Simplified</h2>
-                <p>A proven 4-step workflow that transforms casual college studying into high-confidence placement readiness.</p>
+                <p>A proven 4-step workflow that transforms casual college studying into high-confidence placement
+                    readiness.</p>
             </div>
 
             <div class="steps-container">
@@ -1937,28 +2126,32 @@
                     <div class="step-card">
                         <div class="step-num">01</div>
                         <h3>Create Your Account</h3>
-                        <p>Register and create your SkillPrep profile with your branch, graduation year, and target dream companies.</p>
+                        <p>Register and create your SkillPrep profile with your branch, graduation year, and target
+                            dream companies.</p>
                     </div>
 
                     <!-- Step 2 -->
                     <div class="step-card">
                         <div class="step-num">02</div>
                         <h3>Choose Your Skills</h3>
-                        <p>Select whether you want to focus today on Aptitude, Technical Concepts, Communication, or Hands-on Coding.</p>
+                        <p>Select whether you want to focus today on Aptitude, Technical Concepts, Communication, or
+                            Hands-on Coding.</p>
                     </div>
 
                     <!-- Step 3 -->
                     <div class="step-card">
                         <div class="step-num">03</div>
                         <h3>Practice Every Day</h3>
-                        <p>Complete bite-sized daily challenges, mock tests, and coding problems to build an unstoppable practice streak.</p>
+                        <p>Complete bite-sized daily challenges, mock tests, and coding problems to build an unstoppable
+                            practice streak.</p>
                     </div>
 
                     <!-- Step 4 -->
                     <div class="step-card">
                         <div class="step-num">04</div>
                         <h3>Track Your Progress</h3>
-                        <p>Analyze test analytics, eliminate weak areas with targeted drills, and enter your campus drives with 100% confidence.</p>
+                        <p>Analyze test analytics, eliminate weak areas with targeted drills, and enter your campus
+                            drives with 100% confidence.</p>
                     </div>
                 </div>
             </div>
@@ -1977,8 +2170,9 @@
                             🔥 Consistency Engine
                         </span>
                         <h2>Make Practice a Daily Habit</h2>
-                        <p>Placement preparation fails when done at the last minute. SkillPrep delivers an effortless daily routine balanced across all essential categories.</p>
-                        
+                        <p>Placement preparation fails when done at the last minute. SkillPrep delivers an effortless
+                            daily routine balanced across all essential categories.</p>
+
                         <div class="daily-breakdown">
                             <div class="daily-item">
                                 <div class="daily-item-icon" style="color:#38bdf8;">10</div>
@@ -1998,10 +2192,12 @@
                             </div>
                         </div>
 
-                        <a href="student-entry.html" class="btn btn-primary btn-lg" style="background:#ea580c; border:none; box-shadow: 0 4px 14px rgba(234, 88, 12, 0.4);">
+                        <a href="student-entry.html" class="btn btn-primary btn-lg"
+                            style="background:#ea580c; border:none; box-shadow: 0 4px 14px rgba(234, 88, 12, 0.4);">
                             <span>Start Today's Practice</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
                         </a>
                     </div>
@@ -2017,12 +2213,16 @@
                                 <div class="streak-flame">🔥</div>
                             </div>
 
-                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <div
+                                style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                 <span style="font-size:0.9rem; font-weight:700; color:#cbd5e1;">Today's Progress</span>
-                                <span style="font-size:0.875rem; font-weight:800; color:#34d399;">18 / 21 Completed</span>
+                                <span style="font-size:0.875rem; font-weight:800; color:#34d399;">18 / 21
+                                    Completed</span>
                             </div>
-                            <div class="progress-bar-container" style="height:8px; margin-bottom:20px; background:rgba(255,255,255,0.1);">
-                                <div class="progress-fill" style="background:linear-gradient(90deg, #ea580c, #10b981); width:85%;"></div>
+                            <div class="progress-bar-container"
+                                style="height:8px; margin-bottom:20px; background:rgba(255,255,255,0.1);">
+                                <div class="progress-fill"
+                                    style="background:linear-gradient(90deg, #ea580c, #10b981); width:85%;"></div>
                             </div>
 
                             <div class="daily-checklist">
@@ -2085,21 +2285,31 @@
                     </div>
 
                     <div class="ide-editor">
-                        <div class="code-line"><span class="line-num">1</span><span><span class="syntax-kw">def</span> <span class="syntax-fn">two_sum</span>(nums: list[int], target: int) -> list[int]:</span></div>
-                        <div class="code-line"><span class="line-num">2</span><span>    <span class="syntax-comment"># Optimized hash map lookup O(n)</span></span></div>
-                        <div class="code-line"><span class="line-num">3</span><span>    seen = {}</span></div>
-                        <div class="code-line"><span class="line-num">4</span><span>    <span class="syntax-kw">for</span> i, val <span class="syntax-kw">in</span> <span class="syntax-fn">enumerate</span>(nums):</span></div>
-                        <div class="code-line"><span class="line-num">5</span><span>        complement = target - val</span></div>
-                        <div class="code-line"><span class="line-num">6</span><span>        <span class="syntax-kw">if</span> complement <span class="syntax-kw">in</span> seen:</span></div>
-                        <div class="code-line"><span class="line-num">7</span><span>            <span class="syntax-kw">return</span> [seen[complement], i]</span></div>
-                        <div class="code-line"><span class="line-num">8</span><span>        seen[val] = i</span></div>
-                        <div class="code-line"><span class="line-num">9</span><span>    <span class="syntax-kw">return</span> []</span></div>
+                        <div class="code-line"><span class="line-num">1</span><span><span class="syntax-kw">def</span>
+                                <span class="syntax-fn">two_sum</span>(nums: list[int], target: int) ->
+                                list[int]:</span></div>
+                        <div class="code-line"><span class="line-num">2</span><span> <span class="syntax-comment">#
+                                    Optimized hash map lookup O(n)</span></span></div>
+                        <div class="code-line"><span class="line-num">3</span><span> seen = {}</span></div>
+                        <div class="code-line"><span class="line-num">4</span><span> <span class="syntax-kw">for</span>
+                                i, val <span class="syntax-kw">in</span> <span
+                                    class="syntax-fn">enumerate</span>(nums):</span></div>
+                        <div class="code-line"><span class="line-num">5</span><span> complement = target - val</span>
+                        </div>
+                        <div class="code-line"><span class="line-num">6</span><span> <span class="syntax-kw">if</span>
+                                complement <span class="syntax-kw">in</span> seen:</span></div>
+                        <div class="code-line"><span class="line-num">7</span><span> <span
+                                    class="syntax-kw">return</span> [seen[complement], i]</span></div>
+                        <div class="code-line"><span class="line-num">8</span><span> seen[val] = i</span></div>
+                        <div class="code-line"><span class="line-num">9</span><span> <span
+                                    class="syntax-kw">return</span> []</span></div>
                     </div>
 
                     <div class="ide-console">
                         <div class="console-header">
                             <span>⚡ Test Results: ALL 3 TESTCASES PASSED</span>
-                            <span style="color:#94a3b8; font-family:var(--font-mono); font-size:0.75rem;">Time: 14ms | Memory: 16.4 MB</span>
+                            <span style="color:#94a3b8; font-family:var(--font-mono); font-size:0.75rem;">Time: 14ms |
+                                Memory: 16.4 MB</span>
                         </div>
                         <div class="testcase-pills">
                             <span class="testcase-pill">✓ Test 1: [2,7,11,15], target=9</span>
@@ -2115,20 +2325,24 @@
                         💻 Real Developer Environment
                     </span>
                     <h2>Practice Coding Like a Real Developer</h2>
-                    <p>Solve coding problems, run your code against test cases and instantly understand your results with detailed error diagnostics and performance benchmarks.</p>
+                    <p>Solve coding problems, run your code against test cases and instantly understand your results
+                        with detailed error diagnostics and performance benchmarks.</p>
 
                     <ul class="code-features-list">
                         <li class="code-feat-item">
                             <span class="code-feat-icon">✓</span>
-                            <span><strong>Multi-Language Online Editor</strong> — Python, Java, C, C++, JavaScript</span>
+                            <span><strong>Multi-Language Online Editor</strong> — Python, Java, C, C++,
+                                JavaScript</span>
                         </li>
                         <li class="code-feat-item">
                             <span class="code-feat-icon">✓</span>
-                            <span><strong>Hidden & Edge Test Cases</strong> — Validated against strict time & memory limits</span>
+                            <span><strong>Hidden & Edge Test Cases</strong> — Validated against strict time & memory
+                                limits</span>
                         </li>
                         <li class="code-feat-item">
                             <span class="code-feat-icon">✓</span>
-                            <span><strong>Instant Evaluation</strong> — Detailed runtime, memory profiling and hints</span>
+                            <span><strong>Instant Evaluation</strong> — Detailed runtime, memory profiling and
+                                hints</span>
                         </li>
                         <li class="code-feat-item">
                             <span class="code-feat-icon">✓</span>
@@ -2138,8 +2352,10 @@
 
                     <a href="student-entry.html" class="btn btn-dark btn-lg" id="coding-practice-cta">
                         <span>Try Coding Practice</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                         </svg>
                     </a>
                 </div>
@@ -2155,7 +2371,8 @@
             <div class="section-header">
                 <span class="badge badge-primary">Deep Insights</span>
                 <h2>Know Exactly Where You Stand</h2>
-                <p>Don't just practice. Understand your progress with clear, actionable analytics designed to target your weakest areas first.</p>
+                <p>Don't just practice. Understand your progress with clear, actionable analytics designed to target
+                    your weakest areas first.</p>
             </div>
 
             <div class="analytics-dashboard-card">
@@ -2174,7 +2391,8 @@
                     <div class="stat-box">
                         <div class="stat-box-label">Coding Problems Solved</div>
                         <div class="stat-box-value">142</div>
-                        <span style="font-size:0.75rem; color:var(--primary); font-weight:700;">64 Medium • 18 Hard</span>
+                        <span style="font-size:0.75rem; color:var(--primary); font-weight:700;">64 Medium • 18
+                            Hard</span>
                     </div>
                     <div class="stat-box">
                         <div class="stat-box-label">Active Streak</div>
@@ -2192,23 +2410,25 @@
                             <span class="badge badge-success">+18% Confidence</span>
                         </div>
                         <svg viewBox="0 0 500 180" style="width:100%; height:180px; overflow:visible;">
-                            <line x1="0" y1="40" x2="500" y2="40" stroke="#f1f5f9" stroke-width="1"/>
-                            <line x1="0" y1="90" x2="500" y2="90" stroke="#f1f5f9" stroke-width="1"/>
-                            <line x1="0" y1="140" x2="500" y2="140" stroke="#f1f5f9" stroke-width="1"/>
-                            
+                            <line x1="0" y1="40" x2="500" y2="40" stroke="#f1f5f9" stroke-width="1" />
+                            <line x1="0" y1="90" x2="500" y2="90" stroke="#f1f5f9" stroke-width="1" />
+                            <line x1="0" y1="140" x2="500" y2="140" stroke="#f1f5f9" stroke-width="1" />
+
                             <defs>
                                 <linearGradient id="scoreGrad" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.3"/>
-                                    <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.0"/>
+                                    <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.3" />
+                                    <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.0" />
                                 </linearGradient>
                             </defs>
-                            <path d="M 0,140 Q 100,120 180,95 T 340,55 T 500,20 L 500,180 L 0,180 Z" fill="url(#scoreGrad)"/>
-                            <path d="M 0,140 Q 100,120 180,95 T 340,55 T 500,20" fill="none" stroke="#4f46e5" stroke-width="3.5" stroke-linecap="round"/>
-                            
-                            <circle cx="180" cy="95" r="5" fill="#4f46e5" stroke="#fff" stroke-width="2"/>
-                            <circle cx="340" cy="55" r="5" fill="#4f46e5" stroke="#fff" stroke-width="2"/>
-                            <circle cx="500" cy="20" r="6" fill="#10b981" stroke="#fff" stroke-width="2"/>
-                            
+                            <path d="M 0,140 Q 100,120 180,95 T 340,55 T 500,20 L 500,180 L 0,180 Z"
+                                fill="url(#scoreGrad)" />
+                            <path d="M 0,140 Q 100,120 180,95 T 340,55 T 500,20" fill="none" stroke="#4f46e5"
+                                stroke-width="3.5" stroke-linecap="round" />
+
+                            <circle cx="180" cy="95" r="5" fill="#4f46e5" stroke="#fff" stroke-width="2" />
+                            <circle cx="340" cy="55" r="5" fill="#4f46e5" stroke="#fff" stroke-width="2" />
+                            <circle cx="500" cy="20" r="6" fill="#10b981" stroke="#fff" stroke-width="2" />
+
                             <text x="10" y="175" fill="#94a3b8" font-size="11" font-family="sans-serif">Week 1</text>
                             <text x="170" y="175" fill="#94a3b8" font-size="11" font-family="sans-serif">Week 2</text>
                             <text x="330" y="175" fill="#94a3b8" font-size="11" font-family="sans-serif">Week 3</text>
@@ -2219,13 +2439,15 @@
                     <!-- Topic-wise Performance Bars -->
                     <div class="topic-progress-card">
                         <h4 style="font-size:1rem; font-weight:700; color:var(--text-main);">Topic-Wise Readiness</h4>
-                        
+
                         <div class="topic-row">
                             <div class="topic-info-row">
                                 <span>Data Structures & Algorithms</span>
                                 <span style="color:#6366f1; font-weight:700;">90%</span>
                             </div>
-                            <div class="progress-bar-container"><div class="progress-fill" style="width:90%; background:#6366f1;"></div></div>
+                            <div class="progress-bar-container">
+                                <div class="progress-fill" style="width:90%; background:#6366f1;"></div>
+                            </div>
                         </div>
 
                         <div class="topic-row">
@@ -2233,7 +2455,9 @@
                                 <span>Quantitative Aptitude</span>
                                 <span style="color:#3b82f6; font-weight:700;">85%</span>
                             </div>
-                            <div class="progress-bar-container"><div class="progress-fill" style="width:85%; background:#3b82f6;"></div></div>
+                            <div class="progress-bar-container">
+                                <div class="progress-fill" style="width:85%; background:#3b82f6;"></div>
+                            </div>
                         </div>
 
                         <div class="topic-row">
@@ -2241,7 +2465,9 @@
                                 <span>DBMS & SQL Queries</span>
                                 <span style="color:#10b981; font-weight:700;">88%</span>
                             </div>
-                            <div class="progress-bar-container"><div class="progress-fill" style="width:88%; background:#10b981;"></div></div>
+                            <div class="progress-bar-container">
+                                <div class="progress-fill" style="width:88%; background:#10b981;"></div>
+                            </div>
                         </div>
 
                         <div class="topic-row">
@@ -2249,7 +2475,9 @@
                                 <span>Verbal & Communication</span>
                                 <span style="color:#f59e0b; font-weight:700;">82%</span>
                             </div>
-                            <div class="progress-bar-container"><div class="progress-fill" style="width:82%; background:#f59e0b;"></div></div>
+                            <div class="progress-bar-container">
+                                <div class="progress-fill" style="width:82%; background:#f59e0b;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2265,7 +2493,8 @@
             <div class="section-header">
                 <span class="badge badge-primary">Democratizing Preparation</span>
                 <h2>Placement Preparation That Anyone Can Afford</h2>
-                <p>No expensive coaching institutes. No hidden subscription traps. Just pure, comprehensive placement training accessible to every college student.</p>
+                <p>No expensive coaching institutes. No hidden subscription traps. Just pure, comprehensive placement
+                    training accessible to every college student.</p>
             </div>
 
             <div class="pricing-card-wrapper">
@@ -2315,10 +2544,12 @@
                         </div>
                     </div>
 
-                    <a href="student-entry.html" class="btn btn-primary btn-lg" style="width:100%; font-size:1.1rem; padding:16px;" id="pricing-cta">
+                    <a href="student-entry.html" class="btn btn-primary btn-lg"
+                        style="width:100%; font-size:1.1rem; padding:16px;" id="pricing-cta">
                         <span>Get Started for ₹10/year</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                     </a>
                 </div>
@@ -2343,7 +2574,8 @@
                     <div>
                         <div class="stars-row">★★★★★</div>
                         <p class="testimonial-quote">
-                            "The daily streak system kept me consistent when I had no motivation. The combination of Aptitude shortcuts and coding test cases directly matched our campus assessment patterns."
+                            "The daily streak system kept me consistent when I had no motivation. The combination of
+                            Aptitude shortcuts and coding test cases directly matched our campus assessment patterns."
                         </p>
                     </div>
                     <div class="student-author">
@@ -2360,7 +2592,8 @@
                     <div>
                         <div class="stars-row">★★★★★</div>
                         <p class="testimonial-quote">
-                            "I used to struggle with communication and speed in quantitative rounds. The analytics pinpointed my weak areas in Time & Work within 2 days. Truly high value for students."
+                            "I used to struggle with communication and speed in quantitative rounds. The analytics
+                            pinpointed my weak areas in Time & Work within 2 days. Truly high value for students."
                         </p>
                     </div>
                     <div class="student-author">
@@ -2377,7 +2610,8 @@
                     <div>
                         <div class="stars-row">★★★★★</div>
                         <p class="testimonial-quote">
-                            "Getting an online coding compiler, 10 aptitude questions and technical drills every single day for just ₹10/year is unbelievable. It replaced 3 different paid websites for me."
+                            "Getting an online coding compiler, 10 aptitude questions and technical drills every single
+                            day for just ₹10/year is unbelievable. It replaced 3 different paid websites for me."
                         </p>
                     </div>
                     <div class="student-author">
@@ -2399,15 +2633,19 @@
         <div class="container">
             <div class="final-cta-box">
                 <h2>Your Placement Journey Starts Today.</h2>
-                <p>Practice consistently. Improve your skills. Track your progress. Get ready for your dream placement.</p>
-                
-                <a href="student-entry.html" class="btn btn-primary btn-lg" style="background:#ffffff; color:#1e1b4b; font-weight:800; padding:16px 36px; box-shadow:0 10px 25px rgba(0,0,0,0.25);" id="final-cta-btn">
+                <p>Practice consistently. Improve your skills. Track your progress. Get ready for your dream placement.
+                </p>
+
+                <a href="student-entry.html" class="btn btn-primary btn-lg"
+                    style="background:#ffffff; color:#1e1b4b; font-weight:800; padding:16px 36px; box-shadow:0 10px 25px rgba(0,0,0,0.25);"
+                    id="final-cta-btn">
                     <span>Start Practicing Now</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                 </a>
-                
+
                 <div class="final-cta-subtitle">
                     No complicated setup. Just practice and improve.
                 </div>
@@ -2424,13 +2662,15 @@
                 <div class="footer-brand">
                     <h3>
                         <div class="brand-icon" style="width:30px; height:30px; border-radius:6px;">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" width="18" height="18">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" width="18"
+                                height="18">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
                         SkillPrep
                     </h3>
-                    <p>Student Skill Development Platform. Empowering college students to master Aptitude, Technical Skills, Communication, and Coding.</p>
+                    <p>Student Skill Development Platform. Empowering college students to master Aptitude, Technical
+                        Skills, Communication, and Coding.</p>
                 </div>
 
                 <div class="footer-column">
@@ -2500,4 +2740,5 @@
         });
     </script>
 </body>
+
 </html>

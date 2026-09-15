@@ -886,31 +886,305 @@
         /* --------------------------------------------------------------------------
            10. QUESTION BANK & ASSESSMENT OVERVIEWS
            -------------------------------------------------------------------------- */
-        .qbank-grid {
+        .qbank-categories-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 14px;
+            margin-bottom: 18px;
         }
 
-        .qbank-box {
+        @media (max-width: 1024px) {
+            .qbank-categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .qbank-categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .qbank-cat-card {
+            background: #ffffff;
+            border: 2px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+            user-select: none;
+        }
+
+        .qbank-cat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.1);
+        }
+
+        .qbank-cat-card.active {
+            border-color: var(--primary);
+            background: #f8faff;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18), 0 8px 20px rgba(79, 70, 229, 0.08);
+        }
+
+        .qbank-cat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .qbank-cat-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
             background: var(--surface-alt);
-            border-radius: var(--radius-md);
-            padding: 14px;
-            border: 1px solid var(--border-subtle);
-            text-align: center;
         }
 
-        .qbank-num {
-            font-size: 1.3rem;
+        .qbank-cat-card.active .qbank-cat-icon {
+            background: var(--primary-light);
+        }
+
+        .qbank-cat-count {
+            font-size: 0.8rem;
             font-weight: 800;
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+            background: var(--surface-alt);
             color: var(--text-main);
         }
 
-        .qbank-cat {
-            font-size: 0.75rem;
+        .qbank-cat-card.active .qbank-cat-count {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .qbank-cat-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .qbank-cat-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .qbank-cat-card.active .qbank-cat-title {
+            color: var(--primary);
+        }
+
+        .qbank-cat-desc {
+            font-size: 0.72rem;
             color: var(--text-muted);
-            font-weight: 600;
-            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        /* QBank Toolbar */
+        .qbank-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: var(--surface-alt);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 16px;
+        }
+
+        .qbank-toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 260px;
+            flex-wrap: wrap;
+        }
+
+        .qbank-toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qbank-view-toggle {
+            display: flex;
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 2px;
+        }
+
+        .qbank-view-btn {
+            border: none;
+            background: transparent;
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .qbank-view-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 6px var(--primary-glow);
+        }
+
+        /* Question Cards List */
+        .qbank-questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .qbank-qcard {
+            background: #ffffff;
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 18px 20px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .qbank-qcard:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+        }
+
+        .qbank-qcard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border-subtle);
+        }
+
+        .qbank-qcard-tags {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .qbank-qnum-pill {
+            background: #1e293b;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .qbank-qstatement {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        /* 4 Options Grid */
+        .qbank-options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .qbank-options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .qbank-opt-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            color: #334155;
+            transition: all 0.15s ease;
+        }
+
+        .qbank-opt-item.is-correct {
+            background: #ecfdf5;
+            border-color: #10b981;
+            color: #065f46;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.12);
+        }
+
+        .qbank-opt-letter {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #475569;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .qbank-opt-item.is-correct .qbank-opt-letter {
+            background: #10b981;
+            color: #ffffff;
+        }
+
+        .qbank-opt-text {
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .qbank-correct-badge {
+            margin-left: auto;
+            font-size: 0.72rem;
+            background: #10b981;
+            color: #ffffff;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .qbank-qcard-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
         }
 
         /* --------------------------------------------------------------------------
@@ -1477,50 +1751,126 @@
                     <div class="card-header-row" style="flex-wrap:wrap; gap:12px;">
                         <div>
                             <h3 class="card-title">📚 Question Bank & Question Creator</h3>
-                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Manage questions across Aptitude, Technical, Coding, and Communication</p>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Click on any category below to view all questions and options as a list, or add new questions</p>
                         </div>
                         <div style="display:flex; gap:10px;">
-                            <button class="btn-action-pill primary" onclick="openModal('modal-add-question')" style="box-shadow:0 4px 12px var(--primary-glow);">
+                            <button class="btn-action-pill primary" onclick="openCreateQuestionModal()" style="box-shadow:0 4px 12px var(--primary-glow);">
                                 <span>➕ Add Question</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Category Filter Chips -->
-                    <div style="display:flex; flex-wrap:wrap; gap:8px; margin: 16px 0 12px 0;">
-                        <button class="btn-filter active" id="filter-btn-all" onclick="filterQuestionBank('all', this)">
-                            <span>All Categories</span>
-                            <span class="badge-counter" id="count-all-questions" style="margin-left:6px; background:var(--surface-alt); color:var(--text-main);">0</span>
-                        </button>
-                        <button class="btn-filter" id="filter-btn-aptitude" onclick="filterQuestionBank('Aptitude', this)">
-                            <span>🧠 Aptitude</span>
-                            <span class="badge-counter" id="count-aptitude-questions" style="margin-left:6px; background:#eff6ff; color:#2563eb;">0</span>
-                        </button>
-                        <button class="btn-filter" id="filter-btn-technical" onclick="filterQuestionBank('Technical', this)">
-                            <span>💻 Technical</span>
-                            <span class="badge-counter" id="count-technical-questions" style="margin-left:6px; background:#ecfdf5; color:#059669;">0</span>
-                        </button>
-                        <button class="btn-filter" id="filter-btn-coding" onclick="filterQuestionBank('Coding', this)">
-                            <span>👨‍💻 Coding</span>
-                            <span class="badge-counter" id="count-coding-questions" style="margin-left:6px; background:#f5f3ff; color:#7c3aed;">0</span>
-                        </button>
-                        <button class="btn-filter" id="filter-btn-communication" onclick="filterQuestionBank('Communication', this)">
-                            <span>🗣 Communication</span>
-                            <span class="badge-counter" id="count-communication-questions" style="margin-left:6px; background:#fffbeb; color:#d97706;">0</span>
-                        </button>
+                    <!-- Category Selector Cards Grid -->
+                    <div class="qbank-categories-grid">
+                        <div class="qbank-cat-card active" id="cat-card-all" onclick="selectQuestionCategoryTab('all')">
+                            <div class="qbank-cat-top">
+                                <div class="qbank-cat-icon">🌐</div>
+                                <span class="qbank-cat-count" id="count-all-questions">0</span>
+                            </div>
+                            <div class="qbank-cat-info">
+                                <span class="qbank-cat-title">All Categories</span>
+                                <span class="qbank-cat-desc">Complete Master Bank</span>
+                            </div>
+                        </div>
+
+                        <div class="qbank-cat-card" id="cat-card-aptitude" onclick="selectQuestionCategoryTab('Aptitude')">
+                            <div class="qbank-cat-top">
+                                <div class="qbank-cat-icon" style="color:#2563eb; background:#eff6ff;">🧠</div>
+                                <span class="qbank-cat-count" id="count-aptitude-questions">0</span>
+                            </div>
+                            <div class="qbank-cat-info">
+                                <span class="qbank-cat-title">Aptitude</span>
+                                <span class="qbank-cat-desc">Quant, Logic & Reasoning</span>
+                            </div>
+                        </div>
+
+                        <div class="qbank-cat-card" id="cat-card-technical" onclick="selectQuestionCategoryTab('Technical')">
+                            <div class="qbank-cat-top">
+                                <div class="qbank-cat-icon" style="color:#059669; background:#ecfdf5;">💻</div>
+                                <span class="qbank-cat-count" id="count-technical-questions">0</span>
+                            </div>
+                            <div class="qbank-cat-info">
+                                <span class="qbank-cat-title">Technical</span>
+                                <span class="qbank-cat-desc">Core CS, DBMS, OS & Web</span>
+                            </div>
+                        </div>
+
+                        <div class="qbank-cat-card" id="cat-card-coding" onclick="selectQuestionCategoryTab('Coding')">
+                            <div class="qbank-cat-top">
+                                <div class="qbank-cat-icon" style="color:#7c3aed; background:#f5f3ff;">👨‍💻</div>
+                                <span class="qbank-cat-count" id="count-coding-questions">0</span>
+                            </div>
+                            <div class="qbank-cat-info">
+                                <span class="qbank-cat-title">Coding</span>
+                                <span class="qbank-cat-desc">DSA, Python & Algorithms</span>
+                            </div>
+                        </div>
+
+                        <div class="qbank-cat-card" id="cat-card-communication" onclick="selectQuestionCategoryTab('Communication')">
+                            <div class="qbank-cat-top">
+                                <div class="qbank-cat-icon" style="color:#d97706; background:#fffbeb;">🗣</div>
+                                <span class="qbank-cat-count" id="count-communication-questions">0</span>
+                            </div>
+                            <div class="qbank-cat-info">
+                                <span class="qbank-cat-title">Communication</span>
+                                <span class="qbank-cat-desc">Verbal & Professional English</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Questions Table -->
-                    <div class="table-responsive" style="margin-top:12px;">
+                    <!-- Toolbar with Search, Topic Filter, View Toggle, and Add Button -->
+                    <div class="qbank-toolbar">
+                        <div class="qbank-toolbar-left">
+                            <div class="admin-search-wrapper" style="width:240px; margin-bottom:0;">
+                                <svg class="search-icon-svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                                <input type="text" id="qbank-search-input" class="admin-search-input" placeholder="Search questions or options..." oninput="handleQBankSearch(this.value)">
+                            </div>
+
+                            <select id="qbank-topic-filter" class="admin-search-input" style="width:210px; margin-bottom:0;" onchange="handleQBankTopicFilter(this.value)">
+                                <option value="all">🎯 All Topics</option>
+                            </select>
+
+                            <select id="qbank-source-filter" class="admin-search-input" style="width:160px; margin-bottom:0;" onchange="handleQBankSourceFilter(this.value)">
+                                <option value="all">⚡ All Sources</option>
+                                <option value="custom">👤 Admin Created</option>
+                                <option value="standard">🏛️ Platform Core</option>
+                            </select>
+                        </div>
+
+                        <div class="qbank-toolbar-right">
+                            <span id="qbank-status-counter" style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">
+                                Loading questions...
+                            </span>
+
+                            <div class="qbank-view-toggle">
+                                <button type="button" class="qbank-view-btn active" id="btn-view-cards" onclick="setQBankViewMode('cards')" title="Card View (with options)">
+                                    <span>📄 Cards</span>
+                                </button>
+                                <button type="button" class="qbank-view-btn" id="btn-view-table" onclick="setQBankViewMode('table')" title="Compact Table">
+                                    <span>🗂 Table</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1. Question Cards List Container (Default view displaying all options clearly) -->
+                    <div id="qbank-cards-container" class="qbank-questions-list">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- 2. Question Table Container (Alternative Compact View) -->
+                    <div id="qbank-table-container" class="table-responsive" style="display:none; margin-top:12px;">
                         <table class="admin-table">
                             <thead>
                                 <tr>
-                                    <th style="width:130px;">Category</th>
-                                    <th style="width:180px;">Topic</th>
-                                    <th>Question Problem Statement</th>
+                                    <th style="width:120px;">Category</th>
+                                    <th style="width:170px;">Topic</th>
+                                    <th>Question & Options</th>
                                     <th style="width:180px;">Correct Answer</th>
-                                    <th style="width:100px;">Source</th>
-                                    <th style="width:110px;">Actions</th>
+                                    <th style="width:110px;">Source</th>
+                                    <th style="width:120px;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="questions-bank-table-body">
@@ -1603,13 +1953,14 @@
         <div class="modal-box modal-lg">
             <div class="modal-header">
                 <div>
-                    <h3>➕ Create New Question</h3>
-                    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Add questions directly into the platform database for student practice & tests</p>
+                    <h3 id="modal-question-header-title">➕ Create New Question</h3>
+                    <p id="modal-question-header-desc" style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Add questions directly into the platform database for student practice & tests</p>
                 </div>
                 <span class="modal-close-btn" onclick="closeModal('modal-add-question')">&times;</span>
             </div>
             
             <form id="form-create-question" onsubmit="handleSaveQuestionSubmit(event)">
+                <input type="hidden" id="edit-question-id" value="">
                 
                 <!-- STEP 1: SELECT CATEGORY -->
                 <div style="margin-bottom:16px;">
@@ -1863,6 +2214,10 @@
 
         let currentSelectedCategory = 'Aptitude';
         let currentQuestionBankFilter = 'all';
+        let currentQBankTopic = 'all';
+        let currentQBankSource = 'all';
+        let currentQBankSearch = '';
+        let currentQBankViewMode = 'cards';
 
         // Role check & Authorization Guard
         document.addEventListener('DOMContentLoaded', () => {
@@ -1870,7 +2225,8 @@
             setupDropdowns();
             setupLiveDate();
             initQuestionCreator();
-            renderQuestionBankTable('all');
+            populateQBankTopicFilter('all');
+            renderQuestionBankView();
         });
 
         function setupLiveDate() {
@@ -1889,17 +2245,36 @@
             populateTopics('Aptitude');
         }
 
+        function openCreateQuestionModal(cat) {
+            const editIdInput = document.getElementById('edit-question-id');
+            if (editIdInput) editIdInput.value = '';
+            
+            const titleEl = document.getElementById('modal-question-header-title');
+            if (titleEl) titleEl.textContent = '➕ Create New Question';
+            
+            const descEl = document.getElementById('modal-question-header-desc');
+            if (descEl) descEl.textContent = 'Add questions directly into the platform database for student practice & tests';
+
+            document.getElementById('form-create-question').reset();
+            
+            const targetCat = (cat && cat !== 'all') ? cat : ((currentQuestionBankFilter !== 'all') ? currentQuestionBankFilter : 'Aptitude');
+            selectQuestionCategory(targetCat);
+            updateCorrectOptionUI(0);
+            openModal('modal-add-question');
+        }
+
         // STEP 1: Select Category
         function selectQuestionCategory(category, btnElement) {
             currentSelectedCategory = category;
-            document.getElementById('new-q-category').value = category;
+            const catInput = document.getElementById('new-q-category');
+            if (catInput) catInput.value = category;
             
             // Highlight active button
-            document.querySelectorAll('.cat-card-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('#modal-add-question .cat-card-btn').forEach(btn => btn.classList.remove('active'));
             if (btnElement) {
                 btnElement.classList.add('active');
             } else {
-                const target = document.querySelector(`.cat-card-btn[data-category="${category}"]`);
+                const target = document.querySelector(`#modal-add-question .cat-card-btn[data-category="${category}"]`);
                 if (target) target.classList.add('active');
             }
 
@@ -1908,7 +2283,7 @@
         }
 
         // STEP 2: Populate topics based on chosen category
-        function populateTopics(category) {
+        function populateTopics(category, selectedTopic = null) {
             const selectEl = document.getElementById('new-q-topic-select');
             const customWrapper = document.getElementById('new-q-custom-topic-wrapper');
             const customInput = document.getElementById('new-q-topic-custom');
@@ -1917,10 +2292,15 @@
             selectEl.innerHTML = '';
             const topics = PREDEFINED_TOPICS[category] || ['General'];
             
-            topics.forEach((topic, idx) => {
+            let hasPredefinedMatch = false;
+            topics.forEach((topic) => {
                 const opt = document.createElement('option');
                 opt.value = topic;
                 opt.textContent = topic;
+                if (selectedTopic && topic === selectedTopic) {
+                    opt.selected = true;
+                    hasPredefinedMatch = true;
+                }
                 selectEl.appendChild(opt);
             });
 
@@ -1928,13 +2308,23 @@
             const customOpt = document.createElement('option');
             customOpt.value = '__custom__';
             customOpt.textContent = '➕ + Enter New Custom Topic...';
+            if (selectedTopic && !hasPredefinedMatch) {
+                customOpt.selected = true;
+            }
             selectEl.appendChild(customOpt);
 
-            selectEl.selectedIndex = 0;
-            if (customWrapper) customWrapper.style.display = 'none';
-            if (customInput) {
-                customInput.value = '';
-                customInput.required = false;
+            if (selectedTopic && !hasPredefinedMatch) {
+                if (customWrapper) customWrapper.style.display = 'block';
+                if (customInput) {
+                    customInput.value = selectedTopic;
+                    customInput.required = true;
+                }
+            } else {
+                if (customWrapper) customWrapper.style.display = 'none';
+                if (customInput) {
+                    customInput.value = '';
+                    customInput.required = false;
+                }
             }
         }
 
@@ -1973,10 +2363,11 @@
             // Live validation if needed
         }
 
-        // STEP 4: Save the Question into Database
+        // STEP 4: Save or Update Question
         function handleSaveQuestionSubmit(e) {
             e.preventDefault();
 
+            const editId = document.getElementById('edit-question-id')?.value?.trim();
             const category = document.getElementById('new-q-category').value.trim();
             const topicSelect = document.getElementById('new-q-topic-select').value;
             const topicCustom = document.getElementById('new-q-topic-custom').value.trim();
@@ -1996,8 +2387,7 @@
                 return;
             }
 
-            // Save question object into persistence store
-            const newQData = {
+            const qData = {
                 category: category,
                 topic: topic,
                 question: statement,
@@ -2005,42 +2395,159 @@
                 correct: correctIndex
             };
 
-            const savedItem = saveCustomQuestionToDB(newQData);
-
-            if (savedItem) {
-                showToast(`✅ Question saved successfully to ${category} > ${topic}! 📚`, 'success');
-                
-                // Reset form
-                document.getElementById('form-create-question').reset();
-                selectQuestionCategory('Aptitude');
-                updateCorrectOptionUI(0);
-                closeModal('modal-add-question');
-
-                // Refresh Questions table
-                renderQuestionBankTable(currentQuestionBankFilter);
+            if (editId) {
+                // Update existing question
+                const updated = (typeof updateCustomQuestion === 'function') ? updateCustomQuestion(editId, qData) : null;
+                if (updated) {
+                    showToast(`✅ Question updated successfully!`, 'success');
+                    closeModal('modal-add-question');
+                    renderQuestionBankView();
+                } else {
+                    showToast('Failed to update question.', 'error');
+                }
             } else {
-                showToast('Failed to save question. Please try again.', 'error');
+                // Save new question
+                const savedItem = saveCustomQuestionToDB(qData);
+                if (savedItem) {
+                    showToast(`✅ Question saved successfully to ${category} > ${topic}! 📚`, 'success');
+                    document.getElementById('form-create-question').reset();
+                    selectQuestionCategory(category);
+                    updateCorrectOptionUI(0);
+                    closeModal('modal-add-question');
+                    renderQuestionBankView();
+                } else {
+                    showToast('Failed to save question. Please try again.', 'error');
+                }
             }
         }
 
         // =====================================================================
-        // QUESTION BANK TABLE & FILTER RENDERING
+        // QUESTION BANK: INTERACTIVE CATEGORIES, OPTIONS LIST & FILTER ENGINE
         // =====================================================================
-        function renderQuestionBankTable(filterCat = 'all') {
-            currentQuestionBankFilter = filterCat;
+        function selectQuestionCategoryTab(category) {
+            currentQuestionBankFilter = category;
+            currentQBankTopic = 'all';
+
+            // Highlight Category Card
+            const catCards = {
+                'all': 'cat-card-all',
+                'Aptitude': 'cat-card-aptitude',
+                'Technical': 'cat-card-technical',
+                'Coding': 'cat-card-coding',
+                'Communication': 'cat-card-communication'
+            };
+
+            Object.keys(catCards).forEach(key => {
+                const el = document.getElementById(catCards[key]);
+                if (el) {
+                    if (key.toLowerCase() === category.toLowerCase()) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.remove('active');
+                    }
+                }
+            });
+
+            // Update Topic Filter Dropdown for this Category
+            populateQBankTopicFilter(category);
+
+            // Re-render Question List
+            renderQuestionBankView();
+        }
+
+        function populateQBankTopicFilter(category) {
+            const selectEl = document.getElementById('qbank-topic-filter');
+            if (!selectEl) return;
+
+            selectEl.innerHTML = '<option value="all">🎯 All Topics</option>';
+            
+            let topicList = [];
+            if (category === 'all') {
+                Object.keys(PREDEFINED_TOPICS).forEach(cat => {
+                    topicList.push(...(PREDEFINED_TOPICS[cat] || []));
+                });
+            } else {
+                topicList = PREDEFINED_TOPICS[category] || [];
+            }
+
+            // Include any topics from custom questions
+            const customQuestions = getCustomQuestions();
+            customQuestions.forEach(q => {
+                if (category === 'all' || (q.category && q.category.toLowerCase() === category.toLowerCase())) {
+                    if (q.topic && !topicList.includes(q.topic)) {
+                        topicList.push(q.topic);
+                    }
+                }
+            });
+
+            // Unique sorted
+            const uniqueTopics = Array.from(new Set(topicList));
+            uniqueTopics.forEach(top => {
+                const opt = document.createElement('option');
+                opt.value = top;
+                opt.textContent = top;
+                selectEl.appendChild(opt);
+            });
+
+            selectEl.value = 'all';
+        }
+
+        function handleQBankTopicFilter(topicVal) {
+            currentQBankTopic = topicVal;
+            renderQuestionBankView();
+        }
+
+        function handleQBankSourceFilter(sourceVal) {
+            currentQBankSource = sourceVal;
+            renderQuestionBankView();
+        }
+
+        function handleQBankSearch(query) {
+            currentQBankSearch = (query || '').trim().toLowerCase();
+            renderQuestionBankView();
+        }
+
+        function setQBankViewMode(mode) {
+            currentQBankViewMode = mode;
+            const btnCards = document.getElementById('btn-view-cards');
+            const btnTable = document.getElementById('btn-view-table');
+            const cardsCont = document.getElementById('qbank-cards-container');
+            const tableCont = document.getElementById('qbank-table-container');
+
+            if (mode === 'cards') {
+                if (btnCards) btnCards.classList.add('active');
+                if (btnTable) btnTable.classList.remove('active');
+                if (cardsCont) cardsCont.style.display = 'flex';
+                if (tableCont) tableCont.style.display = 'none';
+            } else {
+                if (btnCards) btnCards.classList.remove('active');
+                if (btnTable) btnTable.classList.add('active');
+                if (cardsCont) cardsCont.style.display = 'none';
+                if (tableCont) tableCont.style.display = 'block';
+            }
+        }
+
+        function renderQuestionBankView() {
+            const cardsContainer = document.getElementById('qbank-cards-container');
             const tbody = document.getElementById('questions-bank-table-body');
-            if (!tbody) return;
+            const counterEl = document.getElementById('qbank-status-counter');
 
             const customQuestions = getCustomQuestions();
             
-            // Collect base and custom questions
-            const aptQuestions = (typeof getQuestionsByModule === 'function') ? getQuestionsByModule('aptitude') : [];
-            const techQuestions = (typeof getQuestionsByModule === 'function') ? getQuestionsByModule('technical-practice') : [];
-            const codeQuestions = (typeof getQuestionsByModule === 'function') ? getQuestionsByModule('programming') : [];
-            const commQuestions = (typeof getQuestionsByModule === 'function') ? getQuestionsByModule('communication') : [];
+            // Base Standard questions
+            const aptBase = QUESTIONS.aptitude || [];
+            const techBase = QUESTIONS['technical-practice'] || [];
+            const codeBase = QUESTIONS.programming || [];
+            const commBase = QUESTIONS.communication || [];
 
-            // Update Counts
-            const totalCount = aptQuestions.length + techQuestions.length + codeQuestions.length + commQuestions.length;
+            // Custom questions per category
+            const aptCustom = customQuestions.filter(q => (q.category || '').toLowerCase() === 'aptitude');
+            const techCustom = customQuestions.filter(q => (q.category || '').toLowerCase() === 'technical');
+            const codeCustom = customQuestions.filter(q => (q.category || '').toLowerCase() === 'coding');
+            const commCustom = customQuestions.filter(q => (q.category || '').toLowerCase() === 'communication');
+
+            // Update Header Card Counts
+            const totalCount = aptBase.length + techBase.length + codeBase.length + commBase.length + customQuestions.length;
             const countAll = document.getElementById('count-all-questions');
             const countApt = document.getElementById('count-aptitude-questions');
             const countTech = document.getElementById('count-technical-questions');
@@ -2048,132 +2555,284 @@
             const countComm = document.getElementById('count-communication-questions');
 
             if (countAll) countAll.textContent = totalCount;
-            if (countApt) countApt.textContent = aptQuestions.length;
-            if (countTech) countTech.textContent = techQuestions.length;
-            if (countCode) countCode.textContent = codeQuestions.length;
-            if (countComm) countComm.textContent = commQuestions.length;
+            if (countApt) countApt.textContent = aptBase.length + aptCustom.length;
+            if (countTech) countTech.textContent = techBase.length + techCustom.length;
+            if (countCode) countCode.textContent = codeBase.length + codeCustom.length;
+            if (countComm) countComm.textContent = commBase.length + commCustom.length;
 
-            // Merge questions with normalized category labels
-            let displayList = [];
+            // Build Master List
+            let masterList = [];
 
-            // 1. First show Custom Questions added by Admin
+            // 1. First add Custom Questions
             customQuestions.forEach(q => {
-                displayList.push({
+                masterList.push({
                     id: q.id,
-                    category: q.category,
+                    category: q.category || 'Aptitude',
                     topic: q.topic || 'General Topic',
                     question: q.question,
                     options: q.options || [],
-                    correct: q.correct,
+                    correct: parseInt(q.correct) || 0,
                     isCustom: true,
                     createdAt: q.createdAt
                 });
             });
 
-            // 2. Then show sample/standard questions from base sets
-            const appendBase = (arr, catName, defaultTopic) => {
+            // 2. Then add Standard Base Questions
+            const appendBaseQuestions = (arr, catName, defaultTopic) => {
                 arr.forEach((q, idx) => {
-                    // Avoid duplicating custom questions that getQuestionsByModule merged
-                    if (q.id && q.id.startsWith('q_')) return;
-                    displayList.push({
-                        id: `std_${catName}_${idx}`,
+                    masterList.push({
+                        id: `std_${catName.toLowerCase()}_${idx}`,
                         category: catName,
                         topic: q.topic || defaultTopic,
                         question: q.question,
                         options: q.options || [],
-                        correct: q.correct,
+                        correct: parseInt(q.correct) || 0,
                         isCustom: false
                     });
                 });
             };
 
-            appendBase(QUESTIONS.aptitude || [], 'Aptitude', 'Quantitative & Logic');
-            appendBase(QUESTIONS['technical-practice'] || [], 'Technical', 'Core CS & Data Structures');
-            appendBase(QUESTIONS.programming || [], 'Coding', 'Python & Code Basics');
-            appendBase(QUESTIONS.communication || [], 'Communication', 'Verbal & Professional English');
+            appendBaseQuestions(aptBase, 'Aptitude', 'Quantitative & Logic');
+            appendBaseQuestions(techBase, 'Technical', 'Core CS & Data Structures');
+            appendBaseQuestions(codeBase, 'Coding', 'Python & Code Basics');
+            appendBaseQuestions(commBase, 'Communication', 'Verbal & Professional English');
 
-            // Apply category filter
-            if (filterCat !== 'all') {
-                displayList = displayList.filter(q => q.category.toLowerCase() === filterCat.toLowerCase());
+            // Apply Category Filter
+            let displayList = masterList;
+            if (currentQuestionBankFilter !== 'all') {
+                displayList = displayList.filter(q => (q.category || '').toLowerCase() === currentQuestionBankFilter.toLowerCase());
             }
 
-            if (displayList.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="6" style="text-align:center; padding:32px; color:var(--text-muted);">
-                            <div style="font-size:1.8rem; margin-bottom:8px;">🔍</div>
-                            <div>No questions found in this category.</div>
-                            <button class="btn-action-pill primary" style="margin-top:12px;" onclick="openModal('modal-add-question'); selectQuestionCategory('${filterCat === 'all' ? 'Aptitude' : filterCat}');">
-                                + Add First Question
+            // Apply Topic Filter
+            if (currentQBankTopic !== 'all') {
+                displayList = displayList.filter(q => (q.topic || '').toLowerCase() === currentQBankTopic.toLowerCase());
+            }
+
+            // Apply Source Filter
+            if (currentQBankSource === 'custom') {
+                displayList = displayList.filter(q => q.isCustom === true);
+            } else if (currentQBankSource === 'standard') {
+                displayList = displayList.filter(q => q.isCustom === false);
+            }
+
+            // Apply Search Query
+            if (currentQBankSearch) {
+                displayList = displayList.filter(q => {
+                    const qTxt = (q.question || '').toLowerCase();
+                    const topicTxt = (q.topic || '').toLowerCase();
+                    const optTxt = (q.options || []).join(' ').toLowerCase();
+                    return qTxt.includes(currentQBankSearch) || topicTxt.includes(currentQBankSearch) || optTxt.includes(currentQBankSearch);
+                });
+            }
+
+            // Update status counter
+            const catDisplayName = (currentQuestionBankFilter === 'all') ? 'All Categories' : currentQuestionBankFilter;
+            if (counterEl) {
+                counterEl.textContent = `Showing ${displayList.length} of ${masterList.length} questions (${catDisplayName})`;
+            }
+
+            // -------------------------------------------------------------
+            // 1. RENDER QUESTION CARDS (WITH OPTIONS EXPLICITLY DISPLAYED)
+            // -------------------------------------------------------------
+            if (cardsContainer) {
+                if (displayList.length === 0) {
+                    cardsContainer.innerHTML = `
+                        <div style="text-align:center; padding:48px 20px; background:#ffffff; border-radius:var(--radius-lg); border:1.5px dashed var(--border-subtle);">
+                            <div style="font-size:2.4rem; margin-bottom:12px;">🔍</div>
+                            <h4 style="font-weight:800; color:var(--text-main); font-size:1.1rem; margin-bottom:6px;">No questions found in ${escapeHtml(catDisplayName)}</h4>
+                            <p style="font-size:0.85rem; color:var(--text-muted); max-width:420px; margin:0 auto 16px auto;">
+                                Try changing your search query or topic filter, or create a brand new question for this category.
+                            </p>
+                            <button class="btn-action-pill primary" onclick="openCreateQuestionModal('${currentQuestionBankFilter}')" style="box-shadow:0 4px 12px var(--primary-glow);">
+                                <span>➕ Add Question to ${escapeHtml(catDisplayName)}</span>
                             </button>
-                        </td>
-                    </tr>
-                `;
+                        </div>
+                    `;
+                } else {
+                    cardsContainer.innerHTML = '';
+                    displayList.forEach((q, index) => {
+                        const card = document.createElement('div');
+                        card.className = 'qbank-qcard';
+                        
+                        // Category styling
+                        const catLower = (q.category || '').toLowerCase();
+                        let catClass = 'badge-cat-aptitude';
+                        let catIcon = '🧠';
+                        if (catLower.includes('tech')) { catClass = 'badge-cat-technical'; catIcon = '💻'; }
+                        else if (catLower.includes('cod') || catLower.includes('prog')) { catClass = 'badge-cat-coding'; catIcon = '👨‍💻'; }
+                        else if (catLower.includes('comm')) { catClass = 'badge-cat-communication'; catIcon = '🗣'; }
+
+                        // Generate Options HTML (All 4 options cleanly laid out with correct answer highlighted)
+                        const optionsHtml = (q.options || []).map((optText, optIdx) => {
+                            const isCorrect = (optIdx === q.correct);
+                            const letter = String.fromCharCode(65 + optIdx);
+                            return `
+                                <div class="qbank-opt-item ${isCorrect ? 'is-correct' : ''}">
+                                    <span class="qbank-opt-letter">${letter}</span>
+                                    <span class="qbank-opt-text">${escapeHtml(optText)}</span>
+                                    ${isCorrect ? `<span class="qbank-correct-badge">✓ Correct Answer</span>` : ''}
+                                </div>
+                            `;
+                        }).join('');
+
+                        card.innerHTML = `
+                            <div class="qbank-qcard-header">
+                                <div class="qbank-qcard-tags">
+                                    <span class="qbank-qnum-pill">Q${index + 1}</span>
+                                    <span class="badge-cat-pill ${catClass}">
+                                        <span>${catIcon}</span>
+                                        <span>${escapeHtml(q.category)}</span>
+                                    </span>
+                                    <span class="badge-topic-tag">${escapeHtml(q.topic)}</span>
+                                    ${q.isCustom ? '<span class="badge-source-admin" style="font-size:0.7rem;">👤 Admin Created</span>' : '<span style="font-size:0.7rem; color:var(--text-muted); font-weight:600;">🏛️ Core Platform</span>'}
+                                </div>
+                                <div style="display:flex; gap:6px; align-items:center;">
+                                    ${q.isCustom ? `
+                                        <button class="btn-table-action" style="color:#2563eb; border-color:#bfdbfe;" onclick="editQuestionFromAdmin('${q.id}')">✏️ Edit</button>
+                                        <button class="btn-table-action" style="color:#ef4444; border-color:#fecaca;" onclick="deleteQuestionFromAdmin('${q.id}', '${q.category}')">🗑️ Delete</button>
+                                    ` : `
+                                        <span style="font-size:0.75rem; color:var(--text-muted); padding:3px 6px;">Verified Core</span>
+                                    `}
+                                    <button class="btn-table-action" style="background:#eff6ff; color:#2563eb; font-weight:700;" onclick="previewQuestionTest('${q.category}', '${q.topic}')">🎯 Test Assessment →</button>
+                                </div>
+                            </div>
+
+                            <div class="qbank-qstatement">
+                                ${escapeHtml(q.question)}
+                            </div>
+
+                            <div class="qbank-options-grid">
+                                ${optionsHtml}
+                            </div>
+
+                            <div class="qbank-qcard-footer">
+                                <span>📚 Module: <strong>${escapeHtml(q.category)}</strong> &bull; Topic: <strong>${escapeHtml(q.topic)}</strong></span>
+                                <span style="font-size:0.72rem; color:var(--text-muted);">
+                                    ${q.isCustom ? `Created on ${new Date(q.createdAt || Date.now()).toLocaleDateString()}` : 'Platform Standard Drill Set'}
+                                </span>
+                            </div>
+                        `;
+                        cardsContainer.appendChild(card);
+                    });
+                }
+            }
+
+            // -------------------------------------------------------------
+            // 2. RENDER TABLE VIEW (COMPACT ALTERNATIVE)
+            // -------------------------------------------------------------
+            if (tbody) {
+                if (displayList.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="6" style="text-align:center; padding:32px; color:var(--text-muted);">
+                                No questions found in this category.
+                            </td>
+                        </tr>
+                    `;
+                } else {
+                    tbody.innerHTML = '';
+                    displayList.forEach((q, index) => {
+                        const tr = document.createElement('tr');
+                        
+                        const catLower = (q.category || '').toLowerCase();
+                        let catClass = 'badge-cat-aptitude';
+                        let catIcon = '🧠';
+                        if (catLower.includes('tech')) { catClass = 'badge-cat-technical'; catIcon = '💻'; }
+                        else if (catLower.includes('cod') || catLower.includes('prog')) { catClass = 'badge-cat-coding'; catIcon = '👨‍💻'; }
+                        else if (catLower.includes('comm')) { catClass = 'badge-cat-communication'; catIcon = '🗣'; }
+
+                        const correctOptText = (q.options && q.options[q.correct] !== undefined) ? q.options[q.correct] : `Option ${String.fromCharCode(65 + q.correct)}`;
+
+                        tr.innerHTML = `
+                            <td>
+                                <span class="badge-cat-pill ${catClass}">
+                                    <span>${catIcon}</span>
+                                    <span>${escapeHtml(q.category)}</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge-topic-tag">${escapeHtml(q.topic)}</span>
+                            </td>
+                            <td>
+                                <div style="font-weight:700; color:var(--text-main); font-size:0.88rem; line-height:1.4;">
+                                    ${escapeHtml(q.question)}
+                                </div>
+                                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
+                                    <span style="${q.correct === 0 ? 'color:#059669; font-weight:700;' : ''}">A: ${escapeHtml(q.options[0] || '')}</span> &bull;
+                                    <span style="${q.correct === 1 ? 'color:#059669; font-weight:700;' : ''}">B: ${escapeHtml(q.options[1] || '')}</span> &bull;
+                                    <span style="${q.correct === 2 ? 'color:#059669; font-weight:700;' : ''}">C: ${escapeHtml(q.options[2] || '')}</span> &bull;
+                                    <span style="${q.correct === 3 ? 'color:#059669; font-weight:700;' : ''}">D: ${escapeHtml(q.options[3] || '')}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span style="display:inline-flex; align-items:center; gap:4px; background:#ecfdf5; color:#059669; font-weight:700; font-size:0.8rem; padding:3px 8px; border-radius:6px; border:1px solid #a7f3d0;">
+                                    ✓ (${String.fromCharCode(65 + q.correct)}) ${escapeHtml(correctOptText.length > 20 ? correctOptText.substring(0, 18) + '...' : correctOptText)}
+                                </span>
+                            </td>
+                            <td>
+                                ${q.isCustom ? '<span class="badge-source-admin">Admin Created</span>' : '<span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Platform Core</span>'}
+                            </td>
+                            <td>
+                                <div style="display:flex; gap:6px;">
+                                    ${q.isCustom ? `
+                                        <button class="btn-table-action" style="color:#2563eb; border-color:#bfdbfe;" onclick="editQuestionFromAdmin('${q.id}')">Edit</button>
+                                        <button class="btn-table-action" style="color:#ef4444; border-color:#fecaca;" onclick="deleteQuestionFromAdmin('${q.id}', '${q.category}')">Delete</button>
+                                    ` : `
+                                        <button class="btn-table-action" onclick="showToast('Platform core question (Read-only)', 'info')">View</button>
+                                    `}
+                                    <button class="btn-table-action" onclick="previewQuestionTest('${q.category}', '${q.topic}')">Test →</button>
+                                </div>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            }
+        }
+
+        // Backward compatibility for filterQuestionBank
+        function filterQuestionBank(category, btnElement) {
+            selectQuestionCategoryTab(category);
+        }
+
+        function renderQuestionBankTable(category = 'all') {
+            selectQuestionCategoryTab(category);
+        }
+
+        function editQuestionFromAdmin(questionId) {
+            const customQuestions = getCustomQuestions();
+            const q = customQuestions.find(item => item.id === questionId);
+            if (!q) {
+                showToast('Question not found.', 'error');
                 return;
             }
 
-            tbody.innerHTML = '';
-            displayList.slice(0, 50).forEach((q, index) => {
-                const tr = document.createElement('tr');
-                
-                // Category badge
-                const catLower = (q.category || '').toLowerCase();
-                let catClass = 'badge-cat-aptitude';
-                let catIcon = '🧠';
-                if (catLower.includes('tech')) { catClass = 'badge-cat-technical'; catIcon = '💻'; }
-                else if (catLower.includes('cod') || catLower.includes('prog')) { catClass = 'badge-cat-coding'; catIcon = '👨‍💻'; }
-                else if (catLower.includes('comm')) { catClass = 'badge-cat-communication'; catIcon = '🗣'; }
+            const editIdInput = document.getElementById('edit-question-id');
+            if (editIdInput) editIdInput.value = q.id;
 
-                const correctOptText = (q.options && q.options[q.correct] !== undefined) ? q.options[q.correct] : `Option ${String.fromCharCode(65 + q.correct)}`;
+            const titleEl = document.getElementById('modal-question-header-title');
+            if (titleEl) titleEl.textContent = '✏️ Edit Question';
 
-                tr.innerHTML = `
-                    <td>
-                        <span class="badge-cat-pill ${catClass}">
-                            <span>${catIcon}</span>
-                            <span>${q.category}</span>
-                        </span>
-                    </td>
-                    <td>
-                        <span class="badge-topic-tag">${escapeHtml(q.topic)}</span>
-                    </td>
-                    <td>
-                        <div style="font-weight:600; color:var(--text-main); font-size:0.88rem; line-height:1.4;">
-                            ${escapeHtml(q.question)}
-                        </div>
-                        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px; display:flex; gap:8px; flex-wrap:wrap;">
-                            <span>A: ${escapeHtml(q.options[0] || '')}</span> •
-                            <span>B: ${escapeHtml(q.options[1] || '')}</span> •
-                            <span>C: ${escapeHtml(q.options[2] || '')}</span> •
-                            <span>D: ${escapeHtml(q.options[3] || '')}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <span style="display:inline-flex; align-items:center; gap:4px; background:#ecfdf5; color:#059669; font-weight:700; font-size:0.8rem; padding:3px 8px; border-radius:6px; border:1px solid #a7f3d0;">
-                            ✓ (${String.fromCharCode(65 + q.correct)}) ${escapeHtml(correctOptText.length > 20 ? correctOptText.substring(0, 18) + '...' : correctOptText)}
-                        </span>
-                    </td>
-                    <td>
-                        ${q.isCustom ? '<span class="badge-source-admin">Admin Created</span>' : '<span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Platform Default</span>'}
-                    </td>
-                    <td>
-                        <div style="display:flex; gap:6px;">
-                            ${q.isCustom ? `
-                                <button class="btn-table-action" style="color:#ef4444; border-color:#fecaca;" onclick="deleteQuestionFromAdmin('${q.id}', '${q.category}')">Delete</button>
-                            ` : `
-                                <button class="btn-table-action" onclick="showToast('Platform core question (Read-only)', 'info')">View</button>
-                            `}
-                            <button class="btn-table-action" onclick="previewQuestionTest('${q.category}', '${q.topic}')">Test →</button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(tr);
+            const descEl = document.getElementById('modal-question-header-desc');
+            if (descEl) descEl.textContent = `Editing question in ${q.category} > ${q.topic}`;
+
+            // Pre-fill fields
+            selectQuestionCategory(q.category);
+            populateTopics(q.category, q.topic);
+            
+            document.getElementById('new-q-statement').value = q.question || '';
+            document.getElementById('new-q-opt-0').value = (q.options && q.options[0]) || '';
+            document.getElementById('new-q-opt-1').value = (q.options && q.options[1]) || '';
+            document.getElementById('new-q-opt-2').value = (q.options && q.options[2]) || '';
+            document.getElementById('new-q-opt-3').value = (q.options && q.options[3]) || '';
+
+            const radios = document.querySelectorAll('input[name="correct_option"]');
+            radios.forEach(r => {
+                r.checked = (parseInt(r.value) === parseInt(q.correct));
             });
-        }
+            updateCorrectOptionUI(q.correct);
 
-        function filterQuestionBank(category, btnElement) {
-            document.querySelectorAll('#question-management-section .btn-filter').forEach(b => b.classList.remove('active'));
-            if (btnElement) btnElement.classList.add('active');
-            renderQuestionBankTable(category);
+            openModal('modal-add-question');
         }
 
         function deleteQuestionFromAdmin(questionId, category) {
@@ -2181,7 +2840,7 @@
                 const ok = deleteCustomQuestion(questionId);
                 if (ok) {
                     showToast('Question removed from the database.', 'info');
-                    renderQuestionBankTable(currentQuestionBankFilter);
+                    renderQuestionBankView();
                 }
             }
         }
@@ -2373,20 +3032,9 @@
         }
 
         function handleGlobalSearch(query) {
-            if (query.trim().length > 1) {
-                renderQuestionBankTable(currentQuestionBankFilter);
-                const qLower = query.toLowerCase().trim();
-                const tbody = document.getElementById('questions-bank-table-body');
-                if (tbody) {
-                    const rows = tbody.querySelectorAll('tr');
-                    rows.forEach(r => {
-                        const txt = r.textContent.toLowerCase();
-                        r.style.display = txt.includes(qLower) ? '' : 'none';
-                    });
-                }
-            } else {
-                renderQuestionBankTable(currentQuestionBankFilter);
-            }
+            handleQBankSearch(query);
+            const qInput = document.getElementById('qbank-search-input');
+            if (qInput) qInput.value = query;
         }
 
         function adminLogout() {
